@@ -11,9 +11,9 @@ public class Field {
     public boolean discoverSpot(int x, int y){
         int around = checkAround(x, y);
         if(field[x][y].discoverThis(around)){
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 
     private int checkAround(int x, int y){
@@ -35,8 +35,8 @@ public class Field {
                 field[x][y+1].mineIt(around);
                 break;
             case 1:
-                field[x][y-1].mineIt(around);
                 field[x][y+1].mineIt(around);
+                field[x][y-1].mineIt(around);
                 break;
             case 2:
                 field[x][y-1].mineIt(around);
@@ -54,7 +54,7 @@ public class Field {
 
     private void drawColumn(int count){
         for(int i = 0; i<3; ++i){
-            field[count][i].drawThis();
+            field[i][count].drawThis();
         }
     }
 

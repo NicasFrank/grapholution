@@ -15,6 +15,7 @@ public class Spot {
 
     public boolean discoverThis(int around){
         if(mine){
+            this.discovered = true;
             return true;
         }
         this.discovered = true;
@@ -27,7 +28,12 @@ public class Spot {
             System.out.print("#");
             return;
         }
+        if(mine){
+            System.out.print("*");
+            return;
+        }
         System.out.print(value);
+        return;
     }
 
     public void mineIt(int around){
