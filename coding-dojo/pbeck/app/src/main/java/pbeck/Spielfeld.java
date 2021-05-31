@@ -1,5 +1,7 @@
 package pbeck;
 
+interface
+
 public class Spielfeld {
     private int size;
     private String[] feld;
@@ -11,10 +13,18 @@ public class Spielfeld {
         for(String e: feld) {
             e = "#";
         }
+        bombs = new Bombs();
     }
 
-    public void move(int x, int y) {
+    public void zug(int position) {
+        if(!bombs.isBomb(position)) {
+            printZahl(position);
+        }
+    }
 
+    public void printZahl(int Position) {
+        int proximity = 0;
+        if(position )
     }
 
 }
