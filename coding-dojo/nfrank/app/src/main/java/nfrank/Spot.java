@@ -36,10 +36,10 @@ public class Spot {
         return;
     }
 
-    public void mineIt(int around){
+    public boolean mineIt(){
         if(mine){
-            around++;
+            return true;
         }
+        return false;
     }
-
 }

@@ -20,29 +20,77 @@ public class Field {
         int around = 0;
         switch(x){
             case 0:
-                field[x+1][y].mineIt(around);
+                if(field[x+1][y].mineIt()){
+                    around++;
+                }
                 break;
             case 1:
-                field[x+1][y].mineIt(around);
-                field[x-1][y].mineIt(around);
+                if (field[x+1][y].mineIt()) {
+                    around++;
+                }
+                if (field[x-1][y].mineIt()) {
+                    around++;
+                }
                 break;
             case 2:
-                field[x-1][y].mineIt(around);
+                if (field[x-1][y].mineIt()) {
+                    around++;
+                }
                 break;
         }
         switch(y){
             case 0:
-                field[x][y+1].mineIt(around);
+                if(field[x][y+1].mineIt()){
+                    around++;
+                }
                 break;
             case 1:
-                field[x][y+1].mineIt(around);
-                field[x][y-1].mineIt(around);
+                if (field[x][y+1].mineIt()) {
+                    around++;
+                }
+                if (field[x][y-1].mineIt()) {
+                    around++;
+                }
                 break;
             case 2:
-                field[x][y-1].mineIt(around);
+                if (field[x][y-1].mineIt()) {
+                    around++;
+                }
                 break;
         }
+        if(around == 0){
+            revealAround(x,y);
+        }
         return around;
+    }
+
+    private void revealAround(int x, int y){
+
+        switch(x){
+            case 0:
+                discoverSpot(x+1,y);
+                break;
+            case 1:
+                discoverSpot(x+1,y);
+                discoverSpot(x-1,y);
+                break;
+            case 2:
+                discoverSpot(x-1,y);
+                break;
+        }
+        switch(x){
+            case 0:
+                discoverSpot(x,y+1);
+                break;
+            case 1:
+                discoverSpot(x,y+1);
+                discoverSpot(x,y-1);
+                break;
+            case 2:
+                discoverSpot(x,y-1);
+                break;
+        }
+
     }
 
     public void drawRow(){
