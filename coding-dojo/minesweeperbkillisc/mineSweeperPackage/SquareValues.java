@@ -4,4 +4,3 @@ enum SquareValues {
     Bomb,
     Empty
 }
-
