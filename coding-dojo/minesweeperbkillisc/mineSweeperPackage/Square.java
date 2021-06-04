@@ -1,5 +1,7 @@
 package mineSweeperPackage;
 
+import java.io.PrintStream;
+
 public class Square {
     private final SquareValues value;
     private String displayValue;
@@ -21,7 +23,7 @@ public class Square {
         this.displayValue = displayValue;
     }
 
-    public void display() {
-        System.out.print(displayValue);
+    public void display(PrintStream printStream) {
+        printStream.print(displayValue);
     }
 }
