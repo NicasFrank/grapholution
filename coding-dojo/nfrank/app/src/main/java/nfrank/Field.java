@@ -3,65 +3,53 @@ package nfrank;
 public class Field {
 
     private Spot[][] field = new Spot[3][3];
+    private int around;
 
     public Field (){
         fillRow();
     }
 
     public boolean discoverSpot(int x, int y){
-        int around = checkAround(x, y);
-        if(field[x][y].discoverThis(around)){
+        checkAround(x, y);
+        if(field[x][y].discoverThis(this.around)){
             return true;
         }
         return false;
     }
 
-    private int checkAround(int x, int y){
-        int around = 0;
+    private void checkAround(int x, int y){
+        this.around = 0;
         switch(x){
             case 0:
-                if(field[x+1][y].mineIt()){
-                    around++;
-                }
+                field[x+1][y].mineIt(this);
                 break;
             case 1:
-                if (field[x+1][y].mineIt()) {
-                    around++;
-                }
-                if (field[x-1][y].mineIt()) {
-                    around++;
-                }
+                field[x+1][y].mineIt(this);
+                field[x-1][y].mineIt(this);
                 break;
             case 2:
-                if (field[x-1][y].mineIt()) {
-                    around++;
-                }
+                field[x-1][y].mineIt(this);
                 break;
         }
         switch(y){
             case 0:
-                if(field[x][y+1].mineIt()){
-                    around++;
-                }
+                field[x][y+1].mineIt(this);
                 break;
             case 1:
-                if (field[x][y+1].mineIt()) {
-                    around++;
-                }
-                if (field[x][y-1].mineIt()) {
-                    around++;
-                }
+                field[x][y+1].mineIt(this);
+                field[x][y-1].mineIt(this);
                 break;
             case 2:
-                if (field[x][y-1].mineIt()) {
-                    around++;
-                }
+                field[x][y-1].mineIt(this);
                 break;
         }
-        if(around == 0){
+        if(this.around == 0){
             revealAround(x,y);
         }
-        return around;
+    }
+
+    public void incrementAround(){
+        this.around++;
     }
 
     private void revealAround(int x, int y){

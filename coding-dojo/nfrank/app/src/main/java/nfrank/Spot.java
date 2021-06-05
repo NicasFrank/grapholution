@@ -36,8 +36,9 @@ public class Spot {
         return;
     }
 
-    public boolean mineIt(){
+    public boolean mineIt(Field f){
         if(mine){
+            f.incrementAround();
             return true;
         }
         return false;
