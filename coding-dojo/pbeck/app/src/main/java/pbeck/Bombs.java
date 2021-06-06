@@ -1,24 +1,27 @@
 package pbeck;
 
+import java.awt.*;
+import java.util.HashSet;
 import java.util.Random;
 
 public class Bombs {
-    private int[] positions;
+    private HashSet<Point> positions = new HashSet<>();
 
-    public Bombs() {
-        Random zufall = new Random();
-        positions = new int[10];
-        for(int position: positions) {
-            position = zufall.nextInt(100);
+    public Bombs(int size) {
+        Random random = new Random();
+        while (positions.size() < size) {
+            int x = random.nextInt(size);
+            int y = random.nextInt(size);
+            positions.add(new Point(x,y));
         }
     }
 
-    public boolean isBomb(int position) {
-        boolean bomb = false;
-        for(int pos: positions) {
-            bomb ^= pos == position;
+    public void placeBombs(Cell[][] field) {
+        for (Point p: positions) {
+            int x = p.x;
+            int y = p.y;
+            field[x][y] = new Cell(true);
         }
-        return bomb;
     }
 
 }
