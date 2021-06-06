@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: #322A10;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    </rowConstraints>
+    <children>
+        <Text fx:id="title" boundsType="VISUAL" fill="#c79442" stroke="#322a10" strokeLineCap="ROUND" text="Grapholution" textAlignment="CENTER" textOrigin="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="NEVER">
+            <font>
+                <Font name="System Bold" size="80.0" />
+            </font>
+            <GridPane.margin>
+                <Insets top="60.0" />
+            </GridPane.margin>
+        </Text>
+        <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #322A10;" GridPane.columnSpan="2147483647" GridPane.rowIndex="13" />
+        <GridPane prefHeight="176.0" prefWidth="460.0" scaleShape="false" style="-fx-background-color: #FBF4F1;" GridPane.columnSpan="2147483647" GridPane.hgrow="NEVER" GridPane.rowIndex="4" GridPane.rowSpan="9" GridPane.vgrow="NEVER">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="20.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="20.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="20.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="20.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="20.0" prefWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints fillHeight="false" maxHeight="1.7976931348623157E308" minHeight="10.0" percentHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints fillHeight="false" maxHeight="1.7976931348623157E308" minHeight="10.0" percentHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints fillHeight="false" maxHeight="1.7976931348623157E308" minHeight="10.0" percentHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints fillHeight="false" maxHeight="1.7976931348623157E308" minHeight="10.0" percentHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints fillHeight="false" maxHeight="1.7976931348623157E308" minHeight="10.0" percentHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints fillHeight="false" maxHeight="1.7976931348623157E308" minHeight="10.0" percentHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Text fill="#322a10" strokeType="OUTSIDE" strokeWidth="0.0" text="Option 1" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.valignment="TOP" GridPane.vgrow="NEVER">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                    <GridPane.margin>
+                        <Insets top="15.0" />
+                    </GridPane.margin>
+                </Text>
+                <Text fill="#322a10" strokeType="OUTSIDE" strokeWidth="0.0" text="Option 2" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.valignment="TOP" GridPane.vgrow="NEVER">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                    <GridPane.margin>
+                        <Insets top="15.0" />
+                    </GridPane.margin>
+                </Text>
+                <Text fill="#322a10" strokeType="OUTSIDE" strokeWidth="0.0" text="Option 3" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="2" GridPane.valignment="TOP" GridPane.vgrow="NEVER">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                    <GridPane.margin>
+                        <Insets top="15.0" />
+                    </GridPane.margin>
+                </Text>
+                <Text fill="#322a10" strokeType="OUTSIDE" strokeWidth="0.0" text="Option 4" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="3" GridPane.valignment="TOP" GridPane.vgrow="NEVER">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                    <GridPane.margin>
+                        <Insets top="15.0" />
+                    </GridPane.margin>
+                </Text>
+                <Text fill="#322a10" strokeType="OUTSIDE" strokeWidth="0.0" text="Option 5" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="4" GridPane.valignment="TOP" GridPane.vgrow="NEVER">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                    <GridPane.margin>
+                        <Insets top="15.0" />
+                    </GridPane.margin>
+                </Text>
+                <Text fill="#322a10" strokeType="OUTSIDE" strokeWidth="0.0" text="Option 6" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="5" GridPane.valignment="TOP" GridPane.vgrow="NEVER">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                    <GridPane.margin>
+                        <Insets top="15.0" />
+                    </GridPane.margin>
+                </Text>
+                <Slider onMouseExited="#colorRectangle1" showTickLabels="true" showTickMarks="true">
+                    <GridPane.margin>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                    </GridPane.margin>
+                </Slider>
+                <Slider onMouseExited="#colorRectangle2" showTickLabels="true" showTickMarks="true" GridPane.rowIndex="1">
+                    <GridPane.margin>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                    </GridPane.margin>
+                </Slider>
+                <Slider onMouseExited="#colorRectangle3" showTickLabels="true" showTickMarks="true" GridPane.rowIndex="2">
+                    <GridPane.margin>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                    </GridPane.margin>
+                </Slider>
+                <Slider onMouseExited="#colorRectangle4"  showTickLabels="true" showTickMarks="true" GridPane.rowIndex="3">
+                    <GridPane.margin>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                    </GridPane.margin>
+                </Slider>
+                <Slider onMouseExited="#colorRectangle5" showTickLabels="true" showTickMarks="true" GridPane.rowIndex="4">
+                    <GridPane.margin>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                    </GridPane.margin>
+                </Slider>
+                <Slider onMouseExited="#colorRectangle6" showTickLabels="true" showTickMarks="true" GridPane.rowIndex="5">
+                    <GridPane.margin>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                    </GridPane.margin>
+                </Slider>
+                <Pane prefHeight="100.0" prefWidth="590.0" style="-fx-background-color: #322A10;" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="1">
+                    <children>
+                        <Rectangle fx:id="rect6" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="100.0" layoutX="850.0" stroke="TRANSPARENT" strokeType="INSIDE" width="170.0" />
+                        <Rectangle fx:id="rect5" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="100.0" layoutX="680.0" stroke="TRANSPARENT" strokeType="INSIDE" width="170.0" />
+                        <Rectangle fx:id="rect4" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="100.0" layoutX="510.0" stroke="TRANSPARENT" strokeType="INSIDE" width="170.0" />
+                        <Rectangle fx:id="rect3" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="100.0" layoutX="340.0" stroke="TRANSPARENT" strokeType="INSIDE" width="170.0" />
+                        <Rectangle fx:id="rect2" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="100.0" layoutX="170.0" stroke="TRANSPARENT" strokeType="INSIDE" width="170.0" />
+                        <Rectangle fx:id="rect1" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="100.0" stroke="TRANSPARENT" strokeType="INSIDE" width="170.0" />
+                    </children>
+                </Pane>
+            </children>
+        </GridPane>
+        <ImageView fx:id="settingImage" fitHeight="100.0" fitWidth="100.0" onMouseEntered="#rotateImageOnEnter" onMousePressed="#settingsVisibility" pickOnBounds="true" preserveRatio="true" smooth="false" style="-fx-cursor: hand;" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+            <GridPane.margin>
+                <Insets top="50.0" />
+            </GridPane.margin>
+            <image>
+                <Image url="@../smallCog.png" />
+            </image>
+        </ImageView>
+        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1.0" prefWidth="1.0" GridPane.hgrow="NEVER" GridPane.vgrow="NEVER">
+            <children>
+                <Pane fx:id="settings" layoutX="28.0" layoutY="137.0" onMouseExited="#hideSettings" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #322A10; -fx-border-color: #c79442;" visible="false" AnchorPane.rightAnchor="-1250.0" AnchorPane.topAnchor="60.0" />
+            </children>
+        </AnchorPane>
+    </children>
+</GridPane>
