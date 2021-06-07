@@ -4,12 +4,12 @@ import java.util.Random;
 
 public class Spot {
 
-    private boolean mine;
+    private final boolean mine;
     private boolean discovered = false;
     private int value;
-    private Random random = new Random();
 
     public Spot(){
+        Random random = new Random();
         this.mine = random.nextBoolean();
     }
 
@@ -33,14 +33,11 @@ public class Spot {
             return;
         }
         System.out.print(value);
-        return;
     }
 
-    public boolean mineIt(Field f){
+    public void mineIt(Field f){
         if(mine){
             f.incrementAround();
-            return true;
         }
-        return false;
     }
 }

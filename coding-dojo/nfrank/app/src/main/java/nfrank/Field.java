@@ -2,7 +2,7 @@ package nfrank;
 
 public class Field {
 
-    private Spot[][] field = new Spot[3][3];
+    private final Spot[][] field = new Spot[3][3];
     private int around;
 
     public Field (){
@@ -11,37 +11,24 @@ public class Field {
 
     public boolean discoverSpot(int x, int y){
         checkAround(x, y);
-        if(field[x][y].discoverThis(this.around)){
-            return true;
-        }
-        return false;
+        return field[x][y].discoverThis(this.around);
     }
 
     private void checkAround(int x, int y){
         this.around = 0;
-        switch(x){
-            case 0:
-                field[x+1][y].mineIt(this);
-                break;
-            case 1:
-                field[x+1][y].mineIt(this);
-                field[x-1][y].mineIt(this);
-                break;
-            case 2:
-                field[x-1][y].mineIt(this);
-                break;
+        switch (x) {
+            case 0, 2 -> field[1][y].mineIt(this);
+            case 1 -> {
+                field[2][y].mineIt(this);
+                field[0][y].mineIt(this);
+            }
         }
-        switch(y){
-            case 0:
-                field[x][y+1].mineIt(this);
-                break;
-            case 1:
-                field[x][y+1].mineIt(this);
-                field[x][y-1].mineIt(this);
-                break;
-            case 2:
-                field[x][y-1].mineIt(this);
-                break;
+        switch (y) {
+            case 0, 2 -> field[x][1].mineIt(this);
+            case 1 -> {
+                field[x][2].mineIt(this);
+                field[x][0].mineIt(this);
+            }
         }
         if(this.around == 0){
             revealAround(x,y);
@@ -54,29 +41,19 @@ public class Field {
 
     private void revealAround(int x, int y){
 
-        switch(x){
-            case 0:
-                discoverSpot(x+1,y);
-                break;
-            case 1:
-                discoverSpot(x+1,y);
-                discoverSpot(x-1,y);
-                break;
-            case 2:
-                discoverSpot(x-1,y);
-                break;
+        switch (x) {
+            case 0, 2 -> discoverSpot(1, y);
+            case 1 -> {
+                discoverSpot(2, y);
+                discoverSpot(0, y);
+            }
         }
-        switch(x){
-            case 0:
-                discoverSpot(x,y+1);
-                break;
-            case 1:
-                discoverSpot(x,y+1);
-                discoverSpot(x,y-1);
-                break;
-            case 2:
-                discoverSpot(x,y-1);
-                break;
+        switch (x) {
+            case 0, 2 -> discoverSpot(x, 1);
+            case 1 -> {
+                discoverSpot(x, 2);
+                discoverSpot(x, 0);
+            }
         }
 
     }
