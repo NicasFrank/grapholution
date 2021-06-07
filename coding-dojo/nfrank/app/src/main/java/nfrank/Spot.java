@@ -23,6 +23,10 @@ public class Spot {
         return false;
     }
 
+    public boolean getDiscovered(){
+        return discovered;
+    }
+
     public void drawThis(){
         if(!discovered){
             System.out.print("#");

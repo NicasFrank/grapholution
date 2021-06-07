@@ -4,14 +4,20 @@ public class Field {
 
     private final Spot[][] field = new Spot[3][3];
     private int around;
+    private boolean gamestate;
 
     public Field (){
+        gamestate = false;
         fillRow();
     }
 
     public boolean discoverSpot(int x, int y){
         checkAround(x, y);
-        return field[x][y].discoverThis(this.around);
+        gamestate = field[x][y].discoverThis(this.around);
+        if(this.around == 0 && !field[x][y].getDiscovered()){
+            revealAround(x,y);
+        }
+        return gamestate;
     }
 
     private void checkAround(int x, int y){
@@ -29,9 +35,6 @@ public class Field {
                 field[x][2].mineIt(this);
                 field[x][0].mineIt(this);
             }
-        }
-        if(this.around == 0){
-            revealAround(x,y);
         }
     }
 
