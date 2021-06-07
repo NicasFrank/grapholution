@@ -76,7 +76,7 @@ public class Field {
                 discoverSpot(0, y);
             }
         }
-        switch (x) {
+        switch (y) {
             case 0, 2 -> discoverSpot(x, 1);
             case 1 -> {
                 discoverSpot(x, 2);
