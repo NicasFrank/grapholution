@@ -24,7 +24,11 @@ public class Game {
             gameover = field.discoverSpot(x,y);
             field.drawRow();
         }
-        System.out.println("Du hast verloren ... Sadge");
+        if(!field.checkBoard()){
+            System.out.println("Du hast verloren ... Sadge");
+            return;
+        }
+        System.out.println("Du hast gewonnen ... POG");
     }
 
 

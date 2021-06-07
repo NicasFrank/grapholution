@@ -27,6 +27,10 @@ public class Spot {
         return discovered;
     }
 
+    public void revealSpot(){
+        this.discovered = true;
+    }
+
     public void drawThis(){
         if(!discovered){
             System.out.print("#");

@@ -11,13 +11,38 @@ public class Field {
         fillRow();
     }
 
-    public boolean discoverSpot(int x, int y){
-        checkAround(x, y);
-        gamestate = field[x][y].discoverThis(this.around);
-        if(this.around == 0 && !field[x][y].getDiscovered()){
-            revealAround(x,y);
+    public boolean checkBoard(){
+        for(int i = 0; i< 3; i++){
+            for(int j = 0; j<3; j++){
+                gamestate = false;
+            }
         }
         return gamestate;
+    }
+
+    public boolean discoverSpot(int x, int y){
+        if(field[x][y].getDiscovered()){
+            return gamestate;
+        }
+        checkAround(x, y);
+        gamestate = field[x][y].discoverThis(this.around);
+        if(this.around == 0){
+            revealAround(x,y);
+        }
+        checkMines(x,y);
+        return gamestate;
+    }
+
+    private void checkMines(int x, int y){
+        if(x%2 == 0 && y%2 == 0 && around == 2){
+            revealMines(x,y);
+        }
+        if(x%2 == 1 && y%2 == 1 && around == 4){
+            revealMines(x,y);
+        }
+        if((x%2 == 0 && y%2 == 1 || x%2 == 1 && y%2 == 0) && around == 3){
+            revealMines(x,y);
+        }
     }
 
     private void checkAround(int x, int y){
@@ -58,8 +83,26 @@ public class Field {
                 discoverSpot(x, 0);
             }
         }
-
     }
+
+    private void revealMines(int x, int y){
+        switch (x) {
+            case 0, 2 -> field[1][y].revealSpot();
+            case 1 -> {
+                field[2][y].revealSpot();
+                field[0][y].revealSpot();
+            }
+        }
+        switch (y) {
+            case 0, 2 -> field[x][1].revealSpot();
+            case 1 -> {
+                field[x][2].revealSpot();
+                field[x][0].revealSpot();
+            }
+        }
+    }
+
+
 
     public void drawRow(){
         for(int i = 0; i<3; ++i){
