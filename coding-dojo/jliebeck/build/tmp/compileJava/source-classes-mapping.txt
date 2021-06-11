@@ -1,4 +1,0 @@
-Minesweeper_GUI.java
- Minesweeper_GUI
-Minesweeper_Logic.java
- Minesweeper_Logic
