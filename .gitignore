@@ -1,0 +1,3 @@
+# Keep IDE files from getting added to base directory
+.idea/
+*.iml
