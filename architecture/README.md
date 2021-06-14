@@ -28,4 +28,4 @@
 
 ## Code Standards und Definition of Done
 
-siehe https://gitlab.imn.htwk-leipzig.de/weicker/grapholution/-/edit/master/code/README.md
+siehe https://gitlab.imn.htwk-leipzig.de/weicker/grapholution/-/blob/master/code/README.md
