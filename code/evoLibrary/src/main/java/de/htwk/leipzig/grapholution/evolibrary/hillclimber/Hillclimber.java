@@ -1,6 +1,7 @@
 package de.htwk.leipzig.grapholution.evolibrary.hillclimber;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Einfacher Hillclimber-Algorithmus mit Bit-Strings als Konfigurationen
@@ -49,7 +50,11 @@ public class Hillclimber {
         return sum;
     }
 
-    private String mutate(String configuration) {
-        return "";
+    private String mutate(String config) {
+        Random rand = new Random();
+        int index = rand.nextInt(config.length());
+        int newBit = 1 - Character.getNumericValue(config.charAt(index));
+
+        return config.substring(0, index) + newBit + config.substring(index + 1);
     }
 }
