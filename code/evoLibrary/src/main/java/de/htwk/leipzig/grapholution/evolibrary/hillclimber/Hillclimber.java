@@ -9,6 +9,12 @@ import java.util.Random;
 public class Hillclimber {
     private ArrayList<String> history;
 
+    /**
+     * erzeugt eine Liste der erfolgreichen Evolutionsergebnisse der Konfigurationen
+     *      und fügt die Startkonfiguration als erstes Element hinzu
+     * @param startConfig erhält eine Startkonfiguration,
+     *      sonst wird mit eine Bit-String gestartet der nur Nullen hat
+     */
     public Hillclimber(String startConfig) {
         if (!startConfig.matches("[01]+")) {
             startConfig = "00000000";
@@ -18,6 +24,11 @@ public class Hillclimber {
         history.add(startConfig);
     }
 
+    /**
+     * Liefert die aktuell beste Konfiguration
+     *
+     * @return letzte Element von history
+     */
     private String getLastConfig() {
         return history.get(history.size() - 1);
     }
@@ -40,6 +51,11 @@ public class Hillclimber {
         return getLastConfig();
     }
 
+    /**
+     * Bewertet eine Konfiguration in dem es die Zahl der einsen zusammenzählt
+     * @param configuration erhält eine Konfiguration
+     * @return Anzahl der einsen
+     */
     private int evaluate(String configuration) {
         int sum = 0;
         for(int i = 0; i<configuration.length(); i++){
@@ -50,6 +66,11 @@ public class Hillclimber {
         return sum;
     }
 
+    /**
+     * Mutiert die Konfiguration an einer zufälligen Stelle von 1 zu 0 bzw von 0 zu 1
+     * @param config erhält eine Konfiguration
+     * @return die erhalten Konfiguration mit einer zufällig geflippten Stelle
+     */
     private String mutate(String config) {
         Random rand = new Random();
         int index = rand.nextInt(config.length());
