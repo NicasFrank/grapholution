@@ -40,7 +40,13 @@ public class Hillclimber {
     }
 
     private int evaluate(String configuration) {
-        return 0;
+        int sum = 0;
+        for(int i = 0; i<configuration.length(); i++){
+            if(configuration.charAt(i) == '1'){
+                sum++;
+            }
+        }
+        return sum;
     }
 
     private String mutate(String configuration) {
