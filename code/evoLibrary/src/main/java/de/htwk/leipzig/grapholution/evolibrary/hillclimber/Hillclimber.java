@@ -56,7 +56,8 @@ public class Hillclimber {
      * @param configuration erhält eine Konfiguration
      * @return Anzahl der einsen
      */
-    private int evaluate(String configuration) {
+
+    public int evaluate(String configuration) {
         int sum = 0;
         for(int i = 0; i<configuration.length(); i++){
             if(configuration.charAt(i) == '1'){
@@ -71,7 +72,7 @@ public class Hillclimber {
      * @param config erhält eine Konfiguration
      * @return die erhalten Konfiguration mit einer zufällig geflippten Stelle
      */
-    private String mutate(String config) {
+    public String mutate(String config) {
         Random rand = new Random();
         int index = rand.nextInt(config.length());
         int newBit = 1 - Character.getNumericValue(config.charAt(index));
