@@ -4,6 +4,7 @@
 
 plugins {
     id 'de.htwk.leipzig.grapholution.java-application-conventions'
+    id 'org.openjfx.javafxplugin' version '0.0.10'
 }
 
 dependencies {
@@ -11,7 +12,20 @@ dependencies {
     implementation project(':evoLibrary')
 }
 
+javafx {
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
+
+sourceSets {
+    main {
+        resources {
+            srcDirs = ["src/main/resources"]
+            includes = ["**/*.fxml", "**/*.css"]
+        }
+    }
+}
+
 application {
     // Define the main class for the application.
-    mainClass = 'de.htwk.leipzig.grapholution.javafxapp.App'
+    mainClass = 'de.htwk.leipzig.grapholution.javafxapp.MainApp'
 }
