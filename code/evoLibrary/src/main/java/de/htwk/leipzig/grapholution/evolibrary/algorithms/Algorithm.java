@@ -1,6 +1,5 @@
 package de.htwk.leipzig.grapholution.evolibrary.algorithms;
 
-import de.htwk.leipzig.grapholution.evolibrary.fitnessfun.Fitnessfunction;
 import de.htwk.leipzig.grapholution.evolibrary.genotype.Genotype;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.Mutator;
 
