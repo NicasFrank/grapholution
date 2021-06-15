@@ -22,23 +22,24 @@ public class HillclimberTest {
     static Hillclimber<Boolean> hillclimberOne;
     static ArrayList<Boolean> resultZ;
     static ArrayList<Boolean> resultO;
+    static int genosize = 10;
 
     @BeforeAll
     static void initHillclimber() {
         Fitnessfunction<Boolean> fitnessfunctionZ = new ZeroMaxEvaluator();
         Fitnessfunction<Boolean> fitnessfunctionO = new OneMaxEvaluator();
-        GenotypeBoolean genotypeZ = new GenotypeBoolean(fitnessfunctionZ, 10);
-        GenotypeBoolean genotypeO = new GenotypeBoolean(fitnessfunctionO, 10);
+        GenotypeBoolean genotypeZ = new GenotypeBoolean(fitnessfunctionZ, genosize);
+        GenotypeBoolean genotypeO = new GenotypeBoolean(fitnessfunctionO, genosize);
         Mutator<Boolean> mutatorB = new BinaryMutation(10);
         Mutator<Boolean> mutatorS = new SwitchOneBit();
         hillclimberZero = new Hillclimber<>(genotypeZ, mutatorB);
         hillclimberOne = new Hillclimber<>(genotypeO, mutatorS);
         resultZ = new ArrayList<>();
-        for(int i = 0; i<10; i++){
+        for(int i = 0; i<genosize; i++){
             resultZ.add(Boolean.FALSE);
         }
         resultO = new ArrayList<>();
-        for(int i = 0; i<10; i++){
+        for(int i = 0; i<genosize; i++){
             resultO.add(Boolean.TRUE);
         }
     }
@@ -46,14 +47,14 @@ public class HillclimberTest {
     @Test
     void testHillClimbZero() {
         Genotype<Boolean> expectedZ = hillclimberZero.run();
-        for(int i = 0; i<10; i++){
+        for(int i = 0; i<genosize; i++){
             assertEquals(resultZ.get(i), expectedZ.valueAt(i));
         }
     }
     @Test
     void testHillClimbOne() {
         Genotype<Boolean> expectedO = hillclimberOne.run();
-        for(int i = 0; i<10; i++){
+        for(int i = 0; i<genosize; i++){
             assertEquals(resultO.get(i), expectedO.valueAt(i));
         }
     }

@@ -13,4 +13,10 @@ public class Algorithm<T> {
         this.mutator = mutator;
     }
 
+    public Genotype<T> run(){
+
+        return null;
+
+    }
+
 }
