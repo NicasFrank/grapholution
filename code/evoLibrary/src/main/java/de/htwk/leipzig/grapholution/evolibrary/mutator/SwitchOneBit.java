@@ -1,19 +1,19 @@
 package de.htwk.leipzig.grapholution.evolibrary.mutator;
 
-import de.htwk.leipzig.grapholution.evolibrary.genotype.GenotypeBool;
+import de.htwk.leipzig.grapholution.evolibrary.genotype.GenotypeBoolean;
 
 import java.util.Random;
 
-public class SwitchOneBit implements Mutator<GenotypeBool> {
+public class SwitchOneBit implements Mutator<GenotypeBoolean> {
 
     public SwitchOneBit(){
 
     }
 
     @Override
-    public void mutate(GenotypeBool genotype) {
+    public void mutate(GenotypeBoolean genotype) {
         Random rand = new Random();
-        int index = rand.nextInt(genotype.lenght());
+        int index = rand.nextInt(genotype.length());
         Boolean newBit = !genotype.getValues().get(index);
         genotype.getValues().set(index, newBit);
     }

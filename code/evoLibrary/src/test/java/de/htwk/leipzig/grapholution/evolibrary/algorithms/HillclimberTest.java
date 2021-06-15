@@ -3,7 +3,7 @@ package de.htwk.leipzig.grapholution.evolibrary.algorithms;
 import de.htwk.leipzig.grapholution.evolibrary.algorithms.hillclimber.Hillclimber;
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfun.Fitnessfun;
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfun.OneMaxEvaluator;
-import de.htwk.leipzig.grapholution.evolibrary.genotype.GenotypeBool;
+import de.htwk.leipzig.grapholution.evolibrary.genotype.GenotypeBoolean;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.Mutator;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.SwitchOneBit;
 import org.junit.jupiter.api.BeforeAll;
@@ -20,11 +20,7 @@ public class HillclimberTest {
 
     @BeforeAll
     static void initHillclimber() {
-        ArrayList<Boolean> values = new ArrayList<>();
-        for(int i = 0; i<8; i++){
-            values.add(Boolean.FALSE);
-        }
-        GenotypeBool genotype = new GenotypeBool(values);
+        GenotypeBoolean genotype = new GenotypeBoolean(8);
         Fitnessfun fitnessfun = new OneMaxEvaluator();
         Mutator mutator = new SwitchOneBit();
         hillclimber = new Hillclimber<Boolean>(genotype, fitnessfun, mutator);
@@ -36,7 +32,7 @@ public class HillclimberTest {
 
     @Test
     void testHillClimb() {
-        GenotypeBool expected = new GenotypeBool(result);
+        GenotypeBoolean expected = new GenotypeBoolean(result);
         for(int i = 0; i<8; i++){
             assertEquals(result.get(i), expected.valueAt(i));
         }
