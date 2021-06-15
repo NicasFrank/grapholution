@@ -46,6 +46,7 @@ public class Genotype<T> {
         for (T value : values) {
             System.out.print(value + " ");
         }
+        System.out.println("\n");
     }
 
 

@@ -28,6 +28,7 @@ public class Hillclimber<T> extends Algorithm<T> {
             mutator.mutate(copy);
             int eval = fitnessfun.evaluate(copy);
             if (eval > fitnessfun.evaluate(getLastConfig())) {
+                copy.print();
                 history.add(copy);
             }
             else {
