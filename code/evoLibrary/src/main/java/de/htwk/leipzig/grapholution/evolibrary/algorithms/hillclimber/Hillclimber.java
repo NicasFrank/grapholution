@@ -23,7 +23,7 @@ public class Hillclimber<T> extends Algorithm<T> {
     }
 
     public Genotype<T> run() {
-        while (fitnessfun.evaluate(getLastConfig()) < getLastConfig().length()) {
+        while (fitnessfun.evaluate(getLastConfig()) < getLastConfig().lenght()) {
             Genotype<T> copy = getLastConfig().createCopy();
             mutator.mutate(copy);
             int eval = fitnessfun.evaluate(copy);

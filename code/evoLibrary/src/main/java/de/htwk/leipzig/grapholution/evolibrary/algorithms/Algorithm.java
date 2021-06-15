@@ -4,7 +4,7 @@ import de.htwk.leipzig.grapholution.evolibrary.fitnessfun.Fitnessfun;
 import de.htwk.leipzig.grapholution.evolibrary.genotype.Genotype;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.Mutator;
 
-public class Algorithm<T> implements EvoAlgorithm<T> {
+public class Algorithm<T> {
 
     protected Genotype<T> genotype;
     protected Fitnessfun<Genotype<T>> fitnessfun;
@@ -16,7 +16,4 @@ public class Algorithm<T> implements EvoAlgorithm<T> {
         this.mutator = mutator;
     }
 
-    public Genotype<T> run() {
-        return null;
-    }
 }
