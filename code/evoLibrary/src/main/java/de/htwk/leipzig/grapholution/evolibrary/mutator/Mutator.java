@@ -1,6 +1,6 @@
 package de.htwk.leipzig.grapholution.evolibrary.mutator;
 
-import de.htwk.leipzig.grapholution.evolibrary.genotype.Genotype;
+import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
 
 public interface Mutator<T> {
 

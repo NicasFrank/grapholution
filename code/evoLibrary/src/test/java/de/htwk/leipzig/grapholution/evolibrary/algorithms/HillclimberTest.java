@@ -4,8 +4,8 @@ import de.htwk.leipzig.grapholution.evolibrary.algorithms.hillclimber.Hillclimbe
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfun.Fitnessfunction;
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfun.OneMaxEvaluator;
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfun.ZeroMaxEvaluator;
-import de.htwk.leipzig.grapholution.evolibrary.genotype.Genotype;
-import de.htwk.leipzig.grapholution.evolibrary.genotype.GenotypeBoolean;
+import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
+import de.htwk.leipzig.grapholution.evolibrary.genotypes.GenotypeBoolean;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.BinaryMutation;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.Mutator;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.SwitchOneBit;

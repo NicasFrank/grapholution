@@ -1,7 +1,7 @@
 package de.htwk.leipzig.grapholution.evolibrary.algorithms.hillclimber;
 
 import de.htwk.leipzig.grapholution.evolibrary.algorithms.Algorithm;
-import de.htwk.leipzig.grapholution.evolibrary.genotype.Genotype;
+import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.Mutator;
 
 import java.util.ArrayList;

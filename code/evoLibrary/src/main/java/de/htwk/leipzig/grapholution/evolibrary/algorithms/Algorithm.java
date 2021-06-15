@@ -1,6 +1,6 @@
 package de.htwk.leipzig.grapholution.evolibrary.algorithms;
 
-import de.htwk.leipzig.grapholution.evolibrary.genotype.Genotype;
+import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.Mutator;
 
 public class Algorithm<T> {

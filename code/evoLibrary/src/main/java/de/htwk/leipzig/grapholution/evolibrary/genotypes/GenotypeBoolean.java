@@ -1,4 +1,4 @@
-package de.htwk.leipzig.grapholution.evolibrary.genotype;
+package de.htwk.leipzig.grapholution.evolibrary.genotypes;
 
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfun.Fitnessfunction;
 
