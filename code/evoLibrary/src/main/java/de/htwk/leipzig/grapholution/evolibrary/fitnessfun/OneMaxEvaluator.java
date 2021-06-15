@@ -1,7 +1,6 @@
 package de.htwk.leipzig.grapholution.evolibrary.fitnessfun;
 
 import de.htwk.leipzig.grapholution.evolibrary.genotype.Genotype;
-import de.htwk.leipzig.grapholution.evolibrary.genotype.GenotypeBoolean;
 
 public class OneMaxEvaluator implements Fitnessfun<Boolean> {
 
