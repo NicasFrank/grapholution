@@ -1,7 +1,7 @@
 package de.htwk.leipzig.grapholution.evolibrary.algorithms.hillclimber;
 
 import de.htwk.leipzig.grapholution.evolibrary.algorithms.Algorithm;
-import de.htwk.leipzig.grapholution.evolibrary.fitnessfun.Fitnessfun;
+import de.htwk.leipzig.grapholution.evolibrary.fitnessfun.Fitnessfunction;
 import de.htwk.leipzig.grapholution.evolibrary.genotype.Genotype;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.Mutator;
 
@@ -12,8 +12,8 @@ public class Hillclimber<T> extends Algorithm<T> {
 
     private final ArrayList<Genotype<T>> history;
 
-    public Hillclimber(Genotype<T> genotype, Fitnessfun<T> fitnessfun, Mutator<T> mutator) {
-        super(genotype, fitnessfun, mutator);
+    public Hillclimber(Genotype<T> genotype, Mutator<T> mutator) {
+        super(genotype, mutator);
         history = new ArrayList<>();
         history.add(genotype);
     }
@@ -23,15 +23,15 @@ public class Hillclimber<T> extends Algorithm<T> {
     }
 
     public Genotype<T> run() {
-        while (fitnessfun.evaluate(getLastConfig()) < getLastConfig().length()) {
+        while (getLastConfig().getFitness() < getLastConfig().length()) {
             Genotype<T> copy = getLastConfig().createCopy();
             mutator.mutate(copy);
-            int eval = fitnessfun.evaluate(copy);
-            if (eval > fitnessfun.evaluate(getLastConfig())) {
+            if (copy.getFitness() > getLastConfig().getFitness()) {
                 copy.print();
                 history.add(copy);
             }
             else {
+                getLastConfig().print();
                 getLastConfig().survive();
             }
         }

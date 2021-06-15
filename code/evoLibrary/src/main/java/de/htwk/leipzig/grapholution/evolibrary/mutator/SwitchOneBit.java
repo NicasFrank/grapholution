@@ -16,6 +16,7 @@ public class SwitchOneBit implements Mutator<Boolean> {
         int index = rand.nextInt(genotype.length());
         Boolean newBit = !genotype.getValues().get(index);
         genotype.getValues().set(index, newBit);
+        genotype.updateFitness();
     }
 
 }

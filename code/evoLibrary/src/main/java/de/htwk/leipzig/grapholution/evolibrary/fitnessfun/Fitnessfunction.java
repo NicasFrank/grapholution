@@ -2,7 +2,7 @@ package de.htwk.leipzig.grapholution.evolibrary.fitnessfun;
 
 import de.htwk.leipzig.grapholution.evolibrary.genotype.Genotype;
 
-public interface Fitnessfun<T> {
+public interface Fitnessfunction<T> {
 
     int evaluate (Genotype<T> genotype);
 

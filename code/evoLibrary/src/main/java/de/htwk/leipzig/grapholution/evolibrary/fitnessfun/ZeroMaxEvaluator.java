@@ -2,7 +2,7 @@ package de.htwk.leipzig.grapholution.evolibrary.fitnessfun;
 
 import de.htwk.leipzig.grapholution.evolibrary.genotype.Genotype;
 
-public class ZeroMaxEvaluator implements Fitnessfun<Boolean> {
+public class ZeroMaxEvaluator implements Fitnessfunction<Boolean> {
 
     @Override
     public int evaluate(Genotype<Boolean> genotype) {

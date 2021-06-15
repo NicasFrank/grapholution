@@ -1,20 +1,32 @@
 package de.htwk.leipzig.grapholution.evolibrary.genotype;
 
+import de.htwk.leipzig.grapholution.evolibrary.fitnessfun.Fitnessfunction;
+
 import java.util.ArrayList;
 
 public class Genotype<T> {
 
+    protected Fitnessfunction<T> fitnessfunction;
     protected ArrayList<T> values;
     protected int length;
     protected int age = 0;
+    protected int fitness;
 
-    public Genotype(ArrayList<T> values){
+    public Genotype(Fitnessfunction<T> fitnessfunction, ArrayList<T> values){
+        this.fitnessfunction = fitnessfunction;
         this.values = values;
         this.length = values.size();
+        this.fitness = fitnessfunction.evaluate(this);
     }
 
-    public Genotype(int size){
+    public Genotype(Fitnessfunction<T> fitnessfunction, int size){
+        this.fitnessfunction = fitnessfunction;
+        this.fitness = fitnessfunction.evaluate(this);
         this.length = size;
+    }
+
+    public int getFitness(){
+        return fitness;
     }
 
     public T valueAt(int index){
@@ -31,7 +43,11 @@ public class Genotype<T> {
 
     public Genotype<T> createCopy(){
         ArrayList<T> valueCopy = new ArrayList<>(values);
-        return new Genotype<>(valueCopy);
+        return new Genotype<>(fitnessfunction, valueCopy);
+    }
+
+    public void updateFitness(){
+        this.fitness = fitnessfunction.evaluate(this);
     }
 
     public void survive(){
