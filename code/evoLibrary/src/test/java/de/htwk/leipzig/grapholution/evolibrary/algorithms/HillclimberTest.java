@@ -24,7 +24,7 @@ public class HillclimberTest {
 
     @BeforeAll
     static void initHillclimber() {
-        GenotypeBoolean genotype = new GenotypeBoolean(8);
+        GenotypeBoolean genotype = new GenotypeBoolean(12);
         Fitnessfun<Boolean> fitnessfunZ = new ZeroMaxEvaluator();
         Fitnessfun<Boolean> fitnessfunO = new OneMaxEvaluator();
         Mutator<Boolean> mutator = new SwitchOneBit();
@@ -41,14 +41,18 @@ public class HillclimberTest {
     }
 
     @Test
-    void testHillClimb() {
+    void testHillClimbZero() {
         Genotype<Boolean> expectedZ = hillclimberZero.run();
         for(int i = 0; i<8; i++){
             assertEquals(resultZ.get(i), expectedZ.valueAt(i));
         }
+    }
+    @Test
+    void testHillClimbOne() {
         Genotype<Boolean> expectedO = hillclimberOne.run();
         for(int i = 0; i<8; i++){
             assertEquals(resultO.get(i), expectedO.valueAt(i));
         }
     }
+
 }
