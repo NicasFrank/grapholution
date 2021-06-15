@@ -12,7 +12,7 @@ public class Hillclimber<T> extends Algorithm<T> {
 
     private final ArrayList<Genotype<T>> history;
 
-    public Hillclimber(Genotype<T> genotype, Fitnessfun<Genotype<T>> fitnessfun, Mutator<Genotype<T>> mutator) {
+    public Hillclimber(Genotype<T> genotype, Fitnessfun<T> fitnessfun, Mutator<T> mutator) {
         super(genotype, fitnessfun, mutator);
         history = new ArrayList<>();
         history.add(genotype);

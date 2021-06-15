@@ -22,9 +22,9 @@ public class HillclimberTest {
     @BeforeAll
     static void initHillclimber() {
         GenotypeBoolean genotype = new GenotypeBoolean(8);
-        Fitnessfun fitnessfun = new OneMaxEvaluator();
-        Mutator mutator = new SwitchOneBit();
-        hillclimber = new Hillclimber<Boolean>(genotype, fitnessfun, mutator);
+        Fitnessfun<Boolean> fitnessfun = new OneMaxEvaluator();
+        Mutator<Boolean> mutator = new SwitchOneBit();
+        hillclimber = new Hillclimber<>(genotype, fitnessfun, mutator);
         result = new ArrayList<>();
         for(int i = 0; i<8; i++){
             result.add(Boolean.TRUE);
@@ -33,7 +33,7 @@ public class HillclimberTest {
 
     @Test
     void testHillClimb() {
-        Genotype expected = hillclimber.run();
+        Genotype<Boolean> expected = hillclimber.run();
         for(int i = 0; i<8; i++){
             assertEquals(result.get(i), expected.valueAt(i));
         }
