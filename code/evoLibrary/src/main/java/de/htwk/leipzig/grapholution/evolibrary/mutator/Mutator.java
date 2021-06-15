@@ -1,7 +1,7 @@
 package de.htwk.leipzig.grapholution.evolibrary.mutator;
 
-public interface Mutator<Genotype> {
+public interface Mutator<T> {
 
-    void mutate (Genotype genotype);
+    void mutate (T genotype);
 
 }

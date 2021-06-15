@@ -3,6 +3,7 @@ package de.htwk.leipzig.grapholution.evolibrary.algorithms;
 import de.htwk.leipzig.grapholution.evolibrary.algorithms.hillclimber.Hillclimber;
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfun.Fitnessfun;
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfun.OneMaxEvaluator;
+import de.htwk.leipzig.grapholution.evolibrary.genotype.Genotype;
 import de.htwk.leipzig.grapholution.evolibrary.genotype.GenotypeBoolean;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.Mutator;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.SwitchOneBit;
@@ -32,7 +33,7 @@ public class HillclimberTest {
 
     @Test
     void testHillClimb() {
-        GenotypeBoolean expected = new GenotypeBoolean(result);
+        Genotype expected = hillclimber.run();
         for(int i = 0; i<8; i++){
             assertEquals(result.get(i), expected.valueAt(i));
         }
