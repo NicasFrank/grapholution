@@ -4,13 +4,13 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class HillclimberTest {
+public class StringHillclimberTest {
 
-    static Hillclimber hillclimber;
+    static StringHillClimber hillclimber;
 
     @BeforeAll
     static void initHillclimber() {
-        hillclimber = new Hillclimber("00000000");
+        hillclimber = new StringHillClimber();
     }
 
     @Test
@@ -38,6 +38,6 @@ public class HillclimberTest {
 
     @Test
     void testHillClimb() {
-        assertEquals("11111111", hillclimber.hillclimb());
+        assertEquals("11111111", hillclimber.run("00000000"));
     }
 }
