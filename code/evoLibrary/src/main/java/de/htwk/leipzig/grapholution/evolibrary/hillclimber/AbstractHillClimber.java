@@ -1,6 +1,5 @@
 package de.htwk.leipzig.grapholution.evolibrary.hillclimber;
 
-import de.htwk.leipzig.grapholution.evolibrary.EvoAlgAbstract.IEvaluator;
 import de.htwk.leipzig.grapholution.evolibrary.EvoAlgAbstract.IEvoAlg;
 import java.util.ArrayList;
 
@@ -12,25 +11,14 @@ import java.util.ArrayList;
  *
  * @param <T> der Typ der Konfiguration
  */
-public abstract class AbstractHillClimber<T, V extends Comparable<V>> implements IEvoAlg<T> {
+public abstract class AbstractHillClimber<T> implements IEvoAlg<T> {
     protected final ArrayList<T> history;
-
-    public IEvaluator<T, V> getEvaluator() {
-        return evaluator;
-    }
-
-    public void setEvaluator(IEvaluator<T, V> evaluator) {
-        this.evaluator = evaluator;
-    }
-
-    private IEvaluator<T, V> evaluator;
 
     /**
      * Erzeugt eine Liste der erfolgreichen Evolutionsergebnisse der Konfigurationen
      */
-    public AbstractHillClimber(IEvaluator<T, V> evaluator) {
+    public AbstractHillClimber() {
         history = new ArrayList<>();
-        this.evaluator = evaluator;
     }
 
     /**
@@ -46,9 +34,8 @@ public abstract class AbstractHillClimber<T, V extends Comparable<V>> implements
 
         while (!stoppingCondition(getLastConfig())) {
             T temp = mutate(getLastConfig());
-            V eval = evaluator.evalute(temp);
 
-            if (eval.compareTo(evaluator.evalute(getLastConfig())) > 1) {
+            if (evaluate(temp) > evaluate(getLastConfig()) ) {
                 history.add(temp);
             }
         }
@@ -83,4 +70,12 @@ public abstract class AbstractHillClimber<T, V extends Comparable<V>> implements
      * @return die mutierte Konfiguration
      */
     public abstract T mutate(T config);
+
+    /**
+     * Bewertet die übergebene Konfiguration
+     *
+     * @param config die zu bewertende Konfiguration
+     * @return die Bewertung der Konfiguration
+     */
+    public abstract int evaluate(T config);
 }

@@ -1,26 +1,11 @@
 package de.htwk.leipzig.grapholution.evolibrary.hillclimber;
 
-import de.htwk.leipzig.grapholution.evolibrary.EvoAlgAbstract.IEvaluator;
-
 import java.util.Random;
 
 /**
  * Einfacher Hillclimber mit Bit-Strings als Konfigurationen
  */
-public class StringHillClimber extends AbstractHillClimber<String, Integer> {
-    public StringHillClimber() {
-        super(config -> {
-            int sum = 0;
-
-            for(int i = 0; i<config.length(); i++){
-                if(config.charAt(i) == '1'){
-                    sum++;
-                }
-            }
-            return sum;
-        });
-    }
-
+public class StringHillClimber extends AbstractHillClimber<String> {
     /**
      * Bricht das Hillclimbing ab, falls die aktuelle Konfiguration nur aus Einsen besteht
      *
@@ -29,7 +14,7 @@ public class StringHillClimber extends AbstractHillClimber<String, Integer> {
      */
     @Override
     protected boolean stoppingCondition(String config) {
-        return getEvaluator().evalute(config) == config.length();
+        return evaluate(config) == config.length();
     }
 
     /**
@@ -45,5 +30,23 @@ public class StringHillClimber extends AbstractHillClimber<String, Integer> {
         int newBit = 1 - Character.getNumericValue(config.charAt(index));
 
         return config.substring(0, index) + newBit + config.substring(index + 1);
+    }
+
+    /**
+     * Bewertet die Konfiguration indem die Anzahl der vorhandenen 1 gezählt werden
+     *
+     * @param config die zu bewertende Konfiguration
+     * @return die Anzahl der Einsen in der Konfiguration
+     */
+    @Override
+    public int evaluate(String config) {
+        int sum = 0;
+
+        for(int i = 0; i<config.length(); i++){
+            if(config.charAt(i) == '1'){
+                sum++;
+            }
+        }
+        return sum;
     }
 }
