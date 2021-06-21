@@ -18,4 +18,9 @@ public class OneMaxEvaluator implements Fitnessfunction<Boolean> {
         }
         return sum;
     }
+
+    @Override
+    public int getMaxFitnessValue(Genotype<Boolean> genotype) {
+        return genotype.length();
+    }
 }

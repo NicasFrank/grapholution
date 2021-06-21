@@ -11,18 +11,21 @@ public class Genotype<T> {
     protected int length;
     protected int age = 0;
     protected int fitness;
+    public final int MAX_FITNESS_VALUE;
 
     public Genotype(Fitnessfunction<T> fitnessfunction, ArrayList<T> values){
         this.fitnessfunction = fitnessfunction;
         this.values = values;
         this.length = values.size();
         this.fitness = fitnessfunction.evaluate(this);
+        MAX_FITNESS_VALUE = fitnessfunction.getMaxFitnessValue(this);
     }
 
     public Genotype(Fitnessfunction<T> fitnessfunction, int size){
         this.fitnessfunction = fitnessfunction;
         this.fitness = fitnessfunction.evaluate(this);
         this.length = size;
+        MAX_FITNESS_VALUE = fitnessfunction.getMaxFitnessValue(this);
     }
 
     public int getFitness(){
