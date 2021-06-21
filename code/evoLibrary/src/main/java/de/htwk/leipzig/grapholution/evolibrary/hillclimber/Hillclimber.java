@@ -25,6 +25,14 @@ public class Hillclimber {
     }
 
     /**
+     * Gibt eine Liste mit den Entwicklungen der Individuen zurück
+     * @return LinkedList mit evolutionierten Strings
+     */
+    public ArrayList<String> getHistory(){
+        return history;
+    }
+
+    /**
      * Liefert die aktuell beste Konfiguration
      *
      * @return letzte Element von history
