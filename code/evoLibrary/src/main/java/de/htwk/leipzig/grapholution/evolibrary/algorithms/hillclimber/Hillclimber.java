@@ -17,22 +17,28 @@ public class Hillclimber<T> extends Algorithm<T> {
         history.add(genotype);
     }
 
+    public Hillclimber(Genotype<T> genotype, Mutator<T> mutator, int limit) {
+        super(genotype, mutator, limit);
+        history = new ArrayList<>();
+        history.add(genotype);
+    }
+
     private Genotype<T> getLastConfig() {
         return history.get(history.size() - 1);
     }
 
     public Genotype<T> run() {
-            while (getLastConfig().getFitness() < getLastConfig().MAX_FITNESS_VALUE){
+            while (getLastConfig().getFitness() < getLastConfig().MAX_FITNESS_VALUE &&
+                (limit < 0 || iterations < limit)){
             Genotype<T> copy = getLastConfig().createCopy();
             mutator.mutate(copy);
             if (copy.getFitness() > getLastConfig().getFitness()) {
-                copy.print();
                 history.add(copy);
             }
             else {
-                getLastConfig().print();
                 getLastConfig().survive();
             }
+            iterations++;
         }
         return getLastConfig();
     }

@@ -20,6 +20,7 @@ public class HillclimberTest {
 
     static Hillclimber<Boolean> hillclimberZero;
     static Hillclimber<Boolean> hillclimberOne;
+    static Hillclimber<Boolean> hillclimberOneLimit;
     static ArrayList<Boolean> resultZ;
     static ArrayList<Boolean> resultO;
     static int genosize = 10;
@@ -34,6 +35,7 @@ public class HillclimberTest {
         Mutator<Boolean> mutatorS = new SwitchOneBit();
         hillclimberZero = new Hillclimber<>(genotypeZ, mutatorB);
         hillclimberOne = new Hillclimber<>(genotypeO, mutatorS);
+        hillclimberOneLimit = new Hillclimber<>(genotypeO, mutatorS, 8);
         resultZ = new ArrayList<>();
         for(int i = 0; i<genosize; i++){
             resultZ.add(Boolean.FALSE);
@@ -57,6 +59,11 @@ public class HillclimberTest {
         for(int i = 0; i<genosize; i++){
             assertEquals(resultO.get(i), expectedO.valueAt(i));
         }
+    }
+    @Test
+    void testHillClimberLimit() {
+        hillclimberOneLimit.run();
+        assertEquals(8, hillclimberOneLimit.getIterations());
     }
 
 }
