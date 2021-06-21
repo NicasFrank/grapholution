@@ -16,12 +16,7 @@ public class GenotypeBoolean extends Genotype<Boolean> {
         Random random = new Random();
         ArrayList<Boolean> save = new ArrayList<>();
         for(int i = 0; i<this.length; i++){
-            if(random.nextBoolean()){
-                save.add(Boolean.TRUE);
-            }
-            else {
-                save.add(Boolean.FALSE);
-            }
+            save.add(random.nextBoolean());
         }
         this.values = save;
     }
@@ -30,12 +25,7 @@ public class GenotypeBoolean extends Genotype<Boolean> {
         Random random = new Random();
         ArrayList<Boolean> save = new ArrayList<>();
         for(int i = 0; i<this.length; i++){
-            if(random.nextBoolean()){
-                save.add(Boolean.TRUE);
-            }
-            else {
-                save.add(Boolean.FALSE);
-            }
+            save.add(random.nextBoolean());
         }
         return new GenotypeBoolean(fitnessfunction, save);
     }
