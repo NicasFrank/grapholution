@@ -1,13 +1,15 @@
 package de.htwk.leipzig.grapholution.evolibrary.hillclimber;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
  * Einfacher Hillclimber-Algorithmus mit Bit-Strings als Konfigurationen
  */
 public class Hillclimber {
-    private ArrayList<String> history;
+
+    private final List<String> history;
 
     /**
      * erzeugt eine Liste der erfolgreichen Evolutionsergebnisse der Konfigurationen
@@ -17,7 +19,7 @@ public class Hillclimber {
      */
     public Hillclimber(String startConfig) {
         if (!startConfig.matches("[01]+")) {
-            startConfig = "00000000";
+            throw new IllegalArgumentException("Ungueltiger Bitstring eingegeben!");
         }
 
         history = new ArrayList<>();
@@ -28,7 +30,7 @@ public class Hillclimber {
      * Gibt eine Liste mit den Entwicklungen der Individuen zurück
      * @return LinkedList mit evolutionierten Strings
      */
-    public ArrayList<String> getHistory(){
+    public List<String> getHistory(){
         return history;
     }
 
