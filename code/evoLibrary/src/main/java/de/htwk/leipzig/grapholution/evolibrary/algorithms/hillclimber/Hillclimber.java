@@ -5,11 +5,12 @@ import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.Mutator;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class Hillclimber<T> extends Algorithm<T> {
 
-    private final ArrayList<Genotype<T>> history;
+    private final List<Genotype<T>> history;
 
     public Hillclimber(Genotype<T> genotype, Mutator<T> mutator) {
         super(genotype, mutator);

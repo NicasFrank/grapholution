@@ -3,12 +3,13 @@ package de.htwk.leipzig.grapholution.evolibrary.genotypes;
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfun.Fitnessfunction;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Genotype<T> {
 
-    protected Fitnessfunction<T> fitnessfunction;
-    protected ArrayList<T> values;
-    protected int length;
+    protected final Fitnessfunction<T> fitnessfunction;
+    protected List<T> values;
+    protected final int length;
     protected int age = 0;
     protected int fitness;
     public final int MAX_FITNESS_VALUE;
@@ -36,7 +37,7 @@ public class Genotype<T> {
         return values.get(index);
     }
 
-    public ArrayList<T> getValues(){
+    public List<T> getValues(){
         return values;
     }
 

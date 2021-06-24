@@ -13,7 +13,6 @@ public class BinaryMutation implements Mutator<Boolean> {
         this.probability = probability;
     }
 
-
     @Override
     public void mutate(Genotype<Boolean> genotype) {
         for(int i = 0; i < genotype.length(); i++){
