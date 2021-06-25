@@ -1,0 +1,11 @@
+de/htwk/leipzig/grapholution/evolibrary/utilities/StringUtils.java
+ de.htwk.leipzig.grapholution.evolibrary.utilities.StringUtils
+de/htwk/leipzig/grapholution/evolibrary/utilities/SplitUtils.java
+ de.htwk.leipzig.grapholution.evolibrary.utilities.SplitUtils
+de/htwk/leipzig/grapholution/evolibrary/utilities/JoinUtils.java
+ de.htwk.leipzig.grapholution.evolibrary.utilities.JoinUtils
+de/htwk/leipzig/grapholution/evolibrary/list/LinkedList.java
+ de.htwk.leipzig.grapholution.evolibrary.list.LinkedList
+ de.htwk.leipzig.grapholution.evolibrary.list.LinkedList$Node
+module-info.java
+ module-info

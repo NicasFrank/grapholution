@@ -1,0 +1,8 @@
+de/htwk/leipzig/grapholution/javafxapp/MessageUtils.java
+ de.htwk.leipzig.grapholution.javafxapp.MessageUtils
+de/htwk/leipzig/grapholution/javafxapp/MainApp.java
+ de.htwk.leipzig.grapholution.javafxapp.MainApp
+de/htwk/leipzig/grapholution/javafxapp/FXMLController.java
+ de.htwk.leipzig.grapholution.javafxapp.FXMLController
+module-info.java
+ module-info
