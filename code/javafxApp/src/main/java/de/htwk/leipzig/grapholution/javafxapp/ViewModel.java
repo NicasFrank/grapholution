@@ -17,10 +17,10 @@ public class ViewModel {
         inputField = new TextField();
     }
 
-    private void isButtonClicked(){
+    public void isButtonClicked(){
         startButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent e) {
-                /**Aktion für starten des Hillclimber Algorithmus;
+                /**Aktion für Starten des Hillclimber Algorithmus
 
                  */
                  }
