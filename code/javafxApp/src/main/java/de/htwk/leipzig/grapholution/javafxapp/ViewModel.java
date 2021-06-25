@@ -11,6 +11,7 @@ public class ViewModel {
     private TextField outputField;
     private Button startButton;
 
+
     public ViewModel(){
         startButton = new Button();
         outputField = new TextField();
@@ -28,6 +29,7 @@ public class ViewModel {
     }
 
     private void handleInput(){
+
 
     }
 
