@@ -10,28 +10,6 @@ public class ViewModel {
     private StringProperty inputField = new SimpleStringProperty();
     private StringProperty outputField= new SimpleStringProperty();;
 
-<<<<<<< HEAD
-
-    public ViewModel(){
-        startButton = new Button();
-        outputField = new TextField();
-        inputField = new TextField();
-    }
-
-    public void isButtonClicked(){
-        startButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override public void handle(ActionEvent e) {
-                /**Aktion für Starten des Hillclimber Algorithmus
-
-                 */
-                 }
-        });
-    }
-
-    private void handleInput(){
-
-
-=======
     public void onButtonClick(){
         outputField.set("");
         if(handleInput()) {
@@ -53,7 +31,7 @@ public class ViewModel {
 
     private void alert(){
         outputField.set("Input nicht richtig Format!");
->>>>>>> d06e3de66aef835de6e63adec3cf0ec739ded8fe
+
     }
 
     private void handleOutput(){
