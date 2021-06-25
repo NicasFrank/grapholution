@@ -1,37 +1,48 @@
 package de.htwk.leipzig.grapholution.javafxapp;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.beans.property.Property;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.beans.value.ObservableValue;
 
 public class ViewModel {
 
-    private TextField inputField;
-    private TextField outputField;
-    private Button startButton;
+    private StringProperty inputField = new SimpleStringProperty();
+    private StringProperty outputField= new SimpleStringProperty();;
 
-    public ViewModel(){
-        startButton = new Button();
-        outputField = new TextField();
-        inputField = new TextField();
+    public void onButtonClick(){
+        outputField.set("");
+        if(handleInput()) {
+            handleOutput();
+        } else {
+            alert();
+        }
     }
 
-    private void isButtonClicked(){
-        startButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override public void handle(ActionEvent e) {
-                /**Aktion für starten des Hillclimber Algorithmus;
-
-                 */
-                 }
-        });
+    private boolean handleInput(){
+        char[] input = inputField.get().toCharArray();
+        for (int i=0; i<input.length;i++) {
+            if (input[i] != '0' && input[i] != '1') {
+                return false;
+            }
+        }
+        return true;
     }
 
-    private void handleInput(){
-
+    private void alert(){
+        outputField.set("Input nicht richtig Format!");
     }
 
     private void handleOutput(){
+        outputField.set(inputField.get());
+        inputField.set("");
+    }
 
+    public Property<String> inputFieldProperty() {
+        return inputField;
+    }
+
+    public ObservableValue<String> outputFieldProperty() {
+        return outputField;
     }
 }
