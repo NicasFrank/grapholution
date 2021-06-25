@@ -9,6 +9,16 @@
     - Namensgebung sollte kurz und prägnant sein, allerdings ohne Abkürzungen
 - Generell möchten wir möglichst viel von dem [Maintainable Code Cheat Sheet](https://liviuoprisan.com/maintainable-code-cheat-sheet/) übernehmen, aber das ist relativ viel. Daher: Versucht euer Bestes, wenn ihr mal ein paar Richtlinien verletzt ist das nicht so schlimm. Wirklich problematische Dinge sollten dann im Merge Request auffallen. 
 
+## Anmerkungen basierend auf Code Reviews
+
+### Generell
+- Membervariablen von Klassen sollten wann immer möglich "private final" sein ([Warum?](https://softwareengineering.stackexchange.com/a/98703))
+- Als Variablen-Typ sollten wenn möglich immer die generischen Typen verwendet werden. Bspw. List statt ArrayList ([Warum?](https://stackoverflow.com/a/2279059))
+
+### Testspezifisch
+- Test-Namen sollten ausdrücken was sie tun nach dem Schema "UnitOfWork_StateUnderTest_ExpectedBehavior" ([Warum?](https://stackoverflow.com/a/1594049))
+- Tests sollten nach Muster "Given -> When -> Then" aufgebaut sein (siehe [Modern Best Practices for Java Testing](https://phauer.com/2019/modern-best-practices-testing-java/))
+
 # (Technische) Definition of Done
 - Checkstyle muss durchlaufen
 - Testabdeckung mindestens 75%
