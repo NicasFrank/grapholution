@@ -31,7 +31,6 @@ public class ViewModel {
 
     private void alert(){
         outputField.set("Input nicht richtig Format!");
-
     }
 
     private void handleOutput(){
