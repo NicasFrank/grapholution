@@ -12,7 +12,11 @@ import static de.htwk.leipzig.grapholution.evolibrary.utilities.StringUtils.join
 import static de.htwk.leipzig.grapholution.evolibrary.utilities.StringUtils.split;
 
 public class MainApp extends Application {
-
+    /**
+     * Methode bindet die fxml datei sowie die css Datei in den Startprozess ein
+     * @param stage: Benutzt um Titel und Scene zu setzen
+     * @throws Exception: Wenn Datei nicht gefunden wurde
+     */
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("scene.fxml"));
@@ -25,7 +29,10 @@ public class MainApp extends Application {
         stage.setScene(scene);
         stage.show();
     }
-
+    /**
+     * Noch benötigt ? Absprache im späteren Zeitpunkt
+     * @return
+     */
     private String produceTitleUsingLibrary() {
         LinkedList tokens;
         tokens = split(MessageUtils.getMessage());
@@ -36,5 +43,4 @@ public class MainApp extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-
 }

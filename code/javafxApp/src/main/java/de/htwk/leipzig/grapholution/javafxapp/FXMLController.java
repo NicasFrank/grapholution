@@ -18,11 +18,19 @@ public class FXMLController {
 
     ViewModel viewModel = new ViewModel();
 
+    /**
+     * @initialize :
+     * Verknüpft textProperties mit dem ViewModel
+     */
     public void initialize() {
         inputField.textProperty().bindBidirectional(viewModel.inputFieldProperty());
         outputField.textProperty().bind(viewModel.outputFieldProperty());
     }
 
+    /**
+     *
+     * @param actionEvent: Klick event des Start Buttons
+     */
     public void placeholder(ActionEvent actionEvent) {
         viewModel.onButtonClick();
     }

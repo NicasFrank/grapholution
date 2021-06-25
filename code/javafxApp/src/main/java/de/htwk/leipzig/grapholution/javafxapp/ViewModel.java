@@ -10,6 +10,11 @@ public class ViewModel {
     private StringProperty inputField = new SimpleStringProperty();
     private StringProperty outputField= new SimpleStringProperty();;
 
+    /**
+     * Handhabung des Button-Klicks:
+     * outputField wird anfangs geleert
+     * bei Klick wird Inhalt des Eingabefelds im Ausgabefeld geholt
+     */
     public void onButtonClick(){
         outputField.set("");
         if(handleInput()) {
@@ -19,6 +24,11 @@ public class ViewModel {
         }
     }
 
+    /**
+     * Handhabung des Eingabefeldes:
+     * @return: true falls Eingabe 0 oder 1 (Buchstabe)
+     * iteriert durch das Eingabefeld und speichert in einem char Array
+     */
     private boolean handleInput(){
         char[] input = inputField.get().toCharArray();
         for (int i=0; i<input.length;i++) {
@@ -29,15 +39,27 @@ public class ViewModel {
         return true;
     }
 
+    /**
+     * Gibt Fehlermeldung falls Eingabe nicht dem obigen Format entspricht
+     */
     private void alert(){
         outputField.set("Input nicht richtig Format!");
     }
 
+    /**
+     * Handhabung des Ausgabefeldes:
+     * setzt Inhalt des Eingabefeldes in das Ausgabefeld
+     * und leert das Eingabefeld
+     */
     private void handleOutput(){
         outputField.set(inputField.get());
         inputField.set("");
     }
 
+    /**
+     * Methoden geben Eingabe und Ausgabefeld zurück
+     * @return
+     */
     public Property<String> inputFieldProperty() {
         return inputField;
     }
