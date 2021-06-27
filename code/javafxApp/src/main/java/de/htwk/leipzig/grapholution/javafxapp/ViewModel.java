@@ -8,7 +8,7 @@ import javafx.beans.value.ObservableValue;
 public class ViewModel {
 
     private StringProperty inputField = new SimpleStringProperty();
-    private StringProperty outputField= new SimpleStringProperty();;
+    private StringProperty outputField= new SimpleStringProperty();
 
     /**
      * Handhabung des Button-Klicks:
@@ -17,8 +17,8 @@ public class ViewModel {
      */
     public void onButtonClick(){
         outputField.set("");
-        if(handleInput()) {
-            handleOutput();
+        if(isInputCorrect()) {
+            writeResultInGUI();
         } else {
             alert();
         }
@@ -29,7 +29,7 @@ public class ViewModel {
      * @return: true falls Eingabe 0 oder 1 (Buchstabe)
      * iteriert durch das Eingabefeld und speichert in einem char Array
      */
-    private boolean handleInput(){
+    private boolean isInputCorrect(){
         char[] input = inputField.get().toCharArray();
         for (int i=0; i<input.length;i++) {
             if (input[i] != '0' && input[i] != '1') {
@@ -51,7 +51,7 @@ public class ViewModel {
      * setzt Inhalt des Eingabefeldes in das Ausgabefeld
      * und leert das Eingabefeld
      */
-    private void handleOutput(){
+    private void writeResultInGUI(){
         outputField.set(inputField.get());
         inputField.set("");
     }

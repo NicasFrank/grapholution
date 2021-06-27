@@ -10,13 +10,13 @@ import javafx.scene.control.TextField;
 public class FXMLController {
 
     @FXML
-    Button startButton;
+    private Button startButton;
     @FXML
-    TextField inputField;
+    private TextField inputField;
     @FXML
-    TextField outputField;
+    private TextField outputField;
 
-    ViewModel viewModel = new ViewModel();
+    private final ViewModel viewModel = new ViewModel();
 
     /**
      * @initialize :
@@ -31,7 +31,7 @@ public class FXMLController {
      *
      * @param actionEvent: Klick event des Start Buttons
      */
-    public void placeholder(ActionEvent actionEvent) {
+    public void sendButtonClick(ActionEvent actionEvent) {
         viewModel.onButtonClick();
     }
 }
