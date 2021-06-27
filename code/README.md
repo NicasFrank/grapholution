@@ -14,6 +14,7 @@
 ### Generell
 - Membervariablen von Klassen sollten wann immer möglich "private final" sein ([Warum?](https://softwareengineering.stackexchange.com/a/98703))
 - Als Variablen-Typ sollten wenn möglich immer die generischen Typen verwendet werden. Bspw. List statt ArrayList ([Warum?](https://stackoverflow.com/a/2279059))
+- Methoden die einen Boolean zurückgeben sollten mit "has" oder "is" beginnen und beschreiben was sie prüfen. Bspw. isItTeeTime(Time time)
 
 ### Testspezifisch
 - Test-Namen sollten ausdrücken was sie tun nach dem Schema "UnitOfWork_StateUnderTest_ExpectedBehavior" ([Warum?](https://stackoverflow.com/a/1594049))
