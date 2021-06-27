@@ -2,15 +2,15 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="15">
-      <module name="code.Grapholution.evoLibrary" target="11" />
-      <module name="code.Grapholution.evoLibrary.main" target="11" />
-      <module name="code.Grapholution.evoLibrary.test" target="11" />
-      <module name="code.Grapholution.javafxApp" target="11" />
-      <module name="code.Grapholution.javafxApp.main" target="11" />
-      <module name="code.Grapholution.javafxApp.test" target="11" />
-      <module name="grapholution.code.buildSrc" target="11" />
-      <module name="grapholution.code.buildSrc.main" target="11" />
-      <module name="grapholution.code.buildSrc.test" target="11" />
+      <module name="code.Grapholution.evoLibrary" target="15" />
+      <module name="code.Grapholution.evoLibrary.main" target="15" />
+      <module name="code.Grapholution.evoLibrary.test" target="15" />
+      <module name="code.Grapholution.javafxApp" target="15" />
+      <module name="code.Grapholution.javafxApp.main" target="15" />
+      <module name="code.Grapholution.javafxApp.test" target="15" />
+      <module name="grapholution.code.buildSrc" target="15" />
+      <module name="grapholution.code.buildSrc.main" target="15" />
+      <module name="grapholution.code.buildSrc.test" target="15" />
     </bytecodeTargetLevel>
   </component>
 </project>

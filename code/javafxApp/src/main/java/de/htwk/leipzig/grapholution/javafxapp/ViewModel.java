@@ -43,7 +43,7 @@ public class ViewModel {
      * Gibt Fehlermeldung falls Eingabe nicht dem obigen Format entspricht
      */
     private void alert(){
-        outputField.set("Input nicht richtig Format!");
+        outputField.set("Nur 1 oder 0 verwenden!");
     }
 
     /**
