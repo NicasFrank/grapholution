@@ -15,10 +15,10 @@ public class Hillclimber {
      * erzeugt eine Liste der erfolgreichen Evolutionsergebnisse der Konfigurationen
      *      und fügt die Startkonfiguration als erstes Element hinzu
      * @param startConfig erhält eine Startkonfiguration,
-     *      sonst wird mit eine Bit-String gestartet der nur Nullen hat
+     * @throws IllegalArgumentException falls der übergebene String null ist oder kein Bitstring ist
      */
     public Hillclimber(String startConfig) {
-        if (!startConfig.matches("[01]+")) {
+        if (startConfig == null || !startConfig.matches("[01]+")) {
             throw new IllegalArgumentException("Ungueltiger Bitstring eingegeben!");
         }
 
@@ -62,9 +62,9 @@ public class Hillclimber {
     }
 
     /**
-     * Bewertet eine Konfiguration in dem es die Zahl der einsen zusammenzählt
+     * Bewertet eine Konfiguration in dem es die Zahl der Einsen zusammenzählt
      * @param configuration erhält eine Konfiguration
-     * @return Anzahl der einsen
+     * @return Anzahl der Einsen
      */
 
     public int evaluate(String configuration) {
@@ -80,7 +80,7 @@ public class Hillclimber {
     /**
      * Mutiert die Konfiguration an einer zufälligen Stelle von 1 zu 0 bzw von 0 zu 1
      * @param config erhält eine Konfiguration
-     * @return die erhalten Konfiguration mit einer zufällig geflippten Stelle
+     * @return die mutierte Konfiguration mit einer zufällig geflippten Stelle
      */
     public String mutate(String config) {
         Random rand = new Random();
