@@ -17,10 +17,10 @@ public class ViewModelTest {
         inputField = new SimpleStringProperty();
         outputField= new SimpleStringProperty();
 
-        
+
     }
     @Test
-    public void testInputTextField(){
+    public void InputTextFieldTest(){
 
     }
 
