@@ -14,6 +14,7 @@ public class ViewModel {
      * Handhabung des Button-Klicks:
      * outputField wird anfangs geleert
      * bei Klick wird Inhalt des Eingabefelds im Ausgabefeld geholt
+     * @return
      */
     public void onButtonClick(){
         outputField.set("");

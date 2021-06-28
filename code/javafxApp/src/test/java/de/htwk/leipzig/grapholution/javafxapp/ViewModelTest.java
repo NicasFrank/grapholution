@@ -9,15 +9,15 @@ public class ViewModelTest {
 
     private final StringProperty inputField = new SimpleStringProperty("testInput");
     private final StringProperty outputField= new SimpleStringProperty("testOutput");
+    private final ViewModel viewModel = new ViewModel();
 
-    
     @Test
-    public void InputTextFieldTest(){
+    void InputTextFieldTest_returnsString(){
 
     }
 
     @Test
-    public void onbuttonClickTest(){
+    void onbuttonClickTest(){
 
 
     }
