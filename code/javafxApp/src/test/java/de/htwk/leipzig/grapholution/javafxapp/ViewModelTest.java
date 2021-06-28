@@ -12,13 +12,17 @@ public class ViewModelTest {
     private final ViewModel viewModel = new ViewModel();
 
     @Test
-    void InputTextFieldTest_returnsString(){
+    void inputTextFieldTest(){
 
     }
 
     @Test
     void onbuttonClickTest(){
 
+
+    }
+    @Test
+    void writeResultInGUITest(){
 
     }
 }
