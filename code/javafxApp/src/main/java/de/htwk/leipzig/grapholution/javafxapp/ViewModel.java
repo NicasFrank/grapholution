@@ -7,8 +7,8 @@ import javafx.beans.value.ObservableValue;
 
 public class ViewModel {
 
-    private StringProperty inputField = new SimpleStringProperty();
-    private StringProperty outputField= new SimpleStringProperty();
+    private final StringProperty inputField = new SimpleStringProperty();
+    private final StringProperty outputField= new SimpleStringProperty();
 
     /**
      * Handhabung des Button-Klicks:

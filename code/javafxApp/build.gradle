@@ -10,6 +10,7 @@ plugins {
 dependencies {
     implementation 'org.apache.commons:commons-text'
     implementation project(':evoLibrary')
+    implementation 'junit:junit:3.8.2'
 }
 
 javafx {

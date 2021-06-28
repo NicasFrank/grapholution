@@ -11,6 +11,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Gradle: org.apache.commons:commons-text:1.9" level="project" />
     <orderEntry type="module" module-name="Grapholution.evoLibrary.main" />
+    <orderEntry type="library" name="Gradle: junit:junit:3.8.2" level="project" />
     <orderEntry type="library" name="Gradle: org.openjfx:javafx-fxml:win:16" level="project" />
     <orderEntry type="library" name="Gradle: org.openjfx:javafx-controls:16" level="project" />
     <orderEntry type="library" name="Gradle: org.openjfx:javafx-controls:win:16" level="project" />
