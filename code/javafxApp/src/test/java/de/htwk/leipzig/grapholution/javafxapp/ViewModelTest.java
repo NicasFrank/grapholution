@@ -1,24 +1,16 @@
 package de.htwk.leipzig.grapholution.javafxapp;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import junit.framework.*;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class ViewModelTest {
 
-    private StringProperty inputField;
-    private StringProperty outputField;
+    private final StringProperty inputField = new SimpleStringProperty("testInput");
+    private final StringProperty outputField= new SimpleStringProperty("testOutput");
 
-    @Test
-    public void setup(){
-        inputField = new SimpleStringProperty();
-        outputField= new SimpleStringProperty();
-
-
-    }
+    
     @Test
     public void InputTextFieldTest(){
 
