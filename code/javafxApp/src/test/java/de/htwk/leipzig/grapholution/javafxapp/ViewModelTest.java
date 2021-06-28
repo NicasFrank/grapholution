@@ -1,2 +1,5 @@
-package de.htwk.leipzig.grapholution.javafxapp;public class ViewModelTest {
+package de.htwk.leipzig.grapholution.javafxapp;
+
+public class ViewModelTest {
+
 }
