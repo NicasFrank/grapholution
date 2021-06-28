@@ -9,4 +9,6 @@ plugins {
 // Please consider when to use "implements" and when "api"
 // see https://docs.gradle.org/current/userguide/java_library_plugin.html#sec:java_library_separation
 dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
 }

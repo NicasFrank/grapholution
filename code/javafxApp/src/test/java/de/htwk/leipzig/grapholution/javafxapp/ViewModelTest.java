@@ -18,8 +18,7 @@ public class ViewModelTest {
 
     @Test
     void onbuttonClickTest(){
-
-
+        //verifyThat(".button", hasText("click me!"));
     }
     @Test
     void writeResultInGUITest(){
