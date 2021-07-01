@@ -4,31 +4,25 @@ import java.util.Scanner;
 
 public class Game {
   private final Minefield minefield;
-  private final WLdetector detector;
-  private final Scanner scannerG = new Scanner(System.in);
+  private boolean isLost;
+  private final Scanner scanner = new Scanner(System.in);
 
   public Game(int fieldSize, int numberMines){
-    this.detector = new WLdetector(false,fieldSize,numberMines);
-    this.minefield = new Minefield(fieldSize,numberMines,detector);
+    this.minefield = new Minefield(fieldSize,numberMines);
+    this.isLost=false;
   }
 
   public void play(){
-    int[] XandY;
-    boolean end = false;
+    int[] XandY = new int[2];
     minefield.drawMinefield();
-    while(!end){
-      XandY=coordinates();
-      end=minefield.revealSquare(XandY[0]-1,XandY[1]-1);
+    while(!isLost){
+      System.out.print("Bitte geben sie die Positon ein, die sie aufdecken wollen: \nx=");
+      XandY[0]=scanner.nextInt();
+      System.out.print("y=");
+      XandY[1]=scanner.nextInt();
+      isLost=minefield.revealSquare(XandY[0],XandY[1]);
       minefield.drawMinefield();
-      end=detector.checkEnd(end);
     }
-  }
-
-  private int[] coordinates() {
-    System.out.print("Bitte geben sie die Positon ein, die sie aufdecken wollen: \nx=");
-    int x=scannerG.nextInt();
-    System.out.print("y=");
-    int y=scannerG.nextInt();
-    return new int[] {x,y};
+    System.out.println("Du habe Verloré");
   }
 }
