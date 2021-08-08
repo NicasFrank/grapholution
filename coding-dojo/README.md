@@ -1,4 +1,4 @@
-# Coding Dojo: Knapsack Problem mit evolutionären Algorithmen lösen
+# Coding Dojo: Minesweeper Object Calisthenics
 
 - Programmieraufgabe
     - Motivation: Es geht hauptsächlich darum die Tools kennenzulernen mit denen wir arbeiten
@@ -12,7 +12,7 @@
         - Aufgabe in Minesweeper-Aufgabe.pdf bearbeiten
         - Pull Request erstellen
 
-## Alte Version
+## Alte Version: Knapsack Problem mit evolutionären Algorithmen lösen
 
 - Schritte
     - Eigenen feature branch erstellen
