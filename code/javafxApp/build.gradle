@@ -26,8 +26,7 @@ dependencies {
 
 javafx {
     version = '16'
-    modules = [ 'javafx.controls', 'javafx.fxml' ]
-    configuration = 'compileOnly'
+    modules = [ 'javafx.fxml','javafx.controls'  ]
 }
 
 sourceSets {
@@ -39,6 +38,7 @@ sourceSets {
     }
 }
 
+mainClassName = "$moduleName/de.htwk.leipzig.grapholution.javafxapp.MainApp"
 application {
     // Define the main class for the application.
     mainClass = 'de.htwk.leipzig.grapholution.javafxapp.MainApp'
