@@ -6,36 +6,13 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/evoLibrary/Grapholution.evoLibrary.iml" filepath="$PROJECT_DIR$/.idea/modules/evoLibrary/Grapholution.evoLibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/evoLibrary/Grapholution.evoLibrary.main.iml" filepath="$PROJECT_DIR$/.idea/modules/evoLibrary/Grapholution.evoLibrary.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/evoLibrary/Grapholution.evoLibrary.test.iml" filepath="$PROJECT_DIR$/.idea/modules/evoLibrary/Grapholution.evoLibrary.test.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/javafxApp/Grapholution.javafxApp.iml" filepath="$PROJECT_DIR$/.idea/modules/javafxApp/Grapholution.javafxApp.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/javafxApp/Grapholution.javafxApp.main.iml" filepath="$PROJECT_DIR$/.idea/modules/javafxApp/Grapholution.javafxApp.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/javafxApp/Grapholution.javafxApp.test.iml" filepath="$PROJECT_DIR$/.idea/modules/javafxApp/Grapholution.javafxApp.test.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/code.iml" filepath="$PROJECT_DIR$/.idea/modules/code.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/code.Grapholution.iml" filepath="$PROJECT_DIR$/.idea/modules/code.Grapholution.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/evoLibrary/code.Grapholution.evoLibrary.iml" filepath="$PROJECT_DIR$/.idea/modules/evoLibrary/code.Grapholution.evoLibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/evoLibrary/code.Grapholution.evoLibrary.main.iml" filepath="$PROJECT_DIR$/.idea/modules/evoLibrary/code.Grapholution.evoLibrary.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/evoLibrary/code.Grapholution.evoLibrary.main~1.iml" filepath="$PROJECT_DIR$/.idea/modules/evoLibrary/code.Grapholution.evoLibrary.main~1.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/evoLibrary/code.Grapholution.evoLibrary.main~2.iml" filepath="$PROJECT_DIR$/.idea/modules/evoLibrary/code.Grapholution.evoLibrary.main~2.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/evoLibrary/code.Grapholution.evoLibrary.main~3.iml" filepath="$PROJECT_DIR$/.idea/modules/evoLibrary/code.Grapholution.evoLibrary.main~3.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/evoLibrary/code.Grapholution.evoLibrary.main~4.iml" filepath="$PROJECT_DIR$/.idea/modules/evoLibrary/code.Grapholution.evoLibrary.main~4.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/evoLibrary/code.Grapholution.evoLibrary.test.iml" filepath="$PROJECT_DIR$/.idea/modules/evoLibrary/code.Grapholution.evoLibrary.test.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/evoLibrary/code.Grapholution.evoLibrary.test~1.iml" filepath="$PROJECT_DIR$/.idea/modules/evoLibrary/code.Grapholution.evoLibrary.test~1.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/evoLibrary/code.Grapholution.evoLibrary.test~2.iml" filepath="$PROJECT_DIR$/.idea/modules/evoLibrary/code.Grapholution.evoLibrary.test~2.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/evoLibrary/code.Grapholution.evoLibrary.test~3.iml" filepath="$PROJECT_DIR$/.idea/modules/evoLibrary/code.Grapholution.evoLibrary.test~3.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/evoLibrary/code.Grapholution.evoLibrary.test~4.iml" filepath="$PROJECT_DIR$/.idea/modules/evoLibrary/code.Grapholution.evoLibrary.test~4.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/evoLibrary/code.Grapholution.evoLibrary.test~5.iml" filepath="$PROJECT_DIR$/.idea/modules/evoLibrary/code.Grapholution.evoLibrary.test~5.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/code.Grapholution.main.iml" filepath="$PROJECT_DIR$/.idea/modules/code.Grapholution.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/code.Grapholution.test.iml" filepath="$PROJECT_DIR$/.idea/modules/code.Grapholution.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/code.buildSrc.iml" filepath="$PROJECT_DIR$/.idea/modules/code.buildSrc.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/code.buildSrc.main.iml" filepath="$PROJECT_DIR$/.idea/modules/code.buildSrc.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/code.buildSrc.test.iml" filepath="$PROJECT_DIR$/.idea/modules/code.buildSrc.test.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/evoLibrary/code.evoLibrary.iml" filepath="$PROJECT_DIR$/.idea/modules/evoLibrary/code.evoLibrary.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/evoLibrary/code.evoLibrary.main.iml" filepath="$PROJECT_DIR$/.idea/modules/evoLibrary/code.evoLibrary.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/evoLibrary/code.evoLibrary.test.iml" filepath="$PROJECT_DIR$/.idea/modules/evoLibrary/code.evoLibrary.test.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/javafxApp/code.javafxApp.iml" filepath="$PROJECT_DIR$/.idea/modules/javafxApp/code.javafxApp.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/javafxApp/code.javafxApp.main.iml" filepath="$PROJECT_DIR$/.idea/modules/javafxApp/code.javafxApp.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/javafxApp/code.javafxApp.test.iml" filepath="$PROJECT_DIR$/.idea/modules/javafxApp/code.javafxApp.test.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/code.main.iml" filepath="$PROJECT_DIR$/.idea/modules/code.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/code.test.iml" filepath="$PROJECT_DIR$/.idea/modules/code.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/grapholution.code.buildSrc.iml" filepath="$PROJECT_DIR$/.idea/modules/grapholution.code.buildSrc.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/grapholution.code.buildSrc.main.iml" filepath="$PROJECT_DIR$/.idea/modules/grapholution.code.buildSrc.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/grapholution.code.buildSrc.test.iml" filepath="$PROJECT_DIR$/.idea/modules/grapholution.code.buildSrc.test.iml" />
