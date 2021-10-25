@@ -29,6 +29,8 @@ public class Genotype<T> {
         MAX_FITNESS_VALUE = fitnessfunction.getMaxFitnessValue(this);
     }
 
+    public Fitnessfunction<T> getFitnessfunction() {return fitnessfunction;}
+
     public int getFitness(){
         return fitness;
     }
@@ -40,6 +42,8 @@ public class Genotype<T> {
     public List<T> getValues(){
         return values;
     }
+
+    public void setValues(ArrayList<T> newValues){this.values = newValues;}
 
     public int length() {
         return length;

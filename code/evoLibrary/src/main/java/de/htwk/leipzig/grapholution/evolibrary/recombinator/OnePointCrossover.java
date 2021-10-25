@@ -1,4 +1,27 @@
 package de.htwk.leipzig.grapholution.evolibrary.recombinator;
 
-public class OnePointCrossover implements Recombinator{
+import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
+
+import java.util.ArrayList;
+import java.util.Random;
+
+public class OnePointCrossover<T> implements Recombinator<T>{
+    @Override
+    public void recombine(Genotype<T> individualA, Genotype<T> individualB) {
+
+        Random random = new Random();
+        int crossoverPoint = random.nextInt(individualA.length());
+        ArrayList<T> newA = new ArrayList<>();
+        ArrayList<T> newB = new ArrayList<>();
+        for(int i = 0; i<=crossoverPoint; i++){
+            newA.add(individualA.valueAt(i));
+            newB.add(individualB.valueAt(i));
+        }
+        for(int i = crossoverPoint+1; i<individualA.length(); i++){
+            newA.add(individualB.valueAt(i));
+            newB.add(individualA.valueAt(i));
+        }
+        individualA.setValues(newA);
+        individualB.setValues(newB);
+    }
 }

@@ -9,6 +9,7 @@ import de.htwk.leipzig.grapholution.evolibrary.genotypes.GenotypeBoolean;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.BinaryMutation;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.Mutator;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.SwitchOneBit;
+import de.htwk.leipzig.grapholution.evolibrary.recombinator.OnePointCrossover;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -64,6 +65,14 @@ public class HillclimberTest {
     void testHillClimberLimit() {
         hillclimberOneLimit.run();
         assertEquals(8, hillclimberOneLimit.getIterations());
+    }
+    @Test
+    void testOnePointCrossover(){
+        Fitnessfunction<Boolean> fitnessfunctionO = new OneMaxEvaluator();
+        GenotypeBoolean genotypeO = new GenotypeBoolean(fitnessfunctionO, genosize);
+        GenotypeBoolean genotypeO2 = new GenotypeBoolean(fitnessfunctionO, genosize);
+        OnePointCrossover<Boolean> test = new OnePointCrossover<>();
+        test.recombine(genotypeO, genotypeO2);
     }
 
 }

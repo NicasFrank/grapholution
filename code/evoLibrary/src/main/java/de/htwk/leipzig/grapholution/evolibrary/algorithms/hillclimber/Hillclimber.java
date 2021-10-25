@@ -11,15 +11,18 @@ import java.util.List;
 public class Hillclimber<T> extends Algorithm<T> {
 
     private final List<Genotype<T>> history;
+    private final Mutator<T> mutator;
 
     public Hillclimber(Genotype<T> genotype, Mutator<T> mutator) {
-        super(genotype, mutator);
+        super(genotype);
+        this.mutator = mutator;
         history = new ArrayList<>();
         history.add(genotype);
     }
 
     public Hillclimber(Genotype<T> genotype, Mutator<T> mutator, int limit) {
         super(genotype, mutator, limit);
+        this.mutator = mutator;
         history = new ArrayList<>();
         history.add(genotype);
     }

@@ -6,13 +6,11 @@ import de.htwk.leipzig.grapholution.evolibrary.mutator.Mutator;
 public abstract class Algorithm<T> {
 
     protected Genotype<T> genotype;
-    protected Mutator<T> mutator;
     protected int limit = -1;
     protected int iterations = 0;
 
-    public Algorithm(Genotype<T> genotype, Mutator<T> mutator){
+    public Algorithm(Genotype<T> genotype){
         this.genotype = genotype;
-        this.mutator = mutator;
     }
 
     public int getIterations() {
@@ -20,7 +18,7 @@ public abstract class Algorithm<T> {
     }
 
     public Algorithm(Genotype<T> genotype, Mutator<T> mutator, int limit) {
-        this(genotype, mutator);
+        this(genotype);
         this.limit = limit;
     }
 
