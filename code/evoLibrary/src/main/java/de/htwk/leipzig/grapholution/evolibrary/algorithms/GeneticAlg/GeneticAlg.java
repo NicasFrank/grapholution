@@ -5,6 +5,10 @@ import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.Mutator;
 import de.htwk.leipzig.grapholution.evolibrary.recombinator.Recombinator;
 
+/**
+ * Noch zu entwickeln
+ * @param <T> Datentyp des Genotypen, auf dem der Gen.Alg. arbeitet
+ */
 public class GeneticAlg<T> extends Algorithm<T> {
 
     private final Mutator<T> mutator;

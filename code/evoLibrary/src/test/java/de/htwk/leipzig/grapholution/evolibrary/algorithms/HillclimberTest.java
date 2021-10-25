@@ -66,13 +66,6 @@ public class HillclimberTest {
         hillclimberOneLimit.run();
         assertEquals(8, hillclimberOneLimit.getIterations());
     }
-    @Test
-    void testOnePointCrossover(){
-        Fitnessfunction<Boolean> fitnessfunctionO = new OneMaxEvaluator();
-        GenotypeBoolean genotypeO = new GenotypeBoolean(fitnessfunctionO, genosize);
-        GenotypeBoolean genotypeO2 = new GenotypeBoolean(fitnessfunctionO, genosize);
-        OnePointCrossover<Boolean> test = new OnePointCrossover<>();
-        test.recombine(genotypeO, genotypeO2);
-    }
+
 
 }
