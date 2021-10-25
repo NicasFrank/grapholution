@@ -3,6 +3,7 @@ package de.htwk.leipzig.grapholution.evolibrary.genotypes;
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfun.Fitnessfunction;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -11,11 +12,11 @@ import java.util.Random;
 public class GenotypeBoolean extends Genotype<Boolean> {
 
     /**
-     * Konstruktor zur Erstellung eines Boolean-Genotypen mit vorgenerierten Werten als ArrayList
+     * Konstruktor zur Erstellung eines Boolean-Genotypen mit vorgenerierten Werten als List
      * @param fitnessfunction Fitnessfunktion, die zur Evaluierung des Genotyps benutzt wird
      * @param values Werte, die dem Genotyp zugewiesen werden
      */
-    public GenotypeBoolean(Fitnessfunction<Boolean> fitnessfunction, ArrayList<Boolean> values){
+    public GenotypeBoolean(Fitnessfunction<Boolean> fitnessfunction, List<Boolean> values){
         super(fitnessfunction, values);
     }
 

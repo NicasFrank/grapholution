@@ -19,11 +19,11 @@ public class Genotype<T> {
     public final int MAX_FITNESS_VALUE;
 
     /**
-     * Konstruktor zur Erstellung eines Genotypen mit vorgenerierten Werten als ArrayList
+     * Konstruktor zur Erstellung eines Genotypen mit vorgenerierten Werten als List
      * @param fitnessfunction Fitnessfunktion, die zur Evaluierung des Genotyps benutzt wird
      * @param values Werte, die dem Genotyp zugewiesen werden
      */
-    public Genotype(Fitnessfunction<T> fitnessfunction, ArrayList<T> values){
+    public Genotype(Fitnessfunction<T> fitnessfunction, List<T> values){
         this.fitnessfunction = fitnessfunction;
         this.values = values;
         this.length = values.size();
@@ -32,7 +32,7 @@ public class Genotype<T> {
     }
 
     /**
-     * Konstruktor zur Erstellung eines Genotypen mit zufaellig generierten Werten einer bestimmten Länge
+     * Konstruktor zur Erstellung eines Genotypen mit zufaellig generierten Werten als ArrayList einer bestimmten Länge
      * @param fitnessfunction Fitnessfunktion, die zur Evaluierung des Genotyps benutzt wird
      * @param size Gewuenschte Laenge des Genotypen
      */
@@ -42,12 +42,6 @@ public class Genotype<T> {
         this.length = size;
         MAX_FITNESS_VALUE = fitnessfunction.getMaxFitnessValue(this);
     }
-
-    /**
-     * Getter fuer Fitnessfunktion
-     * @return Fitnessfunktion, die zur Evaluierung des Genotyps benutzt wird
-     */
-    public Fitnessfunction<T> getFitnessfunction() {return fitnessfunction;}
 
     /**
      * Getter fuer Fitnesswert des Genotypen
@@ -68,17 +62,17 @@ public class Genotype<T> {
 
     /**
      * Getter fuer alle Werte des Genotypen
-     * @return ArrayList mit allen Werten des Genotypen
+     * @return List mit allen Werten des Genotypen
      */
     public List<T> getValues(){
         return values;
     }
 
     /**
-     * Setter fuer die ArrayList mit den Werten des Genotypen
+     * Setter fuer die List mit den Werten des Genotypen
      * @param newValues Werte, die dem Genotypen zugewiesen werden sollen
      */
-    public void setValues(ArrayList<T> newValues){
+    public void setValues(List<T> newValues){
         this.values = newValues;
     }
 
