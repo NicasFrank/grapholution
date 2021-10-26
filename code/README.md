@@ -8,6 +8,7 @@
     - **Zeilenumfang** von Klassen sowie Methoden eher **klein halten** und dafür mehr Klassen/Methoden erzeugen
     - Namensgebung sollte **kurz und prägnant** sein, allerdings ohne Abkürzungen
 - Generell möchten wir möglichst viel von dem [Maintainable Code Cheat Sheet](https://liviuoprisan.com/maintainable-code-cheat-sheet/) übernehmen, aber das ist relativ viel. Daher: Versucht euer Bestes, wenn ihr mal ein paar Richtlinien verletzt ist das nicht so schlimm. Wirklich problematische Dinge sollten dann im Merge Request auffallen. 
+- Mockito und Unit Tests beispielhafte Verwendung (von Benni): im [Coding Dojo](https://gitlab.imn.htwk-leipzig.de/weicker/grapholution/-/tree/master/coding-dojo/unitTestMockitoDemo)
 
 ## Anmerkungen basierend auf Code Reviews
 
