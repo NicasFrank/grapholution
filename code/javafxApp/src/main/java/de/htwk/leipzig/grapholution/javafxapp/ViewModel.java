@@ -1,14 +1,14 @@
 package de.htwk.leipzig.grapholution.javafxapp;
 
-import javafx.beans.property.Property;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-import javafx.beans.value.ObservableValue;
+//import javafx.beans.property.Property;
+//import javafx.beans.property.SimpleStringProperty;
+//import javafx.beans.property.StringProperty;
+//import javafx.beans.value.ObservableValue;
 
 public class ViewModel {
 
-    private final StringProperty inputField = new SimpleStringProperty();
-    private final StringProperty outputField= new SimpleStringProperty();
+//    private final StringProperty inputField = new SimpleStringProperty();
+//    private final StringProperty outputField= new SimpleStringProperty();
 
     /**
      * Handhabung des Button-Klicks:
@@ -17,11 +17,11 @@ public class ViewModel {
      * @return
      */
     public void onButtonClick(){
-        outputField.set("");
+//        outputField.set("");
         if(isInputCorrect()) {
             writeResultInGUI();
         } else {
-            alert();
+//            alert();
         }
     }
 
@@ -31,21 +31,21 @@ public class ViewModel {
      * iteriert durch das Eingabefeld und speichert in einem char Array
      */
     private boolean isInputCorrect(){
-        char[] input = inputField.get().toCharArray();
-        for (int i=0; i<input.length;i++) {
-            if (input[i] != '0' && input[i] != '1') {
-                return false;
-            }
-        }
+//        char[] input = inputField.get().toCharArray();
+//        for (int i=0; i<input.length;i++) {
+//            if (input[i] != '0' && input[i] != '1') {
+//                return false;
+//            }
+//        }
         return true;
     }
 
     /**
      * Gibt Fehlermeldung falls Eingabe nicht dem obigen Format entspricht
      */
-    private void alert(){
-        outputField.set("Nur 1 oder 0 verwenden!");
-    }
+//    private void alert(){
+//        outputField.set("Nur 1 oder 0 verwenden!");
+//    }
 
     /**
      * Handhabung des Ausgabefeldes:
@@ -53,19 +53,19 @@ public class ViewModel {
      * und leert das Eingabefeld
      */
     private void writeResultInGUI(){
-        outputField.set(inputField.get());
-        inputField.set("");
+//        outputField.set(inputField.get());
+//        inputField.set("");
     }
 
-    /**
-     * Methoden geben Eingabe und Ausgabefeld zurück
-     * @return
-     */
-    public Property<String> inputFieldProperty() {
-        return inputField;
-    }
-
-    public ObservableValue<String> outputFieldProperty() {
-        return outputField;
-    }
+//    /**
+//     * Methoden geben Eingabe und Ausgabefeld zurück
+//     * @return
+//     */
+//    public Property<String> inputFieldProperty() {
+//        return inputField;
+//    }
+//
+//    public ObservableValue<String> outputFieldProperty() {
+//        return outputField;
+//    }
 }
