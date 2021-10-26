@@ -1,0 +1,42 @@
+image: gradle:7.0.2-jdk11
+
+stages:
+  - test
+  - check
+  - build
+
+variables:
+  GRADLE_OPTS: "-Dorg.gradle.daemon=false"
+
+before_script:
+  - export GRADLE_USER_HOME=`pwd`/.gradle
+
+test:
+  stage: test
+  script: 
+    - cd code
+    - gradle test --info
+
+checkstyle/spotbugs:
+  stage: check
+  script: 
+    - cd code
+    - gradle check --info
+  artifacts:
+    paths:
+      - code/evoLibrary/build/reports/checkstyle/main.html
+      - code/javafxApp/build/reports/checkstyle/main.html
+      - code/evoLibrary/build/reports/checkstyle/test.html
+      - code/javafxApp/build/reports/checkstyle/test.html
+
+build:
+  stage: build
+  script: 
+    - cd code
+    - gradle build --info
+  artifacts:
+    paths:
+      - code/javafxApp/build/libs/*.jar
+
+after_script:
+  - echo "End CI"
