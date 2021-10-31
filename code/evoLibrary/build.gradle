@@ -6,7 +6,13 @@ plugins {
     id 'de.htwk.leipzig.grapholution.java-library-conventions'
 }
 
+repositories {
+    mavenCentral()
+}
+
 // Please consider when to use "implements" and when "api"
 // see https://docs.gradle.org/current/userguide/java_library_plugin.html#sec:java_library_separation
 dependencies {
+    testImplementation 'org.mockito:mockito-inline:4.0.0'
+    testImplementation 'org.mockito:mockito-junit-jupiter:4.0.0'
 }
