@@ -11,9 +11,6 @@
       <module name="grapholution.code.buildSrc" target="14" />
       <module name="grapholution.code.buildSrc.main" target="14" />
       <module name="grapholution.code.buildSrc.test" target="14" />
-      <module name="Grapholution.javafxApp" target="14" />
-      <module name="Grapholution.javafxApp.main" target="14" />
-      <module name="Grapholution.javafxApp.test" target="14" />
     </bytecodeTargetLevel>
   </component>
 </project>
