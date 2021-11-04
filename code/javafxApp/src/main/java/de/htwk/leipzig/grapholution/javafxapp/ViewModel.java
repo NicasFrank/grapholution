@@ -1,6 +1,5 @@
 package de.htwk.leipzig.grapholution.javafxapp;
 
-import de.htwk.leipzig.grapholution.evolibrary.hillclimber.Hillclimber;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -16,8 +15,6 @@ public class ViewModel {
   private int currentSlide = 0;
   private final StringProperty inputField = new SimpleStringProperty();
   private final StringProperty outputField= new SimpleStringProperty();
-
-  private Hillclimber hilly;
 
   private String test;
     /**
