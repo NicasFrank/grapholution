@@ -31,6 +31,26 @@ public class Population {
         }
     }
 
+    public Population(){}
+
+    public void add(Genotype genotype) {
+        population.add(genotype);
+    }
+
+    /**
+     * gibt besten Fitnesswert aus Population zurück
+     * @return bester Fitnesswert
+     */
+    public int getBestFitness() {
+        Genotype bestIndividuum = population.get(0);
+        for (int j = 0; j < population.size(); j++) {
+            if (bestIndividuum.getFitness() < population.get(j).getFitness()) {
+                bestIndividuum = population.get(j);
+            }
+        }
+        return bestIndividuum.getFitness();
+    }
+
 
     /**
      * gibt Genotyp aus Population zurück
