@@ -1,0 +1,42 @@
+*{
+  -fx-text-fill:#000000;
+}
+.background{
+  -fx-background-color: #DDE1EE;
+}
+
+.radio{
+  -fx-background-color: #122760;
+}
+.radio-button:selected .dot{
+  -fx-background-color: #77B4BA;
+}
+.radio .dot{
+  -fx-background-color: #DDE1EE;
+}
+
+.slider .thumb{
+  -fx-color: #77B4BA;
+
+}
+.slider .track{
+  -fx-background-color:#122760;
+
+}
+
+.button{
+  -fx-background-color: #122760;
+  -fx-text-fill: #77B4BA;
+  -fx-cursor: hand;
+}
+.button:hover{
+  -fx-background-color: #0E4499;
+  -fx-cursor: hand;
+}
+#inputField, #outputField{
+  -fx-background-color: #122760;
+  -fx-text-fill: #77B4BA;
+}
+#table{
+  -fx-background-color:#DDE1EE;
+}
