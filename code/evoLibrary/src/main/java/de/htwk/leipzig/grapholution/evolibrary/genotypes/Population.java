@@ -26,9 +26,7 @@ public class Population {
      * @param genotypes Menge von Genotypen
      */
     public Population(Set<Genotype> genotypes) {
-        for(Genotype genotype: genotypes) {
-            population.add(genotype);
-        }
+        population.addAll(genotypes);
     }
 
     public Population(){}
