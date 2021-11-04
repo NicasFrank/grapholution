@@ -1,0 +1,4 @@
+de/htwk/leipzig/grapholution/evolibrary/list/LinkedListTest.java
+ de.htwk.leipzig.grapholution.evolibrary.list.LinkedListTest
+de/htwk/leipzig/grapholution/evolibrary/hillclimber/HillclimberTest.java
+ de.htwk.leipzig.grapholution.evolibrary.hillclimber.HillclimberTest

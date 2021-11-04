@@ -1,0 +1,12 @@
+de/htwk/leipzig/grapholution/javafxapp/MainApp.java
+ de.htwk.leipzig.grapholution.javafxapp.MainApp
+de/htwk/leipzig/grapholution/javafxapp/StartController.java
+ de.htwk.leipzig.grapholution.javafxapp.StartController
+module-info.java
+ module-info
+de/htwk/leipzig/grapholution/javafxapp/HomeController.java
+ de.htwk.leipzig.grapholution.javafxapp.HomeController
+de/htwk/leipzig/grapholution/javafxapp/HillclimberConfigController.java
+ de.htwk.leipzig.grapholution.javafxapp.HillclimberConfigController
+de/htwk/leipzig/grapholution/javafxapp/ViewModel.java
+ de.htwk.leipzig.grapholution.javafxapp.ViewModel
