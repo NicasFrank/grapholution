@@ -5,7 +5,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 
-public class HillclimberConfigController {
+public class HillclimberConfigController extends SceneController{
   @FXML
   private TextField inputField;
   @FXML
@@ -21,8 +21,11 @@ public class HillclimberConfigController {
 
   private ViewModel viewModel;
 
-  public TextField getInput(){return inputField;}
+  public void sendButton_startAlgo(){
+    String output = inputField.getText();
+    viewModel.navigation_configureScreen("Auswertung");
+    viewModel.climbTheHill(output);
+  }
 
-  public void setInputField(){inputField.setText(viewModel.getTest());}
   public void setViewModel(ViewModel viewModel){this.viewModel=viewModel;}
 }
