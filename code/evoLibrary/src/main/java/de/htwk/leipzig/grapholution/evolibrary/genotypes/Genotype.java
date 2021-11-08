@@ -4,6 +4,8 @@ import de.htwk.leipzig.grapholution.evolibrary.fitnessfun.Fitnessfunction;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import java.util.function.Function;
 
 /**
  * Klasse zur Darstellung eines einzelnen Genotypen
@@ -29,18 +31,29 @@ public class Genotype<T> {
         this.length = values.size();
         this.fitness = fitnessfunction.evaluate(this);
         MAX_FITNESS_VALUE = fitnessfunction.getMaxFitnessValue(this);
+        updateFitness();
     }
 
     /**
      * Konstruktor zur Erstellung eines Genotypen mit zufaellig generierten Werten als ArrayList einer bestimmten Länge
+     * @param creator funktion zum erstellen Zufälliger Werte des Individuums
      * @param fitnessfunction Fitnessfunktion, die zur Evaluierung des Genotyps benutzt wird
      * @param size Gewuenschte Laenge des Genotypen
      */
-    public Genotype(Fitnessfunction<T> fitnessfunction, int size){
+    public Genotype(Function<Random, T> creator, Fitnessfunction<T> fitnessfunction, int size){
+        this.values = new ArrayList<>();
+
+        Random rand = new Random();
+
+        for (int i = 0; i < size; i++) {
+            this.values.add(creator.apply(rand));
+        }
+
         this.fitnessfunction = fitnessfunction;
         this.fitness = fitnessfunction.evaluate(this);
         this.length = size;
         MAX_FITNESS_VALUE = fitnessfunction.getMaxFitnessValue(this);
+        updateFitness();
     }
 
     /**

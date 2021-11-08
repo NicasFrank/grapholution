@@ -1,7 +1,6 @@
 package de.htwk.leipzig.grapholution.evolibrary.algorithms;
 
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
-import de.htwk.leipzig.grapholution.evolibrary.mutator.Mutator;
 
 /**
  * Abstrakte Klasse zur Allgemeinen-Dartstellung eines evolutionaeren Algorithmus

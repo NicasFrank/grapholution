@@ -10,8 +10,7 @@ import de.htwk.leipzig.grapholution.evolibrary.genotypes.Population;
 public interface Selector<T> {
     /**
      * Funktion zum Selektieren eines Genotypen
-     * @return genotype Genotyp, der selektiert wurde
      */
-    Population select(int numberOfIndividuals);
+    void select();
 
 }

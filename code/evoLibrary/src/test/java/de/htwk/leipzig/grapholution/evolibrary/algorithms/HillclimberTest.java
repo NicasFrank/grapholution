@@ -5,15 +5,14 @@ import de.htwk.leipzig.grapholution.evolibrary.fitnessfun.Fitnessfunction;
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfun.OneMaxEvaluator;
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfun.ZeroMaxEvaluator;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
-import de.htwk.leipzig.grapholution.evolibrary.genotypes.GenotypeBoolean;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.BinaryMutation;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.Mutator;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.SwitchOneBit;
-import de.htwk.leipzig.grapholution.evolibrary.recombinator.OnePointCrossover;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -28,10 +27,11 @@ public class HillclimberTest {
 
     @BeforeAll
     static void initHillclimber() {
+        Random random = new Random();
         Fitnessfunction<Boolean> fitnessfunctionZ = new ZeroMaxEvaluator();
         Fitnessfunction<Boolean> fitnessfunctionO = new OneMaxEvaluator();
-        GenotypeBoolean genotypeZ = new GenotypeBoolean(fitnessfunctionZ, genosize);
-        GenotypeBoolean genotypeO = new GenotypeBoolean(fitnessfunctionO, genosize);
+        Genotype<Boolean> genotypeZ = new Genotype<>(rand-> random.nextBoolean(), fitnessfunctionZ, genosize);
+        Genotype<Boolean> genotypeO = new Genotype<>(rand -> random.nextBoolean(), fitnessfunctionO, genosize);
         Mutator<Boolean> mutatorB = new BinaryMutation(10);
         Mutator<Boolean> mutatorS = new SwitchOneBit();
         hillclimberZero = new Hillclimber<>(genotypeZ, mutatorB);
