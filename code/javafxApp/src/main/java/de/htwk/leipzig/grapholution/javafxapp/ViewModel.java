@@ -73,6 +73,7 @@ public class ViewModel {
       }
     }
 
+
     /**
      * Handhabung des Eingabefeldes:
      * @return: true falls Eingabe 0 oder 1 (Buchstabe)

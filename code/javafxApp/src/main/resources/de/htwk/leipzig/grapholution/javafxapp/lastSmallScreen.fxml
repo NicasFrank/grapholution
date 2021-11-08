@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
@@ -18,24 +18,23 @@
             <Font size="36.0" />
          </font>
       </Label>
-      <BarChart layoutX="480.0" layoutY="227.0" prefHeight="349.0" prefWidth="453.0">
+      <LineChart id="lineChartResults" fx:id="lineChartResults" layoutX="480.0" layoutY="227.0" prefHeight="349.0" prefWidth="453.0">
          <xAxis>
             <CategoryAxis side="BOTTOM" />
          </xAxis>
          <yAxis>
             <NumberAxis side="LEFT" />
          </yAxis>
-      </BarChart>
-      <TableView layoutX="35.0" layoutY="220.0" prefHeight="338.0" prefWidth="422.0" snapToPixel="false">
+      </LineChart>
+      <TableView id ="tableViewResults" fx:id="tableViewResults" layoutX="35.0" layoutY="220.0" prefHeight="338.0" prefWidth="422.0" snapToPixel="false">
          <columns>
-            <TableColumn prefWidth="83.0" text="Generation" />
-            <TableColumn prefWidth="75.0" text="Dauer" />
-            <TableColumn prefWidth="75.0" text="∅ Fitness" />
-            <TableColumn prefWidth="75.0" text="Sachen" />
-            <TableColumn prefWidth="75.0" text="Dinge" />
-            <TableColumn prefWidth="75.0" text="Inhalte" />
+            <TableColumn fx:id="colGen" prefWidth="83.0" text="Generation" />
+            <TableColumn fx:id="colTime" prefWidth="75.0" text="Dauer" />
+            <TableColumn fx:id="colFit" prefWidth="75.0" text="beste Fitness" />
+
          </columns>
       </TableView>
+
       <TextField id="outputField" fx:id="outputField" alignment="CENTER" editable="false" layoutX="292.0" layoutY="115.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="56.0" promptText="Ausgabefeld">
          <font>
             <Font name="Arial" size="30.0" />
@@ -46,5 +45,7 @@
             <Font name="Arial" size="24.0" />
          </font>
       </Button>
+       <Button id="loadTableButton" fx:id="loadTableButton" alignment="BOTTOM_LEFT" layoutX="700.0" layoutY="565.0" mnemonicParsing="false" text="Lade Visualisierung"></Button>
+       <Button id="loadVisualButton" fx:id="loadVisualButton" alignment="BOTTOM_RIGHT" layoutX="180.0" layoutY="565.0" mnemonicParsing="false" text="Lade Auswertung"></Button>
    </children>
 </AnchorPane>

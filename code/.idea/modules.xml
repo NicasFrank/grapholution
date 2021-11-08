@@ -8,7 +8,6 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/evoLibrary/code.Grapholution.evoLibrary.test.iml" filepath="$PROJECT_DIR$/.idea/modules/evoLibrary/code.Grapholution.evoLibrary.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/grapholution.code.buildSrc.iml" filepath="$PROJECT_DIR$/.idea/modules/grapholution.code.buildSrc.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/grapholution.code.buildSrc.main.iml" filepath="$PROJECT_DIR$/.idea/modules/grapholution.code.buildSrc.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/grapholution.code.buildSrc.test.iml" filepath="$PROJECT_DIR$/.idea/modules/grapholution.code.buildSrc.test.iml" />
     </modules>
   </component>
 </project>
