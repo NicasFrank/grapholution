@@ -2,32 +2,12 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="15">
-      <module name="code" target="14" />
-      <module name="code.evoLibrary" target="14" />
-      <module name="code.evoLibrary.main" target="14" />
-      <module name="code.evoLibrary.test" target="14" />
       <module name="code.Grapholution.evoLibrary" target="14" />
       <module name="code.Grapholution.evoLibrary.main" target="14" />
-      <module name="code.Grapholution.evoLibrary.main~1" target="14" />
-      <module name="code.Grapholution.evoLibrary.main~2" target="14" />
-      <module name="code.Grapholution.evoLibrary.main~3" target="14" />
-      <module name="code.Grapholution.evoLibrary.main~4" target="14" />
       <module name="code.Grapholution.evoLibrary.test" target="14" />
-      <module name="code.Grapholution.evoLibrary.test~1" target="14" />
-      <module name="code.Grapholution.evoLibrary.test~2" target="14" />
-      <module name="code.Grapholution.evoLibrary.test~3" target="14" />
-      <module name="code.Grapholution.evoLibrary.test~4" target="14" />
-      <module name="code.Grapholution.evoLibrary.test~5" target="14" />
-      <module name="code.Grapholution.javafxApp" target="14" />
-      <module name="code.Grapholution.javafxApp.main" target="14" />
-      <module name="code.Grapholution.javafxApp.test" target="14" />
-      <module name="code.Grapholution.main" target="14" />
-      <module name="code.Grapholution.test" target="14" />
-      <module name="code.javafxApp" target="14" />
-      <module name="code.javafxApp.main" target="14" />
-      <module name="code.javafxApp.test" target="14" />
-      <module name="code.main" target="14" />
-      <module name="code.test" target="14" />
+      <module name="code.Grapholution.javafxApp" target="15" />
+      <module name="code.Grapholution.javafxApp.main" target="15" />
+      <module name="code.Grapholution.javafxApp.test" target="15" />
       <module name="grapholution.code.buildSrc" target="14" />
       <module name="grapholution.code.buildSrc.main" target="14" />
       <module name="grapholution.code.buildSrc.test" target="14" />
