@@ -10,6 +10,10 @@ public class SceneControllerResults extends SceneController{
 
   private ViewModel viewModel;
 
+  /**
+   * setter für viewmodel und bindet outputfield an output vom viewmodel
+   * @param viewModel
+   */
   public void setViewModel(ViewModel viewModel){
     this.viewModel=viewModel;
     outputField.textProperty().bind(viewModel.outputFieldProperty());
