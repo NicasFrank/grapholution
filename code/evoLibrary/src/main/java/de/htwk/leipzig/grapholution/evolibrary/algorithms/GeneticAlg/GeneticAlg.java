@@ -109,6 +109,10 @@ public class GeneticAlg<T> extends Algorithm<T> {
         return history.get(history.size() - 2);
     }
 
+    /**
+     * Gibt das beste Individuum der Population zurück
+     * @return beste Individuum
+     */
     private Genotype<T> bestIndividuum() {
         Genotype<T> bestIndividuum = population.get(0);
 

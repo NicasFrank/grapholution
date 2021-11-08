@@ -57,7 +57,7 @@ public class Genotype<T> {
     }
 
     /**
-     * Getter fuer Fitnesswert des Genotypen
+     * Getter für Fitnesswert des Genotypen
      * @return Fitnesswert des Genotypen
      */
     public int getFitness(){
@@ -65,7 +65,7 @@ public class Genotype<T> {
     }
 
     /**
-     * Getter fuer Wert des Genotypen an bestimmter Stelle der ArrayList
+     * Getter für Wert des Genotypen an bestimmter Stelle der ArrayList
      * @param index Stelle der ArrayList die ausgelesen werden soll
      * @return Wert des Genotypen an bestimmter Stelle der ArrayList
      */
@@ -74,7 +74,7 @@ public class Genotype<T> {
     }
 
     /**
-     * Getter fuer alle Werte des Genotypen
+     * Getter für alle Werte des Genotypen
      * @return List mit allen Werten des Genotypen
      */
     public List<T> getValues(){
@@ -82,7 +82,7 @@ public class Genotype<T> {
     }
 
     /**
-     * Setter fuer die List mit den Werten des Genotypen
+     * Setter für die List mit den Werten des Genotypen
      * @param newValues Werte, die dem Genotypen zugewiesen werden sollen
      */
     public void setValues(List<T> newValues){
@@ -90,7 +90,7 @@ public class Genotype<T> {
     }
 
     /**
-     * Getter fuer die Laenge des Genotypen (Anzahl der Werte)
+     * Getter für die Laenge des Genotypen (Anzahl der Werte)
      * @return Laenge des Genotypen
      */
     public int length() {
@@ -114,14 +114,14 @@ public class Genotype<T> {
     }
 
     /**
-     * Funktion zur Erhoehung des Alters um 1
+     * Funktion zur Erhöhung des Alters um 1
      */
     public void survive(){
         age++;
     }
 
     /**
-     * Getter fuer Alter des Genotypen
+     * Getter für Alter des Genotypen
      * @return Alter des Genotypen
      */
     public int getAge(){

@@ -47,6 +47,10 @@ public class FitnessproportionalSelection<T> implements Selector<T>{
         population = new Population<>(selected);
     }
 
+    /**
+     * berechnet die Gesamtfitness der population
+     * @return fitness
+     */
     private int getSum() {
         int sum = 0;
         for (Genotype<T> genotype : populationList) {

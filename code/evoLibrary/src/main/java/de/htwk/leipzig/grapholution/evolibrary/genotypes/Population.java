@@ -13,7 +13,10 @@ public class Population<T> {
 
     /**
      * Konstruktor zur Erzeugung einer Population mit vorgegebenen größen
+     * @param creator funktion zum erstellen Zufälliger Werte des Individuums
      * @param populationSize größe der Population
+     * @param genoLength größe eines einzelnen Individuums
+     * @param fitnessfunction fitnessfunction der Genotypen
      */
     public Population(Function<Random, T> creator, int populationSize, int genoLength, Fitnessfunction<T> fitnessfunction) {
         size = populationSize;
@@ -31,11 +34,19 @@ public class Population<T> {
         size = genotypes.size();
     }
 
+    /**
+     * Konstruktor zur Erstellung einer Population aus einer Liste von Genotypen
+     * @param genotypes Liste von Genotypen
+     */
     public Population(List<Genotype<T>> genotypes) {
         this.population = genotypes;
         size = genotypes.size();
     }
 
+    /**
+     * Funktion zum hinzufügen eines Individuums
+     * @param genotype Individuum, welches hinzugefügt wird
+     */
     public void add(Genotype<T> genotype) {
         population.add(genotype);
     }
@@ -54,6 +65,10 @@ public class Population<T> {
         return bestIndividuum.getFitness();
     }
 
+    /**
+     * Erstellt eine Kopie der Population
+     * @return Liste aller individuen der Population
+     */
     public List<Genotype<T>> createCopy(){
         List<Genotype<T>> copy = new ArrayList<>();
         for(Genotype<T> genome: population) {
@@ -72,6 +87,11 @@ public class Population<T> {
         return population.get(i);
     }
 
+    /**
+     * setzt Genotyp an bestimmter Stelle
+     * @param i Index
+     * @param genotype Genotyp
+     */
     public void set(int i, Genotype<T> genotype) {
         population.set(i, genotype.createCopy());
     }
