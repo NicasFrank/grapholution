@@ -27,6 +27,7 @@ public class Population<T> {
      * @param genotypes Menge von Genotypen
      */
     public Population(Set<Genotype<T>> genotypes) {
+        this.population = new ArrayList<>(genotypes);
         size = genotypes.size();
     }
 
