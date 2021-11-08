@@ -1,6 +1,5 @@
 package de.htwk.leipzig.grapholution.javafxapp;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -10,11 +9,13 @@ public class SceneControllerChoice extends SceneController{
   @FXML
   private Button nextButton,loadButton;
   @FXML
-  private ComboBox comboBoxAlgo,comboBoxProblem;
+  private ComboBox<String> comboBoxAlgo;
+  @FXML
+  private ComboBox<String> comboBoxProblem;
   @FXML
   private Pane basePane;
 
-  private String[] algorythms = {"Hillclimber","Ein Anderer", "Noch Einer"};
+  private final String[] algorythms = {"Hillclimber","Ein Anderer", "Noch Einer"};
   private ViewModel viewModel;
 
   /**

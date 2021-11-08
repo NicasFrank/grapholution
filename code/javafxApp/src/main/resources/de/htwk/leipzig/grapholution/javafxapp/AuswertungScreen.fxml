@@ -26,7 +26,7 @@
             <NumberAxis side="LEFT" />
          </yAxis>
       </BarChart>
-      <TableView layoutX="35.0" layoutY="220.0" prefHeight="338.0" prefWidth="422.0" snapToPixel="false">
+      <TableView fx:id="resultTable" layoutX="35.0" layoutY="220.0" prefHeight="338.0" prefWidth="422.0" snapToPixel="false">
          <columns>
             <TableColumn prefWidth="83.0" text="Generation" />
             <TableColumn prefWidth="75.0" text="Dauer" />

@@ -9,14 +9,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
-import java.util.List;
 
 public class ViewModel {
 
   private final StringProperty inputField = new SimpleStringProperty();
   private final StringProperty outputField= new SimpleStringProperty();
 
-  private SceneControllerChoice sceneControllerChoice;
+  private final SceneControllerChoice sceneControllerChoice;
 
   private Hillclimber hilly;
 
@@ -33,7 +32,7 @@ public class ViewModel {
     boolean result=false;
     switch (nameOfNextScreen.toString()){
       case "Hillclimber":
-        result = loadNewPane("secondSmallScreen.fxml");
+        result = loadNewPane("ConfigHillclimber.fxml");
         break;
 
       case "Ein Anderer":
@@ -41,7 +40,7 @@ public class ViewModel {
         break;
 
       case "Auswertung":
-        result = loadNewPane("lastSmallScreen.fxml");
+        result = loadNewPane("AuswertungScreen.fxml");
         break;
 
       default:
@@ -90,12 +89,12 @@ public class ViewModel {
       }
     }
 
-    /**
-     * Handhabung des Eingabefeldes:
-     * @return: true falls Eingabe 0 oder 1 (Buchstabe)
-     * iteriert durch das Eingabefeld und speichert in einem char Array
-     **/
-    private boolean isInputCorrect(){
+  /**
+   * Handhabung des Eingabefeldes:
+   * iteriert durch das Eingabefeld und speichert in einem char Array
+   * @return true falls Eingabe 0 oder 1 (Buchstabe)
+   */
+  private boolean isInputCorrect(){
         char[] input = inputField.get().toCharArray();
         for (char c : input) {
             if (c != '0' && c != '1') {
@@ -110,9 +109,5 @@ public class ViewModel {
      **/
     public Property<String> outputFieldProperty() {
         return outputField;
-    }
-
-    public List<String> getHistory (){
-      return hilly.getHistory();
     }
 }
