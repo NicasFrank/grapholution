@@ -34,8 +34,6 @@ public class PopulationTests {
         genotypes.add(testGenotype1);
         genotypes.add(testGenotype2);
         population = new Population<>(genotypes);
-        population.add(testGenotype1);
-        population.add(testGenotype2);
     }
 
     @Test
