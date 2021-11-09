@@ -41,7 +41,7 @@
             <Font name="Arial" size="30.0" />
          </font>
       </TextField>
-      <Button id="backButton" fx:id="backButton" alignment="CENTER" layoutX="100.0" layoutY="600.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="60.0" prefWidth="150.0" styleClass="defaultButton" text="Zurück" textFill="#28240b">
+      <Button id="backButton" fx:id="backButton" onAction="#sendButton_backwards" alignment="CENTER" layoutX="100.0" layoutY="600.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="60.0" prefWidth="150.0" styleClass="defaultButton" text="Zurück" textFill="#28240b">
          <font>
             <Font name="Arial" size="24.0" />
          </font>

@@ -10,6 +10,9 @@ public class SceneControllerResults extends SceneController{
 
   private ViewModel viewModel;
 
+  public void sendButton_back(){
+    viewModel.navigation_Back();
+  }
   /**
    * setter für viewmodel und bindet outputfield an output vom viewmodel
    * @param viewModel gleiche ViewModel für alle

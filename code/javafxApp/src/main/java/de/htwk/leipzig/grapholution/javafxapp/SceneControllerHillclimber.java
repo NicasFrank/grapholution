@@ -30,6 +30,10 @@ public class SceneControllerHillclimber extends SceneController{
     viewModel.climbTheHill(inputField.getText());
   }
 
+  public void sendButton_backwards(){
+    viewModel.navigation_Back();
+  }
+
   public void setViewModel(ViewModel viewModel){
     this.viewModel=viewModel;
   }

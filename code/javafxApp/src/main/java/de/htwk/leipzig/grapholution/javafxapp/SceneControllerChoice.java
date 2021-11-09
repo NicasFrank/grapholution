@@ -12,8 +12,7 @@ public class SceneControllerChoice extends SceneController{
   private ComboBox<String> comboBoxAlgo;
   @FXML
   private ComboBox<String> comboBoxProblem;
-  @FXML
-  private Pane basePane;
+
 
   private final String[] algorythms = {"Hillclimber","Ein Anderer", "Noch Einer"};
   private ViewModel viewModel;
@@ -24,31 +23,19 @@ public class SceneControllerChoice extends SceneController{
    */
   public void initialize(){
     comboBoxAlgo.getItems().setAll(algorythms);
-    this.viewModel = new ViewModel(this);
   }
 
   /**
    * gibt Auswahl des Algorithmus an viewmodel weiter
    */
   public void sendButtonClick_configureScreen() {
-    boolean didItWork = viewModel.navigation_configureScreen(
+    viewModel.navigation_configureScreen(
         comboBoxAlgo.getValue()
         //,comboBoxProblem.getValue()
     );
   }
 
-  /**
-   * löscht die aktuellen elemente der szene und fügt die neuen hinzu
-   * @param newPane die Pane, die zur neuen Szene werden soll
-   * @return true wenn neue Szene gesetzt werden kann  false wenn nicht
-   */
-  public boolean setNewScreen(Pane newPane){
-    if (newPane!=null) {
-      basePane.getChildren().clear();
-      basePane.getChildren().add(newPane);
-      return true;
-    } else {
-      return false;
-    }
+  public void setViewModel(ViewModel viewModel) {
+    this.viewModel = viewModel;
   }
 }

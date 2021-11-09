@@ -15,24 +15,30 @@ public class ViewModel {
   private final StringProperty inputField = new SimpleStringProperty();
   private final StringProperty outputField= new SimpleStringProperty();
 
-  private final SceneControllerChoice sceneControllerChoice;
+  private final SceneControllerBase sceneControllerBase;
+  private Pane[] allScenes = new Pane[3];
+  private int currentScene = -1;
 
   private Hillclimber hilly;
 
-  ViewModel(SceneControllerChoice sceneControllerChoice){
-    this.sceneControllerChoice = sceneControllerChoice;
+  ViewModel(SceneControllerBase sceneControllerBase, Pane firstPane){
+    this.sceneControllerBase = sceneControllerBase;
+    allScenes[0]=firstPane;
   }
 
   /**
    * switch anhand String je nach nächster Pane
    * @param nameOfNextScreen String mit Namen des nächsten Screens
-   * @return bool ob laden erfolgreich oder nicht
    */
-  public boolean navigation_configureScreen (Object nameOfNextScreen){
-    boolean result=false;
+  public void navigation_configureScreen (Object nameOfNextScreen){
+    currentScene++;
     switch (nameOfNextScreen.toString()){
+      case "Choice":
+        allScenes[0] = loadNewPane("WahlAlgorithmus.fxml");
+        break;
+
       case "Hillclimber":
-        result = loadNewPane("ConfigHillclimber.fxml");
+        allScenes[1] = loadNewPane("ConfigHillclimber.fxml");
         break;
 
       case "Ein Anderer":
@@ -40,16 +46,23 @@ public class ViewModel {
         break;
 
       case "Auswertung":
-        result = loadNewPane("AuswertungScreen.fxml");
+        allScenes[2] = loadNewPane("AuswertungScreen.fxml");
         break;
 
       default:
         //Nichts
         break;
     }
-    return result;
   }
 
+  /**
+   * dient zur Rückwärtsnavigation
+   * anhand der aktuellen szene wird aus array die vorherige genommen
+   */
+  public void navigation_Back(){
+    currentScene--;
+    setNextScreen(allScenes[currentScene]);
+  }
   /**
    * Hillclimber instanziert und ausgeführt
    * @param startConfig Startkonfiguration
@@ -63,29 +76,28 @@ public class ViewModel {
    * @param paneName Name der zu ladenden Pane aus private String[] slides
    * @return wahr wenn erfolgreich false wenn nicht
    */
-    private boolean loadNewPane (String paneName){
+    private Pane loadNewPane (String paneName){
       FXMLLoader loader = new FXMLLoader(getClass().getResource(paneName));
       try {
         Pane nextPane = loader.load();
         SceneController newController = loader.getController();
         newController.setViewModel(this);
-        return setNextScreen(nextPane);
+        setNextScreen(nextPane);
+        return nextPane;
       } catch (IOException e) {
-        return false;
+        return null;
       }
     }
 
   /**
    * gibt nächste Scene an ersten Controller weiter
    * @param nextScreen nächste Scene als Pane
-   * @return wahr wenn erfolgreich false wenn nicht
    */
-    private boolean setNextScreen (Pane nextScreen){
+    private void setNextScreen (Pane nextScreen){
       if(nextScreen!=null){
-        return sceneControllerChoice.setNewScreen(nextScreen);
+        sceneControllerBase.setNewScreen(nextScreen);
       } else {
         //Fehlermeldung
-        return false;
       }
     }
 
