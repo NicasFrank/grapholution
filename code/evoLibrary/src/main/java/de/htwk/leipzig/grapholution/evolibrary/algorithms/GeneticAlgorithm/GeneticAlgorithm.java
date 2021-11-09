@@ -1,4 +1,4 @@
-package de.htwk.leipzig.grapholution.evolibrary.algorithms.GeneticAlg;
+package de.htwk.leipzig.grapholution.evolibrary.algorithms.GeneticAlgorithm;
 
 import de.htwk.leipzig.grapholution.evolibrary.algorithms.Algorithm;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
@@ -13,7 +13,7 @@ import java.util.Random;
  * Noch zu entwickeln
  * @param <T> Datentyp des Genotypen, auf dem der Gen.Alg. arbeitet
  */
-public class GeneticAlg<T> extends Algorithm<T> {
+public class GeneticAlgorithm<T> extends Algorithm<T> {
 
     private final Mutator<T> mutator;
     private final Recombinator<T> recombinator;
@@ -29,7 +29,7 @@ public class GeneticAlg<T> extends Algorithm<T> {
      * @param recombinationChance Chance dass Rekombination durchgeführt wird
      * @param population Population des Genotypen
      */
-    public GeneticAlg(Mutator<T> mutator, Recombinator<T> recombinator, double recombinationChance, Population<T> population) {
+    public GeneticAlgorithm(Mutator<T> mutator, Recombinator<T> recombinator, double recombinationChance, Population<T> population) {
         super(population.get(0));
         this.mutator = mutator;
         this.recombinator = recombinator;
@@ -47,7 +47,7 @@ public class GeneticAlg<T> extends Algorithm<T> {
      * @param population Population des Genotypen
      * @param limit Maximale Anzahl der Iterationen
      */
-    public GeneticAlg(Mutator<T> mutator, Recombinator<T> recombinator, double recombinationChance, Population<T> population, int limit) {
+    public GeneticAlgorithm(Mutator<T> mutator, Recombinator<T> recombinator, double recombinationChance, Population<T> population, int limit) {
         super(population.get(0));
         this.mutator = mutator;
         this.recombinator = recombinator;

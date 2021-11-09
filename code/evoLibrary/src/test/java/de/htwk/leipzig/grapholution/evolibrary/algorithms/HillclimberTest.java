@@ -1,9 +1,9 @@
 package de.htwk.leipzig.grapholution.evolibrary.algorithms;
 
 import de.htwk.leipzig.grapholution.evolibrary.algorithms.hillclimber.Hillclimber;
-import de.htwk.leipzig.grapholution.evolibrary.fitnessfun.Fitnessfunction;
-import de.htwk.leipzig.grapholution.evolibrary.fitnessfun.OneMaxEvaluator;
-import de.htwk.leipzig.grapholution.evolibrary.fitnessfun.ZeroMaxEvaluator;
+import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.FitnessFunction;
+import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.OneMaxEvaluator;
+import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.ZeroMaxEvaluator;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.BinaryMutation;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.Mutator;
@@ -28,8 +28,8 @@ public class HillclimberTest {
     @BeforeAll
     static void initHillclimber() {
         Random random = new Random();
-        Fitnessfunction<Boolean> fitnessfunctionZ = new ZeroMaxEvaluator();
-        Fitnessfunction<Boolean> fitnessfunctionO = new OneMaxEvaluator();
+        FitnessFunction<Boolean> fitnessfunctionZ = new ZeroMaxEvaluator();
+        FitnessFunction<Boolean> fitnessfunctionO = new OneMaxEvaluator();
         Genotype<Boolean> genotypeZ = new Genotype<>(rand-> random.nextBoolean(), fitnessfunctionZ, genosize);
         Genotype<Boolean> genotypeO = new Genotype<>(rand -> random.nextBoolean(), fitnessfunctionO, genosize);
         Mutator<Boolean> mutatorB = new BinaryMutation(10);

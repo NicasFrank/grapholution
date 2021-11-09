@@ -1,6 +1,6 @@
 package de.htwk.leipzig.grapholution.evolibrary.genotypes;
 
-import de.htwk.leipzig.grapholution.evolibrary.fitnessfun.Fitnessfunction;
+import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.FitnessFunction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.function.Function;
  */
 public class Genotype<T> {
 
-    protected final Fitnessfunction<T> fitnessfunction;
+    protected final FitnessFunction<T> fitnessFunction;
     protected List<T> values;
     protected final int length;
     protected int age = 0;
@@ -25,12 +25,12 @@ public class Genotype<T> {
      * @param fitnessfunction Fitnessfunktion, die zur Evaluierung des Genotyps benutzt wird
      * @param values Werte, die dem Genotyp zugewiesen werden
      */
-    public Genotype(Fitnessfunction<T> fitnessfunction, List<T> values){
-        this.fitnessfunction = fitnessfunction;
+    public Genotype(FitnessFunction<T> fitnessfunction, List<T> values){
+        this.fitnessFunction = fitnessfunction;
         this.values = values;
         this.length = values.size();
-        this.fitness = fitnessfunction.evaluate(this);
-        MAX_FITNESS_VALUE = fitnessfunction.getMaxFitnessValue(this);
+        this.fitness = fitnessFunction.evaluate(this);
+        MAX_FITNESS_VALUE = fitnessFunction.getMaxFitnessValue(this);
         updateFitness();
     }
 
@@ -40,7 +40,7 @@ public class Genotype<T> {
      * @param fitnessfunction Fitnessfunktion, die zur Evaluierung des Genotyps benutzt wird
      * @param size Gewuenschte Laenge des Genotypen
      */
-    public Genotype(Function<Random, T> creator, Fitnessfunction<T> fitnessfunction, int size){
+    public Genotype(Function<Random, T> creator, FitnessFunction<T> fitnessfunction, int size){
         this.values = new ArrayList<>();
 
         Random rand = new Random();
@@ -49,7 +49,7 @@ public class Genotype<T> {
             this.values.add(creator.apply(rand));
         }
 
-        this.fitnessfunction = fitnessfunction;
+        this.fitnessFunction = fitnessfunction;
         this.fitness = fitnessfunction.evaluate(this);
         this.length = size;
         MAX_FITNESS_VALUE = fitnessfunction.getMaxFitnessValue(this);
@@ -103,14 +103,14 @@ public class Genotype<T> {
      */
     public Genotype<T> createCopy(){
         ArrayList<T> valueCopy = new ArrayList<>(values);
-        return new Genotype<>(fitnessfunction, valueCopy);
+        return new Genotype<>(fitnessFunction, valueCopy);
     }
 
     /**
      * Funktion zur erneuten Evaluierung des Fitnesswerts des Genotypen
      */
     public void updateFitness(){
-        this.fitness = fitnessfunction.evaluate(this);
+        this.fitness = fitnessFunction.evaluate(this);
     }
 
     /**

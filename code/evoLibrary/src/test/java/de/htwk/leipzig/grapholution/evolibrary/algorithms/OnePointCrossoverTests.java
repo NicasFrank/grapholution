@@ -1,6 +1,6 @@
 package de.htwk.leipzig.grapholution.evolibrary.algorithms;
 
-import de.htwk.leipzig.grapholution.evolibrary.fitnessfun.Fitnessfunction;
+import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.FitnessFunction;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
 import de.htwk.leipzig.grapholution.evolibrary.recombinator.OnePointCrossover;
 import de.htwk.leipzig.grapholution.evolibrary.recombinator.Recombinator;
@@ -26,7 +26,7 @@ public class OnePointCrossoverTests {
     List<Integer> testValues2;
 
     @Mock
-    Fitnessfunction<Integer> fitnessMock;
+    FitnessFunction<Integer> fitnessMock;
 
     @BeforeEach
     private void setup() {

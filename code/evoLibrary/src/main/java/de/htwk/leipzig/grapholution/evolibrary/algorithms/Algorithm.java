@@ -42,10 +42,6 @@ public abstract class Algorithm<T> {
      * Funktion zum Ausfuehren des Algorithmus
      * @return Bester Genotyp der am Ende herausgekommen ist
      */
-    public Genotype<T> run(){
-
-        return null;
-
-    }
+    public abstract Genotype<T> run();
 
 }

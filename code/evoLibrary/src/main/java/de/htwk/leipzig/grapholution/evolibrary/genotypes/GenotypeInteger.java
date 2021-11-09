@@ -1,6 +1,6 @@
 package de.htwk.leipzig.grapholution.evolibrary.genotypes;
 
-import de.htwk.leipzig.grapholution.evolibrary.fitnessfun.Fitnessfunction;
+import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.FitnessFunction;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class GenotypeInteger extends Genotype<Integer> {
 
-    public GenotypeInteger(Fitnessfunction<Integer> fitnessfunction, List<Integer> values) {
+    public GenotypeInteger(FitnessFunction<Integer> fitnessfunction, List<Integer> values) {
         super(fitnessfunction, values);
     }
 

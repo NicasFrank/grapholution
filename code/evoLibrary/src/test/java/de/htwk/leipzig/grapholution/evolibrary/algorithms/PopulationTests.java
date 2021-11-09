@@ -1,6 +1,6 @@
 package de.htwk.leipzig.grapholution.evolibrary.algorithms;
 
-import de.htwk.leipzig.grapholution.evolibrary.fitnessfun.Fitnessfunction;
+import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.FitnessFunction;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Population;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,7 +19,7 @@ public class PopulationTests {
     Genotype<Integer> testGenotype2;
 
     @Mock
-    Fitnessfunction<Integer> fitnessMock;
+    FitnessFunction<Integer> fitnessMock;
 
     @BeforeEach
     public void setup() {

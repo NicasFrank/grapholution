@@ -1,4 +1,4 @@
-package de.htwk.leipzig.grapholution.evolibrary.fitnessfun;
+package de.htwk.leipzig.grapholution.evolibrary.fitnessfunction;
 
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
 
@@ -6,7 +6,7 @@ import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
  * Interface fuer EvaluationsKlassen zur Fitnesswertermittlung
  * @param <T> Datentyp der mit der Klasse evaluiert werden kann
  */
-public interface Fitnessfunction<T> {
+public interface FitnessFunction<T> {
 
     /**
      * Funktion zur Ermittlung des Fitnesswertes eines Genotypen

@@ -1,6 +1,6 @@
 package de.htwk.leipzig.grapholution.evolibrary.genotypes;
 
-import de.htwk.leipzig.grapholution.evolibrary.fitnessfun.Fitnessfunction;
+import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.FitnessFunction;
 import java.util.*;
 import java.util.function.Function;
 
@@ -18,7 +18,7 @@ public class Population<T> {
      * @param genoLength größe eines einzelnen Individuums
      * @param fitnessfunction fitnessfunction der Genotypen
      */
-    public Population(Function<Random, T> creator, int populationSize, int genoLength, Fitnessfunction<T> fitnessfunction) {
+    public Population(Function<Random, T> creator, int populationSize, int genoLength, FitnessFunction<T> fitnessfunction) {
         size = populationSize;
         for (int i = 0; i < populationSize; i++) {
             population.add(new Genotype<>(creator, fitnessfunction, genoLength));

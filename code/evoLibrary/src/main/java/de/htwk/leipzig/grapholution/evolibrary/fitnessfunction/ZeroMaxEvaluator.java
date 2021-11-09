@@ -1,11 +1,11 @@
-package de.htwk.leipzig.grapholution.evolibrary.fitnessfun;
+package de.htwk.leipzig.grapholution.evolibrary.fitnessfunction;
 
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
 
 /**
  * Klasse zur Evaluierung von Boolean-Genotypen auf Anzahl an false
  */
-public class ZeroMaxEvaluator implements Fitnessfunction<Boolean> {
+public class ZeroMaxEvaluator implements FitnessFunction<Boolean> {
 
     /**
      * Funktion zur Ermittlung von false in einem Boolean-Genotyp
