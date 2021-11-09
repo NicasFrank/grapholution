@@ -8,7 +8,7 @@ import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
  */
 public abstract class Algorithm<T> {
 
-    protected Genotype<T> genotype;
+    protected final Genotype<T> genotype;
     protected int limit = -1;
     protected int iterations = 0;
 

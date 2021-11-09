@@ -9,10 +9,16 @@ import de.htwk.leipzig.grapholution.evolibrary.mutator.Mutator;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.SwitchOneBit;
 import de.htwk.leipzig.grapholution.evolibrary.recombinator.OnePointCrossover;
 import de.htwk.leipzig.grapholution.evolibrary.recombinator.Recombinator;
+import org.junit.jupiter.api.Test;
 import java.util.Random;
 
 public class GeneticAlgTest {
-    public static void main(String[] args) {
+
+    /**
+     * diese Testfunktion dient nur zur Veranschaulichung und zum einfachen Testen des genetischen Algorithmus
+     */
+    @Test
+    void test() {
         Random rnd = new Random();
 
         Fitnessfunction<Boolean> fitnessfunction = new OneMaxEvaluator();
