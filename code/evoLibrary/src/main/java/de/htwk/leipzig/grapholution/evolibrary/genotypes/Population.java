@@ -2,22 +2,26 @@ package de.htwk.leipzig.grapholution.evolibrary.genotypes;
 
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfun.Fitnessfunction;
 import java.util.*;
+import java.util.function.Function;
 
 /**
  * Klasse zur Beschreibung einer Population
  */
-public class Population {
-    private List<Genotype> population = new ArrayList<>();
+public class Population<T> {
+    protected List<Genotype<T>> population = new ArrayList<>();
+    protected final int size;
 
     /**
      * Konstruktor zur Erzeugung einer Population mit vorgegebenen größen
+     * @param creator funktion zum erstellen Zufälliger Werte des Individuums
      * @param populationSize größe der Population
-     * @param genotypeLength größe der einzelnen Genotypen
-     * @param fitnessfunction fitnessfunction zur initialisierung der Genotypen
+     * @param genoLength größe eines einzelnen Individuums
+     * @param fitnessfunction fitnessfunction der Genotypen
      */
-    public Population(int populationSize, int genotypeLength, Fitnessfunction fitnessfunction) {
-        for(int i = 0; i < populationSize; i++) {
-            population.add(new Genotype(fitnessfunction, genotypeLength));
+    public Population(Function<Random, T> creator, int populationSize, int genoLength, Fitnessfunction<T> fitnessfunction) {
+        size = populationSize;
+        for (int i = 0; i < populationSize; i++) {
+            population.add(new Genotype<>(creator, fitnessfunction, genoLength));
         }
     }
 
@@ -25,13 +29,25 @@ public class Population {
      * Konstruktor zur Erstellung einer Population aus einer Menge von Genotypen
      * @param genotypes Menge von Genotypen
      */
-    public Population(Set<Genotype> genotypes) {
-        population.addAll(genotypes);
+    public Population(Set<Genotype<T>> genotypes) {
+        this.population = new ArrayList<>(genotypes);
+        size = genotypes.size();
     }
 
-    public Population(){}
+    /**
+     * Konstruktor zur Erstellung einer Population aus einer Liste von Genotypen
+     * @param genotypes Liste von Genotypen
+     */
+    public Population(List<Genotype<T>> genotypes) {
+        this.population = genotypes;
+        size = genotypes.size();
+    }
 
-    public void add(Genotype genotype) {
+    /**
+     * Funktion zum hinzufügen eines Individuums
+     * @param genotype Individuum, welches hinzugefügt wird
+     */
+    public void add(Genotype<T> genotype) {
         population.add(genotype);
     }
 
@@ -40,13 +56,25 @@ public class Population {
      * @return bester Fitnesswert
      */
     public int getBestFitness() {
-        Genotype bestIndividuum = population.get(0);
-        for (int j = 0; j < population.size(); j++) {
-            if (bestIndividuum.getFitness() < population.get(j).getFitness()) {
-                bestIndividuum = population.get(j);
+        Genotype<T> bestIndividuum = population.get(0);
+        for (Genotype<T> genotype : population) {
+            if (bestIndividuum.getFitness() < genotype.getFitness()) {
+                bestIndividuum = genotype;
             }
         }
         return bestIndividuum.getFitness();
+    }
+
+    /**
+     * Erstellt eine Kopie der Population
+     * @return Liste aller individuen der Population
+     */
+    public List<Genotype<T>> createCopy(){
+        List<Genotype<T>> copy = new ArrayList<>();
+        for(Genotype<T> genome: population) {
+            copy.add(genome.createCopy());
+        }
+        return copy;
     }
 
 
@@ -55,8 +83,17 @@ public class Population {
      * @param i index des Genotyps
      * @return Genotyp
      */
-    public Genotype get(int i){
+    public Genotype<T> get(int i){
         return population.get(i);
+    }
+
+    /**
+     * setzt Genotyp an bestimmter Stelle
+     * @param i Index
+     * @param genotype Genotyp
+     */
+    public void set(int i, Genotype<T> genotype) {
+        population.set(i, genotype.createCopy());
     }
 
     /**

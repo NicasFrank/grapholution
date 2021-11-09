@@ -8,10 +8,10 @@ import de.htwk.leipzig.grapholution.evolibrary.genotypes.Population;
  * @param <T> Datentyp der zu mutierenden Genotypen
  */
 public interface Selector<T> {
+
     /**
      * Funktion zum Selektieren eines Genotypen
-     * @return genotype Genotyp, der selektiert wurde
      */
-    Population select(int numberOfIndividuals);
+    void select();
 
 }

@@ -1,7 +1,6 @@
 package de.htwk.leipzig.grapholution.evolibrary.algorithms;
 
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
-import de.htwk.leipzig.grapholution.evolibrary.mutator.Mutator;
 
 /**
  * Abstrakte Klasse zur Allgemeinen-Dartstellung eines evolutionaeren Algorithmus
@@ -9,7 +8,7 @@ import de.htwk.leipzig.grapholution.evolibrary.mutator.Mutator;
  */
 public abstract class Algorithm<T> {
 
-    protected Genotype<T> genotype;
+    protected final Genotype<T> genotype;
     protected int limit = -1;
     protected int iterations = 0;
 

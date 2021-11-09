@@ -4,6 +4,8 @@ import de.htwk.leipzig.grapholution.evolibrary.fitnessfun.Fitnessfunction;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import java.util.function.Function;
 
 /**
  * Klasse zur Darstellung eines einzelnen Genotypen
@@ -29,22 +31,33 @@ public class Genotype<T> {
         this.length = values.size();
         this.fitness = fitnessfunction.evaluate(this);
         MAX_FITNESS_VALUE = fitnessfunction.getMaxFitnessValue(this);
+        updateFitness();
     }
 
     /**
      * Konstruktor zur Erstellung eines Genotypen mit zufaellig generierten Werten als ArrayList einer bestimmten Länge
+     * @param creator funktion zum erstellen Zufälliger Werte des Individuums
      * @param fitnessfunction Fitnessfunktion, die zur Evaluierung des Genotyps benutzt wird
      * @param size Gewuenschte Laenge des Genotypen
      */
-    public Genotype(Fitnessfunction<T> fitnessfunction, int size){
+    public Genotype(Function<Random, T> creator, Fitnessfunction<T> fitnessfunction, int size){
+        this.values = new ArrayList<>();
+
+        Random rand = new Random();
+
+        for (int i = 0; i < size; i++) {
+            this.values.add(creator.apply(rand));
+        }
+
         this.fitnessfunction = fitnessfunction;
         this.fitness = fitnessfunction.evaluate(this);
         this.length = size;
         MAX_FITNESS_VALUE = fitnessfunction.getMaxFitnessValue(this);
+        updateFitness();
     }
 
     /**
-     * Getter fuer Fitnesswert des Genotypen
+     * Getter für Fitnesswert des Genotypen
      * @return Fitnesswert des Genotypen
      */
     public int getFitness(){
@@ -52,7 +65,7 @@ public class Genotype<T> {
     }
 
     /**
-     * Getter fuer Wert des Genotypen an bestimmter Stelle der ArrayList
+     * Getter für Wert des Genotypen an bestimmter Stelle der ArrayList
      * @param index Stelle der ArrayList die ausgelesen werden soll
      * @return Wert des Genotypen an bestimmter Stelle der ArrayList
      */
@@ -61,7 +74,7 @@ public class Genotype<T> {
     }
 
     /**
-     * Getter fuer alle Werte des Genotypen
+     * Getter für alle Werte des Genotypen
      * @return List mit allen Werten des Genotypen
      */
     public List<T> getValues(){
@@ -69,7 +82,7 @@ public class Genotype<T> {
     }
 
     /**
-     * Setter fuer die List mit den Werten des Genotypen
+     * Setter für die List mit den Werten des Genotypen
      * @param newValues Werte, die dem Genotypen zugewiesen werden sollen
      */
     public void setValues(List<T> newValues){
@@ -77,7 +90,7 @@ public class Genotype<T> {
     }
 
     /**
-     * Getter fuer die Laenge des Genotypen (Anzahl der Werte)
+     * Getter für die Laenge des Genotypen (Anzahl der Werte)
      * @return Laenge des Genotypen
      */
     public int length() {
@@ -101,14 +114,14 @@ public class Genotype<T> {
     }
 
     /**
-     * Funktion zur Erhoehung des Alters um 1
+     * Funktion zur Erhöhung des Alters um 1
      */
     public void survive(){
         age++;
     }
 
     /**
-     * Getter fuer Alter des Genotypen
+     * Getter für Alter des Genotypen
      * @return Alter des Genotypen
      */
     public int getAge(){
