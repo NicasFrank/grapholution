@@ -9,12 +9,16 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class PopulationTests {
-    Population population;
+    Population<Integer> population;
     Genotype<Integer> testGenotype1;
     Genotype<Integer> testGenotype2;
 
@@ -23,9 +27,13 @@ public class PopulationTests {
 
     @BeforeEach
     public void setup() {
-        testGenotype1 = new Genotype<>(fitnessMock, 1);
-        testGenotype2 = new Genotype<>(fitnessMock, 1);
-        population = new Population();
+        Random random = new Random();
+        testGenotype1 = new Genotype<>(rand -> random.nextInt(15), fitnessMock, 1);
+        testGenotype2 = new Genotype<>(rand -> random.nextInt(15), fitnessMock, 1);
+        List<Genotype<Integer>> genotypes = new ArrayList<>();
+        genotypes.add(testGenotype1);
+        genotypes.add(testGenotype2);
+        population = new Population<>(genotypes);
         population.add(testGenotype1);
         population.add(testGenotype2);
     }
