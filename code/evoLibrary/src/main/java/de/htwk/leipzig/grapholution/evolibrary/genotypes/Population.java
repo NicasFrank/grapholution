@@ -41,7 +41,7 @@ public class Population<T> {
      * @param genotypes Liste von Genotypen
      */
     public Population(List<Genotype<T>> genotypes) {
-        this.population = genotypes;
+        this.population = new ArrayList<>(genotypes);
         size = genotypes.size();
     }
 

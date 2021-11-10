@@ -19,15 +19,13 @@ public class GeneticAlgorithmTest {
      */
     @Test
     void test() {
-        Random rnd = new Random();
-
         FitnessFunction<Boolean> fitnessfunction = new OneMaxEvaluator();
         Mutator<Boolean> mutator = new SwitchOneBit();
         Recombinator<Boolean> recombinator = new OnePointCrossover<>();
 
-        Genotype<Boolean> genotype = new Genotype<>(rand -> rnd.nextBoolean(), fitnessfunction, 5);
+//        Genotype<Boolean> genotype = new Genotype<>(Random::nextBoolean, fitnessfunction, 5);
 
-        Population<Boolean> population = new Population<>(rand -> rnd.nextBoolean(),50, 10, fitnessfunction);
+        Population<Boolean> population = new Population<>(Random::nextBoolean,50, 10, fitnessfunction);
         GeneticAlgorithm<Boolean> geneticAlgorithm = new GeneticAlgorithm<>( mutator, recombinator, 0.4, population);
 
         Genotype<Boolean> result = geneticAlgorithm.run();

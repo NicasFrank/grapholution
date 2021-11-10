@@ -11,9 +11,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -27,9 +26,8 @@ public class PopulationTests {
 
     @BeforeEach
     public void setup() {
-        Random random = new Random();
-        testGenotype1 = new Genotype<>(rand -> random.nextInt(15), fitnessMock, 1);
-        testGenotype2 = new Genotype<>(rand -> random.nextInt(15), fitnessMock, 1);
+        testGenotype1 = new Genotype<>(rand -> rand.nextInt(15), fitnessMock, 1);
+        testGenotype2 = new Genotype<>(rand -> rand.nextInt(15), fitnessMock, 1);
         List<Genotype<Integer>> genotypes = new ArrayList<>();
         genotypes.add(testGenotype1);
         genotypes.add(testGenotype2);

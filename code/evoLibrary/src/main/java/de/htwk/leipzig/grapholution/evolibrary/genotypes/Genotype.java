@@ -5,6 +5,7 @@ import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.FitnessFunction;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Function;
 
 /**
@@ -27,7 +28,7 @@ public class Genotype<T> {
      */
     public Genotype(FitnessFunction<T> fitnessfunction, List<T> values){
         this.fitnessFunction = fitnessfunction;
-        this.values = values;
+        this.values = new ArrayList<>(values);
         this.length = values.size();
         this.fitness = fitnessFunction.evaluate(this);
         MAX_FITNESS_VALUE = fitnessFunction.getMaxFitnessValue(this);
@@ -43,10 +44,8 @@ public class Genotype<T> {
     public Genotype(Function<Random, T> creator, FitnessFunction<T> fitnessfunction, int size){
         this.values = new ArrayList<>();
 
-        Random rand = new Random();
-
         for (int i = 0; i < size; i++) {
-            this.values.add(creator.apply(rand));
+            this.values.add(creator.apply(ThreadLocalRandom.current()));
         }
 
         this.fitnessFunction = fitnessfunction;
@@ -78,7 +77,7 @@ public class Genotype<T> {
      * @return List mit allen Werten des Genotypen
      */
     public List<T> getValues(){
-        return values;
+        return new ArrayList<>(values);
     }
 
     /**
@@ -86,7 +85,7 @@ public class Genotype<T> {
      * @param newValues Werte, die dem Genotypen zugewiesen werden sollen
      */
     public void setValues(List<T> newValues){
-        this.values = newValues;
+        this.values = new ArrayList<>(newValues);
     }
 
     /**

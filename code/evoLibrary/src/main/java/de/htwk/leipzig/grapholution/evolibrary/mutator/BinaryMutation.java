@@ -3,6 +3,7 @@ package de.htwk.leipzig.grapholution.evolibrary.mutator;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
 
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Klasse zur Mutation von Boolean-Genotypen nach dem Binary-Mutation Prinzip
@@ -10,7 +11,6 @@ import java.util.Random;
 public class BinaryMutation implements Mutator<Boolean> {
 
     private final int probability;
-    private final Random random = new Random();
 
     /**
      * Konstruktor fuer eine Binary-Mutation Klasse
@@ -27,7 +27,7 @@ public class BinaryMutation implements Mutator<Boolean> {
     @Override
     public void mutate(Genotype<Boolean> genotype) {
         for(int i = 0; i < genotype.length(); i++){
-            if(random.nextInt(101)<probability){
+            if(ThreadLocalRandom.current().nextInt(101)<probability){
                 genotype.getValues().set(i, !genotype.valueAt(i)); //Bit wird geflippt, sollte Wahrscheinlichkeit eintreten
             }
         }

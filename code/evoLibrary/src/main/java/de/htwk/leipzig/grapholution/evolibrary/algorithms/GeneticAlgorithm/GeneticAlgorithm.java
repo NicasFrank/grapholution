@@ -8,6 +8,7 @@ import de.htwk.leipzig.grapholution.evolibrary.recombinator.Recombinator;
 import de.htwk.leipzig.grapholution.evolibrary.selectors.FitnessproportionalSelection;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Noch zu entwickeln
@@ -34,7 +35,7 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
         this.mutator = mutator;
         this.recombinator = recombinator;
         this.recombinationChance = recombinationChance;
-        this.population = population;
+        this.population = new Population<>(population.createCopy());
         history = new ArrayList<>();
         history.add(new Population<>(population.createCopy()));
     }
@@ -52,7 +53,7 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
         this.mutator = mutator;
         this.recombinator = recombinator;
         this.recombinationChance = recombinationChance;
-        this.population = population;
+        this.population = new Population<>(population.createCopy());
         this.limit = limit;
         history = new ArrayList<>();
         history.add(new Population<>(population.createCopy()));
@@ -70,7 +71,6 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
      * @return bester Genotyp aus der gesamten Historie der Populationen
      */
     public Genotype<T> run(){
-        Random random = new Random();
         //getNewGeneration().evaluate; //evaluiert die Diversität der Generation für Anschaulichkeit?
         while( (history.size() <= limit || limit < 0) && !(population.getBestFitness() == genotype.MAX_FITNESS_VALUE) )
         {
@@ -79,8 +79,7 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
 
             for(int i = 0; i < population.size() / 2; i++)
             {
-                double u = random.nextDouble();
-                if(u < recombinationChance)
+                if(ThreadLocalRandom.current().nextDouble(1) < recombinationChance)
                 {
                     recombinator.recombine(population.get(2*i), population.get(2*i + 1));
                 }

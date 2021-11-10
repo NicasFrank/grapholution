@@ -27,11 +27,10 @@ public class HillclimberTest {
 
     @BeforeAll
     static void initHillclimber() {
-        Random random = new Random();
         FitnessFunction<Boolean> fitnessfunctionZ = new ZeroMaxEvaluator();
         FitnessFunction<Boolean> fitnessfunctionO = new OneMaxEvaluator();
-        Genotype<Boolean> genotypeZ = new Genotype<>(rand-> random.nextBoolean(), fitnessfunctionZ, genosize);
-        Genotype<Boolean> genotypeO = new Genotype<>(rand -> random.nextBoolean(), fitnessfunctionO, genosize);
+        Genotype<Boolean> genotypeZ = new Genotype<>(Random::nextBoolean, fitnessfunctionZ, genosize);
+        Genotype<Boolean> genotypeO = new Genotype<>(Random::nextBoolean, fitnessfunctionO, genosize);
         Mutator<Boolean> mutatorB = new BinaryMutation(10);
         Mutator<Boolean> mutatorS = new SwitchOneBit();
         hillclimberZero = new Hillclimber<>(genotypeZ, mutatorB);

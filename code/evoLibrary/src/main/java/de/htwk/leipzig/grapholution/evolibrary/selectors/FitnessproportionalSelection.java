@@ -4,6 +4,7 @@ import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Population;
 
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Klasse zur Fitnessproportionalen Selektion von Individuen einer Population
@@ -19,7 +20,7 @@ public class FitnessproportionalSelection<T> implements Selector<T>{
      * @param population, Population aus der selektiert werden soll
      */
     public FitnessproportionalSelection(Population<T> population){
-        this.population = population;
+        this.population = new Population<>(population.createCopy());
         for (int i = 0; i < population.size(); i++) {
             this.populationList.add(this.population.get(i).createCopy());
         }
@@ -29,11 +30,10 @@ public class FitnessproportionalSelection<T> implements Selector<T>{
      * Selektion mehrerer Individuen mittels der Fitnessproportionalen Selektion
      */
     public void select(){
-        Random rand = new Random();
         Set<Genotype<T>> selected = new HashSet<>();
 
         while(populationList.size() > 0) {
-            int selection = getSum() == 0 ? 0 : rand.nextInt(getSum());
+            int selection = getSum() == 0 ? 0 : ThreadLocalRandom.current().nextInt(getSum());
             int accFitness = 0;
             int j = 0;
             do {

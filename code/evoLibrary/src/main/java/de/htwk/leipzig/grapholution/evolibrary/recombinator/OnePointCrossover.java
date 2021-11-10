@@ -4,6 +4,7 @@ import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Klasse zur Rekombination zweier Genotypen nach dem OnePointCrossoverPrinzip
@@ -18,9 +19,7 @@ public class OnePointCrossover<T> implements Recombinator<T>{
      */
     @Override
     public void recombine(Genotype<T> individualA, Genotype<T> individualB) {
-
-        Random random = new Random();
-        int crossoverPoint = random.nextInt(individualA.length()-1); //Stelle an der Genotypen getrennt werden
+        int crossoverPoint = ThreadLocalRandom.current().nextInt(individualA.length()-1); //Stelle an der Genotypen getrennt werden
         ArrayList<T> newA = new ArrayList<>();
         ArrayList<T> newB = new ArrayList<>();
         for(int i = 0; i<=crossoverPoint; i++){
