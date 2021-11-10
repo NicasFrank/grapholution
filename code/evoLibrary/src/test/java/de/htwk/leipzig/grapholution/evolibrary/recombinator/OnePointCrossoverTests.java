@@ -1,21 +1,20 @@
-package de.htwk.leipzig.grapholution.evolibrary.algorithms;
+package de.htwk.leipzig.grapholution.evolibrary.recombinator;
 
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.FitnessFunction;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
-import de.htwk.leipzig.grapholution.evolibrary.recombinator.OnePointCrossover;
-import de.htwk.leipzig.grapholution.evolibrary.recombinator.Recombinator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentMatchers;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class OnePointCrossoverTests {
@@ -48,7 +47,6 @@ public class OnePointCrossoverTests {
 
     @Test
     void recombine_WhenCalled_SwapsAtLeastTwoValuesBetweenTheGenotypes() {
-
         when(fitnessMock.evaluate(any(Genotype.class))).thenReturn(1);
 
         onePointCrossover.recombine(testGenotype1, testGenotype2);

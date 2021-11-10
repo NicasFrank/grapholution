@@ -3,12 +3,14 @@ package de.htwk.leipzig.grapholution.evolibrary.genotypes;
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.FitnessFunction;
 import java.util.*;
 import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Klasse zur Beschreibung einer Population
  */
 public class Population<T> {
-    protected List<Genotype<T>> population = new ArrayList<>();
+    protected List<Genotype<T>> population;
     protected final int size;
 
     /**
@@ -20,9 +22,9 @@ public class Population<T> {
      */
     public Population(Function<Random, T> creator, int populationSize, int genoLength, FitnessFunction<T> fitnessfunction) {
         size = populationSize;
-        for (int i = 0; i < populationSize; i++) {
-            population.add(new Genotype<>(creator, fitnessfunction, genoLength));
-        }
+        population = Stream.generate(() -> new Genotype<>(creator, fitnessfunction, genoLength))
+                .limit(populationSize)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -56,13 +58,9 @@ public class Population<T> {
      * @return bester Fitnesswert
      */
     public int getBestFitness() {
-        Genotype<T> bestIndividuum = population.get(0);
-        for (Genotype<T> genotype : population) {
-            if (bestIndividuum.getFitness() < genotype.getFitness()) {
-                bestIndividuum = genotype;
-            }
-        }
-        return bestIndividuum.getFitness();
+        return population.stream()
+                .mapToInt(Genotype::getFitness)
+                .max().orElse(0);
     }
 
     /**
@@ -70,11 +68,9 @@ public class Population<T> {
      * @return Liste aller individuen der Population
      */
     public List<Genotype<T>> createCopy(){
-        List<Genotype<T>> copy = new ArrayList<>();
-        for(Genotype<T> genome: population) {
-            copy.add(genome.createCopy());
-        }
-        return copy;
+        return population.stream()
+                .map(Genotype::createCopy)
+                .collect(Collectors.toList());
     }
 
 
