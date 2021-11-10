@@ -33,10 +33,15 @@ public class OnePointCrossoverTests {
         testValues1 = new ArrayList<>();
         testValues1.add(1);
         testValues1.add(2);
+        testValues1.add(3);
+        testValues1.add(4);
+        System.out.println(testValues1.size());
         testGenotype1 = new Genotype<>(fitnessMock, testValues1);
         testValues2 = new ArrayList<>();
-        testValues2.add(3);
-        testValues2.add(4);
+        testValues2.add(5);
+        testValues2.add(6);
+        testValues2.add(7);
+        testValues2.add(8);
         testGenotype2 = new Genotype<>(fitnessMock, testValues2);
         onePointCrossover = new OnePointCrossover<>();
     }

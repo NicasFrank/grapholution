@@ -20,7 +20,7 @@ public class OnePointCrossover<T> implements Recombinator<T>{
     public void recombine(Genotype<T> individualA, Genotype<T> individualB) {
 
         Random random = new Random();
-        int crossoverPoint = random.nextInt(individualA.length()); //Stelle an der Genotypen getrennt werden
+        int crossoverPoint = random.nextInt(individualA.length()-1); //Stelle an der Genotypen getrennt werden
         ArrayList<T> newA = new ArrayList<>();
         ArrayList<T> newB = new ArrayList<>();
         for(int i = 0; i<=crossoverPoint; i++){
