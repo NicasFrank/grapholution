@@ -4,6 +4,7 @@ import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.FitnessFunction;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Function;
@@ -98,5 +99,15 @@ public class Genotype<T> extends ArrayList<T>{
     public void print(){
         this.forEach(value -> System.out.print(value + " "));
         System.out.println("\n");
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return super.equals(o);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), fitnessFunction, length, age, fitness, MAX_FITNESS_VALUE);
     }
 }

@@ -14,6 +14,7 @@ repositories {
 
 spotbugs {
     reportsDir = file("$buildDir/reports/spotbugs")
+    excludeFilter = file('../buildSrc/spotbugs-exclude.xml')
 }
 
 checkstyle {
