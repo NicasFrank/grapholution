@@ -30,6 +30,6 @@ public class GeneticAlgorithmTest {
 
         Genotype<Boolean> result = geneticAlgorithm.run();
 
-        System.out.println(result.getValues());
+        result.print();
     }
 }

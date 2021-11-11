@@ -5,7 +5,6 @@ import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.ArgumentMatchers;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -51,7 +50,7 @@ public class OnePointCrossoverTests {
 
         onePointCrossover.recombine(testGenotype1, testGenotype2);
 
-        assertFalse(testGenotype1.getValues().containsAll(testValues1));
-        assertFalse(testGenotype2.getValues().containsAll(testValues2));
+        assertFalse(testGenotype1.containsAll(testValues1));
+        assertFalse(testGenotype2.containsAll(testValues2));
     }
 }

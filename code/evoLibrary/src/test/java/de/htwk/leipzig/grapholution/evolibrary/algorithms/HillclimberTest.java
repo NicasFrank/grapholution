@@ -50,14 +50,14 @@ public class HillclimberTest {
     void testHillClimbZero() {
         Genotype<Boolean> expectedZ = hillclimberZero.run();
         for(int i = 0; i<genosize; i++){
-            assertEquals(resultZ.get(i), expectedZ.valueAt(i));
+            assertEquals(resultZ.get(i), expectedZ.get(i));
         }
     }
     @Test
     void testHillClimbOne() {
         Genotype<Boolean> expectedO = hillclimberOne.run();
         for(int i = 0; i<genosize; i++){
-            assertEquals(resultO.get(i), expectedO.valueAt(i));
+            assertEquals(resultO.get(i), expectedO.get(i));
         }
     }
     @Test
