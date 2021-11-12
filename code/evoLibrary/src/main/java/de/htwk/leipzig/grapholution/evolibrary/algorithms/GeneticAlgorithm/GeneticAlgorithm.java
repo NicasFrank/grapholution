@@ -19,7 +19,7 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
     private final Mutator<T> mutator;
     private final Recombinator<T> recombinator;
     private final double recombinationChance;
-    private final Population<T> population;
+    private Population<T> population;
     private int limit = -1;
     private final ArrayList<Population<T>> history;
 
@@ -74,8 +74,8 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
         //getNewGeneration().evaluate; //evaluiert die Diversität der Generation für Anschaulichkeit?
         while( (history.size() <= limit || limit < 0) && !(population.getBestFitness() == genotype.MAX_FITNESS_VALUE) )
         {
-            FitnessproportionalSelection<T> selector = new FitnessproportionalSelection<>(population);
-            selector.select();
+            FitnessproportionalSelection<T> selector = new FitnessproportionalSelection<>();
+            population = selector.select(population);
 
             for(int i = 0; i < population.size() / 2; i++)
             {

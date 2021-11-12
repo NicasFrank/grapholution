@@ -2,7 +2,6 @@ package de.htwk.leipzig.grapholution.evolibrary.mutator;
 
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
 
-import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**

@@ -11,7 +11,8 @@ public interface Selector<T> {
 
     /**
      * Funktion zum Selektieren eines Genotypen
+     * @param population, Population aus der selektiert werden soll
      */
-    void select();
+    Population<T> select(Population<T> population);
 
 }
