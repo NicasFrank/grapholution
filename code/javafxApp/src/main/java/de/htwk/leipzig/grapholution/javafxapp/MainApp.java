@@ -1,6 +1,5 @@
 package de.htwk.leipzig.grapholution.javafxapp;
 
-import de.htwk.leipzig.grapholution.evolibrary.list.LinkedList;
 //import javafx.application.Application;
 //import javafx.fxml.FXMLLoader;
 //import javafx.scene.Parent;
@@ -8,8 +7,6 @@ import de.htwk.leipzig.grapholution.evolibrary.list.LinkedList;
 //import javafx.stage.Stage;
 import org.apache.commons.text.WordUtils;
 
-import static de.htwk.leipzig.grapholution.evolibrary.utilities.StringUtils.join;
-import static de.htwk.leipzig.grapholution.evolibrary.utilities.StringUtils.split;
 
 public class MainApp
 //        extends Application
