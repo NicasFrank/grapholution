@@ -103,7 +103,7 @@ public class Genotype<T> extends ArrayList<T>{
 
     @Override
     public boolean equals(Object o) {
-        return super.equals(o);
+        return hashCode() == o.hashCode();
     }
 
     @Override
