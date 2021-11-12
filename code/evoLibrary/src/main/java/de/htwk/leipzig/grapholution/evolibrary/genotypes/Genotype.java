@@ -18,7 +18,6 @@ import java.util.stream.Stream;
 public class Genotype<T> extends ArrayList<T>{
 
     protected final FitnessFunction<T> fitnessFunction;
-    protected final int length;
     protected int age = 0;
     protected int fitness;
     public final int MAX_FITNESS_VALUE;
@@ -31,7 +30,6 @@ public class Genotype<T> extends ArrayList<T>{
     public Genotype(FitnessFunction<T> fitnessfunction, List<T> values){
         super(values);
         this.fitnessFunction = fitnessfunction;
-        this.length = values.size();
         this.fitness = fitnessFunction.evaluate(this);
         MAX_FITNESS_VALUE = fitnessFunction.getMaxFitnessValue(this);
         updateFitness();
@@ -50,7 +48,6 @@ public class Genotype<T> extends ArrayList<T>{
 
         this.fitnessFunction = fitnessfunction;
         this.fitness = fitnessfunction.evaluate(this);
-        this.length = size;
         MAX_FITNESS_VALUE = fitnessfunction.getMaxFitnessValue(this);
         updateFitness();
     }
@@ -103,11 +100,11 @@ public class Genotype<T> extends ArrayList<T>{
 
     @Override
     public boolean equals(Object o) {
-        return hashCode() == o.hashCode();
+        return super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), fitnessFunction, length, age, fitness, MAX_FITNESS_VALUE);
+        return Objects.hash(super.hashCode(), fitnessFunction, age, fitness, MAX_FITNESS_VALUE);
     }
 }
