@@ -2,6 +2,7 @@ package de.htwk.leipzig.grapholution.evolibrary.genotypes;
 
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.FitnessFunction;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -34,11 +36,11 @@ public class PopulationTests {
 
     @Test
     public void getBestFitness_WhenCalled_ReturnsFitnessValueOfBestGenotype() {
-        when(fitnessMock.evaluate(testGenotype1)).thenReturn(10);
-        when(fitnessMock.evaluate(testGenotype2)).thenReturn(0);
-
+        when(fitnessMock.evaluate(any())).thenReturn(10);
         testGenotype1.updateFitness();
+        when(fitnessMock.evaluate(any())).thenReturn(0);
         testGenotype2.updateFitness();
+
         population = new Population<>(genotypes);
 
         var result = population.getBestFitness();
