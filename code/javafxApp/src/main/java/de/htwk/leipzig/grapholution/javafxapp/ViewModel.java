@@ -1,7 +1,14 @@
 package de.htwk.leipzig.grapholution.javafxapp;
 
 
-import de.htwk.leipzig.grapholution.evolibrary.hillclimber.Hillclimber;
+import de.htwk.leipzig.grapholution.evolibrary.algorithms.hillclimber.Hillclimber;
+import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.FitnessFunction;
+import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.OneMaxEvaluator;
+import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
+import de.htwk.leipzig.grapholution.evolibrary.mutator.Mutator;
+import de.htwk.leipzig.grapholution.evolibrary.mutator.SwitchOneBit;
+import de.htwk.leipzig.grapholution.javafxapp.model.BestGenotype;
+import de.htwk.leipzig.grapholution.javafxapp.model.EvoLibMapper;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -9,6 +16,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
+import java.util.Random;
 
 public class ViewModel {
 
@@ -68,8 +76,19 @@ public class ViewModel {
    * @param startConfig Startkonfiguration
    */
   public void climbTheHill(String startConfig){
-    hilly = new Hillclimber(startConfig);
-    outputField.set(hilly.hillclimb());
+      int genosize = 10;
+      FitnessFunction<Boolean> fitnessfunctionO = new OneMaxEvaluator();
+      Genotype<Boolean> genotypeO = new Genotype<>(Random::nextBoolean, fitnessfunctionO, genosize);
+      Mutator<Boolean> mutatorS = new SwitchOneBit();
+
+      hilly = new Hillclimber<>(genotypeO, mutatorS);
+      Genotype<Boolean> genotype = hilly.run();
+      EvoLibMapper evoLibMapper = new EvoLibMapper();
+
+      BestGenotype bg = evoLibMapper.map(genotype);
+
+
+      //outputField.set();
   }
   /**
    * versucht bestimmte Pane zu laden

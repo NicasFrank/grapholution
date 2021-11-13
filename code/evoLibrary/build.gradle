@@ -8,8 +8,13 @@ plugins {
     id "com.github.spotbugs" version "5.0.0-beta.3"
 }
 
+repositories {
+    mavenCentral()
+}
+
 spotbugs {
     reportsDir = file("$buildDir/reports/spotbugs")
+    excludeFilter = file('../buildSrc/spotbugs-exclude.xml')
 }
 
 checkstyle {
@@ -27,8 +32,11 @@ checkstyleTest {
 // Please consider when to use "implements" and when "api"
 // see https://docs.gradle.org/current/userguide/java_library_plugin.html#sec:java_library_separation
 dependencies {
+    testImplementation 'org.mockito:mockito-inline:4.0.0'
+    testImplementation 'org.mockito:mockito-junit-jupiter:4.0.0'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
+
 }
 
 test {
