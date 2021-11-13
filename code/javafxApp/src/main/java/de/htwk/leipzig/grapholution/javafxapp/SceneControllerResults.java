@@ -1,5 +1,8 @@
 package de.htwk.leipzig.grapholution.javafxapp;
-import de.htwk.leipzig.grapholution.evolibrary.hillclimber.Hillclimber;
+import de.htwk.leipzig.grapholution.evolibrary.algorithms.hillclimber.Hillclimber;
+import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
+import de.htwk.leipzig.grapholution.javafxapp.model.EvoLibMapper;
+import de.htwk.leipzig.grapholution.javafxapp.model.HistoryResults;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -11,6 +14,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -25,14 +29,14 @@ public class SceneControllerResults extends SceneController implements Initializ
   @FXML
   private LineChart lineChartResults;
 
-  @FXML
-  private TableColumn<Hillclimber,String> colGen;
-
-  @FXML
-  private TableColumn<Hillclimber,String> colTime;
-
-  @FXML
-  private TableColumn<Hillclimber,String> colFit;
+//  @FXML
+//  private TableColumn<Hillclimber,String> colGen;
+//
+//  @FXML
+//  private TableColumn<Hillclimber,String> colTime;
+//
+//  @FXML
+//  private TableColumn<Hillclimber,String> colFit;
 
   private ViewModel viewModel;
   private Hillclimber hillclimber;
@@ -48,7 +52,11 @@ public class SceneControllerResults extends SceneController implements Initializ
 
   public void setTableViewResults(Hillclimber hillclimber){
       this.hillclimber=hillclimber;
-      List<String> results = hillclimber.getHistory();
+      List<Genotype<Boolean>> results = hillclimber.getHistory();
+      EvoLibMapper evoLibMapper = new EvoLibMapper();
+      List<HistoryResults> list = evoLibMapper.map(results);
+
+      HistoryResults hr = new HistoryResults();
       /*
       for( int i = 0; i < results.size(); i++)
       {

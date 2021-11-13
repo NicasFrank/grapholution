@@ -49,6 +49,10 @@ public class Hillclimber<T> extends Algorithm<T> {
         return history.get(history.size() - 1);
     }
 
+    public List<Genotype<T>> getHistory() {
+        return history;
+    }
+
     /**
      * Funktion zum Ausfuehren des Hillclimbers
      * @return Bester erreichter Genotyp
