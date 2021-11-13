@@ -50,8 +50,9 @@ public class SceneControllerResults extends SceneController implements Initializ
       {
           System.out.println(results.get(i));
       }
-      */
+
       tableViewResults.getItems();
+      */
   }
 
 
