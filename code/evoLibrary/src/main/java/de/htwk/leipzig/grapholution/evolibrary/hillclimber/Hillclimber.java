@@ -2,10 +2,10 @@ package de.htwk.leipzig.grapholution.evolibrary.hillclimber;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
- * Einfacher Hillclimber-Algorithmus mit Bit-Strings als Konfigurationen
+ * Einfacher Hillclimber-Algorithmus mit Bit-Strings als Konfigurationen.
  */
 public class Hillclimber {
 
@@ -13,7 +13,7 @@ public class Hillclimber {
 
     /**
      * erzeugt eine Liste der erfolgreichen Evolutionsergebnisse der Konfigurationen
-     *      und fügt die Startkonfiguration als erstes Element hinzu
+     *      und fügt die Startkonfiguration als erstes Element hinzu.
      * @param startConfig erhält eine Startkonfiguration,
      * @throws IllegalArgumentException falls der übergebene String null ist oder kein Bitstring ist
      */
@@ -27,15 +27,7 @@ public class Hillclimber {
     }
 
     /**
-     * Gibt eine Liste mit den Entwicklungen der Individuen zurück
-     * @return LinkedList mit evolutionierten Strings
-     */
-    public List<String> getHistory(){
-        return history;
-    }
-
-    /**
-     * Liefert die aktuell beste Konfiguration
+     * Liefert die aktuell beste Konfiguration.
      *
      * @return letzte Element von history
      */
@@ -44,7 +36,7 @@ public class Hillclimber {
     }
 
     /**
-     * Führt den Hillclimber-Algorithmus aus und gibt das Ergebnis zurück
+     * Führt den Hillclimber-Algorithmus aus und gibt das Ergebnis zurück.
      *
      * @return gibt das Ergebnis des Hillclimber-Algorithmus
      */
@@ -62,15 +54,15 @@ public class Hillclimber {
     }
 
     /**
-     * Bewertet eine Konfiguration in dem es die Zahl der Einsen zusammenzählt
+     * Bewertet eine Konfiguration in dem es die Zahl der Einsen zusammenzählt.
      * @param configuration erhält eine Konfiguration
      * @return Anzahl der Einsen
      */
 
     public int evaluate(String configuration) {
         int sum = 0;
-        for(int i = 0; i<configuration.length(); i++){
-            if(configuration.charAt(i) == '1'){
+        for (int i = 0; i < configuration.length(); i++) {
+            if (configuration.charAt(i) == '1') {
                 sum++;
             }
         }
@@ -78,13 +70,12 @@ public class Hillclimber {
     }
 
     /**
-     * Mutiert die Konfiguration an einer zufälligen Stelle von 1 zu 0 bzw von 0 zu 1
+     * Mutiert die Konfiguration an einer zufälligen Stelle von 1 zu 0 bzw von 0 zu 1.
      * @param config erhält eine Konfiguration
      * @return die mutierte Konfiguration mit einer zufällig geflippten Stelle
      */
     public String mutate(String config) {
-        Random rand = new Random();
-        int index = rand.nextInt(config.length());
+        int index = ThreadLocalRandom.current().nextInt(config.length());
         int newBit = 1 - Character.getNumericValue(config.charAt(index));
 
         return config.substring(0, index) + newBit + config.substring(index + 1);

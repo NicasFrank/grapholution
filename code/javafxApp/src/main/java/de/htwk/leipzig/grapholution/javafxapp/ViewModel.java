@@ -2,9 +2,9 @@ package de.htwk.leipzig.grapholution.javafxapp;
 
 
 import de.htwk.leipzig.grapholution.evolibrary.hillclimber.Hillclimber;
+import javafx.beans.property.Property;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
 
@@ -12,21 +12,27 @@ import java.io.IOException;
 
 public class ViewModel {
 
-  //private final StringProperty inputField = new SimpleStringProperty();
+  private final StringProperty inputField = new SimpleStringProperty();
   private final StringProperty outputField= new SimpleStringProperty();
 
-  private StartController startController;
+  private final SceneControllerChoice sceneControllerChoice;
+
   private Hillclimber hilly;
 
-  ViewModel(StartController startController){
-    this.startController=startController;
+  ViewModel(SceneControllerChoice sceneControllerChoice){
+    this.sceneControllerChoice = sceneControllerChoice;
   }
 
+  /**
+   * switch anhand String je nach nächster Pane
+   * @param nameOfNextScreen String mit Namen des nächsten Screens
+   * @return bool ob laden erfolgreich oder nicht
+   */
   public boolean navigation_configureScreen (Object nameOfNextScreen){
     boolean result=false;
     switch (nameOfNextScreen.toString()){
       case "Hillclimber":
-        result = loadNewPane("secondSmallScreen.fxml");
+        result = loadNewPane("ConfigHillclimber.fxml");
         break;
 
       case "Ein Anderer":
@@ -34,7 +40,7 @@ public class ViewModel {
         break;
 
       case "Auswertung":
-        result = loadNewPane("lastSmallScreen.fxml");
+        result = loadNewPane("AuswertungScreen.fxml");
         break;
 
       default:
@@ -44,13 +50,18 @@ public class ViewModel {
     return result;
   }
 
+  /**
+   * Hillclimber instanziert und ausgeführt
+   * @param startConfig Startkonfiguration
+   */
   public void climbTheHill(String startConfig){
     hilly = new Hillclimber(startConfig);
     outputField.set(hilly.hillclimb());
   }
   /**
-   * versucht bestimmte Pane zu laden und gibt entweder diese oder null zurück
+   * versucht bestimmte Pane zu laden
    * @param paneName Name der zu ladenden Pane aus private String[] slides
+   * @return wahr wenn erfolgreich false wenn nicht
    */
     private boolean loadNewPane (String paneName){
       FXMLLoader loader = new FXMLLoader(getClass().getResource(paneName));
@@ -64,15 +75,21 @@ public class ViewModel {
       }
     }
 
+  /**
+   * gibt nächste Scene an ersten Controller weiter
+   * @param nextScreen nächste Scene als Pane
+   * @return wahr wenn erfolgreich false wenn nicht
+   */
     private boolean setNextScreen (Pane nextScreen){
       if(nextScreen!=null){
-        return startController.setNewScreen(nextScreen);
+        return sceneControllerChoice.setNewScreen(nextScreen);
       } else {
         //Fehlermeldung
         return false;
       }
     }
 
+<<<<<<< HEAD
 
     /**
      * Handhabung des Eingabefeldes:
@@ -80,6 +97,14 @@ public class ViewModel {
      * iteriert durch das Eingabefeld und speichert in einem char Array
      **
     private boolean isInputCorrect(){
+=======
+  /**
+   * Handhabung des Eingabefeldes:
+   * iteriert durch das Eingabefeld und speichert in einem char Array
+   * @return true falls Eingabe 0 oder 1 (Buchstabe)
+   */
+  private boolean isInputCorrect(){
+>>>>>>> ae99c8711879a866c0f25e27d102ed8f991e0331
         char[] input = inputField.get().toCharArray();
         for (char c : input) {
             if (c != '0' && c != '1') {
@@ -90,31 +115,9 @@ public class ViewModel {
     }
 
     /**
-     * Gibt Fehlermeldung falls Eingabe nicht dem obigen Format entspricht
-     **
-    private void alert(){
-        outputField.set("Nur 1 oder 0 verwenden!");
-    }
-
-    /**
-     * Handhabung des Ausgabefeldes:
-     * setzt Inhalt des Eingabefeldes in das Ausgabefeld
-     * und leert das Eingabefeld
-     **
-    private void writeResultInGUI(){
-        outputField.set(inputField.get());
-        inputField.set("");
-    }
-
-    /**
      * Methoden geben Eingabe und Ausgabefeld zurück
-     **
-    public Property<String> inputFieldProperty() {
-        return inputField;
-    }
-    */
-    public ObservableValue<String> outputFieldProperty() {
+     **/
+    public Property<String> outputFieldProperty() {
         return outputField;
     }
-
 }

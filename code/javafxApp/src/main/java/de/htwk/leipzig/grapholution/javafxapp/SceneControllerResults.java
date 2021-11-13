@@ -37,6 +37,10 @@ public class SceneControllerResults extends SceneController implements Initializ
   private ViewModel viewModel;
   private Hillclimber hillclimber;
 
+  /**
+   * setter für viewmodel und bindet outputfield an output vom viewmodel
+   * @param viewModel gleiche ViewModel für alle
+   */
   public void setViewModel(ViewModel viewModel){
       this.viewModel=viewModel;
       outputField.textProperty().bind(viewModel.outputFieldProperty());
