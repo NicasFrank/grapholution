@@ -1,0 +1,23 @@
+Agenda:
+Kundengespräch
+Daily 11.11.2021
+
+
+Anwesend:
+Benni K.
+Domi J.
+Dong T.
+Eric S.
+Leon K.
+Nicas F.
+Paul B.
+
+Kundengspräch:
+Zeitnahe GUI entwerfen
+GUI mit Tabs
+
+Daily:
+feature-adjustableAlgorithm Branch mergen
+Java-FX Rückgabetypen?
+BitSets Implementation?
+Schrittweise Ausführung
