@@ -2,7 +2,6 @@ package de.htwk.leipzig.grapholution.evolibrary.mutator;
 
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
 
-import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -17,8 +16,7 @@ public class SwitchOneBit implements Mutator<Boolean> {
     @Override
     public void mutate(Genotype<Boolean> genotype) {
         int index = ThreadLocalRandom.current().nextInt(genotype.size());
-        Boolean newBit = !genotype.get(index);
-        genotype.set(index, newBit);
+        genotype.set(index, !genotype.get(index));
         genotype.updateFitness(); //Fitness des Genotypen muss nach Veraenderung der Werte neu ermittelt werden
     }
 

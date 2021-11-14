@@ -6,7 +6,11 @@ import de.htwk.leipzig.grapholution.evolibrary.genotypes.Population;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.Mutator;
 import de.htwk.leipzig.grapholution.evolibrary.recombinator.Recombinator;
 import de.htwk.leipzig.grapholution.evolibrary.selectors.FitnessproportionalSelection;
+import de.htwk.leipzig.grapholution.evolibrary.selectors.Selector;
+
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Comparator;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -19,9 +23,10 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
     private final Mutator<T> mutator;
     private final Recombinator<T> recombinator;
     private final double recombinationChance;
-    private final Population<T> population;
+    private Population<T> population;
     private int limit = -1;
     private final ArrayList<Population<T>> history;
+    private final Selector<T> selector;
 
     /**
      * Konstruktor ohne Limit
@@ -30,14 +35,15 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
      * @param recombinationChance Chance dass Rekombination durchgeführt wird
      * @param population Population des Genotypen
      */
-    public GeneticAlgorithm(Mutator<T> mutator, Recombinator<T> recombinator, double recombinationChance, Population<T> population) {
+    public GeneticAlgorithm(Mutator<T> mutator, Selector<T> selector, Recombinator<T> recombinator, double recombinationChance, Population<T> population) {
         super(population.get(0));
         this.mutator = mutator;
         this.recombinator = recombinator;
         this.recombinationChance = recombinationChance;
         this.population = new Population<>(population.createCopy());
+        this.selector = selector;
         history = new ArrayList<>();
-        history.add(new Population<>(population.createCopy()));
+        history.add(population.createCopy());
     }
 
     /**
@@ -48,15 +54,9 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
      * @param population Population des Genotypen
      * @param limit Maximale Anzahl der Iterationen
      */
-    public GeneticAlgorithm(Mutator<T> mutator, Recombinator<T> recombinator, double recombinationChance, Population<T> population, int limit) {
-        super(population.get(0));
-        this.mutator = mutator;
-        this.recombinator = recombinator;
-        this.recombinationChance = recombinationChance;
-        this.population = new Population<>(population.createCopy());
+    public GeneticAlgorithm(Mutator<T> mutator, Selector<T> selector, Recombinator<T> recombinator, double recombinationChance, Population<T> population, int limit) {
+        this(mutator, selector, recombinator, recombinationChance, population);
         this.limit = limit;
-        history = new ArrayList<>();
-        history.add(new Population<>(population.createCopy()));
     }
 
     /**
@@ -74,8 +74,7 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
         //getNewGeneration().evaluate; //evaluiert die Diversität der Generation für Anschaulichkeit?
         while( (history.size() <= limit || limit < 0) && !(population.getBestFitness() == genotype.MAX_FITNESS_VALUE) )
         {
-            FitnessproportionalSelection<T> selector = new FitnessproportionalSelection<>(population);
-            selector.select();
+            population = selector.select(population);
 
             for(int i = 0; i < population.size() / 2; i++)
             {
@@ -86,7 +85,7 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
                 mutator.mutate(population.get(2*i));
                 mutator.mutate(population.get(2*i + 1));
             }
-            history.add(new Population<>(population.createCopy()));
+            history.add(population.createCopy());
             // getNewGeneration().evaluate;
         }
         return bestIndividuum();
@@ -113,15 +112,9 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
      * @return beste Individuum
      */
     private Genotype<T> bestIndividuum() {
-        Genotype<T> bestIndividuum = population.get(0);
-
-        for (Population<T> tPopulation : history) {
-            for (int j = 0; j < population.size(); j++) {
-                if (bestIndividuum.getFitness() < tPopulation.get(j).getFitness()) {
-                    bestIndividuum = tPopulation.get(j);
-                }
-            }
-        }
-        return bestIndividuum;
+        return history.stream()
+                .flatMap(Collection::stream)
+                .max(Comparator.comparingInt(Genotype::getFitness))
+                .orElse(null);
     }
 }

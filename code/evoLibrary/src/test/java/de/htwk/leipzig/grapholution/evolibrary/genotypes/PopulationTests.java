@@ -1,9 +1,8 @@
-package de.htwk.leipzig.grapholution.evolibrary.algorithms;
+package de.htwk.leipzig.grapholution.evolibrary.genotypes;
 
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.FitnessFunction;
-import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
-import de.htwk.leipzig.grapholution.evolibrary.genotypes.Population;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -11,10 +10,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-import java.util.function.Function;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -25,28 +23,39 @@ public class PopulationTests {
 
     @Mock
     FitnessFunction<Integer> fitnessMock;
+    private List<Genotype<Integer>> genotypes;
 
     @BeforeEach
     public void setup() {
-        Function<Random, Integer> function = rand -> rand.nextInt(15);
-        testGenotype1 = new Genotype<>(function, fitnessMock, 1);
-        testGenotype2 = new Genotype<>(function, fitnessMock, 1);
-        List<Genotype<Integer>> genotypes = new ArrayList<>();
+        testGenotype1 = new Genotype<>(rand -> rand.nextInt(15), fitnessMock, 1);
+        testGenotype2 = new Genotype<>(rand -> rand.nextInt(15), fitnessMock, 1);
+        genotypes = new ArrayList<>();
         genotypes.add(testGenotype1);
         genotypes.add(testGenotype2);
-        population = new Population<>(genotypes);
     }
 
     @Test
     public void getBestFitness_WhenCalled_ReturnsFitnessValueOfBestGenotype() {
-        when(fitnessMock.evaluate(testGenotype1)).thenReturn(10);
-        when(fitnessMock.evaluate(testGenotype2)).thenReturn(0);
-
+        when(fitnessMock.evaluate(any())).thenReturn(10);
         testGenotype1.updateFitness();
+        when(fitnessMock.evaluate(any())).thenReturn(0);
         testGenotype2.updateFitness();
+
+        population = new Population<>(genotypes);
 
         var result = population.getBestFitness();
 
         assertEquals(10, result);
+    }
+
+    @Test
+    public void createCopy_WhenCalled_ReturnsPopulationWithMatchingGenotypes() {
+        population = new Population<>(rand -> rand.nextInt(15), 10, 10, fitnessMock);
+
+        var copy = population.createCopy();
+
+        for (int i = 0; i < population.size(); i++) {
+            assertEquals(population.get(i), copy.get(i));
+        }
     }
 }

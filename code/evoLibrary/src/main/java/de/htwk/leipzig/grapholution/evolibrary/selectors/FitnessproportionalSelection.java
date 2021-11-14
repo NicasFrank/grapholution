@@ -11,52 +11,41 @@ import java.util.concurrent.ThreadLocalRandom;
  * @param <T> Datentyp der zu mutierenden Genotypen
  */
 public class FitnessproportionalSelection<T> implements Selector<T>{
-
-    private Population<T> population;
-    private final List<Genotype<T>> populationList = new ArrayList<>();
-
     /**
      * Konstruktor der Selector-Klasse
-     * @param population, Population aus der selektiert werden soll
      */
-    public FitnessproportionalSelection(Population<T> population){
-        this.population = new Population<>(population.createCopy());
-        for (int i = 0; i < population.size(); i++) {
-            this.populationList.add(this.population.get(i).createCopy());
-        }
+    public FitnessproportionalSelection(){
     }
 
     /**
      * Selektion mehrerer Individuen mittels der Fitnessproportionalen Selektion
+     * @param population, Population aus der selektiert werden soll
      */
-    public void select(){
-        Set<Genotype<T>> selected = new HashSet<>();
+    public Population<T> select(Population<T> population){
+       var selected = new Population<T>(new ArrayList<>());
 
-        while(populationList.size() > 0) {
-            int selection = getSum() == 0 ? 0 : ThreadLocalRandom.current().nextInt(getSum());
+        while (population.size() > 0) {
+            int selection = ThreadLocalRandom.current().nextInt(Math.max(1, getSum(population)));
             int accFitness = 0;
             int j = 0;
             do {
-                accFitness += populationList.get(j).getFitness();
+                accFitness += population.get(j).getFitness();
                 j++;
-            }while(accFitness < selection);
+            } while (accFitness < selection);
 
-            selected.add(populationList.get(j - 1));
-            populationList.remove(populationList.get(j - 1));
+            selected.add(population.remove(j - 1));
         }
-        population = new Population<>(selected);
+
+        return selected;
     }
 
     /**
      * berechnet die Gesamtfitness der population
      * @return fitness
      */
-    private int getSum() {
-        int sum = 0;
-        for (Genotype<T> genotype : populationList) {
-            sum += genotype.getFitness();
-        }
-
-        return sum;
+    private int getSum(Population<T> population) {
+        return population.stream()
+                .mapToInt(Genotype::getFitness)
+                .sum();
     }
 }
