@@ -34,7 +34,7 @@ public class GeneticAlgorithmTest {
     @BeforeEach
     void setup() {
         evaluator = new OneMaxEvaluator();
-        testPopulation = new Population<>(Random::nextBoolean, 10, 10, evaluator);
+        testPopulation = new Population<>(r -> false, 10, 10, evaluator);
     }
 
     @Test

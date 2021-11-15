@@ -30,7 +30,7 @@ public class HillclimberTest {
         FitnessFunction<Boolean> fitnessfunctionZ = new ZeroMaxEvaluator();
         FitnessFunction<Boolean> fitnessfunctionO = new OneMaxEvaluator();
         Genotype<Boolean> genotypeZ = new Genotype<>(Random::nextBoolean, fitnessfunctionZ, genosize);
-        Genotype<Boolean> genotypeO = new Genotype<>(Random::nextBoolean, fitnessfunctionO, genosize);
+        Genotype<Boolean> genotypeO = new Genotype<>(r -> false, fitnessfunctionO, genosize);
         Mutator<Boolean> mutatorB = new BinaryMutation(10);
         Mutator<Boolean> mutatorS = new SwitchOneBit();
         hillclimberZero = new Hillclimber<>(genotypeZ, mutatorB);
