@@ -29,15 +29,6 @@ public class SceneControllerResults extends SceneController{
   @FXML
   private LineChart lineChartResults;
 
-//  @FXML
-//  private TableColumn<Hillclimber,String> colGen;
-//
-//  @FXML
-//  private TableColumn<Hillclimber,String> colTime;
-//
-//  @FXML
-//  private TableColumn<Hillclimber,String> colFit;
-
   private ViewModel viewModel;
   private Hillclimber hillclimber;
 
