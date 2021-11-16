@@ -26,14 +26,11 @@
             <NumberAxis side="LEFT" />
          </yAxis>
       </BarChart>
-      <TableView fx:id="resultTable" layoutX="35.0" layoutY="220.0" prefHeight="338.0" prefWidth="422.0" snapToPixel="false">
+      <TableView fx:id="tableViewResults" layoutX="35.0" layoutY="220.0" prefHeight="338.0" prefWidth="422.0" snapToPixel="false">
          <columns>
             <TableColumn prefWidth="83.0" text="Generation" />
             <TableColumn prefWidth="75.0" text="Dauer" />
             <TableColumn prefWidth="75.0" text="∅ Fitness" />
-            <TableColumn prefWidth="75.0" text="Sachen" />
-            <TableColumn prefWidth="75.0" text="Dinge" />
-            <TableColumn prefWidth="75.0" text="Inhalte" />
          </columns>
       </TableView>
       <TextField id="outputField" fx:id="outputField" alignment="CENTER" editable="false" layoutX="292.0" layoutY="115.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="56.0" promptText="Ausgabefeld">

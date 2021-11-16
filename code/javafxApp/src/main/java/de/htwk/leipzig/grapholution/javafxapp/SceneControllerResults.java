@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class SceneControllerResults extends SceneController implements Initializable {
+public class SceneControllerResults extends SceneController{
 
   @FXML
   private TextField outputField;
@@ -83,10 +83,4 @@ public class SceneControllerResults extends SceneController implements Initializ
 
   }
 
-  @Override
-  public void initialize(URL location, ResourceBundle resources) {
-      colGen.setCellFactory(new PropertyValueFactory("Generation"));
-      colTime.setCellFactory(new PropertyValueFactory("Dauer"));
-      colFit.setCellFactory(new PropertyValueFactory("beste Fitness"));
-  }
 }
