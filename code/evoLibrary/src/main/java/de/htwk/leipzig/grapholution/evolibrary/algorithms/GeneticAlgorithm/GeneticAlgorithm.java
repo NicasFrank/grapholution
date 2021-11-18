@@ -5,13 +5,11 @@ import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Population;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.Mutator;
 import de.htwk.leipzig.grapholution.evolibrary.recombinator.Recombinator;
-import de.htwk.leipzig.grapholution.evolibrary.selectors.FitnessproportionalSelection;
 import de.htwk.leipzig.grapholution.evolibrary.selectors.Selector;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
-import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -72,23 +70,32 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
      */
     public Genotype<T> run(){
         //getNewGeneration().evaluate; //evaluiert die Diversität der Generation für Anschaulichkeit?
-        while( (history.size() <= limit || limit < 0) && !(population.getBestFitness() == genotype.MAX_FITNESS_VALUE) )
-        {
-            population = selector.select(population);
-
-            for(int i = 0; i < population.size() / 2; i++)
-            {
-                if(ThreadLocalRandom.current().nextDouble(1) < recombinationChance)
-                {
-                    recombinator.recombine(population.get(2*i), population.get(2*i + 1));
-                }
-                mutator.mutate(population.get(2*i));
-                mutator.mutate(population.get(2*i + 1));
-            }
-            history.add(population.createCopy());
-            // getNewGeneration().evaluate;
+        while((history.size() <= limit || limit < 0) && !(population.getBestFitness() == genotype.MAX_FITNESS_VALUE)) {
+            iterate();
         }
+
         return bestIndividuum();
+    }
+
+    public Genotype<T> oneStep() {
+        if( (history.size() <= limit || limit < 0) && !(population.getBestFitness() == genotype.MAX_FITNESS_VALUE) ) {
+            iterate();
+        }
+
+        return bestIndividuum();
+    }
+
+    public void iterate(){
+        population = selector.select(population);
+
+        for(int i = 0; i < population.size() / 2; i++) {
+            if(ThreadLocalRandom.current().nextDouble(1) < recombinationChance) {
+                recombinator.recombine(population.get(2*i), population.get(2*i + 1));
+            }
+            mutator.mutate(population.get(2*i));
+            mutator.mutate(population.get(2*i + 1));
+        }
+        history.add(population.createCopy());
     }
 
     /**
