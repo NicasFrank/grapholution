@@ -85,7 +85,7 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
         return bestIndividuum();
     }
 
-    public void iterate(){
+    private void iterate(){
         population = selector.select(population);
 
         for(int i = 0; i < population.size() / 2; i++) {
@@ -96,22 +96,6 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
             mutator.mutate(population.get(2*i + 1));
         }
         history.add(population.createCopy());
-    }
-
-    /**
-     * Einfache Get Methode zu @history
-     * @return gibt das neueste Element in der Historie zurück
-     */
-    private Population<T> getNewGeneration() {
-        return history.get(history.size() - 1);
-    }
-
-    /**
-     * Einfache Get Methode zu @history
-     * @return gibt das neueste Element in der Historie zurück
-     */
-    private Population<T> getOldGeneration() {
-        return history.get(history.size() - 2);
     }
 
     /**
