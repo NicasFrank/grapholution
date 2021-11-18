@@ -14,7 +14,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Noch zu entwickeln
- * @param <T> Datentyp des Genotypen, auf dem der Gen.Alg. arbeitet
+ * @param <T> Datentyp des Genotypen, auf dem der genetische Algorithmus arbeitet
  */
 public class GeneticAlgorithm<T> extends Algorithm<T> {
 
@@ -30,7 +30,7 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
      * Konstruktor ohne Limit
      * @param mutator enthält Mutation des Genotypen
      * @param recombinator enthält Rekombination zweier Genotypen
-     * @param recombinationChance Chance dass Rekombination durchgeführt wird
+     * @param recombinationChance Chance, dass Rekombination durchgeführt wird
      * @param population Population des Genotypen
      */
     public GeneticAlgorithm(Mutator<T> mutator, Selector<T> selector, Recombinator<T> recombinator, double recombinationChance, Population<T> population) {
@@ -48,7 +48,7 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
      * Konstruktor mit Limit
      * @param mutator enthält Mutation des Genotypen
      * @param recombinator enthält Rekombination zweier Genotypen
-     * @param recombinationChance Chance dass Rekombination durchgeführt wird
+     * @param recombinationChance Chance, dass Rekombination durchgeführt wird
      * @param population Population des Genotypen
      * @param limit Maximale Anzahl der Iterationen
      */
@@ -58,11 +58,7 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
     }
 
     /**
-     * Ausfuerung des Gentischen Algorithmus
-     * Bis limit an Iterationen erreicht oder Maximaler Fitnesswert erreicht
-     * Selektiert auf der Population
-     * neue Generation einer Population entsteht aus Paarweise erzeugung neuer Individuen
-     * durch Rekombination wenn die recombinationChance eintrifft
+     * Ausführung des Gentischen-Algorithmus bis limit an Iterationen erreicht oder maximaler Fitnesswert erreicht selektiert auf der Population neue Generation einer Population entsteht aus paarweise Erzeugung neuer Individuen durch Rekombination, wenn die recombinationChance eintrifft
      * ansonsten werden die Eltern Individuen kopiert
      * dann in jedem Fall mutiert
      *
@@ -77,6 +73,10 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
         return bestIndividuum();
     }
 
+    /**
+     * Methode, die einen einzelnen Schritt des Algorithmus ausführt
+     * @return bestes Individuum
+     */
     public Genotype<T> oneStep() {
         if( (history.size() <= limit || limit < 0) && !(population.getBestFitness() == genotype.MAX_FITNESS_VALUE) ) {
             iterate();
@@ -85,6 +85,9 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
         return bestIndividuum();
     }
 
+    /**
+     * Funktion, die die Population selektiert, rekombiniert und mutiert
+     */
     private void iterate(){
         population = selector.select(population);
 
