@@ -78,7 +78,7 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
      * @return bestes Individuum
      */
     public Genotype<T> oneStep() {
-        if( (history.size() <= limit || limit < 0) && !(population.getBestFitness() == genotype.MAX_FITNESS_VALUE) ) {
+        if( (history.size() <= limit || limit < 0) && (population.getBestFitness() != genotype.MAX_FITNESS_VALUE) ) {
             iterate();
         }
 
