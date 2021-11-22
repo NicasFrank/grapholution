@@ -52,7 +52,7 @@ import java.util.ResourceBundle;
         public void setTableViewResults(Hillclimber hillclimber) {
             this.hillclimber = hillclimber;
             List<String> results = hillclimber.getHistory();
-            tableViewResults.setItems(HistoryResults.getHistoryData());
+            //tableViewResults.setItems(HistoryResults.getHistoryData());
         }
 
 

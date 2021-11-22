@@ -16,8 +16,11 @@ import javafx.beans.property.StringProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
 
+import java.io.Console;
 import java.io.IOException;
 import java.util.Random;
+import java.util.List;
+
 
 public class ViewModel {
 
@@ -84,11 +87,11 @@ public class ViewModel {
       Mutator<Boolean> mutatorS = new SwitchOneBit();
 
       hilly = new Hillclimber<>(genotypeO, mutatorS);
-      Genotype<Boolean> genotype = hilly.run();
+      hilly.run();
       EvoLibMapper evoLibMapper = new EvoLibMapper();
 
-      BestGenotype bg = evoLibMapper.map(genotype);
-
+    List<BestGenotype> bg = evoLibMapper.map(hilly.getHistory());
+      System.out.println(bg);
       //outputField.set();
   }
 
