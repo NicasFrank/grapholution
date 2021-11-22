@@ -9,6 +9,7 @@ import de.htwk.leipzig.grapholution.evolibrary.mutator.Mutator;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.SwitchOneBit;
 import de.htwk.leipzig.grapholution.javafxapp.model.BestGenotype;
 import de.htwk.leipzig.grapholution.javafxapp.model.EvoLibMapper;
+import de.htwk.leipzig.grapholution.javafxapp.model.HistoryResults;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -28,6 +29,7 @@ public class ViewModel {
   private int currentScene = -1;
 
   private Hillclimber hilly;
+  private SceneControllerResults sceneControllerResults;
 
   ViewModel(SceneControllerBase sceneControllerBase, Pane firstPane){
     this.sceneControllerBase = sceneControllerBase;
@@ -87,10 +89,10 @@ public class ViewModel {
 
       BestGenotype bg = evoLibMapper.map(genotype);
 
-
       //outputField.set();
   }
-  /**
+
+    /**
    * versucht bestimmte Pane zu laden
    * @param paneName Name der zu ladenden Pane aus private String[] slides
    * @return wahr wenn erfolgreich false wenn nicht

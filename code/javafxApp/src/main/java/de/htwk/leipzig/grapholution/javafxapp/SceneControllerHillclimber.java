@@ -20,6 +20,7 @@ public class SceneControllerHillclimber extends SceneController{
   private ToggleGroup Config2;
 
   private ViewModel viewModel;
+  private SceneControllerResults sceneControllerResults;
 
   /**
    * speichert aktuellen Text des Inputfields, triggert dann laden der Ergebnis-Szene und gibt Input an ViewModel, damit
@@ -28,6 +29,7 @@ public class SceneControllerHillclimber extends SceneController{
   public void sendButton_startAlgo(){
     viewModel.navigation_configureScreen("Auswertung");
     viewModel.climbTheHill(inputField.getText());
+    sceneControllerResults.setTableViewResults();
   }
 
   public void sendButton_backwards(){
