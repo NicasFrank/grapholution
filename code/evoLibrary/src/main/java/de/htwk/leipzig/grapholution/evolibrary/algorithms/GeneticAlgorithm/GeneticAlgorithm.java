@@ -66,11 +66,15 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
      */
     public Genotype<T> run(){
         //getNewGeneration().evaluate; //evaluiert die Diversität der Generation für Anschaulichkeit?
-        while((history.size() <= limit || limit < 0) && !(population.getBestFitness() == genotype.MAX_FITNESS_VALUE)) {
+        while(hasNotRunToCompletion()) {
             iterate();
         }
 
         return bestIndividuum();
+    }
+
+    private boolean hasNotRunToCompletion() {
+        return (history.size() <= limit || limit < 0) && !(population.getBestFitness() == genotype.MAX_FITNESS_VALUE);
     }
 
     /**
@@ -78,7 +82,7 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
      * @return bestes Individuum
      */
     public Genotype<T> oneStep() {
-        if( (history.size() <= limit || limit < 0) && (population.getBestFitness() != genotype.MAX_FITNESS_VALUE) ) {
+        if(hasNotRunToCompletion()) {
             iterate();
         }
 
