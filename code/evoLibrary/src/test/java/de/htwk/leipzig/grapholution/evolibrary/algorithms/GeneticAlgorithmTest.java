@@ -3,21 +3,15 @@ package de.htwk.leipzig.grapholution.evolibrary.algorithms;
 import de.htwk.leipzig.grapholution.evolibrary.algorithms.GeneticAlgorithm.GeneticAlgorithm;
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.FitnessFunction;
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.OneMaxEvaluator;
-import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Population;
-import de.htwk.leipzig.grapholution.evolibrary.mutator.Mutator;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.SwitchOneBit;
 import de.htwk.leipzig.grapholution.evolibrary.recombinator.OnePointCrossover;
-import de.htwk.leipzig.grapholution.evolibrary.recombinator.Recombinator;
 import de.htwk.leipzig.grapholution.evolibrary.selectors.FitnessproportionalSelection;
-import de.htwk.leipzig.grapholution.evolibrary.selectors.Selector;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
@@ -25,7 +19,7 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class GeneticAlgorithmTest {
-    Algorithm<Boolean> geneticAlgorithm;
+    GeneticAlgorithm<Boolean> geneticAlgorithm;
     Population<Boolean> testPopulation;
     FitnessFunction<Boolean> evaluator;
     @Mock
@@ -65,11 +59,46 @@ public class GeneticAlgorithmTest {
                 new OnePointCrossover<>(),
                 0.5,
                 testPopulation,
-                2
+                limit
         );
 
         geneticAlgorithm.run();
 
         verify(selectorMock, times(limit)).select(any());
+    }
+
+    @Test
+    void oneStep_WhenCalled_ExecutesOneIterationOfTheAlgorithm() {
+        when(selectorMock.select(any())).thenCallRealMethod();
+
+        geneticAlgorithm = new GeneticAlgorithm<>(
+                new SwitchOneBit(),
+                selectorMock,
+                new OnePointCrossover<>(),
+                0.5,
+                testPopulation
+        );
+
+        geneticAlgorithm.oneStep();
+
+        verify(selectorMock, times(1)).select(any());
+    }
+
+    @Test
+    void oneStep_AlgorithmHasRunToCompletion_DoesNotExecuteIteration() {
+        var limit = 0;
+
+        geneticAlgorithm = new GeneticAlgorithm<>(
+                new SwitchOneBit(),
+                selectorMock,
+                new OnePointCrossover<>(),
+                0.5,
+                testPopulation,
+                limit
+        );
+
+        geneticAlgorithm.oneStep();
+
+        verify(selectorMock, never()).select(any());
     }
 }

@@ -5,18 +5,16 @@ import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Population;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.Mutator;
 import de.htwk.leipzig.grapholution.evolibrary.recombinator.Recombinator;
-import de.htwk.leipzig.grapholution.evolibrary.selectors.FitnessproportionalSelection;
 import de.htwk.leipzig.grapholution.evolibrary.selectors.Selector;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
-import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Noch zu entwickeln
- * @param <T> Datentyp des Genotypen, auf dem der Gen.Alg. arbeitet
+ * @param <T> Datentyp des Genotypen, auf dem der genetische Algorithmus arbeitet
  */
 public class GeneticAlgorithm<T> extends Algorithm<T> {
 
@@ -32,7 +30,7 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
      * Konstruktor ohne Limit
      * @param mutator enthält Mutation des Genotypen
      * @param recombinator enthält Rekombination zweier Genotypen
-     * @param recombinationChance Chance dass Rekombination durchgeführt wird
+     * @param recombinationChance Chance, dass Rekombination durchgeführt wird
      * @param population Population des Genotypen
      */
     public GeneticAlgorithm(Mutator<T> mutator, Selector<T> selector, Recombinator<T> recombinator, double recombinationChance, Population<T> population) {
@@ -50,7 +48,7 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
      * Konstruktor mit Limit
      * @param mutator enthält Mutation des Genotypen
      * @param recombinator enthält Rekombination zweier Genotypen
-     * @param recombinationChance Chance dass Rekombination durchgeführt wird
+     * @param recombinationChance Chance, dass Rekombination durchgeführt wird
      * @param population Population des Genotypen
      * @param limit Maximale Anzahl der Iterationen
      */
@@ -60,11 +58,7 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
     }
 
     /**
-     * Ausfuerung des Gentischen Algorithmus
-     * Bis limit an Iterationen erreicht oder Maximaler Fitnesswert erreicht
-     * Selektiert auf der Population
-     * neue Generation einer Population entsteht aus Paarweise erzeugung neuer Individuen
-     * durch Rekombination wenn die recombinationChance eintrifft
+     * Ausführung des Gentischen-Algorithmus bis limit an Iterationen erreicht oder maximaler Fitnesswert erreicht selektiert auf der Population neue Generation einer Population entsteht aus paarweise Erzeugung neuer Individuen durch Rekombination, wenn die recombinationChance eintrifft
      * ansonsten werden die Eltern Individuen kopiert
      * dann in jedem Fall mutiert
      *
@@ -72,39 +66,43 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
      */
     public Genotype<T> run(){
         //getNewGeneration().evaluate; //evaluiert die Diversität der Generation für Anschaulichkeit?
-        while( (history.size() <= limit || limit < 0) && !(population.getBestFitness() == genotype.MAX_FITNESS_VALUE) )
-        {
-            population = selector.select(population);
-
-            for(int i = 0; i < population.size() / 2; i++)
-            {
-                if(ThreadLocalRandom.current().nextDouble(1) < recombinationChance)
-                {
-                    recombinator.recombine(population.get(2*i), population.get(2*i + 1));
-                }
-                mutator.mutate(population.get(2*i));
-                mutator.mutate(population.get(2*i + 1));
-            }
-            history.add(population.createCopy());
-            // getNewGeneration().evaluate;
+        while(hasNotRunToCompletion()) {
+            iterate();
         }
+
+        return bestIndividuum();
+    }
+
+    private boolean hasNotRunToCompletion() {
+        return (history.size() <= limit || limit < 0) && !(population.getBestFitness() == genotype.MAX_FITNESS_VALUE);
+    }
+
+    /**
+     * Methode, die einen einzelnen Schritt des Algorithmus ausführt
+     * @return bestes Individuum
+     */
+    public Genotype<T> oneStep() {
+        if(hasNotRunToCompletion()) {
+            iterate();
+        }
+
         return bestIndividuum();
     }
 
     /**
-     * Einfache Get Methode zu @history
-     * @return gibt das neueste Element in der Historie zurück
+     * Funktion, die die Population selektiert, rekombiniert und mutiert
      */
-    private Population<T> getNewGeneration() {
-        return history.get(history.size() - 1);
-    }
+    private void iterate(){
+        population = selector.select(population);
 
-    /**
-     * Einfache Get Methode zu @history
-     * @return gibt das neueste Element in der Historie zurück
-     */
-    private Population<T> getOldGeneration() {
-        return history.get(history.size() - 2);
+        for(int i = 0; i < population.size() / 2; i++) {
+            if(ThreadLocalRandom.current().nextDouble(1) < recombinationChance) {
+                recombinator.recombine(population.get(2*i), population.get(2*i + 1));
+            }
+            mutator.mutate(population.get(2*i));
+            mutator.mutate(population.get(2*i + 1));
+        }
+        history.add(population.createCopy());
     }
 
     /**
