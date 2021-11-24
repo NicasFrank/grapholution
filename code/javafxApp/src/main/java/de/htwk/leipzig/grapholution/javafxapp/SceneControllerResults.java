@@ -36,8 +36,6 @@ import java.util.ResourceBundle;
         TableColumn<HistoryResults, String> fitness;
 
         private ViewModel viewModel;
-        private Hillclimber hillclimber;
-
 
         /**
          * setter für viewmodel und bindet outputfield an output vom viewmodel
@@ -48,13 +46,6 @@ import java.util.ResourceBundle;
             this.viewModel = viewModel;
             outputField.textProperty().bind(viewModel.outputFieldProperty());
         }
-
-        public void setTableViewResults(Hillclimber hillclimber) {
-            this.hillclimber = hillclimber;
-            List<String> results = hillclimber.getHistory();
-            //tableViewResults.setItems(HistoryResults.getHistoryData());
-        }
-
 
         public void setLineChartResults(Hillclimber hillclimber) {
 
@@ -68,9 +59,12 @@ import java.util.ResourceBundle;
 
         }
 
+        public void sendButton_backwards(){
+            viewModel.navigation_Back();
+        }
+
         @Override
         public void initialize(URL location, ResourceBundle resources) {
-            System.out.println("initialize...");
             duration.setCellValueFactory((cellData -> cellData.getValue().durationProperty()));
             population.setCellValueFactory((cellData -> cellData.getValue().populationProperty()));
             fitness.setCellValueFactory((cellData -> cellData.getValue().fitnessProperty()));

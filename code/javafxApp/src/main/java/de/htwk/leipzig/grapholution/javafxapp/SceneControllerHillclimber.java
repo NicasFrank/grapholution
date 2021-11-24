@@ -27,9 +27,8 @@ public class SceneControllerHillclimber extends SceneController{
    * an Hillclimber weiter
    */
   public void sendButton_startAlgo(){
-    viewModel.navigation_configureScreen("Auswertung");
+    viewModel.navigation_configureScreen("AuswertungHillclimber");
     viewModel.climbTheHill(inputField.getText());
-    sceneControllerResults.setTableViewResults();
   }
 
   public void sendButton_backwards(){

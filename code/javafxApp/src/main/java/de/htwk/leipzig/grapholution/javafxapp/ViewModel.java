@@ -31,8 +31,7 @@ public class ViewModel {
   private Pane[] allScenes = new Pane[3];
   private int currentScene = -1;
 
-  private Hillclimber hilly;
-  private SceneControllerResults sceneControllerResults;
+  private Hillclimber<Boolean> hilly;
 
   ViewModel(SceneControllerBase sceneControllerBase, Pane firstPane){
     this.sceneControllerBase = sceneControllerBase;
@@ -58,8 +57,12 @@ public class ViewModel {
         //Something
         break;
 
-      case "Auswertung":
+      case "AuswertungHillclimber":
+        climbTheHill(inputField.get());
         allScenes[2] = loadNewPane("AuswertungScreen.fxml");
+
+        outputField.set("Ergebnis");
+
         break;
 
       default:
@@ -91,7 +94,7 @@ public class ViewModel {
       EvoLibMapper evoLibMapper = new EvoLibMapper();
 
     List<BestGenotype> bg = evoLibMapper.map(hilly.getHistory());
-      System.out.println(bg);
+
       //outputField.set();
   }
 
@@ -118,11 +121,7 @@ public class ViewModel {
    * @param nextScreen nächste Scene als Pane
    */
     private void setNextScreen (Pane nextScreen){
-      if(nextScreen!=null){
         sceneControllerBase.setNewScreen(nextScreen);
-      } else {
-        //Fehlermeldung
-      }
     }
 
   /**
@@ -146,4 +145,7 @@ public class ViewModel {
     public Property<String> outputFieldProperty() {
         return outputField;
     }
+  public Property<String> inputFieldProperty() {
+    return inputField;
+  }
 }
