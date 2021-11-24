@@ -21,6 +21,8 @@ public class SceneControllerBase extends SceneController{
     if (newPane!=null) {
       basePane.getChildren().clear();
       basePane.getChildren().add(newPane);
-    }
+    } else {
+    throw new IllegalArgumentException("Pane is Null!");
+  }
   }
 }

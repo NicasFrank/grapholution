@@ -37,5 +37,6 @@ public class SceneControllerHillclimber extends SceneController{
 
   public void setViewModel(ViewModel viewModel){
     this.viewModel=viewModel;
+    inputField.textProperty().bindBidirectional(viewModel.inputFieldProperty());
   }
 }
