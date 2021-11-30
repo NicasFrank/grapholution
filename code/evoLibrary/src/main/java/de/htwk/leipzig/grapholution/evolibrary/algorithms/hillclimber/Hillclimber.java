@@ -50,7 +50,7 @@ public class Hillclimber<T> extends Algorithm<T> {
     }
 
     public List<Genotype<T>> getHistory() {
-        return history;
+        return new ArrayList<>(history);
     }
 
     /**
