@@ -26,6 +26,10 @@
     - Verzicht auf Verwendung von JavaFX Bibliotheken zu Beginn des Projektes
 - Verwendung von Clean Architecture innerhalb der Bibliothek
 
+## Architektur Workshop (23.11.21, Praktikum II)
+
+siehe https://gitlab.imn.htwk-leipzig.de/weicker/grapholution/-/blob/master/architecture/workshop/Architektur-Workshop.md
+
 ## Code Standards und Definition of Done
 
 siehe https://gitlab.imn.htwk-leipzig.de/weicker/grapholution/-/blob/master/code/README.md
