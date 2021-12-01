@@ -2,6 +2,8 @@ package de.htwk.leipzig.grapholution.evolibrary.algorithms.hillclimber;
 
 import de.htwk.leipzig.grapholution.evolibrary.algorithms.Algorithm;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
+import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmConfigOptions;
+import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmType;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.Mutator;
 
 import java.util.ArrayList;
@@ -32,10 +34,9 @@ public class Hillclimber<T> extends Algorithm<T> {
      * Konstruktor zur Erstellung eines einfachen Hillclimbers mit einstellbarer Mutation und Genotyp, sowie Limit der Durchlaeufe
      * @param genotype Genotyp auf dem der Algorithmus arbeiten soll
      * @param mutator Mutation, die zur Veraenderung des Genotypen benutzt werden soll
-     * @param limit Maximale Anzahl an Durchlaeufen, die der Hillclimber durcharbeiten soll
      */
-    public Hillclimber(Genotype<T> genotype, Mutator<T> mutator, int limit) {
-        super(genotype, limit);
+    public Hillclimber(Genotype<T> genotype, Mutator<T> mutator, AlgorithmConfigOptions configOptions) {
+        super(genotype, configOptions);
         this.mutator = mutator;
         history = new ArrayList<>();
         history.add(genotype);
@@ -71,6 +72,16 @@ public class Hillclimber<T> extends Algorithm<T> {
             iterations++; //Durchlauf wird erhoeht
         }
         return getLastConfig();
+    }
+
+    @Override
+    protected AlgorithmType getType() {
+        return AlgorithmType.Hillclimber;
+    }
+
+    @Override
+    protected AlgorithmConfigOptions getCustomConfigOptions() {
+        return new AlgorithmConfigOptions();
     }
 
 }

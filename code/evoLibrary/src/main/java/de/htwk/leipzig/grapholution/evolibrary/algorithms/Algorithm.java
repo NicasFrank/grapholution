@@ -1,6 +1,14 @@
 package de.htwk.leipzig.grapholution.evolibrary.algorithms;
 
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
+import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmConfigOptions;
+import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmType;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Abstrakte Klasse zur Allgemeinen-Dartstellung eines evolutionaeren Algorithmus
@@ -23,11 +31,11 @@ public abstract class Algorithm<T> {
     /**
      * Konstruktor fuer einen Algorithmus mit Begrenzter Anzahl an Durchlaeufen
      * @param genotype Genotyp, auf dem der Algorithmus arbeiten soll
-     * @param limit Maximale Anzahl an Durchlaeufen, die der Algorithmus durchlaufen soll
+     * @param configOptions Maximale Anzahl an Durchlaeufen, die der Algorithmus durchlaufen soll
      */
-    public Algorithm(Genotype<T> genotype, int limit) {
+    public Algorithm(Genotype<T> genotype, AlgorithmConfigOptions configOptions) {
         this(genotype);
-        this.limit = limit;
+        this.limit = configOptions.getAndConvertOrElse("limit", Integer::parseInt, -1);
     }
 
     /**
@@ -44,4 +52,21 @@ public abstract class Algorithm<T> {
      */
     public abstract Genotype<T> run();
 
+    public void Serialize(File file) throws Exception {
+        var config = new AlgorithmConfigOptions();
+        config.add("limit", Integer.toString(limit));
+        config.merge(getCustomConfigOptions());
+
+        var fos = new FileOutputStream(file);
+        var oos = new ObjectOutputStream(fos);
+
+        oos.writeObject(getType());
+        oos.writeObject(config);
+
+        oos.close();
+        fos.close();
+    }
+
+    protected abstract AlgorithmType getType();
+    protected abstract AlgorithmConfigOptions getCustomConfigOptions();
 }
