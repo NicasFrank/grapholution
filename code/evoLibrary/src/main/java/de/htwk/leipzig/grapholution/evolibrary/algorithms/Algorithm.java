@@ -1,6 +1,7 @@
 package de.htwk.leipzig.grapholution.evolibrary.algorithms;
 
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
+import de.htwk.leipzig.grapholution.evolibrary.statistics.Statistics;
 
 /**
  * Abstrakte Klasse zur Allgemeinen-Dartstellung eines evolutionaeren Algorithmus
@@ -11,13 +12,14 @@ public abstract class Algorithm<T> {
     protected final Genotype<T> genotype;
     protected int limit = -1;
     protected int iterations = 0;
+    protected Statistics statistics = new Statistics();
 
     /**
      * Konstruktor fuer einen Algorithmus
      * @param genotype Genotyp, auf dem der Algorithmus arbeiten soll
      */
     public Algorithm(Genotype<T> genotype){
-        this.genotype = genotype.createCopy();
+        this.genotype = genotype;
     }
 
     /**

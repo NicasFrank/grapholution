@@ -38,10 +38,10 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
         this.mutator = mutator;
         this.recombinator = recombinator;
         this.recombinationChance = recombinationChance;
-        this.population = new Population<>(population.createCopy());
+        this.population = new Population<>(population);
         this.selector = selector;
         history = new ArrayList<>();
-        history.add(population.createCopy());
+        history.add(population);
     }
 
     /**
@@ -104,7 +104,7 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
             population.set(2*i,mutator.mutate(population.get(2*i)));
             population.set(2*i+1,mutator.mutate(population.get(2*i+1)));
         }
-        history.add(population.createCopy());
+        history.add(population);
     }
 
     /**
