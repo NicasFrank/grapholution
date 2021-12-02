@@ -25,11 +25,13 @@ public class BinaryMutation implements Mutator<Boolean> {
      */
     @Override
     public Genotype<Boolean> mutate(Genotype<Boolean> genotype) {
+        Genotype<Boolean> genotypeCopy = genotype.createCopy();
         for(int i = 0; i < genotype.size(); i++){
             if(ThreadLocalRandom.current().nextInt(100)<probability){
-                genotype.set(i, !genotype.get(i)); //Bit wird geflippt, sollte Wahrscheinlichkeit eintreten
+                genotypeCopy.set(i, !genotype.get(i)); //Bit wird geflippt, sollte Wahrscheinlichkeit eintreten
             }
         }
-        return genotype.createCopy();
+        genotypeCopy.updateFitness();
+        return genotypeCopy;
     }
 }
