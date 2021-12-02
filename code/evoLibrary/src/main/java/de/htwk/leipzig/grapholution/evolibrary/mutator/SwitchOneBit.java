@@ -15,9 +15,11 @@ public class SwitchOneBit implements Mutator<Boolean> {
      */
     @Override
     public Genotype<Boolean> mutate(Genotype<Boolean> genotype) {
+        Genotype<Boolean> genotypeCopy = genotype.createCopy();
         int index = ThreadLocalRandom.current().nextInt(genotype.size());
-        genotype.set(index, !genotype.get(index));
-        return genotype.createCopy();
+        genotypeCopy.set(index, !genotype.get(index));
+        genotypeCopy.updateFitness();
+        return genotypeCopy;
     }
 
 }
