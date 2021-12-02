@@ -25,6 +25,7 @@ public class Hillclimber<T> extends Algorithm<T> {
         super(genotype);
         this.mutator = mutator;
         currentBest = genotype;
+        statistics.addBestIndividual(genotype);
     }
 
     /**
