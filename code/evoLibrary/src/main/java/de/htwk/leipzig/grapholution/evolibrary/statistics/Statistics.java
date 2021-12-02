@@ -13,6 +13,7 @@ public class Statistics {
 
     public Statistics(){
         history = new ArrayList<>();
+        bestIndividuals = new ArrayList<>();
     }
 
     public void addToHistory(Population<?> population) {
