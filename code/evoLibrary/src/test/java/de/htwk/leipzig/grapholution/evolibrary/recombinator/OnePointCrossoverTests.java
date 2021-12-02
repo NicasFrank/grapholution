@@ -50,7 +50,7 @@ public class OnePointCrossoverTests {
 
         onePointCrossover.recombine(testGenotype1, testGenotype2);
 
-        assertFalse(testGenotype1.containsAll(testValues1));
-        assertFalse(testGenotype2.containsAll(testValues2));
+        assertFalse(testGenotype1.getValues().containsAll(testValues1));
+        assertFalse(testGenotype2.getValues().containsAll(testValues2));
     }
 }

@@ -15,7 +15,7 @@ public class OneMaxEvaluator implements FitnessFunction<Boolean> {
     @Override
     public int evaluate(Genotype<Boolean> genotype) {
         int sum = 0;
-        for (var value : genotype) {
+        for (var value : genotype.getValues()) {
             if (value) {
                 sum++;
             }
