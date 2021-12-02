@@ -45,7 +45,7 @@ public class Population<T> extends ArrayList<Genotype<T>> {
     public Genotype<T> getBestIndividual() {
         return stream()
                 .max(Comparator.comparing(Genotype<T>::getFitness))
-                .orElseThrow(NoSuchElementException::new);
+                .orElse(null);
     }
 
     /**
