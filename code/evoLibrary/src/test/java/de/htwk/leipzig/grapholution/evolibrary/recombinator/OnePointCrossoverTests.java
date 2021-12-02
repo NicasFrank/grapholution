@@ -48,9 +48,10 @@ public class OnePointCrossoverTests {
     void recombine_WhenCalled_SwapsAtLeastTwoValuesBetweenTheGenotypes() {
         when(fitnessMock.evaluate(any(Genotype.class))).thenReturn(1);
 
-        onePointCrossover.recombine(testGenotype1, testGenotype2);
+        ArrayList<Genotype<Integer>> results;
+        results = onePointCrossover.recombine(testGenotype1, testGenotype2);
 
-        assertFalse(testGenotype1.getValues().containsAll(testValues1));
-        assertFalse(testGenotype2.getValues().containsAll(testValues2));
+        assertFalse(results.get(0).getValues().containsAll(testValues1));
+        assertFalse(results.get(1).getValues().containsAll(testValues2));
     }
 }
