@@ -4,9 +4,6 @@ import de.htwk.leipzig.grapholution.evolibrary.algorithms.Algorithm;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.Mutator;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Klasse zur Darstellung eines einfachen Hillclimbers mit einstellbarer Mutation und Genotyp
  * @param <T> Datentyp des Genotypen, auf dem der Hillclimber arbeitet
