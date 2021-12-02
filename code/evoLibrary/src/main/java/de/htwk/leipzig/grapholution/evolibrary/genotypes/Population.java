@@ -43,6 +43,12 @@ public class Population<T> extends ArrayList<Genotype<T>> {
                 .max().orElse(0);
     }
 
+    public Genotype<T> getBestIndividual() {
+        return stream()
+                .max(Comparator.comparing(Genotype<T>::getFitness))
+                .orElseThrow(NoSuchElementException::new);
+    }
+
     /**
      * gibt das Individuum mit dem besten Fitnesswert zurück
      * @return bester Fitnesswert
