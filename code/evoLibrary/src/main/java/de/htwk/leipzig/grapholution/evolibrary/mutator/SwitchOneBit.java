@@ -12,6 +12,7 @@ public class SwitchOneBit implements Mutator<Boolean> {
     /**
      * Funktion zum switchen eines Einzelnen Bits eines Boolean-Genotypen
      * @param genotype Genotyp, der mutiert werden soll
+     * @return Neuer mutierter Genotyp
      */
     @Override
     public Genotype<Boolean> mutate(Genotype<Boolean> genotype) {

@@ -22,6 +22,7 @@ public class BinaryMutation implements Mutator<Boolean> {
     /**
      * Funktion zur Mutation eines Boolean-Genotypen nach dem Binary-Mutation Prinzip
      * @param genotype Genotyp, der mutiert werden soll
+     * @return Neuer mutierter Genotyp
      */
     @Override
     public Genotype<Boolean> mutate(Genotype<Boolean> genotype) {
