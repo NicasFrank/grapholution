@@ -12,9 +12,10 @@ import java.util.concurrent.ThreadLocalRandom;
 public class OnePointCrossover<T> implements Recombinator<T>{
 
     /**
-     * Funktion Rekombination zweier Genotypen nach dem OnePointCrossoverPrinzip
+     * Funktion zur Rekombination zweier Genotypen nach dem One-Point-Crossover Prinzip
      * @param individualA Erster Genotyp
      * @param individualB Zweiter Genotyp
+     * @return ArrayList mit neuen rekombinierten Genotypen
      */
     @Override
     public ArrayList<Genotype<T>> recombine(Genotype<T> individualA, Genotype<T> individualB) {
