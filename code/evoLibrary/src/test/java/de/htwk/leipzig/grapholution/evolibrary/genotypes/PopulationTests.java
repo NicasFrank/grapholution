@@ -54,7 +54,9 @@ public class PopulationTests {
         var copy = population.createCopy();
 
         for (int i = 0; i < population.size(); i++) {
-            assertEquals(population.get(i), copy.get(i));
+            for(int j = 0; j<population.get(i).size(); j++){
+                assertEquals(population.get(i).get(j), copy.get(i).get(j));
+            }
         }
     }
 }
