@@ -14,6 +14,7 @@ public interface Recombinator<T> {
      * Funktion zur Rekombination zweier Genotypen miteinander
      * @param individualA Erster Genotyp
      * @param individualB Zweiter Genotyp
+     * @return ArrayList mit neuen rekombinierten Genotypen
      */
     ArrayList<Genotype<T>> recombine(Genotype<T> individualA, Genotype<T> individualB);
 
