@@ -9,10 +9,13 @@ import de.htwk.leipzig.grapholution.evolibrary.mutator.Mutator;
 import de.htwk.leipzig.grapholution.evolibrary.recombinator.Recombinator;
 import de.htwk.leipzig.grapholution.evolibrary.selectors.Selector;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Collectors;
 
 /**
  * Noch zu entwickeln
@@ -22,7 +25,7 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
 
     private final Mutator<T> mutator;
     private final Recombinator<T> recombinator;
-    private final double recombinationChance;
+    private double recombinationChance;
     private Population<T> population;
     private final ArrayList<Population<T>> history;
     private final Selector<T> selector;
@@ -71,8 +74,18 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
     protected AlgorithmConfigOptions getCustomConfigOptions() {
         var options = new AlgorithmConfigOptions();
         options.add("recombinationChance", Double.toString(recombinationChance));
-        options.add("recombinationChance", Double.toString(recombinationChance));
-        return null;
+        return options;
+    }
+
+    @Override
+    protected void setCustomConfigOptions(AlgorithmConfigOptions options) {
+        recombinationChance = options.getOrElse("recombinationChance", 1.0);
+    }
+
+    @Override
+    public List<Genotype<T>> getHistory() {
+        return history.stream().map(Population::getBestIndividuum)
+                .collect(Collectors.toList());
     }
 
     private boolean hasNotRunToCompletion() {

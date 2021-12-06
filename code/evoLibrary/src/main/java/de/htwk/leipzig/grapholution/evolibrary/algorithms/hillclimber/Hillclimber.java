@@ -6,6 +6,7 @@ import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmConfigOptions;
 import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmType;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.Mutator;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -84,4 +85,6 @@ public class Hillclimber<T> extends Algorithm<T> {
         return new AlgorithmConfigOptions();
     }
 
+    @Override
+    protected void setCustomConfigOptions(AlgorithmConfigOptions options) { }
 }

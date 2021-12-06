@@ -25,7 +25,7 @@
             <Font name="Arial" size="24.0" />
          </font>
       </Button>
-      <Button id="loadButton" fx:id="loadButton" alignment="CENTER" layoutX="407.0" layoutY="600.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="60.0" prefWidth="150.0" styleClass="defaultButton" text="Laden" textFill="#28240b">
+      <Button id="loadButton" fx:id="loadButton" onAction="#sendButton_loadConfig" alignment="CENTER" layoutX="407.0" layoutY="600.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="60.0" prefWidth="150.0" styleClass="defaultButton" text="Laden" textFill="#28240b">
          <font>
             <Font name="Arial" size="24.0" />
          </font>

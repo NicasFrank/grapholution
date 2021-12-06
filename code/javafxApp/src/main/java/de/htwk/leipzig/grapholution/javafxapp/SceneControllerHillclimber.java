@@ -1,5 +1,6 @@
 package de.htwk.leipzig.grapholution.javafxapp;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
@@ -28,7 +29,7 @@ public class SceneControllerHillclimber extends SceneController{
    */
   public void sendButton_startAlgo(){
     viewModel.navigation_configureScreen("AuswertungHillclimber");
-    viewModel.climbTheHill(inputField.getText());
+    viewModel.climbTheHill(inputField.getText(), null);
   }
 
   public void sendButton_backwards(){
@@ -39,4 +40,7 @@ public class SceneControllerHillclimber extends SceneController{
     this.viewModel=viewModel;
     inputField.textProperty().bindBidirectional(viewModel.inputFieldProperty());
   }
+
+    public void sendButton_loadConfig(ActionEvent actionEvent) {
+    }
 }

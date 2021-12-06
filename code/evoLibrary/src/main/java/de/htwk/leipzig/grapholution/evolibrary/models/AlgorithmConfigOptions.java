@@ -21,12 +21,44 @@ public class AlgorithmConfigOptions implements Serializable {
         return this;
     }
 
+    public AlgorithmConfigOptions add(String name, int value){
+        return add(name, Integer.toString(value));
+    }
+
+    public AlgorithmConfigOptions add(String name, double value){
+        return add(name, Double.toString(value));
+    }
+
     public String get(String name) {
         return options.get(name);
     }
 
+    public int getInt(String name) {
+        return Integer.parseInt(options.get(name));
+    }
+
+    public double getDouble(String name) {
+        return Double.parseDouble(options.get(name));
+    }
+
     public String getOrElse(String name, String fallback) {
         return options.getOrDefault(name, fallback);
+    }
+
+    public int getOrElse(String name, int fallback) {
+        try {
+            return getInt(name);
+        } catch (Exception e) {
+            return fallback;
+        }
+    }
+
+    public double getOrElse(String name, double fallback) {
+        try {
+            return getDouble(name);
+        } catch (Exception e) {
+            return fallback;
+        }
     }
 
     public <T> T getAndConvert(String name, Function<String, T> converter) {
@@ -42,27 +74,5 @@ public class AlgorithmConfigOptions implements Serializable {
         options.putAll(other.options);
 
         return this;
-    }
-
-    public static void SerializeAlgorithmConfigs(AlgorithmConfigOptions configOptions, File file) throws IOException {
-        var fos = new FileOutputStream(file);
-        var oos = new ObjectOutputStream(fos);
-
-        oos.writeObject(configOptions);
-
-        oos.close();
-        fos.close();
-    }
-
-    public static AlgorithmConfigOptions DeserializeAlgorithmConfigs(File file) throws Exception {
-        var fos = new FileInputStream(file);
-        var ois = new ObjectInputStream(fos);
-
-        var object = ois.readObject();
-
-        ois.close();
-        fos.close();
-
-        return (AlgorithmConfigOptions) object;
     }
 }

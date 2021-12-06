@@ -4,10 +4,7 @@ import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
 import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmConfigOptions;
 import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmType;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
-import java.util.ArrayList;
+import java.io.*;
 import java.util.List;
 
 /**
@@ -52,9 +49,10 @@ public abstract class Algorithm<T> {
      */
     public abstract Genotype<T> run();
 
-    public void Serialize(File file) throws Exception {
+    public void serialize(File file) throws Exception {
         var config = new AlgorithmConfigOptions();
         config.add("limit", Integer.toString(limit));
+        config.add("iterations", Integer.toString(iterations));
         config.merge(getCustomConfigOptions());
 
         var fos = new FileOutputStream(file);
@@ -67,6 +65,30 @@ public abstract class Algorithm<T> {
         fos.close();
     }
 
+    public void deserialize(File file) throws Exception {
+        var fis = new FileInputStream(file);
+        var ois = new ObjectInputStream(fis);
+
+        var type = (AlgorithmType) ois.readObject();
+        if (type != getType()) {
+            throw new IllegalArgumentException("");
+        }
+        var options = (AlgorithmConfigOptions) ois.readObject();
+
+        ois.close();
+        fis.close();
+
+        limit = options.getInt("limit");
+        iterations = options.getInt("iterations");
+
+        setCustomConfigOptions(options);
+    }
+
     protected abstract AlgorithmType getType();
+
     protected abstract AlgorithmConfigOptions getCustomConfigOptions();
+
+    protected abstract void setCustomConfigOptions(AlgorithmConfigOptions options);
+
+    public abstract List<Genotype<T>> getHistory();
 }
