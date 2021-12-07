@@ -13,7 +13,7 @@ public class SceneControllerChoice extends SceneController{
   private ComboBox<String> comboBoxProblem;
 
 
-  private final String[] algorythms = {"Hillclimber","Ein Anderer", "Noch Einer"};
+  private final String[] algorythms = {"Hillclimber","Genetischer Algorithmus", "Noch Einer"};
   private ViewModel viewModel;
 
   /**

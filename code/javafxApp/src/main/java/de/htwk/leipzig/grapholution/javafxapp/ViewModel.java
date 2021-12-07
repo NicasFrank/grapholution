@@ -9,14 +9,12 @@ import de.htwk.leipzig.grapholution.evolibrary.mutator.Mutator;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.SwitchOneBit;
 import de.htwk.leipzig.grapholution.javafxapp.model.BestGenotype;
 import de.htwk.leipzig.grapholution.javafxapp.model.EvoLibMapper;
-import de.htwk.leipzig.grapholution.javafxapp.model.HistoryResults;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
 
-import java.io.Console;
 import java.io.IOException;
 import java.util.Random;
 import java.util.List;
@@ -30,6 +28,8 @@ public class ViewModel {
   private final SceneControllerBase sceneControllerBase;
   private Pane[] allScenes = new Pane[3];
   private int currentScene = -1;
+
+  private ViewModelGeneticAlgorithm viewModelGeneticAlgorithm;
 
   private Hillclimber<Boolean> hilly;
 
@@ -53,16 +53,18 @@ public class ViewModel {
         allScenes[1] = loadNewPane("ConfigHillclimber.fxml");
         break;
 
-      case "Ein Anderer":
-        //Something
+      case "Genetischer Algorithmus":
+        allScenes[1] = loadNewPane("ConfigGeneticAlgorithm.fxml");
         break;
 
       case "AuswertungHillclimber":
         climbTheHill(inputField.get());
         allScenes[2] = loadNewPane("AuswertungScreen.fxml");
-
         outputField.set("Ergebnis");
+        break;
 
+      case "AuswertungGeneticAlgorithm":
+        allScenes[2] = loadNewPane("AuswertungGeneticAlgorithm.fxml");
         break;
 
       default:
@@ -96,6 +98,17 @@ public class ViewModel {
     List<BestGenotype> bg = evoLibMapper.map(hilly.getHistory());
 
       //outputField.set();
+  }
+
+  public void startGeneticAlgorithm(boolean isStepByStep, boolean mutationIsBinary,double mutationChance,
+                                    boolean fitnessIsOneMax, double recombinationChance,double populationSize,
+                                    double genotypeSize, double generationAmount){
+    viewModelGeneticAlgorithm = new ViewModelGeneticAlgorithm(isStepByStep,mutationIsBinary,mutationChance,
+        fitnessIsOneMax,recombinationChance,populationSize,genotypeSize,generationAmount);
+  }
+
+  public BestGenotype geneticAlgorithmNextStep(boolean untilDone){
+    return viewModelGeneticAlgorithm.runAlgorithm(untilDone);
   }
 
     /**
