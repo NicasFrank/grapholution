@@ -35,6 +35,7 @@ public class ViewModel {
   private int currentScene = -1;
 
   private Algorithm<Boolean> hilly;
+  private ViewModelGeneticAlgorithm viewModelGeneticAlgorithm;
 
   ViewModel(SceneControllerBase sceneControllerBase, Pane firstPane){
     this.sceneControllerBase = sceneControllerBase;
@@ -60,8 +61,8 @@ public class ViewModel {
         allScenes[1] = loadNewPane("ConfigHillclimber.fxml");
         break;
 
-      case "Ein Anderer":
-        //Something
+      case "Genetischer Algorithmus":
+        allScenes[1] = loadNewPane("ConfigGeneticAlgorithm.fxml");
         break;
 
       case "AuswertungHillclimber":
@@ -69,7 +70,10 @@ public class ViewModel {
         allScenes[2] = loadNewPane("AuswertungScreen.fxml");
 
         outputField.set("Ergebnis");
+        break;
 
+      case "AuswertungGeneticAlgorithm":
+        allScenes[2] = loadNewPane("AuswertungGeneticAlgorithm.fxml");
         break;
 
       default:
@@ -86,7 +90,6 @@ public class ViewModel {
     currentScene--;
     setNextScreen(allScenes[currentScene]);
   }
-
   /**
    * Hillclimber instanziert und ausgeführt
    * @param startConfig Startkonfiguration
@@ -121,6 +124,17 @@ public class ViewModel {
     List<BestGenotype> bg = evoLibMapper.map(hilly.getHistory());
 
       //outputField.set();
+  }
+
+  public void startGeneticAlgorithm(boolean isStepByStep, boolean mutationIsBinary,double mutationChance,
+                                    boolean fitnessIsOneMax, double recombinationChance,double populationSize,
+                                    double genotypeSize, double generationAmount){
+    viewModelGeneticAlgorithm = new ViewModelGeneticAlgorithm(isStepByStep,mutationIsBinary,mutationChance,
+        fitnessIsOneMax,recombinationChance,populationSize,genotypeSize,generationAmount);
+  }
+
+  public BestGenotype geneticAlgorithmNextStep(boolean untilDone){
+    return viewModelGeneticAlgorithm.runAlgorithm(untilDone);
   }
 
     /**
