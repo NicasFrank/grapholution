@@ -36,7 +36,7 @@ public class HillclimberTest {
         Mutator<Boolean> mutatorS = new SwitchOneBit();
         hillclimberZero = new Hillclimber<>(genotypeZ, mutatorB);
         hillclimberOne = new Hillclimber<>(genotypeO, mutatorS);
-        hillclimberOneLimit = new Hillclimber<>(genotypeO, mutatorS, new AlgorithmConfigOptions("limit", "8"));
+        hillclimberOneLimit = new Hillclimber<>(genotypeO, mutatorS, new AlgorithmConfigOptions().add("limit", 8));
         resultZ = new ArrayList<>();
         for(int i = 0; i<genosize; i++){
             resultZ.add(Boolean.FALSE);

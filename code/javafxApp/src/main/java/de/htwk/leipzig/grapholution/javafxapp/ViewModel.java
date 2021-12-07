@@ -86,6 +86,15 @@ public class ViewModel {
     currentScene--;
     setNextScreen(allScenes[currentScene]);
   }
+
+  /**
+   * Hillclimber instanziert und ausgeführt
+   * @param startConfig Startkonfiguration
+   */
+  public void climbTheHill(String startConfig){
+    climbTheHill(startConfig, null);
+  }
+
   /**
    * Hillclimber instanziert und ausgeführt
    * @param startConfig Startkonfiguration

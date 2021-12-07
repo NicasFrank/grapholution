@@ -9,6 +9,7 @@ import javafx.scene.control.ComboBox;
 import javafx.stage.FileChooser;
 
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 public class SceneControllerChoice extends SceneController{
   @FXML
@@ -19,9 +20,7 @@ public class SceneControllerChoice extends SceneController{
   private ComboBox<String> comboBoxProblem;
 
 
-  private final String[] algorithms = (String[]) Arrays.stream(AlgorithmType.class.getEnumConstants())
-          .map(algorithmType -> algorithmType.name)
-          .toArray();
+
   private ViewModel viewModel;
 
   /**
@@ -29,7 +28,11 @@ public class SceneControllerChoice extends SceneController{
    * setzt Inhalt der ComboBox(en), erstellt ViewModel und gibt diesem sich selbst als parameter
    */
   public void initialize(){
-    comboBoxAlgo.getItems().setAll(algorithms);
+    comboBoxAlgo.getItems().setAll(
+    Arrays.stream(AlgorithmType.class.getEnumConstants())
+            .map(algorithmType -> algorithmType.name)
+            .collect(Collectors.toList())
+    );
   }
 
   /**

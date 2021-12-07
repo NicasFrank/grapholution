@@ -11,11 +11,6 @@ public class AlgorithmConfigOptions implements Serializable {
         options = new HashMap<>();
     }
 
-    public AlgorithmConfigOptions(String name, String value) {
-        options = new HashMap<>();
-        add(name, value);
-    }
-
     public AlgorithmConfigOptions add(String name, String value) {
         options.put(name, value);
         return this;

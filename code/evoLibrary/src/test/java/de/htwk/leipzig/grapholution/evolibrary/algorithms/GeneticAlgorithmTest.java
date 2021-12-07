@@ -41,7 +41,8 @@ public class GeneticAlgorithmTest {
                 selectorMock,
                 new OnePointCrossover<>(),
                 testPopulation,
-                new AlgorithmConfigOptions("recombinationChance", "0.5")
+                new AlgorithmConfigOptions()
+                        .add("recombinationChance", 0.5)
         );
 
         var result = geneticAlgorithm.run();
@@ -59,8 +60,9 @@ public class GeneticAlgorithmTest {
                 selectorMock,
                 new OnePointCrossover<>(),
                 testPopulation,
-                new AlgorithmConfigOptions("recombinationChance", "0.5")
-                        .add("limit", Integer.toString(limit))
+                new AlgorithmConfigOptions()
+                        .add("recombinationChance", 0.5)
+                        .add("limit", limit)
         );
 
         geneticAlgorithm.run();
@@ -77,7 +79,8 @@ public class GeneticAlgorithmTest {
                 selectorMock,
                 new OnePointCrossover<>(),
                 testPopulation,
-                new AlgorithmConfigOptions("recombinationChance", "0.5")
+                new AlgorithmConfigOptions()
+                        .add("recombinationChance", 0.5)
         );
 
         geneticAlgorithm.oneStep();
@@ -94,8 +97,9 @@ public class GeneticAlgorithmTest {
                 selectorMock,
                 new OnePointCrossover<>(),
                 testPopulation,
-                new AlgorithmConfigOptions("recombinationChance", "0.5")
-                        .add("limit", Integer.toString(limit))
+                new AlgorithmConfigOptions()
+                        .add("recombinationChance", 0.5)
+                        .add("limit", limit)
         );
 
         geneticAlgorithm.oneStep();

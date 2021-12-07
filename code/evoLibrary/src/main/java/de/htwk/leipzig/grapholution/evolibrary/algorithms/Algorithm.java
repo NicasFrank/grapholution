@@ -32,7 +32,7 @@ public abstract class Algorithm<T> {
      */
     public Algorithm(Genotype<T> genotype, AlgorithmConfigOptions configOptions) {
         this(genotype);
-        this.limit = configOptions.getAndConvertOrElse("limit", Integer::parseInt, -1);
+        this.limit = configOptions.getOrElse("limit", -1);
     }
 
     /**
@@ -51,8 +51,8 @@ public abstract class Algorithm<T> {
 
     public void serialize(File file) throws Exception {
         var config = new AlgorithmConfigOptions();
-        config.add("limit", Integer.toString(limit));
-        config.add("iterations", Integer.toString(iterations));
+        config.add("limit", limit);
+        config.add("iterations", iterations);
         config.merge(getCustomConfigOptions());
 
         var fos = new FileOutputStream(file);

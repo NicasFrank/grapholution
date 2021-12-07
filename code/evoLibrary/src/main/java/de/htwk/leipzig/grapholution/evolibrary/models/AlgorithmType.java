@@ -6,7 +6,7 @@ public enum AlgorithmType {
 
     public final String name;
 
-    private AlgorithmType(String name) {
+    AlgorithmType(String name) {
         this.name = name;
     }
 }

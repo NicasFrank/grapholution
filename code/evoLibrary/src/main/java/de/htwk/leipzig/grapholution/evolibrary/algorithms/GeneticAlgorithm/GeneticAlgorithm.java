@@ -41,8 +41,7 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
         super(population.get(0), configOptions);
         this.mutator = mutator;
         this.recombinator = recombinator;
-        this.recombinationChance = configOptions.getAndConvertOrElse("recombinationChance",
-                Double::parseDouble, 1.0);
+        this.recombinationChance = configOptions.getOrElse("recombinationChance", 1.0);
         this.population = new Population<>(population.createCopy());
         this.selector = selector;
         history = new ArrayList<>();
@@ -73,7 +72,7 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
     @Override
     protected AlgorithmConfigOptions getCustomConfigOptions() {
         var options = new AlgorithmConfigOptions();
-        options.add("recombinationChance", Double.toString(recombinationChance));
+        options.add("recombinationChance", recombinationChance);
         return options;
     }
 
