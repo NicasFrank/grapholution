@@ -4,7 +4,6 @@ import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Population;
 import de.htwk.leipzig.grapholution.evolibrary.statistics.Statistics;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +28,7 @@ public class EvoLibMapper {
 
         for (Object g : statistics.getBestIndividuals()) {
             Genotype<Boolean> h = (Genotype<Boolean>) g;
-            listReturn.add(new StatModel(h.getFitness(),h.getAge()));
+            listReturn.add(new StatModel(h.getFitness()));
         }
         return listReturn;
     }
@@ -43,7 +42,7 @@ public class EvoLibMapper {
             List<StatModel> statListReturn = new ArrayList<>();
             for (Object genotypeObject: population){
                 Genotype<Boolean> genotype = (Genotype<Boolean>) genotypeObject;
-                statListReturn.add(new StatModel(genotype.getFitness(),genotype.getAge()));
+                statListReturn.add(new StatModel(genotype.getFitness()));
             }
             listReturn.add(new GenModel(statListReturn));
         }

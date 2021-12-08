@@ -1,7 +1,8 @@
 package de.htwk.leipzig.grapholution.javafxapp;
 
+import de.htwk.leipzig.grapholution.evolibrary.statistics.Statistics;
 import de.htwk.leipzig.grapholution.javafxapp.model.BestGenotype;
-import de.htwk.leipzig.grapholution.javafxapp.model.HistoryResults;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,13 +16,9 @@ import java.util.ResourceBundle;
 public class SceneControllerResultsGeneticAlgorithm extends SceneController implements Initializable {
 
     @FXML
-    TableView<HistoryResults> tableViewResults;
-    //@FXML
-    //TableColumn<HistoryResults, String> population;
+    TableView<Statistics> tableViewResults;
     @FXML
-    TableColumn<HistoryResults, String> duration;
-    @FXML
-    TableColumn<HistoryResults, String> fitness;
+    TableColumn<Statistics, String> fitness;
     @FXML
     private Button buttonNextStep,buttonFastForward;
 
@@ -48,9 +45,7 @@ public class SceneControllerResultsGeneticAlgorithm extends SceneController impl
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-      duration.setCellValueFactory((cellData -> cellData.getValue().durationProperty()));
-      //population.setCellValueFactory((cellData -> cellData.getValue().populationProperty()));
-      fitness.setCellValueFactory((cellData -> cellData.getValue().fitnessProperty()));
+        fitness.setCellValueFactory((cellData -> (ObservableValue<String>) cellData.getValue()));
     }
     /**
      * setter für viewmodel und bindet outputfield an output vom viewmodel
