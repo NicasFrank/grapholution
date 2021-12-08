@@ -38,9 +38,6 @@ public class Hillclimber<T> extends Algorithm<T> {
         statistics.addBestIndividual(genotype);
     }
 
-    public List<Genotype<T>> getHistory() {
-        return new ArrayList<>(history);
-    }
 
     /**
      * Funktion zum Ausfuehren des Hillclimbers
