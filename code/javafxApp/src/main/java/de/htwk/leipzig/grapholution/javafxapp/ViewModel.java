@@ -53,7 +53,7 @@ public class ViewModel {
    */
   public void navigation_configureScreen (Object nameOfNextScreen, File file){
     currentScene++;
-    switch (nameOfNextScreen.toString()){
+    switch (nameOfNextScreen){
       case "Choice":
         allScenes[0] = loadNewPane("WahlAlgorithmus.fxml");
         break;
