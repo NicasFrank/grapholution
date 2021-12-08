@@ -22,14 +22,17 @@ public class BinaryMutation implements Mutator<Boolean> {
     /**
      * Funktion zur Mutation eines Boolean-Genotypen nach dem Binary-Mutation Prinzip
      * @param genotype Genotyp, der mutiert werden soll
+     * @return Neuer mutierter Genotyp
      */
     @Override
-    public void mutate(Genotype<Boolean> genotype) {
+    public Genotype<Boolean> mutate(Genotype<Boolean> genotype) {
+        Genotype<Boolean> genotypeCopy = genotype.createCopy();
         for(int i = 0; i < genotype.size(); i++){
             if(ThreadLocalRandom.current().nextInt(100)<probability){
-                genotype.set(i, !genotype.get(i)); //Bit wird geflippt, sollte Wahrscheinlichkeit eintreten
+                genotypeCopy.set(i, !genotype.get(i)); //Bit wird geflippt, sollte Wahrscheinlichkeit eintreten
             }
         }
-        genotype.updateFitness(); //Fitness des Genotypen muss nach Veraenderung der Werte neu ermittelt werden
+        genotypeCopy.updateFitness();
+        return genotypeCopy;
     }
 }

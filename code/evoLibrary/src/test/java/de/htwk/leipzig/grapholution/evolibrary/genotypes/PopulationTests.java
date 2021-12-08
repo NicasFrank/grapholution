@@ -2,7 +2,6 @@ package de.htwk.leipzig.grapholution.evolibrary.genotypes;
 
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.FitnessFunction;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -55,7 +54,9 @@ public class PopulationTests {
         var copy = population.createCopy();
 
         for (int i = 0; i < population.size(); i++) {
-            assertEquals(population.get(i), copy.get(i));
+            for(int j = 0; j<population.get(i).size(); j++){
+                assertEquals(population.get(i).get(j), copy.get(i).get(j));
+            }
         }
     }
 }

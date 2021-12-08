@@ -11,7 +11,8 @@ public interface Mutator<T> {
     /**
      * Funktion zur Mutation eines Genotypen
      * @param genotype Genotyp, der mutiert werden soll
+     * @return Neuer mutierter Genotyp
      */
-    void mutate (Genotype<T> genotype);
+    Genotype<T> mutate (Genotype<T> genotype);
 
 }

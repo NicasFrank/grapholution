@@ -8,7 +8,6 @@ import de.htwk.leipzig.grapholution.evolibrary.recombinator.Recombinator;
 import de.htwk.leipzig.grapholution.evolibrary.selectors.Selector;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Comparator;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -23,7 +22,6 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
     private final double recombinationChance;
     private Population<T> population;
     private int limit = -1;
-    private final ArrayList<Population<T>> history;
     private final Selector<T> selector;
 
     /**
@@ -38,10 +36,9 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
         this.mutator = mutator;
         this.recombinator = recombinator;
         this.recombinationChance = recombinationChance;
-        this.population = new Population<>(population.createCopy());
+        this.population = population;
         this.selector = selector;
-        history = new ArrayList<>();
-        history.add(population.createCopy());
+        statistics.addToHistory(population);
     }
 
     /**
@@ -55,6 +52,7 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
     public GeneticAlgorithm(Mutator<T> mutator, Selector<T> selector, Recombinator<T> recombinator, double recombinationChance, Population<T> population, int limit) {
         this(mutator, selector, recombinator, recombinationChance, population);
         this.limit = limit;
+        statistics.addToHistory(population);
     }
 
     /**
@@ -74,7 +72,7 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
     }
 
     private boolean hasNotRunToCompletion() {
-        return (history.size() <= limit || limit < 0) && !(population.getBestFitness() == genotype.MAX_FITNESS_VALUE);
+        return (iterations < limit || limit < 0) && !(population.getBestFitness() == genotype.MAX_FITNESS_VALUE);
     }
 
     /**
@@ -94,15 +92,18 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
      */
     private void iterate(){
         population = selector.select(population);
+        statistics.addToHistory(population);
 
         for(int i = 0; i < population.size() / 2; i++) {
             if(ThreadLocalRandom.current().nextDouble(1) < recombinationChance) {
-                recombinator.recombine(population.get(2*i), population.get(2*i + 1));
+                ArrayList<Genotype<T>> newGenotypes = recombinator.recombine(population.get(2*i), population.get(2*i + 1));
+                population.set(2*i, newGenotypes.get(0));
+                population.set(2*i+1, newGenotypes.get(1));
             }
-            mutator.mutate(population.get(2*i));
-            mutator.mutate(population.get(2*i + 1));
+            population.set(2*i,mutator.mutate(population.get(2*i)));
+            population.set(2*i+1,mutator.mutate(population.get(2*i+1)));
         }
-        history.add(population.createCopy());
+        iterations++;
     }
 
     /**
@@ -110,8 +111,7 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
      * @return beste Individuum
      */
     private Genotype<T> bestIndividuum() {
-        return history.stream()
-                .flatMap(Collection::stream)
+        return population.stream()
                 .max(Comparator.comparingInt(Genotype::getFitness))
                 .orElse(null);
     }
