@@ -43,9 +43,9 @@ public class ViewModel {
    * switch anhand String je nach nächster Pane
    * @param nameOfNextScreen String mit Namen des nächsten Screens
    */
-  public void navigation_configureScreen (Object nameOfNextScreen){
+  public void navigation_configureScreen (String nameOfNextScreen){
     currentScene++;
-    switch (nameOfNextScreen.toString()){
+    switch (nameOfNextScreen){
       case "Choice":
         allScenes[0] = loadNewPane("WahlAlgorithmus.fxml");
         break;
