@@ -33,6 +33,7 @@ public class ViewModel {
   private final SceneControllerBase sceneControllerBase;
   private Pane[] allScenes = new Pane[3];
   private int currentScene = -1;
+  private boolean isAlgorithmStepByStep = false;
 
   private Algorithm<Boolean> hilly;
   private ViewModelGeneticAlgorithm viewModelGeneticAlgorithm;
@@ -129,6 +130,7 @@ public class ViewModel {
   public void startGeneticAlgorithm(boolean isStepByStep, boolean mutationIsBinary,double mutationChance,
                                     boolean fitnessIsOneMax, double recombinationChance,double populationSize,
                                     double genotypeSize, double generationAmount){
+    isAlgorithmStepByStep = isStepByStep;
     viewModelGeneticAlgorithm = new ViewModelGeneticAlgorithm(isStepByStep,mutationIsBinary,mutationChance,
         fitnessIsOneMax,recombinationChance,populationSize,genotypeSize,generationAmount);
   }
@@ -187,4 +189,5 @@ public class ViewModel {
   public Property<String> inputFieldProperty() {
     return inputField;
   }
+  public boolean getIsAlgorithmStepByStep(){return isAlgorithmStepByStep;}
 }

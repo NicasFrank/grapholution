@@ -44,22 +44,13 @@ public class ViewModelGeneticAlgorithm{
                                    boolean fitnessIsOneMax, double recombinationChance,double populationSize,
                                    double genotypeSize, double limit){
     this.isStepByStep = isStepByStep;
-    Mutator mutator;
-    Selector selector;
-    Recombinator recombinator;
-    Population population;
-    FitnessFunction fitnessFunction;
-    mutator = mutatorIsBinary ? new BinaryMutation((int) mutationChance) : new SwitchOneBit();
-    selector = new FitnessproportionalSelection();
-    recombinator = new OnePointCrossover();
-    fitnessFunction = fitnessIsOneMax ? new OneMaxEvaluator() : new ZeroMaxEvaluator();
-    population = new Population<>(Random::nextBoolean,(int)populationSize,(int) genotypeSize,fitnessFunction);
-    if(limit < 0){
-      geneticAlgorithm = new GeneticAlgorithm(mutator,selector,recombinator,recombinationChance,population);
-    } else {
-      geneticAlgorithm = new GeneticAlgorithm(mutator,selector,recombinator,recombinationChance,population,(int) limit);
-    }
-    runAlgorithm(false);
+    Mutator mutator = mutatorIsBinary ? new BinaryMutation((int) mutationChance) : new SwitchOneBit();
+    Selector selector= new FitnessproportionalSelection();
+    Recombinator recombinator = new OnePointCrossover();
+    FitnessFunction fitnessFunction = fitnessIsOneMax ? new OneMaxEvaluator() : new ZeroMaxEvaluator();
+    Population population = new Population<>(Random::nextBoolean,(int)populationSize,(int) genotypeSize,fitnessFunction);
+    geneticAlgorithm = (limit < 0) ? new GeneticAlgorithm(mutator,selector,recombinator,recombinationChance,population)
+            : new GeneticAlgorithm(mutator,selector,recombinator,recombinationChance,population,(int) limit);
   }
 
   /**
