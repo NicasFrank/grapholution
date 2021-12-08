@@ -2,6 +2,8 @@ package de.htwk.leipzig.grapholution.javafxapp.model;
 
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Population;
+import de.htwk.leipzig.grapholution.evolibrary.statistics.Statistics;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +24,7 @@ public class EvoLibMapper {
     }
 
 
-    public List<StatModel> map(Statistics statistics) {
+    public List<StatModel> mapStatModel(Statistics statistics) {
         List<StatModel> listReturn = new ArrayList<>();
 
         for (Object g : statistics.getBestIndividuals()) {

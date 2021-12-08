@@ -46,4 +46,11 @@ public abstract class Algorithm<T> {
      */
     public abstract Genotype<T> run();
 
+    /**
+     * Funktion zum erhalten der Statistiken
+     * @return statitics
+     */
+    public Statistics getStatistics(){
+        return statistics;
+    }
 }

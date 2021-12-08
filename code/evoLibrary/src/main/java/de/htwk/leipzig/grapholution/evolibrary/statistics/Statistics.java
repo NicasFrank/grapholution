@@ -30,4 +30,19 @@ public class Statistics {
      */
     public void addBestIndividual(Genotype<?> genotype){bestIndividuals.add(genotype);}
 
+    /**
+     * Funktion zum erhalten der besten Individuen
+     * @return List<genotype> beste Individuem
+     */
+    public List<Genotype<?>> getBestIndividuals(){
+        return bestIndividuals;
+    }
+
+    /**
+     * Funktion zum erhalten der history
+     * @return List<Population<?>> histroy
+     */
+    public List<Population<?>> getHistory(){
+        return history;
+    }
 }
