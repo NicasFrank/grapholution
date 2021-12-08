@@ -13,7 +13,7 @@ public class SceneControllerChoice extends SceneController{
   private ComboBox<String> comboBoxProblem;
 
 
-  private final String[] algorythms = {"Hillclimber","Genetischer Algorithmus", "Noch Einer"};
+  private final String[] algorithms = {"Hillclimber","Genetischer Algorithmus", "Noch Einer"};
   private ViewModel viewModel;
 
   /**
@@ -21,7 +21,7 @@ public class SceneControllerChoice extends SceneController{
    * setzt Inhalt der ComboBox(en), erstellt ViewModel und gibt diesem sich selbst als parameter
    */
   public void initialize(){
-    comboBoxAlgo.getItems().setAll(algorythms);
+    comboBoxAlgo.getItems().setAll(algorithms);
   }
 
   /**

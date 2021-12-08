@@ -27,15 +27,6 @@ public class SceneControllerResultsGeneticAlgorithm extends SceneController impl
 
     private ViewModel viewModel;
 
-    /**
-     * setter für viewmodel und bindet outputfield an output vom viewmodel
-     *
-     * @param viewModel gleiche ViewModel für alle
-     */
-    public void setViewModel(ViewModel viewModel) {
-      this.viewModel = viewModel;
-    }
-
     public void loadButtonTableView(ActionEvent e) {
     }
 
@@ -60,5 +51,17 @@ public class SceneControllerResultsGeneticAlgorithm extends SceneController impl
       duration.setCellValueFactory((cellData -> cellData.getValue().durationProperty()));
       population.setCellValueFactory((cellData -> cellData.getValue().populationProperty()));
       fitness.setCellValueFactory((cellData -> cellData.getValue().fitnessProperty()));
+    }
+    /**
+     * setter für viewmodel und bindet outputfield an output vom viewmodel
+     *
+     * @param viewModel gleiche ViewModel für alle
+     */
+    public void setViewModel(ViewModel viewModel) {
+      this.viewModel = viewModel;
+      if(viewModel.getIsAlgorithmStepByStep()){
+        buttonFastForward.setDisable(false);
+        buttonNextStep.setDisable(false);
+      }
     }
 }
