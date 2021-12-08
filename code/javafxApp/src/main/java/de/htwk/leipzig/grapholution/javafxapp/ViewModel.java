@@ -1,6 +1,5 @@
 package de.htwk.leipzig.grapholution.javafxapp;
 
-
 import de.htwk.leipzig.grapholution.evolibrary.algorithms.hillclimber.Hillclimber;
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.FitnessFunction;
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.OneMaxEvaluator;
@@ -32,6 +31,7 @@ public class ViewModel {
   private ViewModelGeneticAlgorithm viewModelGeneticAlgorithm;
 
   private Hillclimber<Boolean> hilly;
+  private BestGenotype bestGenotype;
 
   ViewModel(SceneControllerBase sceneControllerBase, Pane firstPane){
     this.sceneControllerBase = sceneControllerBase;
@@ -94,7 +94,6 @@ public class ViewModel {
       hilly = new Hillclimber<>(genotypeO, mutatorS);
       hilly.run();
       EvoLibMapper evoLibMapper = new EvoLibMapper();
-      hilly.setTableViewResults();
 
       //List<BestGenotype> bg = evoLibMapper.map(hilly.getStatistics());
 

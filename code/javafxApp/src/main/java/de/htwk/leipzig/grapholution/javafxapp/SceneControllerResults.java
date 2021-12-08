@@ -18,16 +18,16 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-    public class SceneControllerResults extends SceneController implements Initializable {
+public class SceneControllerResults extends SceneController implements Initializable{
 
     @FXML
     private TextField outputField;
-   // @FXML
-  //  private TableView<StatModel> tableViewResults;
+    // @FXML
+    //  private TableView<StatModel> tableViewResults;
     @FXML
     private LineChart lineChartResults;
     @FXML
-    private TableColumn<Statistics, String> fitness;
+    private TableColumn<StatModel, String> fitness;
 
     private ViewModel viewModel;
 
@@ -69,10 +69,10 @@ import java.util.ResourceBundle;
         viewModel.navigation_Back();
     }
 
-    @Override
+    @FXML
     public void initialize(URL location, ResourceBundle resources) {
-        fitness.setCellValueFactory(new PropertyValueFactory<Statistics, String>("fitness"));
+        fitness.setCellValueFactory(new PropertyValueFactory<StatModel, String>("fitness"));
     }
 
 
-    }
+}
