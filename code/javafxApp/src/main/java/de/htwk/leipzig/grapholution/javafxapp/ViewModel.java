@@ -55,7 +55,7 @@ public class ViewModel {
     currentScene++;
     switch (nameOfNextScreen){
       case "Choice":
-        allScenes[0] = loadNewPane("WahlAlgorithmus.fxml");
+        allScenes[0] = loadNewPane("AlgorithmChoice.fxml");
         break;
 
       case "Hillclimber":
@@ -67,14 +67,13 @@ public class ViewModel {
         break;
 
       case "AuswertungHillclimber":
-        climbTheHill(inputField.get(), file);
-        allScenes[2] = loadNewPane("AuswertungScreen.fxml");
-
+        climbTheHill(inputField.get());
+        allScenes[2] = loadNewPane("ResultsHillclimber.fxml");
         outputField.set("Ergebnis");
         break;
 
       case "AuswertungGeneticAlgorithm":
-        allScenes[2] = loadNewPane("AuswertungGeneticAlgorithm.fxml");
+        allScenes[2] = loadNewPane("ResultsGeneticAlgorithm.fxml");
         break;
 
       default:

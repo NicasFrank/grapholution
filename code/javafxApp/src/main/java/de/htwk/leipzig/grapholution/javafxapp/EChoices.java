@@ -5,5 +5,5 @@ public enum EChoices {
   Hillclimber,
   GeneticAlgorithm,
   ResultsHillclimber,
-  ResultsGeneticAlgorithm
+  ResultsGeneticAlgorithm;
 }
