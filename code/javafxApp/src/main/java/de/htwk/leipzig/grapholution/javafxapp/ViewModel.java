@@ -94,6 +94,7 @@ public class ViewModel {
       hilly = new Hillclimber<>(genotypeO, mutatorS);
       hilly.run();
       EvoLibMapper evoLibMapper = new EvoLibMapper();
+      hilly.setTableViewResults();
 
       //List<BestGenotype> bg = evoLibMapper.map(hilly.getStatistics());
 
