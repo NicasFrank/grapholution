@@ -6,5 +6,4 @@ public abstract class SceneController {
   public void setViewModel(ViewModel viewModel) {
       this.viewModel = viewModel;
   }
-
 }
