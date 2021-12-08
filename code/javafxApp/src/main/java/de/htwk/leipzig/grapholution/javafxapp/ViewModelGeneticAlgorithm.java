@@ -15,7 +15,6 @@ import de.htwk.leipzig.grapholution.evolibrary.recombinator.OnePointCrossover;
 import de.htwk.leipzig.grapholution.evolibrary.selectors.FitnessproportionalSelection;
 import de.htwk.leipzig.grapholution.javafxapp.model.BestGenotype;
 import de.htwk.leipzig.grapholution.javafxapp.model.EvoLibMapper;
-import de.htwk.leipzig.grapholution.javafxapp.model.HistoryResults;
 
 import java.util.Random;
 
@@ -23,7 +22,6 @@ public class ViewModelGeneticAlgorithm{
 
   private final GeneticAlgorithm<Boolean> geneticAlgorithm;
   private BestGenotype bestGenotype;
-  private HistoryResults historyResults;
   private EvoLibMapper evoLibMapper;
   private boolean isStepByStep;
 
