@@ -9,6 +9,7 @@ import de.htwk.leipzig.grapholution.evolibrary.mutator.Mutator;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.SwitchOneBit;
 import de.htwk.leipzig.grapholution.javafxapp.model.BestGenotype;
 import de.htwk.leipzig.grapholution.javafxapp.model.EvoLibMapper;
+import de.htwk.leipzig.grapholution.javafxapp.EChoices;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -45,9 +46,38 @@ public class ViewModel {
    */
   public void navigation_configureScreen (String nameOfNextScreen){
     currentScene++;
+/*
+    String name = nameOfNextScreen.replaceAll("\\s+", "");
+    switch (EChoices.valueOf(name)){
+      case AlgorithmChoice:
+        allScenes[0] = loadNewPane("AlgorithmChoice.fxml");
+        break;
+
+      case Hillclimber:
+        allScenes[1] = loadNewPane("ConfigHillclimber.fxml");
+        break;
+
+      case GeneticAlgorithm:
+        allScenes[1] = loadNewPane("ConfigGeneticAlgorithm.fxml");
+        break;
+
+      case ResultsHillclimber:
+        climbTheHill(inputField.get());
+        allScenes[2] = loadNewPane("ResultsHillclimber.fxml");
+        outputField.set("Ergebnis");
+        break;
+
+      case ResultsGeneticAlgorithm:
+        allScenes[2] = loadNewPane("ResultsGeneticAlgorithm.fxml");
+        break;
+
+      default:
+        //Nichts
+        break;
+    }*/
     switch (nameOfNextScreen){
       case "Choice":
-        allScenes[0] = loadNewPane("WahlAlgorithmus.fxml");
+        allScenes[0] = loadNewPane("AlgorithmChoice.fxml");
         break;
 
       case "Hillclimber":
@@ -60,12 +90,12 @@ public class ViewModel {
 
       case "AuswertungHillclimber":
         climbTheHill(inputField.get());
-        allScenes[2] = loadNewPane("AuswertungScreen.fxml");
+        allScenes[2] = loadNewPane("ResultsHillclimber.fxml");
         outputField.set("Ergebnis");
         break;
 
       case "AuswertungGeneticAlgorithm":
-        allScenes[2] = loadNewPane("AuswertungGeneticAlgorithm.fxml");
+        allScenes[2] = loadNewPane("ResultsGeneticAlgorithm.fxml");
         break;
 
       default:
