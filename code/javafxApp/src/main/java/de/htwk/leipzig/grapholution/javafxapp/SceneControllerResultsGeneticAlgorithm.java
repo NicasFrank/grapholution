@@ -16,8 +16,8 @@ public class SceneControllerResultsGeneticAlgorithm extends SceneController impl
 
     @FXML
     TableView<HistoryResults> tableViewResults;
-    @FXML
-    TableColumn<HistoryResults, String> population;
+    //@FXML
+    //TableColumn<HistoryResults, String> population;
     @FXML
     TableColumn<HistoryResults, String> duration;
     @FXML
@@ -49,7 +49,7 @@ public class SceneControllerResultsGeneticAlgorithm extends SceneController impl
     @Override
     public void initialize(URL location, ResourceBundle resources) {
       duration.setCellValueFactory((cellData -> cellData.getValue().durationProperty()));
-      population.setCellValueFactory((cellData -> cellData.getValue().populationProperty()));
+      //population.setCellValueFactory((cellData -> cellData.getValue().populationProperty()));
       fitness.setCellValueFactory((cellData -> cellData.getValue().fitnessProperty()));
     }
     /**

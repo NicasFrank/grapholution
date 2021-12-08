@@ -1,6 +1,7 @@
 package de.htwk.leipzig.grapholution.javafxapp.model;
 
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
+import de.htwk.leipzig.grapholution.evolibrary.genotypes.Population;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,5 +19,32 @@ public class EvoLibMapper {
 
     public BestGenotype map(Genotype<Boolean> genotype) {
         return new BestGenotype(genotype.getFitness(), genotype.getAge());
+    }
+
+
+    public List<StatModel> map(Statistics statistics) {
+        List<StatModel> listReturn = new ArrayList<>();
+
+        for (Object g : statistics.getBestIndividuals()) {
+            Genotype<Boolean> h = (Genotype<Boolean>) g;
+            listReturn.add(new StatModel(h.getFitness(),h.getAge()));
+        }
+        return listReturn;
+    }
+
+
+    public List<GenModel> map(Statistics statistics) {
+        List<GenModel> listReturn = new ArrayList<>();
+
+        for (Object populationObject : statistics.getHistory()) {
+            Population<Boolean> population = (Population<Boolean>) populationObject;
+            List<StatModel> statListReturn = new ArrayList<>();
+            for (Object genotypeObject: population){
+                Genotype<Boolean> genotype = (Genotype<Boolean>) genotypeObject;
+                statListReturn.add(new StatModel(genotype.getFitness(),genotype.getAge()));
+            }
+            listReturn.add(new GenModel(statListReturn));
+        }
+        return listReturn;
     }
 }
