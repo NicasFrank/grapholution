@@ -8,10 +8,16 @@ import de.htwk.leipzig.grapholution.evolibrary.mutator.Mutator;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.SwitchOneBit;
 import de.htwk.leipzig.grapholution.javafxapp.model.BestGenotype;
 import de.htwk.leipzig.grapholution.javafxapp.model.EvoLibMapper;
+import de.htwk.leipzig.grapholution.javafxapp.model.StatModel;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
@@ -32,6 +38,7 @@ public class ViewModel {
 
   private Hillclimber<Boolean> hilly;
   private BestGenotype bestGenotype;
+  private SceneControllerResults sceneControllerResults;
 
   ViewModel(SceneControllerBase sceneControllerBase, Pane firstPane){
     this.sceneControllerBase = sceneControllerBase;
@@ -94,10 +101,9 @@ public class ViewModel {
       hilly = new Hillclimber<>(genotypeO, mutatorS);
       hilly.run();
       EvoLibMapper evoLibMapper = new EvoLibMapper();
-
       //List<BestGenotype> bg = evoLibMapper.map(hilly.getStatistics());
-
       //outputField.set();
+
   }
 
   public void startGeneticAlgorithm(boolean isStepByStep, boolean mutationIsBinary,double mutationChance,

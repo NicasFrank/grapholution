@@ -22,12 +22,10 @@ public class SceneControllerResults extends SceneController implements Initializ
 
     @FXML
     private TextField outputField;
-    // @FXML
-    //  private TableView<StatModel> tableViewResults;
-    @FXML
-    private LineChart lineChartResults;
     @FXML
     private TableColumn<StatModel, String> fitness;
+    @FXML
+    private TableView<StatModel> tableViewResults;
 
     private ViewModel viewModel;
 
@@ -36,32 +34,25 @@ public class SceneControllerResults extends SceneController implements Initializ
      *
      * @param viewModel gleiche ViewModel für alle
      */
-    public void setViewModel(ViewModel viewModel, StatModel statModel) {
+    public void setViewModel(ViewModel viewModel) {
         this.viewModel = viewModel;
         outputField.textProperty().bind(viewModel.outputFieldProperty());
     }
 
-    public void setTableViewResults() {
+    public void setTableViewResults(SceneControllerResults sceneControllerResults) {
 
-        TableView<StatModel> tableViewResults = new TableView<StatModel>();
+        this.tableViewResults = new TableView<StatModel>();
         final ObservableList<StatModel> data = FXCollections.observableArrayList(
                 new StatModel(1));
 
         TableColumn fitness = new TableColumn("fitness");
-        tableViewResults.setItems(data);
+
         tableViewResults.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         tableViewResults.getColumns().addAll(fitness);
-
+        tableViewResults.setItems(data);
     }
+
     public void setLineChartResults(Hillclimber hillclimber) {
-
-    }
-
-    public void loadButtonTableView(ActionEvent e) {
-
-    }
-
-    public void loadButtonLineChart(ActionEvent e) {
 
     }
 
