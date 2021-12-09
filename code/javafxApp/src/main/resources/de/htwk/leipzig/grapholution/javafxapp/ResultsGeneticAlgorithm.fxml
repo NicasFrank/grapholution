@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.htwk.leipzig.grapholution.javafxapp.SceneControllerResultsGeneticAlgorithm">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.htwk.leipzig.grapholution.javafxapp.SceneControllerResultsGeneticAlgorithm">
    <children>
       <Label layoutX="335.0" layoutY="14.0" prefHeight="117.0" prefWidth="291.0" styleClass="heading" text="Ergebnisse Genetic Algorithm" textAlignment="CENTER" wrapText="true">
          <font>
@@ -39,12 +39,12 @@
             <Font name="Arial" size="24.0" />
          </font>
       </Button>
-      <Button fx:id="buttonNextStep" onAction="#nextStep" disable="true" layoutX="405.0" layoutY="600.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="150.0" text="nächster Schritt" textAlignment="CENTER" visible="true" wrapText="true">
+      <Button fx:id="buttonNextStep" onAction="#nextStep" disable="true" layoutX="405.0" layoutY="600.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="150.0" text="nächster Schritt" textAlignment="CENTER" wrapText="true">
          <font>
             <Font name="Arial" size="19.0" />
          </font>
       </Button>
-      <Button fx:id="buttonFastForward" onAction="#fastForward" disable="true" layoutX="684.0" layoutY="600.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="150.0" text="FastForward" textAlignment="CENTER" visible="true" wrapText="true">
+      <Button fx:id="buttonFastForward" onAction="#fastForward" disable="true" layoutX="684.0" layoutY="600.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="150.0" text="FastForward" textAlignment="CENTER" wrapText="true">
          <font>
             <Font name="Arial" size="21.0" />
          </font>
