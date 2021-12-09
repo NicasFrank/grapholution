@@ -36,7 +36,7 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
         this.mutator = mutator;
         this.recombinator = recombinator;
         this.recombinationChance = recombinationChance;
-        this.population = population;
+        this.population = population.createCopy();
         this.selector = selector;
         statistics.addToHistory(population);
     }

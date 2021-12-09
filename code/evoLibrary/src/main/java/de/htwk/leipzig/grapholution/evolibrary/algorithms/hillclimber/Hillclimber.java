@@ -21,7 +21,7 @@ public class Hillclimber<T> extends Algorithm<T> {
     public Hillclimber(Genotype<T> genotype, Mutator<T> mutator) {
         super(genotype);
         this.mutator = mutator;
-        currentBest = genotype;
+        currentBest = genotype.createCopy();
         statistics.addBestIndividual(genotype);
     }
 
@@ -34,7 +34,7 @@ public class Hillclimber<T> extends Algorithm<T> {
     public Hillclimber(Genotype<T> genotype, Mutator<T> mutator, int limit) {
         super(genotype, limit);
         this.mutator = mutator;
-        currentBest = genotype;
+        currentBest = genotype.createCopy();
         statistics.addBestIndividual(genotype);
     }
 
@@ -55,7 +55,7 @@ public class Hillclimber<T> extends Algorithm<T> {
             }
             iterations++; //Durchlauf wird erhoeht
         }
-        return currentBest;
+        return currentBest.createCopy();
     }
 
 }

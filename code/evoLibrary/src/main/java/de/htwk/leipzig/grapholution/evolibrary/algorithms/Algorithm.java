@@ -19,7 +19,7 @@ public abstract class Algorithm<T> {
      * @param genotype Genotyp, auf dem der Algorithmus arbeiten soll
      */
     public Algorithm(Genotype<T> genotype){
-        this.genotype = genotype;
+        this.genotype = genotype.createCopy();
     }
 
     /**
