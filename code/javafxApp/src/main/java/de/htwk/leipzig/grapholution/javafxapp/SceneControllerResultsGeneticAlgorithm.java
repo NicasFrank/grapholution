@@ -2,13 +2,14 @@ package de.htwk.leipzig.grapholution.javafxapp;
 
 import de.htwk.leipzig.grapholution.evolibrary.statistics.Statistics;
 import de.htwk.leipzig.grapholution.javafxapp.model.BestGenotype;
-import javafx.beans.value.ObservableValue;
+import de.htwk.leipzig.grapholution.javafxapp.model.StatModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -18,7 +19,7 @@ public class SceneControllerResultsGeneticAlgorithm extends SceneController impl
     @FXML
     TableView<Statistics> tableViewResults;
     @FXML
-    TableColumn<Statistics, String> fitness;
+    TableColumn<StatModel, String> fitness;
     @FXML
     private Button buttonNextStep,buttonFastForward;
 
@@ -52,8 +53,8 @@ public class SceneControllerResultsGeneticAlgorithm extends SceneController impl
       buttonNextStep.setDisable(true);
     }
 
-    @Override
+    @FXML
     public void initialize(URL location, ResourceBundle resources) {
-        fitness.setCellValueFactory((cellData -> (ObservableValue<String>) cellData.getValue()));
+        fitness.setCellValueFactory(new PropertyValueFactory<StatModel, String>("fitness"));
     }
 }

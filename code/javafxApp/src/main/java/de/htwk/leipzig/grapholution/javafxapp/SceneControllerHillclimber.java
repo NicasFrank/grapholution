@@ -1,9 +1,10 @@
 package de.htwk.leipzig.grapholution.javafxapp;
 
+import de.htwk.leipzig.grapholution.javafxapp.model.StatModel;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 
 public class SceneControllerHillclimber extends SceneController{
   @FXML
@@ -20,7 +21,6 @@ public class SceneControllerHillclimber extends SceneController{
   private ToggleGroup Config2;
 
   private ViewModel viewModel;
-  private SceneControllerResults sceneControllerResults;
 
   /**
    * speichert aktuellen Text des Inputfields, triggert dann laden der Ergebnis-Szene und gibt Input an ViewModel, damit
