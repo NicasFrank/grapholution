@@ -1,8 +1,6 @@
 package de.htwk.leipzig.grapholution.javafxapp;
 import de.htwk.leipzig.grapholution.evolibrary.algorithms.hillclimber.Hillclimber;
-import de.htwk.leipzig.grapholution.evolibrary.statistics.Statistics;
-import de.htwk.leipzig.grapholution.javafxapp.model.StatModel;
-import javafx.beans.property.SimpleStringProperty;
+import de.htwk.leipzig.grapholution.javafxapp.model.HillModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,12 +20,12 @@ public class SceneControllerResults extends SceneController implements Initializ
 
     @FXML
     private TextField outputField;
-    // @FXML
-    //  private TableView<StatModel> tableViewResults;
+    @FXML
+    private TableView<HillModel> tableViewResults;
     @FXML
     private LineChart lineChartResults;
     @FXML
-    private TableColumn<StatModel, String> fitness;
+    private TableColumn<HillModel, String> fitness;
 
     private ViewModel viewModel;
 
@@ -36,29 +34,25 @@ public class SceneControllerResults extends SceneController implements Initializ
      *
      * @param viewModel gleiche ViewModel für alle
      */
-    public void setViewModel(ViewModel viewModel, StatModel statModel) {
+    public void setViewModel(ViewModel viewModel) {
         this.viewModel = viewModel;
         outputField.textProperty().bind(viewModel.outputFieldProperty());
     }
 
     public void setTableViewResults() {
-
-        TableView<StatModel> tableViewResults = new TableView<StatModel>();
-        final ObservableList<StatModel> data = FXCollections.observableArrayList(
-                new StatModel(1));
-
-        TableColumn fitness = new TableColumn("fitness");
+        final ObservableList<HillModel> data = FXCollections.observableArrayList(
+                new HillModel(1),
+            new HillModel(4),
+            new HillModel(3),
+            new HillModel(2));
+        fitness.setCellValueFactory(new PropertyValueFactory<>("fitness"));
         tableViewResults.setItems(data);
         tableViewResults.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        tableViewResults.getColumns().addAll(fitness);
-
     }
     public void setLineChartResults(Hillclimber hillclimber) {
-
     }
 
     public void loadButtonTableView(ActionEvent e) {
-
     }
 
     public void loadButtonLineChart(ActionEvent e) {
@@ -71,8 +65,6 @@ public class SceneControllerResults extends SceneController implements Initializ
 
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
-        fitness.setCellValueFactory(new PropertyValueFactory<StatModel, String>("fitness"));
+        setTableViewResults();
     }
-
-
 }
