@@ -3,6 +3,7 @@ package de.htwk.leipzig.grapholution.evolibrary.genotypes;
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.FitnessFunction;
 import java.util.*;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -40,6 +41,16 @@ public class Population<T> extends ArrayList<Genotype<T>> {
         return stream()
                 .mapToInt(Genotype::getFitness)
                 .max().orElse(0);
+    }
+
+    /**
+     * gibt das Individuum mit dem besten Fitnesswert zurück
+     * @return bester Fitnesswert
+     */
+    public Genotype<T> getBestIndividuum() {
+        return stream()
+                .filter(genotype -> genotype.fitness == getBestFitness())
+                .findFirst().orElse(null);
     }
 
     /**

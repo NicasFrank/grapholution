@@ -3,14 +3,19 @@ package de.htwk.leipzig.grapholution.evolibrary.algorithms.GeneticAlgorithm;
 import de.htwk.leipzig.grapholution.evolibrary.algorithms.Algorithm;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Population;
+import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmConfigOptions;
+import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmType;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.Mutator;
 import de.htwk.leipzig.grapholution.evolibrary.recombinator.Recombinator;
 import de.htwk.leipzig.grapholution.evolibrary.selectors.Selector;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Collectors;
 
 /**
  * Noch zu entwickeln
@@ -20,9 +25,8 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
 
     private final Mutator<T> mutator;
     private final Recombinator<T> recombinator;
-    private final double recombinationChance;
+    private double recombinationChance;
     private Population<T> population;
-    private int limit = -1;
     private final ArrayList<Population<T>> history;
     private final Selector<T> selector;
 
@@ -30,31 +34,18 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
      * Konstruktor ohne Limit
      * @param mutator enthält Mutation des Genotypen
      * @param recombinator enthält Rekombination zweier Genotypen
-     * @param recombinationChance Chance, dass Rekombination durchgeführt wird
      * @param population Population des Genotypen
      */
-    public GeneticAlgorithm(Mutator<T> mutator, Selector<T> selector, Recombinator<T> recombinator, double recombinationChance, Population<T> population) {
-        super(population.get(0));
+    public GeneticAlgorithm(Mutator<T> mutator, Selector<T> selector, Recombinator<T> recombinator,
+            Population<T> population, AlgorithmConfigOptions configOptions) {
+        super(population.get(0), configOptions);
         this.mutator = mutator;
         this.recombinator = recombinator;
-        this.recombinationChance = recombinationChance;
+        this.recombinationChance = configOptions.getOrElse("recombinationChance", 1.0);
         this.population = new Population<>(population.createCopy());
         this.selector = selector;
         history = new ArrayList<>();
         history.add(population.createCopy());
-    }
-
-    /**
-     * Konstruktor mit Limit
-     * @param mutator enthält Mutation des Genotypen
-     * @param recombinator enthält Rekombination zweier Genotypen
-     * @param recombinationChance Chance, dass Rekombination durchgeführt wird
-     * @param population Population des Genotypen
-     * @param limit Maximale Anzahl der Iterationen
-     */
-    public GeneticAlgorithm(Mutator<T> mutator, Selector<T> selector, Recombinator<T> recombinator, double recombinationChance, Population<T> population, int limit) {
-        this(mutator, selector, recombinator, recombinationChance, population);
-        this.limit = limit;
     }
 
     /**
@@ -71,6 +62,29 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
         }
 
         return bestIndividuum();
+    }
+
+    @Override
+    protected AlgorithmType getType() {
+        return AlgorithmType.GeneticAlgorithm;
+    }
+
+    @Override
+    protected AlgorithmConfigOptions getCustomConfigOptions() {
+        var options = new AlgorithmConfigOptions();
+        options.add("recombinationChance", recombinationChance);
+        return options;
+    }
+
+    @Override
+    protected void setCustomConfigOptions(AlgorithmConfigOptions options) {
+        recombinationChance = options.getOrElse("recombinationChance", 1.0);
+    }
+
+    @Override
+    public List<Genotype<T>> getHistory() {
+        return history.stream().map(Population::getBestIndividuum)
+                .collect(Collectors.toList());
     }
 
     private boolean hasNotRunToCompletion() {

@@ -1,6 +1,7 @@
 package de.htwk.leipzig.grapholution.javafxapp;
 
 
+import de.htwk.leipzig.grapholution.evolibrary.algorithms.Algorithm;
 import de.htwk.leipzig.grapholution.evolibrary.algorithms.hillclimber.Hillclimber;
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.FitnessFunction;
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.OneMaxEvaluator;
@@ -10,6 +11,7 @@ import de.htwk.leipzig.grapholution.evolibrary.mutator.SwitchOneBit;
 import de.htwk.leipzig.grapholution.javafxapp.model.BestGenotype;
 import de.htwk.leipzig.grapholution.javafxapp.model.EvoLibMapper;
 import de.htwk.leipzig.grapholution.javafxapp.model.HistoryResults;
+import de.htwk.leipzig.grapholution.javafxapp.utils.DialogUtils;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -17,6 +19,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
 
 import java.io.Console;
+import java.io.File;
 import java.io.IOException;
 import java.util.Random;
 import java.util.List;
@@ -31,18 +34,22 @@ public class ViewModel {
   private Pane[] allScenes = new Pane[3];
   private int currentScene = -1;
 
-  private Hillclimber<Boolean> hilly;
+  private Algorithm<Boolean> hilly;
 
   ViewModel(SceneControllerBase sceneControllerBase, Pane firstPane){
     this.sceneControllerBase = sceneControllerBase;
     allScenes[0]=firstPane;
   }
 
+  public void navigation_configureScreen (Object nameOfNextScreen) {
+    navigation_configureScreen(nameOfNextScreen, null);
+  }
+
   /**
    * switch anhand String je nach nächster Pane
    * @param nameOfNextScreen String mit Namen des nächsten Screens
    */
-  public void navigation_configureScreen (Object nameOfNextScreen){
+  public void navigation_configureScreen (Object nameOfNextScreen, File file){
     currentScene++;
     switch (nameOfNextScreen.toString()){
       case "Choice":
@@ -58,7 +65,7 @@ public class ViewModel {
         break;
 
       case "AuswertungHillclimber":
-        climbTheHill(inputField.get());
+        climbTheHill(inputField.get(), file);
         allScenes[2] = loadNewPane("AuswertungScreen.fxml");
 
         outputField.set("Ergebnis");
@@ -79,17 +86,35 @@ public class ViewModel {
     currentScene--;
     setNextScreen(allScenes[currentScene]);
   }
+
   /**
    * Hillclimber instanziert und ausgeführt
    * @param startConfig Startkonfiguration
    */
   public void climbTheHill(String startConfig){
+    climbTheHill(startConfig, null);
+  }
+
+  /**
+   * Hillclimber instanziert und ausgeführt
+   * @param startConfig Startkonfiguration
+   */
+  public void climbTheHill(String startConfig, File file){
       int genosize = 10;
       FitnessFunction<Boolean> fitnessfunctionO = new OneMaxEvaluator();
       Genotype<Boolean> genotypeO = new Genotype<>(Random::nextBoolean, fitnessfunctionO, genosize);
       Mutator<Boolean> mutatorS = new SwitchOneBit();
 
       hilly = new Hillclimber<>(genotypeO, mutatorS);
+      if (file != null) {
+        try {
+          hilly.deserialize(file);
+        } catch (Exception e) {
+          DialogUtils.ShowWarning("Warnung!", "Fehler beim Öffnen der Datei!");
+          e.printStackTrace();
+        }
+      }
+
       hilly.run();
       EvoLibMapper evoLibMapper = new EvoLibMapper();
 

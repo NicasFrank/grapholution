@@ -1,8 +1,15 @@
 package de.htwk.leipzig.grapholution.javafxapp;
 
+import de.htwk.leipzig.grapholution.evolibrary.algorithms.hillclimber.Hillclimber;
+import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmType;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.stage.FileChooser;
+
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 public class SceneControllerChoice extends SceneController{
   @FXML
@@ -13,7 +20,7 @@ public class SceneControllerChoice extends SceneController{
   private ComboBox<String> comboBoxProblem;
 
 
-  private final String[] algorythms = {"Hillclimber","Ein Anderer", "Noch Einer"};
+
   private ViewModel viewModel;
 
   /**
@@ -21,7 +28,11 @@ public class SceneControllerChoice extends SceneController{
    * setzt Inhalt der ComboBox(en), erstellt ViewModel und gibt diesem sich selbst als parameter
    */
   public void initialize(){
-    comboBoxAlgo.getItems().setAll(algorythms);
+    comboBoxAlgo.getItems().setAll(
+    Arrays.stream(AlgorithmType.class.getEnumConstants())
+            .map(algorithmType -> algorithmType.name)
+            .collect(Collectors.toList())
+    );
   }
 
   /**
@@ -36,5 +47,19 @@ public class SceneControllerChoice extends SceneController{
 
   public void setViewModel(ViewModel viewModel) {
     this.viewModel = viewModel;
+  }
+
+  public void sendButton_loadConfig(ActionEvent actionEvent) {
+    var fileChooser = new FileChooser();
+    fileChooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("Json files", "*.json"));
+
+    var file = fileChooser.showOpenDialog(null);
+
+    if (file != null) {
+      viewModel.navigation_configureScreen(
+              comboBoxAlgo.getValue(),
+              file
+      );
+    }
   }
 }

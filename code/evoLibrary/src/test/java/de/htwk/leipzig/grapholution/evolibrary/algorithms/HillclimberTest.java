@@ -5,6 +5,7 @@ import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.FitnessFunction;
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.OneMaxEvaluator;
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.ZeroMaxEvaluator;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
+import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmConfigOptions;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.BinaryMutation;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.Mutator;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.SwitchOneBit;
@@ -35,7 +36,7 @@ public class HillclimberTest {
         Mutator<Boolean> mutatorS = new SwitchOneBit();
         hillclimberZero = new Hillclimber<>(genotypeZ, mutatorB);
         hillclimberOne = new Hillclimber<>(genotypeO, mutatorS);
-        hillclimberOneLimit = new Hillclimber<>(genotypeO, mutatorS, 8);
+        hillclimberOneLimit = new Hillclimber<>(genotypeO, mutatorS, new AlgorithmConfigOptions().add("limit", 8));
         resultZ = new ArrayList<>();
         for(int i = 0; i<genosize; i++){
             resultZ.add(Boolean.FALSE);
