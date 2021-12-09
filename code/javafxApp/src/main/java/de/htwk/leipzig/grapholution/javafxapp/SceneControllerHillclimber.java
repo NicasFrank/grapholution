@@ -1,6 +1,6 @@
 package de.htwk.leipzig.grapholution.javafxapp;
 
-import de.htwk.leipzig.grapholution.javafxapp.model.StatModel;
+import de.htwk.leipzig.grapholution.javafxapp.model.HillModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
