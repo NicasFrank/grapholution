@@ -27,7 +27,6 @@ public class SceneControllerGeneticAlgorithm extends SceneController{
    * gibt Konfiguration des genetischen Algorithmus weiter
    */
   public void sendButton_startAlgo(){
-    viewModel.navigation_configureScreen("AuswertungGeneticAlgorithm");
     viewModel.startGeneticAlgorithm(
         checkBoxStepByStep.isSelected(),
         radioMutationBinary.isSelected(),
@@ -37,6 +36,7 @@ public class SceneControllerGeneticAlgorithm extends SceneController{
         sliderPopulationSize.getValue(),
         sliderGenotypeSize.getValue(),
         sliderGenerations.getValue());
+    viewModel.navigation_configureScreen("AuswertungGeneticAlgorithm");
   }
 
   public void sendButton_backwards(){
