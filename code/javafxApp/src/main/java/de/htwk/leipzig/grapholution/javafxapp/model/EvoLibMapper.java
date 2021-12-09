@@ -23,12 +23,12 @@ public class EvoLibMapper {
     }
 
 
-    public List<StatModel> mapStatModel(Statistics statistics) {
-        List<StatModel> listReturn = new ArrayList<>();
+    public List<HillModel> mapStatModel(Statistics statistics) {
+        List<HillModel> listReturn = new ArrayList<>();
 
         for (Object g : statistics.getBestIndividuals()) {
             Genotype<Boolean> h = (Genotype<Boolean>) g;
-            listReturn.add(new StatModel(h.getFitness()));
+            listReturn.add(new HillModel(h.getFitness()));
         }
         return listReturn;
     }
@@ -39,10 +39,10 @@ public class EvoLibMapper {
 
         for (Object populationObject : statistics.getHistory()) {
             Population<Boolean> population = (Population<Boolean>) populationObject;
-            List<StatModel> statListReturn = new ArrayList<>();
+            List<HillModel> statListReturn = new ArrayList<>();
             for (Object genotypeObject: population){
                 Genotype<Boolean> genotype = (Genotype<Boolean>) genotypeObject;
-                statListReturn.add(new StatModel(genotype.getFitness()));
+                statListReturn.add(new HillModel(genotype.getFitness()));
             }
             listReturn.add(new GenModel(statListReturn));
         }
