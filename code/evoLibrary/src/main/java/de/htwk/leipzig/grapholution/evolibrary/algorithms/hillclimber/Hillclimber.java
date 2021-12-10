@@ -6,9 +6,6 @@ import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmConfigOptions;
 import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmType;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.Mutator;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Klasse zur Darstellung eines einfachen Hillclimbers mit einstellbarer Mutation und Genotyp
@@ -28,6 +25,7 @@ public class Hillclimber<T> extends Algorithm<T> {
         super(genotype);
         this.mutator = mutator;
         currentBest = genotype;
+        statistics.addBestIndividual(genotype);
     }
 
     /**
@@ -42,9 +40,6 @@ public class Hillclimber<T> extends Algorithm<T> {
         statistics.addBestIndividual(genotype);
     }
 
-    public List<Genotype<T>> getHistory() {
-        return new ArrayList<>(history);
-    }
 
     /**
      * Funktion zum Ausfuehren des Hillclimbers

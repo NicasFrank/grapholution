@@ -9,13 +9,9 @@ import de.htwk.leipzig.grapholution.evolibrary.mutator.Mutator;
 import de.htwk.leipzig.grapholution.evolibrary.recombinator.Recombinator;
 import de.htwk.leipzig.grapholution.evolibrary.selectors.Selector;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Comparator;
-import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.stream.Collectors;
 
 /**
  * Noch zu entwickeln
@@ -40,8 +36,9 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
         super(population.get(0), configOptions);
         this.mutator = mutator;
         this.recombinator = recombinator;
+        this.population = population;
         this.recombinationChance = configOptions.getOrElse("recombinationChance", 1.0);
-        this.population = new Population<>(population.createCopy());
+        this.population = population.createCopy();
         this.selector = selector;
         statistics.addToHistory(population);
     }
@@ -81,7 +78,7 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
 
 
     private boolean hasNotRunToCompletion() {
-        return (iterations <= limit || limit < 0) && !(population.getBestFitness() == genotype.MAX_FITNESS_VALUE);
+        return (iterations < limit || limit < 0) && !(population.getBestFitness() == genotype.MAX_FITNESS_VALUE);
     }
 
     /**
@@ -112,6 +109,7 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
             population.set(2*i+1,mutator.mutate(population.get(2*i+1)));
         }
         statistics.addToHistory(population);
+        iterations++;
     }
 
     /**
