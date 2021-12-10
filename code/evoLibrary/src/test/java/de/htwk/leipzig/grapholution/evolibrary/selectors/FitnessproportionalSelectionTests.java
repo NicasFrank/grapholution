@@ -6,8 +6,6 @@ import de.htwk.leipzig.grapholution.evolibrary.genotypes.Population;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.concurrent.ThreadLocalRandom;
-
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class FitnessproportionalSelectionTests {

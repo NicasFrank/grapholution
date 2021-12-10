@@ -40,7 +40,6 @@ public class Hillclimber<T> extends Algorithm<T> {
         statistics.addBestIndividual(genotype);
     }
 
-
     /**
      * Funktion zum Ausfuehren des Hillclimbers
      * @return Bester erreichter Genotyp

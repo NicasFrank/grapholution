@@ -3,7 +3,6 @@ package de.htwk.leipzig.grapholution.evolibrary.recombinator;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
 
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
