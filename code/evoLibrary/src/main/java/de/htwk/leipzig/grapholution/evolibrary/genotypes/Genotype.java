@@ -29,7 +29,7 @@ public class Genotype<T> {
      * @param values Werte, die dem Genotyp zugewiesen werden
      */
     public Genotype(FitnessFunction<T> fitnessfunction, List<T> values){
-        this.values = values;
+        this.values = new ArrayList<>(values);
         this.fitnessFunction = fitnessfunction;
         this.fitness = fitnessFunction.evaluate(this);
         MAX_FITNESS_VALUE = fitnessFunction.getMaxFitnessValue(this);
@@ -41,7 +41,7 @@ public class Genotype<T> {
      * @return Liste mit Werten des Genotyps
      */
     public List<T> getValues() {
-        return values;
+        return new ArrayList<>(values);
     }
 
     public int size(){
