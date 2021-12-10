@@ -14,5 +14,7 @@ public class HillModel extends Statistics {
         this.fitness = new SimpleStringProperty(String.valueOf(fitness));
     }
 
+
+
     public String getFitness(){return fitness.get();}
 }
