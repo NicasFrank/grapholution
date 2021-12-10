@@ -29,7 +29,7 @@ public class SwitchOneBitTests {
         var copy = testGenotype.createCopy();
         switchOneBit = new SwitchOneBit();
 
-        switchOneBit.mutate(testGenotype);
+        testGenotype = switchOneBit.mutate(testGenotype);
 
         var trueCount = testGenotype.getValues().stream()
                 .filter(aBoolean -> aBoolean)

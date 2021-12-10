@@ -27,7 +27,6 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
     private final Recombinator<T> recombinator;
     private double recombinationChance;
     private Population<T> population;
-    private final ArrayList<Population<T>> history;
     private final Selector<T> selector;
 
     /**
@@ -44,8 +43,7 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
         this.recombinationChance = configOptions.getOrElse("recombinationChance", 1.0);
         this.population = new Population<>(population.createCopy());
         this.selector = selector;
-        history = new ArrayList<>();
-        history.add(population.createCopy());
+        statistics.addToHistory(population);
     }
 
     /**
@@ -81,14 +79,9 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
         recombinationChance = options.getOrElse("recombinationChance", 1.0);
     }
 
-    @Override
-    public List<Genotype<T>> getHistory() {
-        return history.stream().map(Population::getBestIndividuum)
-                .collect(Collectors.toList());
-    }
 
     private boolean hasNotRunToCompletion() {
-        return (history.size() <= limit || limit < 0) && !(population.getBestFitness() == genotype.MAX_FITNESS_VALUE);
+        return (iterations <= limit || limit < 0) && !(population.getBestFitness() == genotype.MAX_FITNESS_VALUE);
     }
 
     /**
@@ -118,7 +111,7 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
             population.set(2*i,mutator.mutate(population.get(2*i)));
             population.set(2*i+1,mutator.mutate(population.get(2*i+1)));
         }
-        history.add(population.createCopy());
+        statistics.addToHistory(population);
     }
 
     /**
@@ -126,8 +119,7 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
      * @return beste Individuum
      */
     private Genotype<T> bestIndividuum() {
-        return history.stream()
-                .flatMap(Collection::stream)
+        return population.stream()
                 .max(Comparator.comparingInt(Genotype::getFitness))
                 .orElse(null);
     }

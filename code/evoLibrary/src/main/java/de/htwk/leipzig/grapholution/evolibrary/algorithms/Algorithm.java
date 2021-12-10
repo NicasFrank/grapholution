@@ -1,6 +1,7 @@
 package de.htwk.leipzig.grapholution.evolibrary.algorithms;
 
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
+import de.htwk.leipzig.grapholution.evolibrary.statistics.Statistics;
 import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmConfigOptions;
 import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmType;
 
@@ -16,6 +17,7 @@ public abstract class Algorithm<T> {
     protected final Genotype<T> genotype;
     protected int limit = -1;
     protected int iterations = 0;
+    protected Statistics statistics = new Statistics();
 
     /**
      * Konstruktor fuer einen Algorithmus
@@ -90,5 +92,4 @@ public abstract class Algorithm<T> {
 
     protected abstract void setCustomConfigOptions(AlgorithmConfigOptions options);
 
-    public abstract List<Genotype<T>> getHistory();
 }
