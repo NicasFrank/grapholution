@@ -11,7 +11,7 @@ public class SceneControllerBase extends SceneController{
 
   public void initialize(){
     this.viewModel = new ViewModel(this, basePane);
-    viewModel.navigation_configureScreen("Choice");
+    viewModel.navigation_configureScreen("AlgorithmChoice");
   }
   /**
    * löscht die aktuellen elemente der szene und fügt die neuen hinzu

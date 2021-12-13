@@ -53,32 +53,19 @@ public class ViewModel {
    */
   public void navigation_configureScreen (Object nameOfNextScreen, File file){
     currentScene++;
-    switch (nameOfNextScreen){
-      case "Choice":
-        allScenes[0] = loadNewPane("AlgorithmChoice.fxml");
-        break;
-
-      case "Hillclimber":
-        allScenes[1] = loadNewPane("ConfigHillclimber.fxml");
-        break;
-
-      case "Genetischer Algorithmus":
-        allScenes[1] = loadNewPane("ConfigGeneticAlgorithm.fxml");
-        break;
-
-      case "AuswertungHillclimber":
+    switch (EChoices.valueOf(nameOfNextScreen.replaceAll("\\s+", "")).name()) {
+      case "AlgorithmChoice" -> allScenes[0] = loadNewPane("AlgorithmChoice.fxml");
+      case "Hillclimber" -> allScenes[1] = loadNewPane("ConfigHillclimber.fxml");
+      case "GeneticAlgorithm" -> allScenes[1] = loadNewPane("ConfigGeneticAlgorithm.fxml");
+      case "ResultsHillclimber" -> {
         climbTheHill(inputField.get());
         allScenes[2] = loadNewPane("ResultsHillclimber.fxml");
         outputField.set("Ergebnis");
-        break;
-
-      case "AuswertungGeneticAlgorithm":
-        allScenes[2] = loadNewPane("ResultsGeneticAlgorithm.fxml");
-        break;
-
-      default:
-        //Nichts
-        break;
+      }
+      case "ResultsGeneticAlgorithm" -> allScenes[2] = loadNewPane("ResultsGeneticAlgorithm.fxml");
+      default -> {
+      }
+      //Nichts
     }
   }
 
