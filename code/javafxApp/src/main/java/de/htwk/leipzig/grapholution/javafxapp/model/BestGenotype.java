@@ -12,4 +12,27 @@ public class BestGenotype {
 
     }
 
+    public String getAge() {
+        return age.get();
+    }
+
+    public StringProperty ageProperty() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age.set(age);
+    }
+
+    public String getFitness() {
+        return fitness.get();
+    }
+
+    public StringProperty fitnessProperty() {
+        return fitness;
+    }
+
+    public void setFitness(String fitness) {
+        this.fitness.set(fitness);
+    }
 }

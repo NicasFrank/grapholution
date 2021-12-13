@@ -15,16 +15,6 @@ public class Statistics {
     private List<Genotype<?>> bestIndividuals = new ArrayList<>();
 
     /**
-     * Funktion zum Hinzufuegen einer Population des Algorithmus zur Historie, sowie deren bestes Individuum zur
-     * Besten-Individuums-Historie
-     * @param population Population die hinzugefuegt werden soll
-     */
-    public void addToHistory(Population<?> population) {
-        history.add(population);
-        bestIndividuals.add(population.getBestIndividual());
-    }
-
-    /**
      * Funktion zum hinzufügen eines besten Individuums zur Besten-Individuums-Historie
      * @param genotype Individuum das hinzugefuegt werden soll
      */
@@ -38,6 +28,15 @@ public class Statistics {
         return bestIndividuals;
     }
 
+    /**
+     * Funktion zum Hinzufuegen einer Population des Algorithmus zur Historie, sowie deren bestes Individuum zur
+     * Besten-Individuums-Historie
+     * @param population Population die hinzugefuegt werden soll
+     */
+    public void addToHistory(Population<?> population) {
+        history.add(population);
+        bestIndividuals.add(population.getBestIndividual());
+    }
     /**
      * Funktion zum erhalten der history
      * @return List<Population<?>> histroy

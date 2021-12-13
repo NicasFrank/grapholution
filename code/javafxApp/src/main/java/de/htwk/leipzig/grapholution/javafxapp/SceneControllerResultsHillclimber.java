@@ -15,7 +15,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class SceneControllerResults extends SceneController implements Initializable{
+public class SceneControllerResultsHillclimber extends SceneController implements Initializable{
 
     @FXML
     private TextField outputField;
@@ -27,6 +27,7 @@ public class SceneControllerResults extends SceneController implements Initializ
     private TableColumn<HillModel, String> fitness;
 
     private ViewModel viewModel;
+    private ViewModelHillclimber viewModelHillclimber;
 
     /**
      * setter für viewmodel und bindet outputfield an output vom viewmodel
