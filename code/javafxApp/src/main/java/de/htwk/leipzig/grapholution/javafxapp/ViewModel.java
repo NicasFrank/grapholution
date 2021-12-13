@@ -3,26 +3,22 @@ package de.htwk.leipzig.grapholution.javafxapp;
 import de.htwk.leipzig.grapholution.evolibrary.algorithms.hillclimber.Hillclimber;
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.FitnessFunction;
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.OneMaxEvaluator;
+import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.ZeroMaxEvaluator;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
+import de.htwk.leipzig.grapholution.evolibrary.mutator.BinaryMutation;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.Mutator;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.SwitchOneBit;
 import de.htwk.leipzig.grapholution.javafxapp.model.BestGenotype;
 import de.htwk.leipzig.grapholution.javafxapp.model.EvoLibMapper;
-import de.htwk.leipzig.grapholution.javafxapp.model.HillModel;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
-import java.util.Random;
 import java.util.List;
+import java.util.Random;
 
 
 public class ViewModel {
@@ -38,11 +34,15 @@ public class ViewModel {
 
   private Hillclimber<Boolean> hilly;
   private BestGenotype bestGenotype;
-  private SceneControllerResults sceneControllerResults;
 
-  ViewModel(SceneControllerBase sceneControllerBase, Pane firstPane){
+  public ViewModel(SceneControllerBase sceneControllerBase, Pane firstPane, double mutationChance,
+                   boolean mutatorIsBinary, boolean fitnessIsOneMax){
     this.sceneControllerBase = sceneControllerBase;
     allScenes[0]=firstPane;
+    Mutator mutator;
+    FitnessFunction fitnessFunction;
+    mutator = mutatorIsBinary ? new BinaryMutation((int) mutationChance) : new SwitchOneBit();
+    fitnessFunction = fitnessIsOneMax ? new OneMaxEvaluator() : new OneMaxEvaluator();
   }
 
   /**
@@ -53,7 +53,7 @@ public class ViewModel {
     currentScene++;
     switch (nameOfNextScreen.toString()){
       case "Choice":
-        allScenes[0] = loadNewPane("WahlAlgorithmus.fxml");
+        allScenes[0] = loadNewPane("ChoiceAlgorithm.fxml");
         break;
 
       case "Hillclimber":
@@ -65,13 +65,13 @@ public class ViewModel {
         break;
 
       case "AuswertungHillclimber":
-        climbTheHill(inputField.get());
-        allScenes[2] = loadNewPane("AuswertungScreen.fxml");
+        climbTheHill(inputField.get(),12);
+        allScenes[2] = loadNewPane("StatisticsHillclimber.fxml");
         outputField.set("Ergebnis");
         break;
 
       case "AuswertungGeneticAlgorithm":
-        allScenes[2] = loadNewPane("AuswertungGeneticAlgorithm.fxml");
+        allScenes[2] = loadNewPane("StatisticsGeneticAlgorithm.fxml");
         break;
 
       default:
@@ -92,19 +92,17 @@ public class ViewModel {
    * Hillclimber instanziert und ausgeführt
    * @param startConfig Startkonfiguration
    */
-  public void climbTheHill(String startConfig){
+  public void climbTheHill(String startConfig, double mutationChance){
       int genosize = 10;
       FitnessFunction<Boolean> fitnessfunctionO = new OneMaxEvaluator();
       Genotype<Boolean> genotypeO = new Genotype<>(Random::nextBoolean, fitnessfunctionO, genosize);
       Mutator<Boolean> mutatorS = new SwitchOneBit();
-
+      isInputCorrect();
       hilly = new Hillclimber<>(genotypeO, mutatorS);
       hilly.run();
       EvoLibMapper evoLibMapper = new EvoLibMapper();
-      //List<BestGenotype> bg = evoLibMapper.map(hilly.getStatistics());
-      //outputField.set();
-
   }
+
 
   public void startGeneticAlgorithm(boolean isStepByStep, boolean mutationIsBinary,double mutationChance,
                                     boolean fitnessIsOneMax, double recombinationChance,double populationSize,

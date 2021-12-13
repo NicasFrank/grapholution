@@ -10,15 +10,9 @@ public class SceneControllerHillclimber extends SceneController{
   @FXML
   private TextField inputField;
   @FXML
-  private RadioButton radioCon1op1;
+  private RadioButton radioMutationBinary;
   @FXML
-  private RadioButton radioCon1op2;
-  @FXML
-  private RadioButton radioCon1op3;
-  @FXML
-  private ToggleGroup Config1;
-  @FXML
-  private ToggleGroup Config2;
+  private Slider sliderMutationChance;
 
   private ViewModel viewModel;
 
@@ -27,8 +21,10 @@ public class SceneControllerHillclimber extends SceneController{
    * an Hillclimber weiter
    */
   public void sendButton_startAlgo(){
-    viewModel.navigation_configureScreen("AuswertungHillclimber");
-    viewModel.climbTheHill(inputField.getText());
+    viewModel.navigation_configureScreen("StatisticsHillclimber");
+    viewModel.climbTheHill(
+            inputField.getText(),
+            radioMutationBinary.isSelected() ? sliderMutationChance.getValue() : 0);
   }
 
   public void sendButton_backwards(){

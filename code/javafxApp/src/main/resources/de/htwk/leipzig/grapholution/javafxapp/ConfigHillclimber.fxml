@@ -16,21 +16,12 @@
             <Font size="36.0" />
          </font>
       </Label>
-      <RadioButton fx:id="radioCon1op1" layoutX="242.0" layoutY="326.0" mnemonicParsing="false" selected="true" text="Config1 Option1">
+      <RadioButton fx:id="radioMutationBinary" layoutX="242.0" layoutY="326.0" mnemonicParsing="false" selected="true" text="Mutation Binary">
          <toggleGroup>
-            <ToggleGroup fx:id="Config1" />
+            <ToggleGroup fx:id="Fitnessfunction" />
          </toggleGroup>
       </RadioButton>
-      <RadioButton fx:id="radioCon1op2" layoutX="242.0" layoutY="366.0" mnemonicParsing="false" text="Config1 Option2" toggleGroup="$Config1" />
-      <RadioButton fx:id="radioCon1op3" layoutX="242.0" layoutY="407.0" mnemonicParsing="false" text="Config1 Option3" toggleGroup="$Config1" />
-      <Slider fx:id="slider" blockIncrement="1.0" max="5.0" layoutX="357.0" layoutY="510.0" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="247.0" showTickLabels="true" />
-      <RadioButton fx:id="radioCon2op1" layoutX="603.0" layoutY="326.0" mnemonicParsing="false" selected="true" text="Config2 Option1">
-         <toggleGroup>
-            <ToggleGroup fx:id="Config2" />
-         </toggleGroup>
-      </RadioButton>
-      <RadioButton fx:id="radioCon2op2" layoutX="603.0" layoutY="366.0" mnemonicParsing="false" text="Config2 Option2" toggleGroup="$Config2" />
-      <RadioButton fx:id="radioCon2op3" layoutX="603.0" layoutY="407.0" mnemonicParsing="false" text="Config2 Option3" toggleGroup="$Config2" />
+      <Slider fx:id="sliderMutationChance" blockIncrement="1.0" layoutX="357.0" layoutY="510.0" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" minorTickCount="2" prefHeight="35.0" prefWidth="247.0" showTickLabels="true" showTickMarks="true" value="50.0"/>
       <Label layoutX="380.0" layoutY="474.0" prefHeight="17.0" prefWidth="200.0" styleClass="heading" text="Anzahl der Generationen">
          <font>
             <Font size="18.0" />

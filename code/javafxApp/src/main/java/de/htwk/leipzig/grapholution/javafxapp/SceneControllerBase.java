@@ -10,7 +10,7 @@ public class SceneControllerBase extends SceneController{
   private ViewModel viewModel;
 
   public void initialize(){
-    this.viewModel = new ViewModel(this, basePane);
+    this.viewModel = new ViewModel(this, basePane, 12,true,true);
     viewModel.navigation_configureScreen("Choice");
   }
   /**
