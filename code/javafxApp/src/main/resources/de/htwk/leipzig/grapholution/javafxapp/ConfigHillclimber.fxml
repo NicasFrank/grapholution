@@ -22,7 +22,7 @@
          </toggleGroup>
       </RadioButton>
       <Slider fx:id="sliderMutationChance" blockIncrement="1.0" layoutX="357.0" layoutY="510.0" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" minorTickCount="2" prefHeight="35.0" prefWidth="247.0" showTickLabels="true" showTickMarks="true" value="50.0"/>
-      <Label layoutX="380.0" layoutY="474.0" prefHeight="17.0" prefWidth="200.0" styleClass="heading" text="Anzahl der Generationen">
+      <Label layoutX="380.0" layoutY="474.0" prefHeight="17.0" prefWidth="200.0" styleClass="heading" text="Mutationswahrscheinlichkeit">
          <font>
             <Font size="18.0" />
          </font>

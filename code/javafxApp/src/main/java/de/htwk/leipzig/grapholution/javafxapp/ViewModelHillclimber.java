@@ -8,7 +8,8 @@ import de.htwk.leipzig.grapholution.evolibrary.mutator.BinaryMutation;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.Mutator;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.SwitchOneBit;
 import de.htwk.leipzig.grapholution.javafxapp.model.EvoLibMapper;
-import de.htwk.leipzig.grapholution.evolibrary.genotypes.BestGenotype;
+import de.htwk.leipzig.grapholution.javafxapp.model.BestGenotype;
+
 public class ViewModelHillclimber{
 
     private BestGenotype bestGenotype;
@@ -39,7 +40,7 @@ public class ViewModelHillclimber{
      * @return aktuell besten genotypen
      */
     public BestGenotype runAlgorithm(boolean untilDone){
-        Genotype currentBestGeno;
+        Genotype currentBestGeno = genotype;
         if(!untilDone) {
             currentBestGeno = hillclimber.run();
         }
