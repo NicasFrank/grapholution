@@ -1,6 +1,6 @@
 package de.htwk.leipzig.grapholution.javafxapp;
 
-import de.htwk.leipzig.grapholution.evolibrary.algorithms.hillclimber.Hillclimber;
+import de.htwk.leipzig.grapholution.evolibrary.algorithms.Hillclimber.Hillclimber;
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.FitnessFunction;
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.OneMaxEvaluator;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
@@ -29,18 +29,18 @@ public class ViewModelHillclimber{
         mutator = mutatorIsBinary ? new BinaryMutation((int) mutationChance) : new SwitchOneBit();
         fitnessFunction = fitnessIsOneMax ? new OneMaxEvaluator() : new OneMaxEvaluator();
         if(limit < 0) {
-            hillclimber = new Hillclimber(genotype,mutator, (int) limit);
+            hillclimber = new Hillclimber<Genotype>(genotype,mutator, (int) limit);
         }
         runAlgorithm(false);
     }
 
     /**
-     * ruft die run methoden des genetischen algorithmus abheangig ob schrittweise oder auf einmal gerechnet werden soll
+     * ruft die run methoden des Hillclimber algorithmus
      * @param untilDone ob der algorithmus bis zur maximalanzahl der generationen oder bestmoeglichen individuums durchlaufen soll
      * @return aktuell besten genotypen
      */
     public BestGenotype runAlgorithm(boolean untilDone){
-        Genotype currentBestGeno = genotype;
+        Genotype currentBestGeno = null;
         if(!untilDone) {
             currentBestGeno = hillclimber.run();
         }
