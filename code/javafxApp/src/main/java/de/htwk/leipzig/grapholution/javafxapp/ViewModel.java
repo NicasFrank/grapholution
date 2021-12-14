@@ -51,7 +51,7 @@ public class ViewModel {
    * switch anhand String je nach nächster Pane
    * @param nameOfNextScreen String mit Namen des nächsten Screens
    */
-  public void navigation_configureScreen (Object nameOfNextScreen, File file){
+  public void navigation_configureScreen (EChoices nameOfNextScreen, File file){
     currentScene++;
     switch (EChoices.valueOf(nameOfNextScreen.replaceAll("\\s+", "")).name()) {
       case "AlgorithmChoice" :
