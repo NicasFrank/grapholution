@@ -1,6 +1,5 @@
 package de.htwk.leipzig.grapholution.javafxapp;
 
-import de.htwk.leipzig.grapholution.evolibrary.algorithms.hillclimber.Hillclimber;
 import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -57,7 +56,7 @@ public class SceneControllerChoice extends SceneController{
 
     if (file != null) {
       viewModel.navigation_configureScreen(
-              comboBoxAlgo.getValue(),
+              EChoices.valueOf(comboBoxAlgo.getValue()),
               file
       );
     }

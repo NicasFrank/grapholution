@@ -2,7 +2,6 @@ package de.htwk.leipzig.grapholution.javafxapp;
 
 
 import de.htwk.leipzig.grapholution.evolibrary.algorithms.Algorithm;
-import de.htwk.leipzig.grapholution.evolibrary.algorithms.hillclimber.Hillclimber;
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.FitnessFunction;
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.OneMaxEvaluator;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
@@ -10,7 +9,6 @@ import de.htwk.leipzig.grapholution.evolibrary.mutator.Mutator;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.SwitchOneBit;
 import de.htwk.leipzig.grapholution.javafxapp.model.BestGenotype;
 import de.htwk.leipzig.grapholution.javafxapp.model.EvoLibMapper;
-import de.htwk.leipzig.grapholution.javafxapp.model.HistoryResults;
 import de.htwk.leipzig.grapholution.javafxapp.utils.DialogUtils;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleStringProperty;
@@ -18,7 +16,6 @@ import javafx.beans.property.StringProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
 
-import java.io.Console;
 import java.io.File;
 import java.io.IOException;
 import java.util.Random;
@@ -43,7 +40,7 @@ public class ViewModel {
     allScenes[0]=firstPane;
   }
 
-  public void navigation_configureScreen (Object nameOfNextScreen) {
+  public void navigation_configureScreen (EChoices nameOfNextScreen) {
     navigation_configureScreen(nameOfNextScreen, null);
   }
 
