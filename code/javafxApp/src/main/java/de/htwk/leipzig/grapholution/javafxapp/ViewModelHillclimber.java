@@ -20,14 +20,14 @@ public class ViewModelHillclimber{
      * @param mutationChance die wahrscheinlichkeit der binary mutation
      * @param limit die maximale anzahl an generationen
      */
-    public ViewModelHillclimber(boolean mutatorIsBinary, double mutationChance, int limit){
-        Mutator mutator;
+    public ViewModelHillclimber(boolean mutatorIsBinary, double mutationChance, int limit, Genotype<Boolean> genotype){
+        Mutator<Boolean> mutator;
         mutator = mutatorIsBinary ? new BinaryMutation((int) mutationChance) : new SwitchOneBit();
         if(limit < 0) {
-            hillclimber = new Hillclimber<Genotype>(genotype,mutator, (int) limit);
+            this.hillclimber = new Hillclimber<Boolean>(genotype, mutator, (int) limit);
         }
         else{
-            hillclimber = new Hillclimber<Genotype>(genotype, mutator);
+            this.hillclimber = new Hillclimber<Boolean>(genotype, mutator);
         }
         runAlgorithm(false);
     }

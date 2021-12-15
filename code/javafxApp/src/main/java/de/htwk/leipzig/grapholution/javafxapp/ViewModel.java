@@ -32,6 +32,7 @@ public class ViewModel {
 
     private Hillclimber<Boolean> hilly;
     private BestGenotype bestGenotype;
+    private Genotype genotype;
 
     public ViewModel(SceneControllerBase sceneControllerBase, Pane firstPane) {
         this.sceneControllerBase = sceneControllerBase;
@@ -100,14 +101,14 @@ public class ViewModel {
     }
 
     public void startHillclimberAlgorithm(boolean mutationIsBinary, double mutationChance, int limit) {
-        viewModelHillclimber = new ViewModelHillclimber(mutationIsBinary, mutationChance, (int) limit);
+        viewModelHillclimber = new ViewModelHillclimber(mutationIsBinary, mutationChance, (int) limit, genotype);
     }
 
     public void startGeneticAlgorithm(boolean isStepByStep, boolean mutationIsBinary, double mutationChance,
                                       boolean fitnessIsOneMax, double recombinationChance, double populationSize,
                                       double genotypeSize, double generationAmount) {
         viewModelGeneticAlgorithm = new ViewModelGeneticAlgorithm(isStepByStep, mutationIsBinary, mutationChance,
-                fitnessIsOneMax, recombinationChance, populationSize, genotypeSize, generationAmount);
+                fitnessIsOneMax, recombinationChance, populationSize, genotypeSize, generationAmount,genotype);
     }
 
     public BestGenotype geneticAlgorithmNextStep(boolean untilDone) {

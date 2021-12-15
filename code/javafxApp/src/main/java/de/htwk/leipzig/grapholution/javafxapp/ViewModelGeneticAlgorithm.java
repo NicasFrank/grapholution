@@ -24,6 +24,7 @@ public class ViewModelGeneticAlgorithm{
   private BestGenotype bestGenotype;
   private EvoLibMapper evoLibMapper;
   private boolean isStepByStep;
+  private Genotype genotype;
 
 
   /**
@@ -40,7 +41,7 @@ public class ViewModelGeneticAlgorithm{
    */
   public ViewModelGeneticAlgorithm(boolean isStepByStep, boolean mutatorIsBinary, double mutationChance,
                                    boolean fitnessIsOneMax, double recombinationChance,double populationSize,
-                                   double genotypeSize, double limit){
+                                   double genotypeSize, double limit, Genotype<Boolean> genotype){
     this.isStepByStep = isStepByStep;
     Mutator mutator;
     Selector selector;
@@ -53,7 +54,7 @@ public class ViewModelGeneticAlgorithm{
     fitnessFunction = fitnessIsOneMax ? new OneMaxEvaluator() : new ZeroMaxEvaluator();
     population = new Population<>(Random::nextBoolean,(int)populationSize,(int) genotypeSize,fitnessFunction);
     if(limit < 0){
-      geneticAlgorithm = new GeneticAlgorithm(mutator,selector,recombinator,recombinationChance,population);
+      geneticAlgorithm = new GeneticAlgorithm<>(mutator,selector,recombinator,recombinationChance,population);
     } else {
       geneticAlgorithm = new GeneticAlgorithm(mutator,selector,recombinator,recombinationChance,population,(int) limit);
     }

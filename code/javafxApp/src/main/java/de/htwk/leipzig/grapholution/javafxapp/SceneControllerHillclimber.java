@@ -28,7 +28,7 @@ public class SceneControllerHillclimber extends SceneController{
       viewModel.startHillclimberAlgorithm(
               radioMutationBinary.isSelected(),
               radioMutationBinary.isSelected() ? sliderMutationChance.getValue() : 0,
-              0
+              -1
 
       );
   }
