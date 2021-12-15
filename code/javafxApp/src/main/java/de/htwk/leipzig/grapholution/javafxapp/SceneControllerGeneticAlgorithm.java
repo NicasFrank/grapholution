@@ -36,7 +36,7 @@ public class SceneControllerGeneticAlgorithm extends SceneController{
         sliderPopulationSize.getValue(),
         sliderGenotypeSize.getValue(),
         sliderGenerations.getValue());
-    viewModel.navigation_configureScreen("ResultsGeneticAlgorithm");
+    viewModel.navigation_configureScreen(EChoices.ResultsGeneticAlgorithm);
   }
 
   public void sendButton_backwards(){
