@@ -33,14 +33,14 @@ public class SceneControllerHillclimber extends SceneController{
   private ToggleGroup Config2;
 
   private ViewModel viewModel;
-  private SceneControllerResults sceneControllerResults;
+  private SceneControllerResultsHillclimber sceneControllerResultsHillclimber;
 
   /**
    * speichert aktuellen Text des Inputfields, triggert dann laden der Ergebnis-Szene und gibt Input an ViewModel, damit
    * an Hillclimber weiter
    */
   public void sendButton_startAlgo(){
-    viewModel.navigation_configureScreen("AuswertungHillclimber");
+    viewModel.navigation_configureScreen(EChoices.ResultsHillclimber);
     viewModel.climbTheHill(inputField.getText());
   }
 

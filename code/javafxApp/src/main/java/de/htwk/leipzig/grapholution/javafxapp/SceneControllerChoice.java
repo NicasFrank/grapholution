@@ -40,7 +40,7 @@ public class SceneControllerChoice extends SceneController{
    */
   public void sendButtonClick_configureScreen() {
     viewModel.navigation_configureScreen(
-        comboBoxAlgo.getValue()
+        EChoices.valueOf(comboBoxAlgo.getValue())
         //,comboBoxProblem.getValue()
     );
   }
@@ -57,7 +57,7 @@ public class SceneControllerChoice extends SceneController{
 
     if (file != null) {
       viewModel.navigation_configureScreen(
-              comboBoxAlgo.getValue(),
+              EChoices.valueOf(comboBoxAlgo.getValue()),
               file
       );
     }

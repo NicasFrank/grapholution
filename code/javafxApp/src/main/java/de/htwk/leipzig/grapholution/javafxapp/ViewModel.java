@@ -33,15 +33,17 @@ public class ViewModel {
   private final SceneControllerBase sceneControllerBase;
   private Pane[] allScenes = new Pane[3];
   private int currentScene = -1;
+  private boolean isAlgorithmStepByStep = false;
 
   private Algorithm<Boolean> hilly;
+  private ViewModelGeneticAlgorithm viewModelGeneticAlgorithm;
 
   ViewModel(SceneControllerBase sceneControllerBase, Pane firstPane){
     this.sceneControllerBase = sceneControllerBase;
     allScenes[0]=firstPane;
   }
 
-  public void navigation_configureScreen (Object nameOfNextScreen) {
+  public void navigation_configureScreen (EChoices nameOfNextScreen) {
     navigation_configureScreen(nameOfNextScreen, null);
   }
 
@@ -49,31 +51,28 @@ public class ViewModel {
    * switch anhand String je nach nächster Pane
    * @param nameOfNextScreen String mit Namen des nächsten Screens
    */
-  public void navigation_configureScreen (Object nameOfNextScreen, File file){
+  public void navigation_configureScreen (EChoices nameOfNextScreen, File file){
     currentScene++;
-    switch (nameOfNextScreen.toString()){
-      case "Choice":
-        allScenes[0] = loadNewPane("WahlAlgorithmus.fxml");
+    switch (nameOfNextScreen) {
+      case AlgorithmChoice :
+        allScenes[0] = loadNewPane("AlgorithmChoice.fxml");
         break;
-
-      case "Hillclimber":
+      case Hillclimber :
         allScenes[1] = loadNewPane("ConfigHillclimber.fxml");
         break;
-
-      case "Ein Anderer":
-        //Something
+      case GeneticAlgorithm :
+        allScenes[1] = loadNewPane("ConfigGeneticAlgorithm.fxml");
         break;
-
-      case "AuswertungHillclimber":
-        climbTheHill(inputField.get(), file);
-        allScenes[2] = loadNewPane("AuswertungScreen.fxml");
-
+      case ResultsHillclimber :
+        climbTheHill(inputField.get());
+        allScenes[2] = loadNewPane("ResultsHillclimber.fxml");
         outputField.set("Ergebnis");
-
         break;
-
-      default:
-        //Nichts
+      case ResultsGeneticAlgorithm :
+        allScenes[2] = loadNewPane("ResultsGeneticAlgorithm.fxml");
+        break;
+      default :
+        //handle das noch
         break;
     }
   }
@@ -86,7 +85,6 @@ public class ViewModel {
     currentScene--;
     setNextScreen(allScenes[currentScene]);
   }
-
   /**
    * Hillclimber instanziert und ausgeführt
    * @param startConfig Startkonfiguration
@@ -121,6 +119,18 @@ public class ViewModel {
     List<BestGenotype> bg = evoLibMapper.map(hilly.getHistory());
 
       //outputField.set();
+  }
+
+  public void startGeneticAlgorithm(boolean isStepByStep, boolean mutationIsBinary,double mutationChance,
+                                    boolean fitnessIsOneMax, double recombinationChance,double populationSize,
+                                    double genotypeSize, double generationAmount){
+    isAlgorithmStepByStep = isStepByStep;
+    viewModelGeneticAlgorithm = new ViewModelGeneticAlgorithm(isStepByStep,mutationIsBinary,mutationChance,
+        fitnessIsOneMax,recombinationChance,populationSize,genotypeSize,generationAmount);
+  }
+
+  public BestGenotype geneticAlgorithmNextStep(boolean untilDone){
+    return viewModelGeneticAlgorithm.runAlgorithm(untilDone);
   }
 
     /**
@@ -173,4 +183,5 @@ public class ViewModel {
   public Property<String> inputFieldProperty() {
     return inputField;
   }
+  public boolean getIsAlgorithmStepByStep(){return isAlgorithmStepByStep;}
 }

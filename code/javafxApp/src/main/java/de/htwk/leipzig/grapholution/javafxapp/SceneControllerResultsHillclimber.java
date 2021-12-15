@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-    public class SceneControllerResults extends SceneController implements Initializable {
+    public class SceneControllerResultsHillclimber extends SceneController implements Initializable {
 
         @FXML
         TextField outputField;
