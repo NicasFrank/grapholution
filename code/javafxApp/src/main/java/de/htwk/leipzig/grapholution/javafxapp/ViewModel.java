@@ -40,10 +40,6 @@ public class ViewModel {
     allScenes[0]=firstPane;
   }
 
-  public void navigation_configureScreen (EChoices nameOfNextScreen) {
-    navigation_configureScreen(nameOfNextScreen, null);
-  }
-
   /**
    * switch anhand String je nach nächster Pane
    * @param nameOfNextScreen String mit Namen des nächsten Screens
@@ -180,5 +176,4 @@ public class ViewModel {
   public Property<String> inputFieldProperty() {
     return inputField;
   }
-  public boolean getIsAlgorithmStepByStep(){return isAlgorithmStepByStep;}
 }
