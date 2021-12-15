@@ -6,6 +6,7 @@ import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.OneMaxEvaluator;
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.ZeroMaxEvaluator;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Population;
+import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmConfigOptions;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.BinaryMutation;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.Mutator;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.SwitchOneBit;
@@ -49,8 +50,10 @@ public class ViewModelGeneticAlgorithm{
     Recombinator recombinator = new OnePointCrossover();
     FitnessFunction fitnessFunction = fitnessIsOneMax ? new OneMaxEvaluator() : new ZeroMaxEvaluator();
     Population population = new Population<>(Random::nextBoolean,(int)populationSize,(int) genotypeSize,fitnessFunction);
-    geneticAlgorithm = (limit < 0) ? new GeneticAlgorithm(mutator,selector,recombinator,recombinationChance,population)
-            : new GeneticAlgorithm(mutator,selector,recombinator,recombinationChance,population,(int) limit);
+    geneticAlgorithm = (limit < 0) ? new GeneticAlgorithm(mutator,selector,recombinator,population, new AlgorithmConfigOptions().add("recombinationChance", recombinationChance))
+            : new GeneticAlgorithm(mutator,selector,recombinator,population, new AlgorithmConfigOptions()
+                .add("recombinationChance", recombinationChance)
+            .add("limit", (int) limit));
   }
 
   /**

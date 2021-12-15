@@ -57,7 +57,7 @@ public class SceneControllerChoice extends SceneController{
 
     if (file != null) {
       viewModel.navigation_configureScreen(
-              comboBoxAlgo.getValue(),
+              EChoices.valueOf(comboBoxAlgo.getValue()),
               file
       );
     }

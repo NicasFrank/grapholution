@@ -43,7 +43,7 @@ public class ViewModel {
     allScenes[0]=firstPane;
   }
 
-  public void navigation_configureScreen (Object nameOfNextScreen) {
+  public void navigation_configureScreen (EChoices nameOfNextScreen) {
     navigation_configureScreen(nameOfNextScreen, null);
   }
 
