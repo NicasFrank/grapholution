@@ -25,13 +25,14 @@ public class SceneControllerHillclimber extends SceneController{
    */
   public void sendButton_startAlgo() {
       viewModel.navigation_configureScreen("StatisticsHillclimber");
-      viewModel.startHillclimberAlgorithm(
-              radioMutationBinary.isSelected(),
-              radioMutationBinary.isSelected() ? sliderMutationChance.getValue() : 0,
-              -1
+  //    viewModel.startHillclimberAlgorithm(
+  //            radioMutationBinary.isSelected(),
+  //            radioMutationBinary.isSelected() ? sliderMutationChance.getValue() : 0,
+  //            -1,
 
-      );
-  }
+  //    );
+
+ }
 
   /**
    * Handlet die Rückwärtsnavigation

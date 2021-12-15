@@ -54,7 +54,7 @@ public class ViewModelGeneticAlgorithm{
     fitnessFunction = fitnessIsOneMax ? new OneMaxEvaluator() : new ZeroMaxEvaluator();
     population = new Population<>(Random::nextBoolean,(int)populationSize,(int) genotypeSize,fitnessFunction);
     if(limit < 0){
-      geneticAlgorithm = new GeneticAlgorithm<>(mutator,selector,recombinator,recombinationChance,population);
+      geneticAlgorithm = new GeneticAlgorithm(mutator,selector,recombinator,recombinationChance,population);
     } else {
       geneticAlgorithm = new GeneticAlgorithm(mutator,selector,recombinator,recombinationChance,population,(int) limit);
     }

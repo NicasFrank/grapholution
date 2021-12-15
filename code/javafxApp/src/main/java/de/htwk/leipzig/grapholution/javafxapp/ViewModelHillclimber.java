@@ -11,7 +11,7 @@ import de.htwk.leipzig.grapholution.javafxapp.model.EvoLibMapper;
 public class ViewModelHillclimber{
 
     private BestGenotype bestGenotype;
-    private Genotype genotype;
+    private Genotype<Boolean> genotype;
     private EvoLibMapper evoLibMapper;
     private Hillclimber hillclimber;
 

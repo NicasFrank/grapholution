@@ -26,6 +26,7 @@ public class SceneControllerGeneticAlgorithm extends SceneController{
    * loest Laden der naechsten Pane aus
    * gibt Konfiguration des genetischen Algorithmus weiter
    */
+  /*
   public void sendButton_startAlgo(){
     viewModel.navigation_configureScreen("AuswertungGeneticAlgorithm");
     viewModel.startGeneticAlgorithm(
@@ -38,7 +39,7 @@ public class SceneControllerGeneticAlgorithm extends SceneController{
         sliderGenotypeSize.getValue(),
         sliderGenerations.getValue());
   }
-
+*/
   public void sendButton_backwards(){
     viewModel.navigation_Back();
   }
