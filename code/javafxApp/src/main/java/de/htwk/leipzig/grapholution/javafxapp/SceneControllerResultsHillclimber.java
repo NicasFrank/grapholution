@@ -2,7 +2,6 @@ package de.htwk.leipzig.grapholution.javafxapp;
 import de.htwk.leipzig.grapholution.javafxapp.model.HillModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.*;
@@ -15,6 +14,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Scene Kontroller Klasse für Hillclimber Statistik und Visualisierung
+ */
 public class SceneControllerResultsHillclimber extends SceneController implements Initializable{
 
     @FXML
@@ -25,7 +27,9 @@ public class SceneControllerResultsHillclimber extends SceneController implement
     private LineChart<HillModel, String> lineChartResults;
     @FXML
     private TableColumn<HillModel, String> fitness;
-
+    /**
+     * Objekte der ViewModels
+     */
     private ViewModel viewModel;
     private ViewModelHillclimber viewModelHillclimber;
 
@@ -39,6 +43,10 @@ public class SceneControllerResultsHillclimber extends SceneController implement
         outputField.textProperty().bind(viewModel.outputFieldProperty());
     }
 
+    /**
+     * Methode um besten Fitnesswert des Hillclimber Algorithmus, in TableView zu setzen
+     */
+
     public void setTableViewResults() {
         final ObservableList<HillModel> data = FXCollections.observableArrayList(
                 new HillModel(1),
@@ -47,8 +55,12 @@ public class SceneControllerResultsHillclimber extends SceneController implement
                 new HillModel(2));
         fitness.setCellValueFactory(new PropertyValueFactory<>("fitness"));
         tableViewResults.setItems(data);
-        tableViewResults.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        tableViewResults.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     }
+
+    /**
+     * Methode um zeitlichen Verlauf der Fitnesswerte in LinienChart zu setzen
+     */
     public void setLineChartResults() {
         final CategoryAxis xAxis = new CategoryAxis();
         final NumberAxis yAxis = new NumberAxis();
@@ -76,17 +88,18 @@ public class SceneControllerResultsHillclimber extends SceneController implement
         lineChartResults.getData().add(series);
     }
 
-    public void loadButtonTableView(ActionEvent e) {
-    }
-
-    public void loadButtonLineChart(ActionEvent e) {
-
-    }
-
+    /**
+     * Handled die Rückwärtsnavigation
+     */
     public void sendButton_backwards(){
         viewModel.navigation_Back();
     }
 
+    /**
+     * Initialisierungsmethode für das Setzen der Visual-Daten
+     * @param location
+     * @param resources
+     */
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
         setTableViewResults();

@@ -7,7 +7,15 @@ import de.htwk.leipzig.grapholution.evolibrary.statistics.Statistics;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Klasse für das Mapping der Lib Daten zu JavaFX
+ */
 public class EvoLibMapper {
+    /**
+     * Methode für das mappen einer Liste von Genotypen
+     * @param results
+     * @return
+     */
     public List<BestGenotype> map(List<Genotype<Boolean>> results) {
         List<BestGenotype> listReturn = new ArrayList<>();
         for (Object g : results
@@ -18,11 +26,20 @@ public class EvoLibMapper {
         return listReturn;
     }
 
+    /**
+     * Getter für Besten Genotypen
+     * @param genotype
+     * @return bester Gentoyp
+     */
     public BestGenotype map(Genotype<Boolean> genotype) {
         return new BestGenotype(genotype.getFitness(), genotype.getAge());
     }
 
-
+    /**
+     * Methode um Liste von HillModel zu erzeugen und befüllen
+     * @param statistics
+     * @return
+     */
     public List<HillModel> mapStatModel(Statistics statistics) {
         List<HillModel> listReturn = new ArrayList<>();
 
@@ -33,7 +50,11 @@ public class EvoLibMapper {
         return listReturn;
     }
 
-
+    /**
+     * Methode um Liste von GenModel zurückzugeben, welche eine Liste an HillModels enthält
+     * @param statistics
+     * @return
+     */
     public List<GenModel> map(Statistics statistics) {
         List<GenModel> listReturn = new ArrayList<>();
 
