@@ -1,9 +1,6 @@
 package de.htwk.leipzig.grapholution.javafxapp;
 
-import de.htwk.leipzig.grapholution.evolibrary.algorithms.hillclimber.Hillclimber;
-import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
 import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmConfigOptions;
-import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmType;
 import de.htwk.leipzig.grapholution.javafxapp.utils.DialogUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,10 +9,6 @@ import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.FileChooser;
-
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
 
 public class SceneControllerHillclimber extends SceneController{
   public Slider slider;
@@ -54,30 +47,20 @@ public class SceneControllerHillclimber extends SceneController{
   }
 
   private AlgorithmConfigOptions createConfigOptions() {
-    var options = new AlgorithmConfigOptions();
-    options.add("limit", Math.round(slider.getValue()));
-
-    return options;
+    return new AlgorithmConfigOptions()
+            .add("limit", Math.round(slider.getValue()));
   }
 
   public void sendButton_saveConfig(ActionEvent actionEvent) {
       var fileChooser = new FileChooser();
-      fileChooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("Json files", "*.json"));
+      fileChooser.getExtensionFilters()
+              .add(new FileChooser.ExtensionFilter("Hillclimber (*.hccf)", "*.hccf"));
 
       var file = fileChooser.showSaveDialog(null);
 
       if (file != null) {
-
-        FileOutputStream fos = null;
         try {
-          fos = new FileOutputStream(file);
-          var oos = new ObjectOutputStream(fos);
-
-          oos.writeObject(AlgorithmType.Hillclimber);
-          oos.writeObject(createConfigOptions());
-
-          oos.close();
-          fos.close();
+          createConfigOptions().serialize(file);
         } catch (Exception e) {
           DialogUtils.ShowAlert("Error", "Fehler beim Speichern der Datei!");
         };

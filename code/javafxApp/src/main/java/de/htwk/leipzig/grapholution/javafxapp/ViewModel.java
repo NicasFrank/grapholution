@@ -6,11 +6,11 @@ import de.htwk.leipzig.grapholution.evolibrary.algorithms.hillclimber.Hillclimbe
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.FitnessFunction;
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.OneMaxEvaluator;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
+import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmConfigOptions;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.Mutator;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.SwitchOneBit;
 import de.htwk.leipzig.grapholution.javafxapp.model.BestGenotype;
 import de.htwk.leipzig.grapholution.javafxapp.model.EvoLibMapper;
-import de.htwk.leipzig.grapholution.javafxapp.model.HistoryResults;
 import de.htwk.leipzig.grapholution.javafxapp.utils.DialogUtils;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleStringProperty;
@@ -18,7 +18,6 @@ import javafx.beans.property.StringProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
 
-import java.io.Console;
 import java.io.File;
 import java.io.IOException;
 import java.util.Random;
@@ -35,7 +34,7 @@ public class ViewModel {
   private int currentScene = -1;
   private boolean isAlgorithmStepByStep = false;
 
-  private Algorithm<Boolean> hilly;
+  private Hillclimber<Boolean> hilly;
   private ViewModelGeneticAlgorithm viewModelGeneticAlgorithm;
 
   ViewModel(SceneControllerBase sceneControllerBase, Pane firstPane){
@@ -43,15 +42,11 @@ public class ViewModel {
     allScenes[0]=firstPane;
   }
 
-  public void navigation_configureScreen (EChoices nameOfNextScreen) {
-    navigation_configureScreen(nameOfNextScreen, null);
-  }
-
   /**
    * switch anhand String je nach nächster Pane
    * @param nameOfNextScreen String mit Namen des nächsten Screens
    */
-  public void navigation_configureScreen (EChoices nameOfNextScreen, File file){
+  public void navigation_configureScreen (EChoices nameOfNextScreen){
     currentScene++;
     switch (nameOfNextScreen) {
       case AlgorithmChoice :
@@ -85,33 +80,18 @@ public class ViewModel {
     currentScene--;
     setNextScreen(allScenes[currentScene]);
   }
-  /**
-   * Hillclimber instanziert und ausgeführt
-   * @param startConfig Startkonfiguration
-   */
-  public void climbTheHill(String startConfig){
-    climbTheHill(startConfig, null);
-  }
 
   /**
    * Hillclimber instanziert und ausgeführt
    * @param startConfig Startkonfiguration
    */
-  public void climbTheHill(String startConfig, File file){
+  public void climbTheHill(String startConfig){
       int genosize = 10;
       FitnessFunction<Boolean> fitnessfunctionO = new OneMaxEvaluator();
       Genotype<Boolean> genotypeO = new Genotype<>(Random::nextBoolean, fitnessfunctionO, genosize);
       Mutator<Boolean> mutatorS = new SwitchOneBit();
 
       hilly = new Hillclimber<>(genotypeO, mutatorS);
-      if (file != null) {
-        try {
-          hilly.deserialize(file);
-        } catch (Exception e) {
-          DialogUtils.ShowWarning("Warnung!", "Fehler beim Öffnen der Datei!");
-          e.printStackTrace();
-        }
-      }
 
       hilly.run();
       EvoLibMapper evoLibMapper = new EvoLibMapper();
@@ -121,12 +101,10 @@ public class ViewModel {
       //outputField.set();
   }
 
-  public void startGeneticAlgorithm(boolean isStepByStep, boolean mutationIsBinary,double mutationChance,
-                                    boolean fitnessIsOneMax, double recombinationChance,double populationSize,
-                                    double genotypeSize, double generationAmount){
-    isAlgorithmStepByStep = isStepByStep;
-    viewModelGeneticAlgorithm = new ViewModelGeneticAlgorithm(isStepByStep,mutationIsBinary,mutationChance,
-        fitnessIsOneMax,recombinationChance,populationSize,genotypeSize,generationAmount);
+  public void startGeneticAlgorithm(AlgorithmConfigOptions options){
+    isAlgorithmStepByStep = options.getBool("isStepByStep");
+    viewModelGeneticAlgorithm = new ViewModelGeneticAlgorithm(options
+    );
   }
 
   public BestGenotype geneticAlgorithmNextStep(boolean untilDone){
