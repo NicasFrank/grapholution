@@ -40,6 +40,9 @@ public class ViewModel {
     allScenes[0]=firstPane;
   }
 
+  public void navigation_configureScreen (EChoices nameOfNextScreen){
+    navigation_configureScreen (nameOfNextScreen, null);
+  }
   /**
    * switch anhand String je nach nächster Pane
    * @param nameOfNextScreen String mit Namen des nächsten Screens
