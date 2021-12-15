@@ -50,9 +50,8 @@ public class ViewModelGeneticAlgorithm{
     Recombinator recombinator = new OnePointCrossover();
     FitnessFunction fitnessFunction = fitnessIsOneMax ? new OneMaxEvaluator() : new ZeroMaxEvaluator();
     Population population = new Population<>(Random::nextBoolean,(int)populationSize,(int) genotypeSize,fitnessFunction);
-    AlgorithmConfigOptions algorithmConfigOptions = new AlgorithmConfigOptions("limit",limit);
-    geneticAlgorithm = (limit < 0) ? new GeneticAlgorithm(mutator,selector,recombinator,population)
-            : new GeneticAlgorithm(mutator,selector,recombinator,recombinationChance,population,algorithmConfigOptions);
+    AlgorithmConfigOptions algorithmConfigOptions = new AlgorithmConfigOptions().add("limit",limit).add("recombinationChance",recombinationChance);
+    geneticAlgorithm = new GeneticAlgorithm(mutator,selector,recombinator,population,algorithmConfigOptions);
   }
 
   /**

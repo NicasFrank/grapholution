@@ -179,4 +179,7 @@ public class ViewModel {
   public Property<String> inputFieldProperty() {
     return inputField;
   }
+  public boolean getIsAlgorithmStepByStep(){
+      return isAlgorithmStepByStep;
+  }
 }
