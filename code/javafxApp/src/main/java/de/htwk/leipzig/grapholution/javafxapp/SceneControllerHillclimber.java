@@ -40,7 +40,7 @@ public class SceneControllerHillclimber extends SceneController{
    * an Hillclimber weiter
    */
   public void sendButton_startAlgo(){
-    viewModel.navigation_configureScreen("ResultsHillclimber");
+    viewModel.navigation_configureScreen(EChoices.ResultsHillclimber);
     viewModel.climbTheHill(inputField.getText());
   }
 
