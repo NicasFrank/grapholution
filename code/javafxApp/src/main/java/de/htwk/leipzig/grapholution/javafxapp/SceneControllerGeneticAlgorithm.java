@@ -2,13 +2,13 @@ package de.htwk.leipzig.grapholution.javafxapp;
 
 import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmConfigOptions;
 import de.htwk.leipzig.grapholution.javafxapp.utils.DialogUtils;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.FileChooser;
 
 public class SceneControllerGeneticAlgorithm extends SceneController{
 
+  public RadioButton radioFitnessZeroMax;
   @FXML
   private RadioButton radioMutationBinary,radioFitnessOneMax;
   @FXML
@@ -47,18 +47,23 @@ public class SceneControllerGeneticAlgorithm extends SceneController{
             .add("generationAmount", (int) sliderGenerations.getValue());
   }
 
-  public void setOptions(AlgorithmConfigOptions options) {
+  private void setOptions(AlgorithmConfigOptions options) {
     checkBoxStepByStep.selectedProperty().set(options.getOrElse("isStepByStep", checkBoxStepByStep.isSelected()));
     radioMutationBinary.selectedProperty().set(options.getOrElse("mutationIsBinary", radioMutationBinary.isSelected()));
-    radioFitnessOneMax.selectedProperty().set(options.getOrElse("fitnessIsOneMax", radioFitnessOneMax.isSelected()));
     sliderMutationChance.valueProperty().set(options.getOrElse("mutationChance", sliderMutationChance.getValue()));
     sliderRecombinationChance.valueProperty().set(options.getOrElse("recombinationChance", sliderRecombinationChance.getValue()));
     sliderPopulationSize.valueProperty().set(options.getOrElse("populationSize", sliderPopulationSize.getValue()));
     sliderGenotypeSize.valueProperty().set(options.getOrElse("genotypeSize", sliderGenotypeSize.getValue()));
     sliderGenerations.valueProperty().set(options.getOrElse("generationAmount", sliderGenerations.getValue()));
+
+    if (options.getOrElse("fitnessIsOneMax", radioFitnessOneMax.isSelected())) {
+      radioFitnessOneMax.selectedProperty().set(true);
+    } else {
+      radioFitnessZeroMax.selectedProperty().set(true);
+    }
   }
 
-  public void sendButton_saveConfig(ActionEvent actionEvent) {
+  public void sendButton_saveConfig() {
     var fileChooser = new FileChooser();
     fileChooser.getExtensionFilters()
             .add(new FileChooser.ExtensionFilter("Genetischer Algorithmus (*.gacf)", "*.gacf"));
@@ -70,7 +75,7 @@ public class SceneControllerGeneticAlgorithm extends SceneController{
         createConfigOptions().serialize(file);
       } catch (Exception e) {
         DialogUtils.ShowAlert("Error", "Fehler beim Speichern der Datei!");
-      };
+      }
     }
   }
 
@@ -80,5 +85,6 @@ public class SceneControllerGeneticAlgorithm extends SceneController{
 
   public void setViewModel(ViewModel viewModel){
     this.viewModel=viewModel;
+    setOptions(viewModel.getConfigOptions());
   }
 }

@@ -2,7 +2,6 @@ package de.htwk.leipzig.grapholution.javafxapp;
 
 import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmConfigOptions;
 import de.htwk.leipzig.grapholution.javafxapp.utils.DialogUtils;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Slider;
@@ -44,6 +43,11 @@ public class SceneControllerHillclimber extends SceneController{
   public void setViewModel(ViewModel viewModel){
     this.viewModel=viewModel;
     inputField.textProperty().bindBidirectional(viewModel.inputFieldProperty());
+    setOptions(viewModel.getConfigOptions());
+  }
+
+  private void setOptions(AlgorithmConfigOptions options) {
+    slider.valueProperty().set(options.getOrElse("limit", slider.getValue()));
   }
 
   private AlgorithmConfigOptions createConfigOptions() {
@@ -51,7 +55,7 @@ public class SceneControllerHillclimber extends SceneController{
             .add("limit", Math.round(slider.getValue()));
   }
 
-  public void sendButton_saveConfig(ActionEvent actionEvent) {
+  public void sendButton_saveConfig() {
       var fileChooser = new FileChooser();
       fileChooser.getExtensionFilters()
               .add(new FileChooser.ExtensionFilter("Hillclimber (*.hccf)", "*.hccf"));
@@ -63,7 +67,7 @@ public class SceneControllerHillclimber extends SceneController{
           createConfigOptions().serialize(file);
         } catch (Exception e) {
           DialogUtils.ShowAlert("Error", "Fehler beim Speichern der Datei!");
-        };
+        }
       }
   }
 }
