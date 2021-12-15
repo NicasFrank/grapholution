@@ -66,8 +66,12 @@ public class SceneControllerChoice extends SceneController{
         var ending = splitName[splitName.length - 1];
         viewModel.setConfigOptions(options);
         switch (ending) {
-          case "gacf" -> viewModel.navigation_configureScreen(EChoices.GeneticAlgorithm);
-          case "hccf" -> viewModel.navigation_configureScreen(EChoices.Hillclimber);
+          case "gacf":
+            viewModel.navigation_configureScreen(EChoices.GeneticAlgorithm);
+            break;
+          case "hccf":
+            viewModel.navigation_configureScreen(EChoices.Hillclimber);
+            break;
         }
       } catch (Exception e) {
         DialogUtils.ShowAlert("Error", "Fehler beim Öffnen der Datei!");
