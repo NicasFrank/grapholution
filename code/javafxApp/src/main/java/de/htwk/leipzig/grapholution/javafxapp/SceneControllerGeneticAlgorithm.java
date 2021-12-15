@@ -30,6 +30,7 @@ public class SceneControllerGeneticAlgorithm extends SceneController{
    * loest Laden der naechsten Pane aus
    * gibt Konfiguration des genetischen Algorithmus weiter
    */
+  /*
   public void sendButton_startAlgo(){
     viewModel.startGeneticAlgorithm(createConfigOptions());
     viewModel.navigation_configureScreen(EChoices.ResultsGeneticAlgorithm);
@@ -78,7 +79,7 @@ public class SceneControllerGeneticAlgorithm extends SceneController{
       }
     }
   }
-
+*/
   public void sendButton_backwards(){
     viewModel.navigation_Back();
   }
