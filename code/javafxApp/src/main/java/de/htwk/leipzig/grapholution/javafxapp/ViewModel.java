@@ -1,28 +1,26 @@
 package de.htwk.leipzig.grapholution.javafxapp;
 
 
-import de.htwk.leipzig.grapholution.evolibrary.algorithms.Algorithm;
 import de.htwk.leipzig.grapholution.evolibrary.algorithms.hillclimber.Hillclimber;
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.FitnessFunction;
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.OneMaxEvaluator;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
+import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmConfigOptions;
+import de.htwk.leipzig.grapholution.evolibrary.models.BoolConfig;
+import de.htwk.leipzig.grapholution.evolibrary.models.IntConfig;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.Mutator;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.SwitchOneBit;
 import de.htwk.leipzig.grapholution.javafxapp.model.BestGenotype;
 import de.htwk.leipzig.grapholution.javafxapp.model.EvoLibMapper;
-import de.htwk.leipzig.grapholution.javafxapp.model.HistoryResults;
-import de.htwk.leipzig.grapholution.javafxapp.utils.DialogUtils;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
 
-import java.io.Console;
-import java.io.File;
 import java.io.IOException;
-import java.util.Random;
 import java.util.List;
+import java.util.Random;
 
 
 public class ViewModel {
@@ -31,11 +29,12 @@ public class ViewModel {
   private final StringProperty outputField= new SimpleStringProperty();
 
   private final SceneControllerBase sceneControllerBase;
-  private Pane[] allScenes = new Pane[3];
+  private final Pane[] allScenes = new Pane[3];
   private int currentScene = -1;
   private boolean isAlgorithmStepByStep = false;
 
-  private Algorithm<Boolean> hilly;
+  private AlgorithmConfigOptions configOptions = new AlgorithmConfigOptions();
+  private Hillclimber<Boolean> hilly;
   private ViewModelGeneticAlgorithm viewModelGeneticAlgorithm;
 
   ViewModel(SceneControllerBase sceneControllerBase, Pane firstPane){
@@ -43,15 +42,11 @@ public class ViewModel {
     allScenes[0]=firstPane;
   }
 
-  public void navigation_configureScreen (EChoices nameOfNextScreen) {
-    navigation_configureScreen(nameOfNextScreen, null);
-  }
-
   /**
    * switch anhand String je nach nächster Pane
    * @param nameOfNextScreen String mit Namen des nächsten Screens
    */
-  public void navigation_configureScreen (EChoices nameOfNextScreen, File file){
+  public void navigation_configureScreen (EChoices nameOfNextScreen){
     currentScene++;
     switch (nameOfNextScreen) {
       case AlgorithmChoice :
@@ -85,33 +80,18 @@ public class ViewModel {
     currentScene--;
     setNextScreen(allScenes[currentScene]);
   }
+
   /**
    * Hillclimber instanziert und ausgeführt
    * @param startConfig Startkonfiguration
    */
   public void climbTheHill(String startConfig){
-    climbTheHill(startConfig, null);
-  }
-
-  /**
-   * Hillclimber instanziert und ausgeführt
-   * @param startConfig Startkonfiguration
-   */
-  public void climbTheHill(String startConfig, File file){
-      int genosize = 10;
+      int genosize = configOptions.getOrElse(IntConfig.GenotypeSize, 10);
       FitnessFunction<Boolean> fitnessfunctionO = new OneMaxEvaluator();
       Genotype<Boolean> genotypeO = new Genotype<>(Random::nextBoolean, fitnessfunctionO, genosize);
       Mutator<Boolean> mutatorS = new SwitchOneBit();
 
-      hilly = new Hillclimber<>(genotypeO, mutatorS);
-      if (file != null) {
-        try {
-          hilly.deserialize(file);
-        } catch (Exception e) {
-          DialogUtils.ShowWarning("Warnung!", "Fehler beim Öffnen der Datei!");
-          e.printStackTrace();
-        }
-      }
+      hilly = new Hillclimber<>(genotypeO, mutatorS, configOptions);
 
       hilly.run();
       EvoLibMapper evoLibMapper = new EvoLibMapper();
@@ -121,12 +101,11 @@ public class ViewModel {
       //outputField.set();
   }
 
-  public void startGeneticAlgorithm(boolean isStepByStep, boolean mutationIsBinary,double mutationChance,
-                                    boolean fitnessIsOneMax, double recombinationChance,double populationSize,
-                                    double genotypeSize, double generationAmount){
-    isAlgorithmStepByStep = isStepByStep;
-    viewModelGeneticAlgorithm = new ViewModelGeneticAlgorithm(isStepByStep,mutationIsBinary,mutationChance,
-        fitnessIsOneMax,recombinationChance,populationSize,genotypeSize,generationAmount);
+  public void startGeneticAlgorithm(AlgorithmConfigOptions options){
+    setConfigOptions(options);
+    isAlgorithmStepByStep = options.getBool(BoolConfig.IsStepByStep);
+    viewModelGeneticAlgorithm = new ViewModelGeneticAlgorithm(options
+    );
   }
 
   public BestGenotype geneticAlgorithmNextStep(boolean untilDone){
@@ -184,4 +163,12 @@ public class ViewModel {
     return inputField;
   }
   public boolean getIsAlgorithmStepByStep(){return isAlgorithmStepByStep;}
+
+  public AlgorithmConfigOptions getConfigOptions() {
+    return configOptions;
+  }
+
+  public void setConfigOptions(AlgorithmConfigOptions configOptions) {
+    this.configOptions = configOptions;
+  }
 }

@@ -8,4 +8,5 @@ module code.Grapholution.javafxApp.main {
   requires code.Grapholution.evoLibrary.main;
   opens de.htwk.leipzig.grapholution.javafxapp to javafx.fxml;
     exports de.htwk.leipzig.grapholution.javafxapp;
+    exports de.htwk.leipzig.grapholution.javafxapp.model;
 }

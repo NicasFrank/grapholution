@@ -1,7 +1,9 @@
 package de.htwk.leipzig.grapholution.javafxapp;
 
 import de.htwk.leipzig.grapholution.evolibrary.algorithms.hillclimber.Hillclimber;
+import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmConfigOptions;
 import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmType;
+import de.htwk.leipzig.grapholution.javafxapp.utils.DialogUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -29,9 +31,9 @@ public class SceneControllerChoice extends SceneController{
    */
   public void initialize(){
     comboBoxAlgo.getItems().setAll(
-    Arrays.stream(AlgorithmType.class.getEnumConstants())
-            .map(algorithmType -> algorithmType.name)
-            .collect(Collectors.toList())
+      EChoices.algorithms().stream()
+              .map(eChoice -> eChoice.name)
+              .collect(Collectors.toList())
     );
   }
 
@@ -40,7 +42,7 @@ public class SceneControllerChoice extends SceneController{
    */
   public void sendButtonClick_configureScreen() {
     viewModel.navigation_configureScreen(
-        EChoices.valueOf(comboBoxAlgo.getValue())
+        EChoices.getByName(comboBoxAlgo.getValue())
         //,comboBoxProblem.getValue()
     );
   }
@@ -51,15 +53,29 @@ public class SceneControllerChoice extends SceneController{
 
   public void sendButton_loadConfig(ActionEvent actionEvent) {
     var fileChooser = new FileChooser();
-    fileChooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("Json files", "*.json"));
+    fileChooser.getExtensionFilters()
+            .add(new FileChooser.ExtensionFilter("Evolutionaere Algorithmen (*.gacf, *.hccf)", "*.gacf", "*.hccf"));
 
     var file = fileChooser.showOpenDialog(null);
 
     if (file != null) {
-      viewModel.navigation_configureScreen(
-              EChoices.valueOf(comboBoxAlgo.getValue()),
-              file
-      );
+      try {
+        var options = new AlgorithmConfigOptions().deserialize(file);
+
+        var splitName = file.getName().split("\\.");
+        var ending = splitName[splitName.length - 1];
+        viewModel.setConfigOptions(options);
+        switch (ending) {
+          case "gacf":
+            viewModel.navigation_configureScreen(EChoices.GeneticAlgorithm);
+            break;
+          case "hccf":
+            viewModel.navigation_configureScreen(EChoices.Hillclimber);
+            break;
+        }
+      } catch (Exception e) {
+        DialogUtils.ShowAlert("Error", "Fehler beim Öffnen der Datei!");
+      }
     }
   }
 }
