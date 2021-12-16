@@ -1,6 +1,7 @@
 package de.htwk.leipzig.grapholution.javafxapp;
 
 import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmConfigOptions;
+import de.htwk.leipzig.grapholution.evolibrary.models.IntConfig;
 import de.htwk.leipzig.grapholution.javafxapp.utils.DialogUtils;
 import javafx.fxml.FXML;
 import javafx.scene.control.RadioButton;
@@ -47,12 +48,12 @@ public class SceneControllerHillclimber extends SceneController{
   }
 
   private void setOptions(AlgorithmConfigOptions options) {
-    slider.valueProperty().set(options.getOrElse("limit", slider.getValue()));
+    slider.valueProperty().set(options.getOrElse(IntConfig.Limit, (int) slider.getValue()));
   }
 
   private AlgorithmConfigOptions createConfigOptions() {
     return new AlgorithmConfigOptions()
-            .add("limit", Math.round(slider.getValue()));
+            .add(IntConfig.Limit, (int) slider.getValue());
   }
 
   public void sendButton_saveConfig() {

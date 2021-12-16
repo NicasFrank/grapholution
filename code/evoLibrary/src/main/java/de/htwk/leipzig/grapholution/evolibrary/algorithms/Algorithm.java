@@ -3,6 +3,7 @@ package de.htwk.leipzig.grapholution.evolibrary.algorithms;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
 import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmConfigOptions;
 import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmType;
+import de.htwk.leipzig.grapholution.evolibrary.models.IntConfig;
 
 import java.io.*;
 import java.util.List;
@@ -32,7 +33,7 @@ public abstract class Algorithm<T> {
      */
     public Algorithm(Genotype<T> genotype, AlgorithmConfigOptions configOptions) {
         this(genotype);
-        this.limit = configOptions.getOrElse("limit", -1);
+        this.limit = configOptions.getOrElse(IntConfig.Limit, -1);
     }
 
     /**
@@ -51,8 +52,7 @@ public abstract class Algorithm<T> {
 
     public void serialize(File file) throws Exception {
         var config = new AlgorithmConfigOptions();
-        config.add("limit", limit);
-        config.add("iterations", iterations);
+        config.add(IntConfig.Limit, limit);
         config.merge(getCustomConfigOptions());
 
         var fos = new FileOutputStream(file);
@@ -78,8 +78,7 @@ public abstract class Algorithm<T> {
         ois.close();
         fis.close();
 
-        limit = options.getInt("limit");
-        iterations = options.getInt("iterations");
+        limit = options.getInt(IntConfig.Limit);
 
         setCustomConfigOptions(options);
     }

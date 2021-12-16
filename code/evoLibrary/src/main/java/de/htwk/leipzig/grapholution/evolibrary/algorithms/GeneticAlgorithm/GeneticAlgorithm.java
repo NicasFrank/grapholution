@@ -5,6 +5,7 @@ import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Population;
 import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmConfigOptions;
 import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmType;
+import de.htwk.leipzig.grapholution.evolibrary.models.DoubleConfig;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.Mutator;
 import de.htwk.leipzig.grapholution.evolibrary.recombinator.Recombinator;
 import de.htwk.leipzig.grapholution.evolibrary.selectors.Selector;
@@ -41,7 +42,7 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
         super(population.get(0), configOptions);
         this.mutator = mutator;
         this.recombinator = recombinator;
-        this.recombinationChance = configOptions.getOrElse("recombinationChance", 1.0);
+        this.recombinationChance = configOptions.getOrElse(DoubleConfig.RecombinationChance, 1.0);
         this.population = new Population<>(population.createCopy());
         this.selector = selector;
         history = new ArrayList<>();
@@ -72,13 +73,13 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
     @Override
     protected AlgorithmConfigOptions getCustomConfigOptions() {
         var options = new AlgorithmConfigOptions();
-        options.add("recombinationChance", recombinationChance);
+        options.add(DoubleConfig.RecombinationChance, recombinationChance);
         return options;
     }
 
     @Override
     protected void setCustomConfigOptions(AlgorithmConfigOptions options) {
-        recombinationChance = options.getOrElse("recombinationChance", 1.0);
+        recombinationChance = options.getOrElse(DoubleConfig.RecombinationChance, 1.0);
     }
 
     @Override

@@ -2,82 +2,76 @@ package de.htwk.leipzig.grapholution.evolibrary.models;
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Function;
 
 public class AlgorithmConfigOptions implements Serializable {
-    private final Map<String, String> options;
+    private final Map<Config, String> options;
 
     public AlgorithmConfigOptions() {
         options = new HashMap<>();
     }
 
-    public AlgorithmConfigOptions add(String name, String value) {
-        options.put(name, value);
+    private AlgorithmConfigOptions addAny(Config config, String value) {
+        options.put(config, value);
         return this;
     }
 
-    public AlgorithmConfigOptions add(String name, int value){
-        return add(name, Integer.toString(value));
+    public AlgorithmConfigOptions add(StringConfig config, String value) {
+        return addAny(config, value);
     }
 
-    public AlgorithmConfigOptions add(String name, double value){
-        return add(name, Double.toString(value));
+    public AlgorithmConfigOptions add(IntConfig config, int value){
+        return addAny(config, Integer.toString(value));
     }
 
-    public AlgorithmConfigOptions add(String name, boolean value){
-        return add(name, Boolean.toString(value));
+    public AlgorithmConfigOptions add(DoubleConfig config, double value){
+        return addAny(config, Double.toString(value));
     }
 
-    public String get(String name) {
-        return options.get(name);
+    public AlgorithmConfigOptions add(BoolConfig config, boolean value){
+        return addAny(config, Boolean.toString(value));
     }
 
-    public int getInt(String name) {
-        return Integer.parseInt(options.get(name));
+    public String get(StringConfig config) {
+        return options.get(config);
     }
 
-    public double getDouble(String name) {
-        return Double.parseDouble(options.get(name));
-    }
-    public boolean getBool(String name) {
-        return Boolean.parseBoolean(options.get(name));
+    public int getInt(IntConfig config) {
+        return Integer.parseInt(options.get(config));
     }
 
-    public String getOrElse(String name, String fallback) {
-        return options.getOrDefault(name, fallback);
+    public double getDouble(DoubleConfig config) {
+        return Double.parseDouble(options.get(config));
+    }
+    public boolean getBool(BoolConfig config) {
+        return Boolean.parseBoolean(options.get(config));
     }
 
-    public int getOrElse(String name, int fallback) {
+    public String getOrElse(StringConfig config, String fallback) {
+        return options.getOrDefault(config, fallback);
+    }
+
+    public int getOrElse(IntConfig config, int fallback) {
         try {
-            return getInt(name);
+            return getInt(config);
         } catch (Exception e) {
             return fallback;
         }
     }
 
-    public double getOrElse(String name, double fallback) {
+    public double getOrElse(DoubleConfig config, double fallback) {
         try {
-            return getDouble(name);
+            return getDouble(config);
         } catch (Exception e) {
             return fallback;
         }
     }
 
-    public boolean getOrElse(String name, boolean fallback) {
+    public boolean getOrElse(BoolConfig config, boolean fallback) {
         try {
-            return getBool(name);
+            return getBool(config);
         } catch (Exception e) {
             return fallback;
         }
-    }
-
-    public <T> T getAndConvert(String name, Function<String, T> converter) {
-        return converter.apply(get(name));
-    }
-
-    public <T> T getAndConvertOrElse(String name, Function<String, T> converter, T fallback) {
-        var value = get(name);
-        return value == null ? fallback : converter.apply(value);
     }
 
     public AlgorithmConfigOptions merge(AlgorithmConfigOptions other) {

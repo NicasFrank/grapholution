@@ -6,6 +6,8 @@ import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.ZeroMaxEvaluator;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Population;
 import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmConfigOptions;
+import de.htwk.leipzig.grapholution.evolibrary.models.BoolConfig;
+import de.htwk.leipzig.grapholution.evolibrary.models.IntConfig;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.BinaryMutation;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.SwitchOneBit;
 import de.htwk.leipzig.grapholution.evolibrary.recombinator.OnePointCrossover;
@@ -18,7 +20,7 @@ import java.util.Random;
 
 public class ViewModelGeneticAlgorithm{
 
-  private GeneticAlgorithm<Boolean> geneticAlgorithm;
+  private final GeneticAlgorithm<Boolean> geneticAlgorithm;
   private BestGenotype bestGenotype;
   private HistoryResults historyResults;
   private EvoLibMapper evoLibMapper;
@@ -30,12 +32,12 @@ public class ViewModelGeneticAlgorithm{
    * loest erste iteratation des genetischen algorithmus aus
    */
   public ViewModelGeneticAlgorithm(AlgorithmConfigOptions options){
-    this.isStepByStep = options.getBool("isStepByStep");
-    var mutator = options.getBool("mutatorIsBinary") ? new BinaryMutation(options.getInt("mutationChance")) : new SwitchOneBit();
+    this.isStepByStep = options.getBool(BoolConfig.IsStepByStep);
+    var mutator = options.getBool(BoolConfig.MutationIsBinary) ? new BinaryMutation(options.getInt(IntConfig.MutationChance)) : new SwitchOneBit();
     var selector= new FitnessproportionalSelection<Boolean>();
     var recombinator = new OnePointCrossover<Boolean>();
-    var fitnessFunction = options.getBool("fitnessIsOneMax") ? new OneMaxEvaluator() : new ZeroMaxEvaluator();
-    var population = new Population<>(Random::nextBoolean,options.getInt("populationSize"),options.getInt("genotypeSize"),fitnessFunction);
+    var fitnessFunction = options.getBool(BoolConfig.FitnessIsOneMax) ? new OneMaxEvaluator() : new ZeroMaxEvaluator();
+    var population = new Population<>(Random::nextBoolean,options.getInt(IntConfig.PopulationSize),options.getInt(IntConfig.GenotypeSize),fitnessFunction);
     geneticAlgorithm = new GeneticAlgorithm<>(mutator, selector, recombinator, population, options);
   }
 
@@ -45,7 +47,7 @@ public class ViewModelGeneticAlgorithm{
    * @return aktuell besten genotypen
    */
   public BestGenotype runAlgorithm(boolean untilDone){
-    Genotype currentBestGeno;
+    Genotype<Boolean> currentBestGeno;
     if(isStepByStep && !untilDone){
       currentBestGeno = geneticAlgorithm.oneStep();
     } else {

@@ -6,6 +6,8 @@ import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.FitnessFunction;
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.OneMaxEvaluator;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
 import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmConfigOptions;
+import de.htwk.leipzig.grapholution.evolibrary.models.BoolConfig;
+import de.htwk.leipzig.grapholution.evolibrary.models.IntConfig;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.Mutator;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.SwitchOneBit;
 import de.htwk.leipzig.grapholution.javafxapp.model.BestGenotype;
@@ -84,7 +86,7 @@ public class ViewModel {
    * @param startConfig Startkonfiguration
    */
   public void climbTheHill(String startConfig){
-      int genosize = configOptions.getOrElse("genotypeSize", 10);
+      int genosize = configOptions.getOrElse(IntConfig.GenotypeSize, 10);
       FitnessFunction<Boolean> fitnessfunctionO = new OneMaxEvaluator();
       Genotype<Boolean> genotypeO = new Genotype<>(Random::nextBoolean, fitnessfunctionO, genosize);
       Mutator<Boolean> mutatorS = new SwitchOneBit();
@@ -101,7 +103,7 @@ public class ViewModel {
 
   public void startGeneticAlgorithm(AlgorithmConfigOptions options){
     setConfigOptions(options);
-    isAlgorithmStepByStep = options.getBool("isStepByStep");
+    isAlgorithmStepByStep = options.getBool(BoolConfig.IsStepByStep);
     viewModelGeneticAlgorithm = new ViewModelGeneticAlgorithm(options
     );
   }

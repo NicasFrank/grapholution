@@ -1,6 +1,6 @@
 package de.htwk.leipzig.grapholution.javafxapp;
 
-import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmConfigOptions;
+import de.htwk.leipzig.grapholution.evolibrary.models.*;
 import de.htwk.leipzig.grapholution.javafxapp.utils.DialogUtils;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -37,26 +37,26 @@ public class SceneControllerGeneticAlgorithm extends SceneController{
 
   private AlgorithmConfigOptions createConfigOptions() {
     return new AlgorithmConfigOptions()
-            .add("isStepByStep", checkBoxStepByStep.isSelected())
-            .add("mutationIsBinary", radioMutationBinary.isSelected())
-            .add("mutationChance", radioMutationBinary.isSelected() ? (int) sliderMutationChance.getValue() : 0)
-            .add("fitnessIsOneMax", radioFitnessOneMax.isSelected())
-            .add("recombinationChance", sliderRecombinationChance.getValue())
-            .add("populationSize", (int) sliderPopulationSize.getValue())
-            .add("genotypeSize", (int) sliderGenotypeSize.getValue())
-            .add("generationAmount", (int) sliderGenerations.getValue());
+            .add(BoolConfig.IsStepByStep, checkBoxStepByStep.isSelected())
+            .add(BoolConfig.MutationIsBinary, radioMutationBinary.isSelected())
+            .add(IntConfig.MutationChance, radioMutationBinary.isSelected() ? (int) sliderMutationChance.getValue() : 0)
+            .add(BoolConfig.FitnessIsOneMax, radioFitnessOneMax.isSelected())
+            .add(DoubleConfig.RecombinationChance, sliderRecombinationChance.getValue())
+            .add(IntConfig.PopulationSize, (int) sliderPopulationSize.getValue())
+            .add(IntConfig.GenotypeSize, (int) sliderGenotypeSize.getValue())
+            .add(IntConfig.Limit, (int) sliderGenerations.getValue());
   }
 
   private void setOptions(AlgorithmConfigOptions options) {
-    checkBoxStepByStep.selectedProperty().set(options.getOrElse("isStepByStep", checkBoxStepByStep.isSelected()));
-    radioMutationBinary.selectedProperty().set(options.getOrElse("mutationIsBinary", radioMutationBinary.isSelected()));
-    sliderMutationChance.valueProperty().set(options.getOrElse("mutationChance", sliderMutationChance.getValue()));
-    sliderRecombinationChance.valueProperty().set(options.getOrElse("recombinationChance", sliderRecombinationChance.getValue()));
-    sliderPopulationSize.valueProperty().set(options.getOrElse("populationSize", sliderPopulationSize.getValue()));
-    sliderGenotypeSize.valueProperty().set(options.getOrElse("genotypeSize", sliderGenotypeSize.getValue()));
-    sliderGenerations.valueProperty().set(options.getOrElse("generationAmount", sliderGenerations.getValue()));
+    checkBoxStepByStep.selectedProperty().set(options.getOrElse(BoolConfig.IsStepByStep, checkBoxStepByStep.isSelected()));
+    radioMutationBinary.selectedProperty().set(options.getOrElse(BoolConfig.MutationIsBinary, radioMutationBinary.isSelected()));
+    sliderMutationChance.valueProperty().set(options.getOrElse(IntConfig.MutationChance, (int) sliderMutationChance.getValue()));
+    sliderRecombinationChance.valueProperty().set(options.getOrElse(DoubleConfig.RecombinationChance, sliderRecombinationChance.getValue()));
+    sliderPopulationSize.valueProperty().set(options.getOrElse(IntConfig.PopulationSize, (int) sliderPopulationSize.getValue()));
+    sliderGenotypeSize.valueProperty().set(options.getOrElse(IntConfig.GenotypeSize, (int) sliderGenotypeSize.getValue()));
+    sliderGenerations.valueProperty().set(options.getOrElse(IntConfig.Limit, (int) sliderGenerations.getValue()));
 
-    if (options.getOrElse("fitnessIsOneMax", radioFitnessOneMax.isSelected())) {
+    if (options.getOrElse(BoolConfig.FitnessIsOneMax, radioFitnessOneMax.isSelected())) {
       radioFitnessOneMax.selectedProperty().set(true);
     } else {
       radioFitnessZeroMax.selectedProperty().set(true);

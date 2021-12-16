@@ -5,6 +5,8 @@ import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.FitnessFunction;
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.OneMaxEvaluator;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Population;
 import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmConfigOptions;
+import de.htwk.leipzig.grapholution.evolibrary.models.DoubleConfig;
+import de.htwk.leipzig.grapholution.evolibrary.models.IntConfig;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.SwitchOneBit;
 import de.htwk.leipzig.grapholution.evolibrary.recombinator.OnePointCrossover;
 import de.htwk.leipzig.grapholution.evolibrary.selectors.FitnessproportionalSelection;
@@ -42,7 +44,7 @@ public class GeneticAlgorithmTest {
                 new OnePointCrossover<>(),
                 testPopulation,
                 new AlgorithmConfigOptions()
-                        .add("recombinationChance", 0.5)
+                        .add(DoubleConfig.RecombinationChance, 0.5)
         );
 
         var result = geneticAlgorithm.run();
@@ -61,8 +63,8 @@ public class GeneticAlgorithmTest {
                 new OnePointCrossover<>(),
                 testPopulation,
                 new AlgorithmConfigOptions()
-                        .add("recombinationChance", 0.5)
-                        .add("limit", limit)
+                        .add(DoubleConfig.RecombinationChance, 0.5)
+                        .add(IntConfig.Limit, limit)
         );
 
         geneticAlgorithm.run();
@@ -80,7 +82,7 @@ public class GeneticAlgorithmTest {
                 new OnePointCrossover<>(),
                 testPopulation,
                 new AlgorithmConfigOptions()
-                        .add("recombinationChance", 0.5)
+                        .add(DoubleConfig.RecombinationChance, 0.5)
         );
 
         geneticAlgorithm.oneStep();
@@ -98,8 +100,8 @@ public class GeneticAlgorithmTest {
                 new OnePointCrossover<>(),
                 testPopulation,
                 new AlgorithmConfigOptions()
-                        .add("recombinationChance", 0.5)
-                        .add("limit", limit)
+                        .add(DoubleConfig.RecombinationChance, 0.5)
+                        .add(IntConfig.Limit, limit)
         );
 
         geneticAlgorithm.oneStep();
