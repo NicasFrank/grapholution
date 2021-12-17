@@ -10,6 +10,7 @@ import de.htwk.leipzig.grapholution.evolibrary.mutator.Mutator;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.SwitchOneBit;
 import de.htwk.leipzig.grapholution.javafxapp.model.BestGenotype;
 import de.htwk.leipzig.grapholution.javafxapp.model.EvoLibMapper;
+import javafx.beans.property.Property;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -66,7 +67,7 @@ public class ViewModelHillclimber{
      */
     public BestGenotype runAlgorithm(boolean untilDone){
         if(!untilDone) {
-
+            isInputCorrect();
             int fitnessZ = hillclimberZero.run().getFitness();
             int ageZ = hillclimberZero.run().getAge();
             hillclimberZero.run();
@@ -85,6 +86,11 @@ public class ViewModelHillclimber{
         return bestGenotype;
     }
 
+    /**
+     * Methode zum überprüfen ob Eingabe 0 oder 1
+     * @return true falls korrekt
+     * @return false falls inkorrekt
+     */
     private boolean isInputCorrect() {
         char[] input = inputField.get().toCharArray();
         for (char c : input) {
@@ -93,5 +99,13 @@ public class ViewModelHillclimber{
             }
         }
         return true;
+    }
+
+    public Property<String> outputFieldProperty() {
+        return outputField;
+    }
+
+    public Property<String> inputFieldProperty() {
+        return inputField;
     }
 }
