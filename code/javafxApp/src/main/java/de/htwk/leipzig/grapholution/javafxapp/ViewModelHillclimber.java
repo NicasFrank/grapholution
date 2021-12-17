@@ -1,33 +1,60 @@
 package de.htwk.leipzig.grapholution.javafxapp;
 
 import de.htwk.leipzig.grapholution.evolibrary.algorithms.Hillclimber.Hillclimber;
+import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.FitnessFunction;
+import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.OneMaxEvaluator;
+import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.ZeroMaxEvaluator;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.BinaryMutation;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.Mutator;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.SwitchOneBit;
 import de.htwk.leipzig.grapholution.javafxapp.model.BestGenotype;
 import de.htwk.leipzig.grapholution.javafxapp.model.EvoLibMapper;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
+import java.util.ArrayList;
+import java.util.Random;
 
 public class ViewModelHillclimber{
 
     private BestGenotype bestGenotype;
     private Genotype<Boolean> genotype;
     private EvoLibMapper evoLibMapper;
-    private Hillclimber hillclimber;
+    private static Hillclimber<Boolean> hillclimberOne;
+    private static Hillclimber<Boolean> hillclimberZero;
+    private static Hillclimber<Boolean> hillclimberOneLimit;
+    static ArrayList<Boolean> resultZ;
+    static ArrayList<Boolean> resultO;
+    static int genosize = 10;
+    private final StringProperty inputField = new SimpleStringProperty();
+    private final StringProperty outputField = new SimpleStringProperty();
 
     /**
+     * Konstruktor
      * @param mutatorIsBinary ob die mutation binary ist wenn nicht switch one bit
      * @param mutationChance die wahrscheinlichkeit der binary mutation
-     * @param limit die maximale anzahl an generationen
+     * @param fitnessIsOneMax ob OneMax verwendet wird
      */
-    public ViewModelHillclimber(boolean mutatorIsBinary, double mutationChance, int limit, Genotype<Boolean> genotype){
-        Mutator<Boolean> mutator;
-        mutator = mutatorIsBinary ? new BinaryMutation((int) mutationChance) : new SwitchOneBit();
-        if(limit < 0) {
-            this.hillclimber = new Hillclimber<Boolean>(genotype, mutator, (int) limit);
+
+    public ViewModelHillclimber(boolean mutatorIsBinary, double mutationChance, boolean fitnessIsOneMax){
+        FitnessFunction<Boolean> fitnessfunctionZ = new ZeroMaxEvaluator();
+        FitnessFunction<Boolean> fitnessfunction0 = new OneMaxEvaluator();
+        Genotype<Boolean> genotypeZ = new Genotype<>(Random::nextBoolean, fitnessfunctionZ, genosize);
+        Genotype<Boolean> genotypeO = new Genotype<>(r -> false, fitnessfunction0, genosize);
+        Mutator<Boolean> mutatorB = new BinaryMutation(10);
+        Mutator<Boolean> mutatorS = new SwitchOneBit();
+        hillclimberZero = new Hillclimber<Boolean>(genotypeZ, mutatorB);
+        hillclimberOne = new Hillclimber<Boolean>(genotypeO, mutatorS);
+        hillclimberOneLimit = new Hillclimber<Boolean>(genotypeO, mutatorS, 8);
+        resultZ = new ArrayList<>();
+        for(int i = 0; i<genosize; i++){
+            resultZ.add(Boolean.FALSE);
         }
-        else{
-            this.hillclimber = new Hillclimber<Boolean>(genotype, mutator);
+        runAlgorithm(false);
+        resultO = new ArrayList<>();
+        for(int i = 0; i<genosize; i++){
+            resultO.add(Boolean.TRUE);
         }
         runAlgorithm(false);
     }
@@ -38,22 +65,33 @@ public class ViewModelHillclimber{
      * @return aktuell besten genotypen
      */
     public BestGenotype runAlgorithm(boolean untilDone){
-        //Genotype currentBestGeno;
         if(!untilDone) {
-            //currentBestGeno =
-                    hillclimber.run();
+
+            int fitnessZ = hillclimberZero.run().getFitness();
+            int ageZ = hillclimberZero.run().getAge();
+            hillclimberZero.run();
+            bestGenotype = new BestGenotype(fitnessZ,ageZ);
+            System.out.println(bestGenotype +" Iteration: " + hillclimberZero.getIterations());
         }
         else{
-
-            //currentBestGeno =
-                    hillclimber.run();
+            isInputCorrect();
+            int fitness0 = hillclimberOne.run().getFitness();
+            int age0 = hillclimberOne.run().getAge();
+            hillclimberOne.run();
+            bestGenotype = new BestGenotype(fitness0,age0);
+            System.out.println(bestGenotype +" Iteration: " + hillclimberOne.getIterations());
         }
-        int fitness = hillclimber.run().getFitness();
-        int age = hillclimber.run().getAge();;
-        bestGenotype = new BestGenotype(fitness,age);
-
-        //System.out.println(bestGenotype +" Iteration: " + hillclimber.getIterations());
 
         return bestGenotype;
+    }
+
+    private boolean isInputCorrect() {
+        char[] input = inputField.get().toCharArray();
+        for (char c : input) {
+            if (c != '0' && c != '1') {
+                return false;
+            }
+        }
+        return true;
     }
 }

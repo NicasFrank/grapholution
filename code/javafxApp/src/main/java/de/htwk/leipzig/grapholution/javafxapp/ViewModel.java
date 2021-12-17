@@ -100,8 +100,8 @@ public class ViewModel {
         EvoLibMapper evoLibMapper = new EvoLibMapper();
     }
 
-    public void startHillclimberAlgorithm(boolean mutationIsBinary, double mutationChance, int limit, Genotype<Boolean> genotype) {
-        viewModelHillclimber = new ViewModelHillclimber(mutationIsBinary, mutationChance, (int) limit, genotype);
+    public void startHillclimberAlgorithm(boolean mutationIsBinary, double mutationChance, boolean fitnessIsOneMax) {
+        viewModelHillclimber = new ViewModelHillclimber(mutationIsBinary, mutationChance, fitnessIsOneMax);
     }
 
     public void startGeneticAlgorithm(boolean isStepByStep, boolean mutationIsBinary, double mutationChance,
