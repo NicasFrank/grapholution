@@ -1,13 +1,8 @@
 package de.htwk.leipzig.grapholution.javafxapp;
 
 import de.htwk.leipzig.grapholution.evolibrary.algorithms.Hillclimber.Hillclimber;
-import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.FitnessFunction;
-import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.OneMaxEvaluator;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
-import de.htwk.leipzig.grapholution.evolibrary.mutator.Mutator;
-import de.htwk.leipzig.grapholution.evolibrary.mutator.SwitchOneBit;
 import de.htwk.leipzig.grapholution.javafxapp.model.BestGenotype;
-import de.htwk.leipzig.grapholution.javafxapp.model.EvoLibMapper;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -15,7 +10,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
-import java.util.Random;
 
 
 public class ViewModel {
@@ -60,7 +54,7 @@ public class ViewModel {
                 break;
 
             case "AuswertungHillclimber":
-                climbTheHill(inputField.get());
+                //Todo neue Methode für Hillclimber aufrufen
                 allScenes[2] = loadNewPane("StatisticsHillclimber.fxml");
                 outputField.set("Ergebnis");
                 break;
@@ -89,6 +83,7 @@ public class ViewModel {
      *
      * @param startConfig Startkonfiguration
      */
+    /* Todo Methode entfernen
     public void climbTheHill(String startConfig) {
         int genosize = 10;
         FitnessFunction<Boolean> fitnessfunctionO = new OneMaxEvaluator();
@@ -99,7 +94,7 @@ public class ViewModel {
         hilly.run();
         EvoLibMapper evoLibMapper = new EvoLibMapper();
     }
-
+    */
     public void startHillclimberAlgorithm(boolean mutationIsBinary, double mutationChance, boolean fitnessIsOneMax) {
         viewModelHillclimber = new ViewModelHillclimber(mutationIsBinary, mutationChance, fitnessIsOneMax);
     }

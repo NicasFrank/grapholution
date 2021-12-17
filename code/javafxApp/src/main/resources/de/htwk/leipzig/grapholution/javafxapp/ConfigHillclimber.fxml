@@ -35,17 +35,17 @@
             <Font name="Arial" size="30.0" />
          </font>
       </TextField>
-      <Button id="backButton" fx:id="backButton" onAction="#sendButton_backwards" alignment="CENTER" layoutX="100.0" layoutY="600.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="60.0" prefWidth="150.0" styleClass="defaultButton" text="Zurück" textFill="#28240b">
+      <Button id="sendButton_backwards" fx:id="sendButton_backwards" onAction="#sendButton_backwards" alignment="CENTER" layoutX="100.0" layoutY="600.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="60.0" prefWidth="150.0" styleClass="defaultButton" text="Zurück" textFill="#28240b">
          <font>
             <Font name="Arial" size="24.0" />
          </font>
       </Button>
-      <Button id="startButton" fx:id="startButton" onAction="#sendButton_startAlgo" alignment="CENTER" layoutX="710.0" layoutY="600.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="60.0" prefWidth="150.0" styleClass="defaultButton" text="Starten" textFill="#28240b">
+      <Button id="sendButton_startAlgo" fx:id="sendButton_startAlgo" onAction="#sendButton_startAlgo" alignment="CENTER" layoutX="710.0" layoutY="600.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="60.0" prefWidth="150.0" styleClass="defaultButton" text="Starten" textFill="#28240b">
          <font>
             <Font name="Arial" size="24.0" />
          </font>
       </Button>
-      <Button id="saveButton" fx:id="saveButton" alignment="CENTER" layoutX="407.0" layoutY="600.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="60.0" prefWidth="150.0" styleClass="defaultButton" text="Speichern" textFill="#28240b">
+      <Button id="saveButton_saveAlgo" fx:id="saveButton_saveAlgo" alignment="CENTER" layoutX="407.0" layoutY="600.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="60.0" prefWidth="150.0" styleClass="defaultButton" text="Speichern" textFill="#28240b">
          <font>
             <Font name="Arial" size="24.0" />
          </font>

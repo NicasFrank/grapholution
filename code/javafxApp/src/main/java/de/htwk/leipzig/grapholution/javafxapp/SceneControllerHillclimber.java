@@ -1,6 +1,7 @@
 package de.htwk.leipzig.grapholution.javafxapp;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
@@ -11,6 +12,12 @@ import javafx.scene.control.TextField;
 public class SceneControllerHillclimber extends SceneController {
     @FXML
     private TextField inputField;
+    @FXML
+    private Button sendButton_backwards;
+    @FXML
+    private Button sendButton_startAlgo;
+    @FXML
+    private Button sendButton_saveAlgo;
     @FXML
     private RadioButton radioMutationBinary;
     @FXML
