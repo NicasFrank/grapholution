@@ -1,6 +1,5 @@
 package de.htwk.leipzig.grapholution.evolibrary.selectors;
 
-import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Population;
 
 /**

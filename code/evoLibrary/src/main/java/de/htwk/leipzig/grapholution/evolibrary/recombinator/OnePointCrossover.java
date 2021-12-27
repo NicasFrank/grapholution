@@ -3,7 +3,6 @@ package de.htwk.leipzig.grapholution.evolibrary.recombinator;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
 
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -13,12 +12,13 @@ import java.util.concurrent.ThreadLocalRandom;
 public class OnePointCrossover<T> implements Recombinator<T>{
 
     /**
-     * Funktion Rekombination zweier Genotypen nach dem OnePointCrossoverPrinzip
+     * Funktion zur Rekombination zweier Genotypen nach dem One-Point-Crossover Prinzip
      * @param individualA Erster Genotyp
      * @param individualB Zweiter Genotyp
+     * @return ArrayList mit neuen rekombinierten Genotypen
      */
     @Override
-    public void recombine(Genotype<T> individualA, Genotype<T> individualB) {
+    public ArrayList<Genotype<T>> recombine(Genotype<T> individualA, Genotype<T> individualB) {
         int crossoverPoint = ThreadLocalRandom.current().nextInt(individualA.size()-1); //Stelle an der Genotypen getrennt werden
         ArrayList<T> newA = new ArrayList<>();
         ArrayList<T> newB = new ArrayList<>();
@@ -30,11 +30,9 @@ public class OnePointCrossover<T> implements Recombinator<T>{
             newA.add(individualB.get(i));
             newB.add(individualA.get(i));
         }
-        individualA.clear();
-        individualA.addAll(newA);
-        individualB.clear();
-        individualB.addAll(newB);
-        individualA.updateFitness(); //Fitness des Genotypen muss nach Veraenderung der Werte neu ermittelt werden
-        individualB.updateFitness(); //Fitness des Genotypen muss nach Veraenderung der Werte neu ermittelt werden
+        ArrayList<Genotype<T>> recombinedGenotypes = new ArrayList<>();
+        recombinedGenotypes.add(new Genotype<>(individualA.getFitnessFunction(), newA));
+        recombinedGenotypes.add(new Genotype<>(individualA.getFitnessFunction(), newB));
+        return recombinedGenotypes;
     }
 }

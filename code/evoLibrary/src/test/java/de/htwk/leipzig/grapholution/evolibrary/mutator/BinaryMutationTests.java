@@ -29,7 +29,7 @@ public class BinaryMutationTests {
         var copy = testGenotype.createCopy();
         binaryMutation = new BinaryMutation(100);
 
-        binaryMutation.mutate(testGenotype);
+        testGenotype = binaryMutation.mutate(testGenotype);
 
         for (int i = 0; i < testGenotype.size(); i++) {
             assertEquals(copy.get(i), !testGenotype.get(i));
@@ -41,7 +41,7 @@ public class BinaryMutationTests {
         var copy = testGenotype.createCopy();
         binaryMutation = new BinaryMutation(0);
 
-        binaryMutation.mutate(testGenotype);
+        testGenotype = binaryMutation.mutate(testGenotype);
 
         for (int i = 0; i < testGenotype.size(); i++) {
             assertEquals(copy.get(i), testGenotype.get(i));
