@@ -19,10 +19,11 @@ public class FitnessproportionalSelection<T> implements Selector<T>{
 
     /**
      * Selektion mehrerer Individuen mittels der Fitnessproportionalen Selektion
-     * @param population, Population aus der selektiert werden soll
+     * @param startingPopulation, Population aus der selektiert werden soll
      */
-    public Population<T> select(Population<T> population){
-       var selected = new Population<T>(new ArrayList<>());
+    public Population<T> select(Population<T> startingPopulation){
+        var population = startingPopulation.createCopy();
+        var selected = new Population<T>(new ArrayList<>());
 
         while (population.size() > 0) {
             int selection = ThreadLocalRandom.current().nextInt(Math.max(1, getSum(population)));
