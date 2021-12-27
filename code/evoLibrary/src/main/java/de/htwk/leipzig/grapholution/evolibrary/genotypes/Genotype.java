@@ -122,6 +122,14 @@ public class Genotype<T> {
         System.out.println("\n");
     }
 
+    /**
+     * Funktion zur Ausgabe des optimierungsziels der fitnessfunction
+     * @return T Werte der Methode type()
+     */
+    public T getFitnessTarget(){
+        return fitnessFunction.target();
+    }
+
     @Override
     public boolean equals(Object o) {
         return super.equals(o);

@@ -30,4 +30,25 @@ public class Statistics {
      */
     public void addBestIndividual(Genotype<?> genotype){bestIndividuals.add(genotype);}
 
+    /**
+     * Funktion zum erhalt des Proznetanteils der Bits der Stellen des Genotypes die dem Fitnessziel entsprechen einer Population
+     * @return Array mit jeweiligen prozentvorkommen des Fitnessziels an der entsprechenden Stelle
+     */
+    public float[] getColorBitString(Population<?> population){
+        float[] array = new float[population.get(0).size()];
+        for(int j = 0; j <= array.length; j++){
+            array[j] = 0f;
+        }
+        for (Genotype<?> g: population) {
+            for(int i = 0; i < g.size(); i++){
+                if(g.getValues().get(i) == g.getFitnessTarget()){
+                    array[i] += 1f;
+                }
+            }
+        }
+        for(int j = 0; j <= array.length; j++){
+            array[j] = array[j]/population.size();
+        }
+        return array;
+    }
 }
