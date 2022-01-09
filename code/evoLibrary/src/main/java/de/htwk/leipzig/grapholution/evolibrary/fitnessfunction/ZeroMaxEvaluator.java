@@ -15,7 +15,7 @@ public class ZeroMaxEvaluator implements FitnessFunction<Boolean> {
     @Override
     public int evaluate(Genotype<Boolean> genotype) {
         int sum = 0;
-        for (var value : genotype.getValues()) {
+        for (var value : genotype.valuesToList()) {
             if (!value) {
                 sum++;
             }

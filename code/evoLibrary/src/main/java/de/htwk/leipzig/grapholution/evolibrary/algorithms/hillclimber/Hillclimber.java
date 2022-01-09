@@ -45,7 +45,7 @@ public class Hillclimber<T> extends Algorithm<T> {
      * @return Bester erreichter Genotyp
      */
     public Genotype<T> run() {
-            while (currentBest.getFitness() < currentBest.MAX_FITNESS_VALUE && //Ueberprufung ob Limit oder bestmoeglicher Genotyp bereits erreicht
+            while (currentBest.getFitness() < currentBest.getMaxFitnessValue() && //Ueberprufung ob Limit oder bestmoeglicher Genotyp bereits erreicht
                 (limit < 0 || iterations < limit)){
             Genotype<T> mutation = mutator.mutate(currentBest); //Kopie des letzten Genotypen zur Mutation wird erstellt
             if (mutation.getFitness() > currentBest.getFitness()) { //Vergleich der Fitnesswerte von mutierter Kopie und urspruenglichem Genotyp
