@@ -20,7 +20,7 @@ public class Population<T> extends ArrayList<Genotype<T>> {
      * @param fitnessfunction fitnessfunction der Genotypen
      */
     public Population(Function<Random, T> creator, int populationSize, int genoLength, FitnessFunction<T> fitnessfunction) {
-        super(Stream.generate(() -> new Genotype<>(creator, fitnessfunction, genoLength))
+        super(Stream.generate(() -> new ListGenotype<>(creator, fitnessfunction, genoLength))
                 .limit(populationSize)
                 .collect(Collectors.toList()));
     }

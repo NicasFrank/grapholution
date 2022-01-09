@@ -26,8 +26,8 @@ public class PopulationTests {
 
     @BeforeEach
     public void setup() {
-        testGenotype1 = new Genotype<>(rand -> rand.nextInt(15), fitnessMock, 1);
-        testGenotype2 = new Genotype<>(rand -> rand.nextInt(15), fitnessMock, 1);
+        testGenotype1 = new ListGenotype<>(rand -> rand.nextInt(15), fitnessMock, 1);
+        testGenotype2 = new ListGenotype<>(rand -> rand.nextInt(15), fitnessMock, 1);
         genotypes = new ArrayList<>();
         genotypes.add(testGenotype1);
         genotypes.add(testGenotype2);

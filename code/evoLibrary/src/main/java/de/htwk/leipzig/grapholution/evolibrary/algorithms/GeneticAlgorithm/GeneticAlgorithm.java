@@ -78,7 +78,7 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
 
 
     private boolean hasNotRunToCompletion() {
-        return (iterations < limit || limit < 0) && !(population.getBestFitness() == genotype.MAX_FITNESS_VALUE);
+        return (iterations < limit || limit < 0) && !(population.getBestFitness() == genotype.getMaxFitnessValue());
     }
 
     /**

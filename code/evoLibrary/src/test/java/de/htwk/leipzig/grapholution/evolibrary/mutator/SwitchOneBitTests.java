@@ -2,6 +2,7 @@ package de.htwk.leipzig.grapholution.evolibrary.mutator;
 
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.FitnessFunction;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
+import de.htwk.leipzig.grapholution.evolibrary.genotypes.ListGenotype;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,7 +22,7 @@ public class SwitchOneBitTests {
 
     @BeforeEach
     void setup() {
-        testGenotype = new Genotype<>(Random::nextBoolean, fitnessMock, 10);
+        testGenotype = new ListGenotype<>(Random::nextBoolean, fitnessMock, 10);
     }
 
     @Test
@@ -31,11 +32,11 @@ public class SwitchOneBitTests {
 
         testGenotype = switchOneBit.mutate(testGenotype);
 
-        var trueCount = testGenotype.getValues().stream()
+        var trueCount = testGenotype.valuesToList().stream()
                 .filter(aBoolean -> aBoolean)
                 .count();
 
-        var copyTrueCount = copy.getValues().stream()
+        var copyTrueCount = copy.valuesToList().stream()
                 .filter(aBoolean -> aBoolean)
                 .count();
 

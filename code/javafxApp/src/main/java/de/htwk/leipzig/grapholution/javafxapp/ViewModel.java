@@ -5,6 +5,7 @@ import de.htwk.leipzig.grapholution.evolibrary.algorithms.hillclimber.Hillclimbe
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.FitnessFunction;
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.OneMaxEvaluator;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
+import de.htwk.leipzig.grapholution.evolibrary.genotypes.ListGenotype;
 import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmConfigOptions;
 import de.htwk.leipzig.grapholution.evolibrary.models.BoolConfig;
 import de.htwk.leipzig.grapholution.evolibrary.models.IntConfig;
@@ -88,7 +89,7 @@ public class ViewModel {
   public void climbTheHill(String startConfig){
       int genosize = configOptions.getOrElse(IntConfig.GenotypeSize, 10);
       FitnessFunction<Boolean> fitnessfunctionO = new OneMaxEvaluator();
-      Genotype<Boolean> genotypeO = new Genotype<>(Random::nextBoolean, fitnessfunctionO, genosize);
+      Genotype<Boolean> genotypeO = new ListGenotype<>(Random::nextBoolean, fitnessfunctionO, genosize);
       Mutator<Boolean> mutatorS = new SwitchOneBit();
 
       hilly = new Hillclimber<>(genotypeO, mutatorS, configOptions);

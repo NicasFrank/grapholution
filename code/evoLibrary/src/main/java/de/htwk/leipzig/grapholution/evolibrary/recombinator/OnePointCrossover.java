@@ -1,6 +1,7 @@
 package de.htwk.leipzig.grapholution.evolibrary.recombinator;
 
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
+import de.htwk.leipzig.grapholution.evolibrary.genotypes.ListGenotype;
 
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
@@ -31,8 +32,8 @@ public class OnePointCrossover<T> implements Recombinator<T>{
             newB.add(individualA.get(i));
         }
         ArrayList<Genotype<T>> recombinedGenotypes = new ArrayList<>();
-        recombinedGenotypes.add(new Genotype<>(individualA.getFitnessFunction(), newA));
-        recombinedGenotypes.add(new Genotype<>(individualA.getFitnessFunction(), newB));
+        recombinedGenotypes.add(new ListGenotype<>(individualA.getFitnessFunction(), newA));
+        recombinedGenotypes.add(new ListGenotype<>(individualA.getFitnessFunction(), newB));
         return recombinedGenotypes;
     }
 }
