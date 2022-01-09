@@ -9,17 +9,17 @@ import java.util.List;
 /**
  * Klasse zur Verwaltung der Populations-Historie und Besten-Individuums-Historie eines Algorithmus, sowie Auswertung dieser
  */
-public class Statistics {
+public class Statistics<T> {
 
-    private List<Population<?>> history = new ArrayList<>();
-    private List<Genotype<?>> bestIndividuals = new ArrayList<>();
+    private final List<Population<T>> history = new ArrayList<>();
+    private final List<Genotype<T>> bestIndividuals = new ArrayList<>();
 
     /**
      * Funktion zum Hinzufuegen einer Population des Algorithmus zur Historie, sowie deren bestes Individuum zur
      * Besten-Individuums-Historie
      * @param population Population die hinzugefuegt werden soll
      */
-    public void addToHistory(Population<?> population) {
+    public void addToHistory(Population<T> population) {
         history.add(population);
         bestIndividuals.add(population.getBestIndividual());
     }
@@ -28,6 +28,20 @@ public class Statistics {
      * Funktion zum hinzufügen eines besten Individuums zur Besten-Individuums-Historie
      * @param genotype Individuum das hinzugefuegt werden soll
      */
-    public void addBestIndividual(Genotype<?> genotype){bestIndividuals.add(genotype);}
+    public void addBestIndividual(Genotype<T> genotype){bestIndividuals.add(genotype);}
 
+    public Statistics<T> createCopy() {
+        var c = new Statistics<T>();
+        c.history.addAll(history);
+        c.bestIndividuals.addAll(bestIndividuals);
+        return c;
+    }
+
+    public List<Population<T>> getHistory() {
+        return new ArrayList<>(history);
+    }
+
+    public List<Genotype<T>> getBestIndividuals() {
+        return new ArrayList<>(bestIndividuals);
+    }
 }

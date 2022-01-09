@@ -18,7 +18,7 @@ public abstract class Algorithm<T> {
     protected final Genotype<T> genotype;
     protected int limit = -1;
     protected int iterations = 0;
-    protected Statistics statistics = new Statistics();
+    protected Statistics<T> statistics = new Statistics<>();
 
     /**
      * Konstruktor fuer einen Algorithmus
@@ -51,6 +51,10 @@ public abstract class Algorithm<T> {
      * @return Bester Genotyp der am Ende herausgekommen ist
      */
     public abstract Genotype<T> run();
+
+    public Statistics<T> getStatistics() {
+        return statistics.createCopy();
+    }
 
     public void serialize(File file) throws Exception {
         var config = new AlgorithmConfigOptions();
