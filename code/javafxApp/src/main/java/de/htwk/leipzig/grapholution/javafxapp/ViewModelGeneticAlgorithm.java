@@ -3,6 +3,7 @@ package de.htwk.leipzig.grapholution.javafxapp;
 import de.htwk.leipzig.grapholution.evolibrary.algorithms.GeneticAlgorithm.GeneticAlgorithm;
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.OneMaxEvaluator;
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.ZeroMaxEvaluator;
+import de.htwk.leipzig.grapholution.evolibrary.genotypes.BitSetGenotype;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Population;
 import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmConfigOptions;
@@ -37,7 +38,9 @@ public class ViewModelGeneticAlgorithm{
     var selector= new FitnessproportionalSelection<Boolean>();
     var recombinator = new OnePointCrossover<Boolean>();
     var fitnessFunction = options.getBool(BoolConfig.FitnessIsOneMax) ? new OneMaxEvaluator() : new ZeroMaxEvaluator();
-    var population = new Population<>(Random::nextBoolean,options.getInt(IntConfig.PopulationSize),options.getInt(IntConfig.GenotypeSize),fitnessFunction);
+    var population = new Population<>(
+            () -> new BitSetGenotype(Random::nextBoolean, fitnessFunction, options.getInt(IntConfig.GenotypeSize)),
+            options.getInt(IntConfig.PopulationSize));
     geneticAlgorithm = new GeneticAlgorithm<>(mutator, selector, recombinator, population, options);
   }
 
