@@ -1,5 +1,6 @@
 package de.htwk.leipzig.grapholution.evolibrary.fitnessfunction;
 
+import de.htwk.leipzig.grapholution.evolibrary.genotypes.BitSetGenotype;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
 
 /**
@@ -14,13 +15,9 @@ public class OneMaxEvaluator implements FitnessFunction<Boolean> {
      */
     @Override
     public int evaluate(Genotype<Boolean> genotype) {
-        int sum = 0;
-        for (var value : genotype.valuesToList()) {
-            if (value) {
-                sum++;
-            }
-        }
-        return sum;
+        var bitSetGenotype = (BitSetGenotype) genotype;
+
+        return bitSetGenotype.oneCount();
     }
 
     /**

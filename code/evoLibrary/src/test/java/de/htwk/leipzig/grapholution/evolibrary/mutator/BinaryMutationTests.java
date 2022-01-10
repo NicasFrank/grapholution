@@ -1,6 +1,7 @@
 package de.htwk.leipzig.grapholution.evolibrary.mutator;
 
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.FitnessFunction;
+import de.htwk.leipzig.grapholution.evolibrary.genotypes.BitSetGenotype;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.ListGenotype;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,7 +23,7 @@ public class BinaryMutationTests {
 
     @BeforeEach
     void setup() {
-        testGenotype = new ListGenotype<>(Random::nextBoolean, fitnessMock, 10);
+        testGenotype = new BitSetGenotype(Random::nextBoolean, fitnessMock, 10);
     }
 
     @Test

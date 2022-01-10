@@ -2,6 +2,7 @@ package de.htwk.leipzig.grapholution.evolibrary.selectors;
 
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.FitnessFunction;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
+import de.htwk.leipzig.grapholution.evolibrary.genotypes.ListGenotype;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Population;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -36,7 +37,7 @@ public class FitnessproportionalSelectionTests {
         var highFitnessSelectedFirstCount = 0;
 
         for (int i = 0; i < selections; i++) {
-            testPopulation = new Population<>(random -> random.nextInt(10), 2, 1, testFitness);
+            testPopulation = new Population<>(() -> new ListGenotype<>(random -> random.nextInt(10), testFitness, 1), 2);
 
             testPopulation = fitnessproportionalSelection.select(testPopulation);
 

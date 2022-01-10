@@ -49,7 +49,7 @@ public class PopulationTests {
 
     @Test
     public void createCopy_WhenCalled_ReturnsPopulationWithMatchingGenotypes() {
-        population = new Population<>(rand -> rand.nextInt(15), 10, 10, fitnessMock);
+        population = new Population<>(() -> new ListGenotype<>(rand -> rand.nextInt(15), fitnessMock, 10), 10);
 
         var copy = population.createCopy();
 

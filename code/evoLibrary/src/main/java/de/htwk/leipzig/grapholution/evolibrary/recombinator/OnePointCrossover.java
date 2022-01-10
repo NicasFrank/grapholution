@@ -1,9 +1,7 @@
 package de.htwk.leipzig.grapholution.evolibrary.recombinator;
 
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
-import de.htwk.leipzig.grapholution.evolibrary.genotypes.ListGenotype;
-
-import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -19,21 +17,21 @@ public class OnePointCrossover<T> implements Recombinator<T>{
      * @return ArrayList mit neuen rekombinierten Genotypen
      */
     @Override
-    public ArrayList<Genotype<T>> recombine(Genotype<T> individualA, Genotype<T> individualB) {
-        int crossoverPoint = ThreadLocalRandom.current().nextInt(individualA.size()-1); //Stelle an der Genotypen getrennt werden
-        ArrayList<T> newA = new ArrayList<>();
-        ArrayList<T> newB = new ArrayList<>();
+    public List<Genotype<T>> recombine(Genotype<T> individualA, Genotype<T> individualB) {
+        var crossoverPoint = ThreadLocalRandom.current().nextInt(individualA.size()-1); //Stelle an der Genotypen getrennt werden
+
+        var newA = individualA.createCopy();
+        var newB = individualB.createCopy();
+
         for(int i = 0; i<=crossoverPoint; i++){
-            newA.add(individualA.get(i));
-            newB.add(individualB.get(i));
+            newA.set(i, individualA.get(i));
+            newB.set(i, individualB.get(i));
         }
         for(int i = crossoverPoint+1; i<individualA.size(); i++){
-            newA.add(individualB.get(i));
-            newB.add(individualA.get(i));
+            newA.set(i, individualB.get(i));
+            newB.set(i, individualA.get(i));
         }
-        ArrayList<Genotype<T>> recombinedGenotypes = new ArrayList<>();
-        recombinedGenotypes.add(new ListGenotype<>(individualA.getFitnessFunction(), newA));
-        recombinedGenotypes.add(new ListGenotype<>(individualA.getFitnessFunction(), newB));
-        return recombinedGenotypes;
+
+        return List.of(newA, newB);
     }
 }
