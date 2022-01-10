@@ -12,12 +12,15 @@ public class SwitchOneBit implements Mutator<Boolean> {
     /**
      * Funktion zum switchen eines Einzelnen Bits eines Boolean-Genotypen
      * @param genotype Genotyp, der mutiert werden soll
+     * @return Neuer mutierter Genotyp
      */
     @Override
-    public void mutate(Genotype<Boolean> genotype) {
+    public Genotype<Boolean> mutate(Genotype<Boolean> genotype) {
+        Genotype<Boolean> genotypeCopy = genotype.createCopy();
         int index = ThreadLocalRandom.current().nextInt(genotype.size());
-        genotype.set(index, !genotype.get(index));
-        genotype.updateFitness(); //Fitness des Genotypen muss nach Veraenderung der Werte neu ermittelt werden
+        genotypeCopy.set(index, !genotype.get(index));
+        genotypeCopy.updateFitness();
+        return genotypeCopy;
     }
 
 }

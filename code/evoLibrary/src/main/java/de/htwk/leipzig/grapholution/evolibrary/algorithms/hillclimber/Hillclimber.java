@@ -6,9 +6,6 @@ import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmConfigOptions;
 import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmType;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.Mutator;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Klasse zur Darstellung eines einfachen Hillclimbers mit einstellbarer Mutation und Genotyp
@@ -16,7 +13,7 @@ import java.util.List;
  */
 public class Hillclimber<T> extends Algorithm<T> {
 
-    private final List<Genotype<T>> history; //Alle Genotypen, welche Verbesserungen brachten
+    private Genotype<T> currentBest; //Alle Genotypen, welche Verbesserungen brachten
     private final Mutator<T> mutator;
 
     /**
@@ -27,8 +24,8 @@ public class Hillclimber<T> extends Algorithm<T> {
     public Hillclimber(Genotype<T> genotype, Mutator<T> mutator) {
         super(genotype);
         this.mutator = mutator;
-        history = new ArrayList<>();
-        history.add(genotype);
+        currentBest = genotype.createCopy();
+        statistics.addBestIndividual(genotype);
     }
 
     /**
@@ -39,20 +36,8 @@ public class Hillclimber<T> extends Algorithm<T> {
     public Hillclimber(Genotype<T> genotype, Mutator<T> mutator, AlgorithmConfigOptions configOptions) {
         super(genotype, configOptions);
         this.mutator = mutator;
-        history = new ArrayList<>();
-        history.add(genotype);
-    }
-
-    /**
-     * Getter fuer den aktuellsten Genotyp
-     * @return Genotyp mit bestem Fitnesswert
-     */
-    private Genotype<T> getLastConfig() {
-        return history.get(history.size() - 1);
-    }
-
-    public List<Genotype<T>> getHistory() {
-        return new ArrayList<>(history);
+        currentBest = genotype.createCopy();
+        statistics.addBestIndividual(genotype);
     }
 
     /**
@@ -60,19 +45,19 @@ public class Hillclimber<T> extends Algorithm<T> {
      * @return Bester erreichter Genotyp
      */
     public Genotype<T> run() {
-            while (getLastConfig().getFitness() < getLastConfig().MAX_FITNESS_VALUE && //Ueberprufung ob Limit oder bestmoeglicher Genotyp bereits erreicht
+            while (currentBest.getFitness() < currentBest.MAX_FITNESS_VALUE && //Ueberprufung ob Limit oder bestmoeglicher Genotyp bereits erreicht
                 (limit < 0 || iterations < limit)){
-            Genotype<T> copy = getLastConfig().createCopy(); //Kopie des letzten Genotypen zur Mutation wird erstellt
-            mutator.mutate(copy); //Kopie wird mutiert
-            if (copy.getFitness() > getLastConfig().getFitness()) { //Vergleich der Fitnesswerte von mutierter Kopie und urspruenglichem Genotyp
-                history.add(copy); //Wenn Kopie besser, wird sie der history hinzugefügt und als neuer bester Genotyp fuer weitere Mutationen verwendet
+            Genotype<T> mutation = mutator.mutate(currentBest); //Kopie des letzten Genotypen zur Mutation wird erstellt
+            if (mutation.getFitness() > currentBest.getFitness()) { //Vergleich der Fitnesswerte von mutierter Kopie und urspruenglichem Genotyp
+                currentBest = mutation; //Wenn Kopie besser, wird sie der history hinzugefügt und als neuer bester Genotyp fuer weitere Mutationen verwendet
+                statistics.addBestIndividual(currentBest);
             }
             else {
-                getLastConfig().survive(); //Wenn nicht wird Alter des urspruenglichen Genotypen erhoeht, da er "ueberlebt" hat
+                currentBest.survive(); //Wenn nicht wird Alter des urspruenglichen Genotypen erhoeht, da er "ueberlebt" hat
             }
             iterations++; //Durchlauf wird erhoeht
         }
-        return getLastConfig();
+        return currentBest.createCopy();
     }
 
     @Override

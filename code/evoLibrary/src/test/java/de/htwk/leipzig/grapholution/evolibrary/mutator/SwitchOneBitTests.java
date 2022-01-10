@@ -29,13 +29,13 @@ public class SwitchOneBitTests {
         var copy = testGenotype.createCopy();
         switchOneBit = new SwitchOneBit();
 
-        switchOneBit.mutate(testGenotype);
+        testGenotype = switchOneBit.mutate(testGenotype);
 
-        var trueCount = testGenotype.stream()
+        var trueCount = testGenotype.getValues().stream()
                 .filter(aBoolean -> aBoolean)
                 .count();
 
-        var copyTrueCount = copy.stream()
+        var copyTrueCount = copy.getValues().stream()
                 .filter(aBoolean -> aBoolean)
                 .count();
 
