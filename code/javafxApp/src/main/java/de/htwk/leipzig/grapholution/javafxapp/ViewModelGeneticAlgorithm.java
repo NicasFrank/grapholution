@@ -47,18 +47,13 @@ public class ViewModelGeneticAlgorithm{
    * @return aktuell besten genotypen
    */
   public BestGenotype runAlgorithm(boolean untilDone){
-    Genotype<Boolean> currentBestGeno;
     if(isStepByStep && !untilDone){
-      currentBestGeno = geneticAlgorithm.oneStep();
+      geneticAlgorithm.oneStep();
     } else {
-      currentBestGeno = geneticAlgorithm.run();
+      geneticAlgorithm.run();
     }
-    int fitness = currentBestGeno.getFitness();
-    int age = currentBestGeno.getAge();
-    bestGenotype = new BestGenotype(fitness,age);
-
-    System.out.println(bestGenotype +" Iteration: " + geneticAlgorithm.getIterations());
-
-    return bestGenotype;
+    Genotype<Boolean> currentBest =geneticAlgorithm.getStatistics().getBestIndividuals().get(geneticAlgorithm.getStatistics().getBestIndividuals().size()-1);
+    System.out.println(currentBest.getFitness()+ " " +currentBest.getAge()  +" Iteration: " + geneticAlgorithm.getIterations());
+    return new BestGenotype(currentBest.getFitness(),currentBest.getAge());
   }
 }

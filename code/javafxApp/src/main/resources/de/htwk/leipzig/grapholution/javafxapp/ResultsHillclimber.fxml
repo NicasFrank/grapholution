@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.htwk.leipzig.grapholution.javafxapp.SceneControllerResultsHillclimber">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.htwk.leipzig.grapholution.javafxapp.SCResultsHillclimber">
    <children>
       <Label layoutX="394.0" layoutY="36.0" prefHeight="53.0" prefWidth="172.0" styleClass="heading" text="Ergebnisse">
          <font>

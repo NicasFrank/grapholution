@@ -1,11 +1,6 @@
 package de.htwk.leipzig.grapholution.javafxapp;
 import de.htwk.leipzig.grapholution.evolibrary.algorithms.hillclimber.Hillclimber;
-import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
-import de.htwk.leipzig.grapholution.javafxapp.model.BestGenotype;
-import de.htwk.leipzig.grapholution.javafxapp.model.EvoLibMapper;
 import de.htwk.leipzig.grapholution.javafxapp.model.HistoryResults;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -13,14 +8,11 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.cell.PropertyValueFactory;
+
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
-    public class SceneControllerResultsHillclimber extends SceneController implements Initializable {
+    public class SCResultsHillclimber extends SceneController implements Initializable {
 
         @FXML
         TextField outputField;

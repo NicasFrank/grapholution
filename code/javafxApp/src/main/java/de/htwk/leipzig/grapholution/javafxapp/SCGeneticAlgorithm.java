@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.FileChooser;
 
-public class SceneControllerGeneticAlgorithm extends SceneController{
+public class SCGeneticAlgorithm extends SceneController{
 
   public RadioButton radioFitnessZeroMax;
   @FXML

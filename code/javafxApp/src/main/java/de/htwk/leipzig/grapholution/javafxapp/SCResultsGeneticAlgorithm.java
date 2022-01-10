@@ -2,6 +2,7 @@ package de.htwk.leipzig.grapholution.javafxapp;
 
 import de.htwk.leipzig.grapholution.javafxapp.model.BestGenotype;
 import de.htwk.leipzig.grapholution.javafxapp.model.HistoryResults;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -12,7 +13,7 @@ import javafx.scene.control.TableView;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class SceneControllerResultsGeneticAlgorithm extends SceneController implements Initializable {
+public class SCResultsGeneticAlgorithm extends SceneController implements Initializable {
 
     @FXML
     TableView<HistoryResults> tableViewResults;
@@ -26,6 +27,7 @@ public class SceneControllerResultsGeneticAlgorithm extends SceneController impl
     private Button buttonNextStep,buttonFastForward;
 
     private ViewModel viewModel;
+    private ObservableList<BestGenotype> bestGenotypeList;
 
     public void loadButtonTableView(ActionEvent e) {
     }
@@ -38,7 +40,8 @@ public class SceneControllerResultsGeneticAlgorithm extends SceneController impl
     }
 
     public void nextStep(){
-      BestGenotype bestGenotype = viewModel.geneticAlgorithmNextStep(false);
+      viewModel.geneticAlgorithmNextStep(false);
+
     }
     public void fastForward(){
       BestGenotype bestGenotype = viewModel.geneticAlgorithmNextStep(true);
@@ -51,6 +54,7 @@ public class SceneControllerResultsGeneticAlgorithm extends SceneController impl
       duration.setCellValueFactory((cellData -> cellData.getValue().durationProperty()));
       population.setCellValueFactory((cellData -> cellData.getValue().populationProperty()));
       fitness.setCellValueFactory((cellData -> cellData.getValue().fitnessProperty()));
+      age.setCellValueFactory((cellData -> cellData.getValue().ageProperty()));
     }
     /**
      * setter für viewmodel und bindet outputfield an output vom viewmodel

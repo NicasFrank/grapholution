@@ -3,7 +3,7 @@ package de.htwk.leipzig.grapholution.javafxapp;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
 
-public class SceneControllerBase extends SceneController{
+public class SCBase extends SceneController{
   @FXML
   private Pane basePane;
 

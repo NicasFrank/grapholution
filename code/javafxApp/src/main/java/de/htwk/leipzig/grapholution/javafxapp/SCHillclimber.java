@@ -10,7 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.FileChooser;
 
-public class SceneControllerHillclimber extends SceneController{
+public class SCHillclimber extends SceneController{
   public Slider slider;
   @FXML
   private TextField inputField;
@@ -26,7 +26,7 @@ public class SceneControllerHillclimber extends SceneController{
   private ToggleGroup Config2;
 
   private ViewModel viewModel;
-  private SceneControllerResultsHillclimber sceneControllerResultsHillclimber;
+  private SCResultsHillclimber sCResultsHillclimber;
 
   /**
    * speichert aktuellen Text des Inputfields, triggert dann laden der Ergebnis-Szene und gibt Input an ViewModel, damit

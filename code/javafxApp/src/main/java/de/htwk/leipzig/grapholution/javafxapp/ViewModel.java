@@ -28,7 +28,7 @@ public class ViewModel {
   private final StringProperty inputField = new SimpleStringProperty();
   private final StringProperty outputField= new SimpleStringProperty();
 
-  private final SceneControllerBase sceneControllerBase;
+  private final SCBase sCBase;
   private final Pane[] allScenes = new Pane[3];
   private int currentScene = -1;
   private boolean isAlgorithmStepByStep = false;
@@ -37,8 +37,8 @@ public class ViewModel {
   private Hillclimber<Boolean> hilly;
   private ViewModelGeneticAlgorithm viewModelGeneticAlgorithm;
 
-  ViewModel(SceneControllerBase sceneControllerBase, Pane firstPane){
-    this.sceneControllerBase = sceneControllerBase;
+  ViewModel(SCBase sCBase, Pane firstPane){
+    this.sCBase = sCBase;
     allScenes[0]=firstPane;
   }
 
@@ -104,8 +104,7 @@ public class ViewModel {
   public void startGeneticAlgorithm(AlgorithmConfigOptions options){
     setConfigOptions(options);
     isAlgorithmStepByStep = options.getBool(BoolConfig.IsStepByStep);
-    viewModelGeneticAlgorithm = new ViewModelGeneticAlgorithm(options
-    );
+    viewModelGeneticAlgorithm = new ViewModelGeneticAlgorithm(options);
   }
 
   public BestGenotype geneticAlgorithmNextStep(boolean untilDone){
@@ -135,7 +134,7 @@ public class ViewModel {
    * @param nextScreen nächste Scene als Pane
    */
     private void setNextScreen (Pane nextScreen){
-        sceneControllerBase.setNewScreen(nextScreen);
+        sCBase.setNewScreen(nextScreen);
     }
 
   /**
