@@ -1,6 +1,6 @@
 package de.htwk.leipzig.grapholution.javafxapp;
 import de.htwk.leipzig.grapholution.evolibrary.algorithms.hillclimber.Hillclimber;
-import de.htwk.leipzig.grapholution.javafxapp.model.HistoryResults;
+import de.htwk.leipzig.grapholution.javafxapp.model.TableModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -17,15 +17,13 @@ import java.util.ResourceBundle;
         @FXML
         TextField outputField;
         @FXML
-        TableView<HistoryResults> tableViewResults;
+        TableView<TableModel> tableViewResults;
         @FXML
         LineChart lineChartResults;
         @FXML
-        TableColumn<HistoryResults, String> population;
+        TableColumn<TableModel, String> duration;
         @FXML
-        TableColumn<HistoryResults, String> duration;
-        @FXML
-        TableColumn<HistoryResults, String> fitness;
+        TableColumn<TableModel, String> fitness;
 
         private ViewModel viewModel;
 
@@ -57,8 +55,7 @@ import java.util.ResourceBundle;
 
         @Override
         public void initialize(URL location, ResourceBundle resources) {
-            duration.setCellValueFactory((cellData -> cellData.getValue().durationProperty()));
-            population.setCellValueFactory((cellData -> cellData.getValue().populationProperty()));
-            fitness.setCellValueFactory((cellData -> cellData.getValue().fitnessProperty()));
+            duration.setCellValueFactory((cellData -> cellData.getValue().iterationProperty()));
+            fitness.setCellValueFactory((cellData -> cellData.getValue().fitnessIndividualProperty()));
         }
     }

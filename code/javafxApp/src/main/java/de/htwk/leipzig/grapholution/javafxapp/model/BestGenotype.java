@@ -12,6 +12,6 @@ public class BestGenotype {
         this.fitness.setValue(String.valueOf(fitness));
         this.age.setValue(String.valueOf(age));
     }
-    public SimpleStringProperty getFitness(){return fitness;}
-    public SimpleStringProperty getAge(){return age;}
+    public SimpleStringProperty fitnessPropertyIndividual(){return fitness;}
+    public SimpleStringProperty ageProperty(){return age;}
 }

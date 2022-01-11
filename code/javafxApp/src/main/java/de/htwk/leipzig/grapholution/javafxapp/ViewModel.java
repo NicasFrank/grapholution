@@ -10,8 +10,10 @@ import de.htwk.leipzig.grapholution.evolibrary.models.BoolConfig;
 import de.htwk.leipzig.grapholution.evolibrary.models.IntConfig;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.Mutator;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.SwitchOneBit;
+import de.htwk.leipzig.grapholution.evolibrary.statistics.Statistics;
 import de.htwk.leipzig.grapholution.javafxapp.model.BestGenotype;
 import de.htwk.leipzig.grapholution.javafxapp.model.EvoLibMapper;
+import de.htwk.leipzig.grapholution.javafxapp.model.TableModel;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -107,8 +109,11 @@ public class ViewModel {
     viewModelGeneticAlgorithm = new ViewModelGeneticAlgorithm(options);
   }
 
-  public BestGenotype geneticAlgorithmNextStep(boolean untilDone){
-    return viewModelGeneticAlgorithm.runAlgorithm(untilDone);
+  public TableModel geneticAlgorithmNextStep(){
+    return viewModelGeneticAlgorithm.runAlgorithm();
+  }
+  public List<TableModel> geneticAlgorithmUntilDone(){
+    return viewModelGeneticAlgorithm.finishAlgorithm();
   }
 
     /**

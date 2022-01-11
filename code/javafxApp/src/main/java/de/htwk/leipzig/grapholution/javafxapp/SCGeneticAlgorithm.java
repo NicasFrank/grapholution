@@ -67,9 +67,7 @@ public class SCGeneticAlgorithm extends SceneController{
     var fileChooser = new FileChooser();
     fileChooser.getExtensionFilters()
             .add(new FileChooser.ExtensionFilter("Genetischer Algorithmus (*.gacf)", "*.gacf"));
-
     var file = fileChooser.showSaveDialog(null);
-
     if (file != null) {
       try {
         createConfigOptions().serialize(file);

@@ -6,12 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EvoLibMapper {
+
     public List<BestGenotype> map(List<Genotype<Boolean>> results) {
         List<BestGenotype> listReturn = new ArrayList<>();
-        for (Object g : results
-        ) {
-            Genotype<Boolean> h = (Genotype<Boolean>) g;
-            listReturn.add(new BestGenotype(h.getFitness(), h.getAge()));
+        for (Genotype<Boolean> g : results) {
+            listReturn.add(new BestGenotype(g.getFitness(), g.getAge()));
         }
         return listReturn;
     }

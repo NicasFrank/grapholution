@@ -12,18 +12,21 @@ import de.htwk.leipzig.grapholution.evolibrary.mutator.BinaryMutation;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.SwitchOneBit;
 import de.htwk.leipzig.grapholution.evolibrary.recombinator.OnePointCrossover;
 import de.htwk.leipzig.grapholution.evolibrary.selectors.FitnessproportionalSelection;
+import de.htwk.leipzig.grapholution.evolibrary.statistics.Statistics;
 import de.htwk.leipzig.grapholution.javafxapp.model.BestGenotype;
 import de.htwk.leipzig.grapholution.javafxapp.model.EvoLibMapper;
 import de.htwk.leipzig.grapholution.javafxapp.model.HistoryResults;
+import de.htwk.leipzig.grapholution.javafxapp.model.TableModel;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+
+import static java.util.stream.StreamSupport.stream;
 
 public class ViewModelGeneticAlgorithm{
 
   private final GeneticAlgorithm<Boolean> geneticAlgorithm;
-  private BestGenotype bestGenotype;
-  private HistoryResults historyResults;
-  private EvoLibMapper evoLibMapper;
   private boolean isStepByStep;
 
 
@@ -43,17 +46,24 @@ public class ViewModelGeneticAlgorithm{
 
   /**
    * ruft die run methoden des genetischen algorithmus abheangig ob schrittweise oder auf einmal gerechnet werden soll
-   * @param untilDone ob der algorithmus bis zur maximalanzahl der generationen oder bestmoeglichen individuums durchlaufen soll
    * @return aktuell besten genotypen
    */
-  public BestGenotype runAlgorithm(boolean untilDone){
-    if(isStepByStep && !untilDone){
-      geneticAlgorithm.oneStep();
-    } else {
-      geneticAlgorithm.run();
+  public TableModel runAlgorithm(){
+    geneticAlgorithm.oneStep();
+    Statistics<Boolean> stats = geneticAlgorithm.getStatistics();
+    int statsSize = stats.getBestIndividuals().size()-1;
+    return new TableModel(geneticAlgorithm.getIterations(), stats.getBestIndividuals().get(statsSize),stats.getHistory().get(statsSize));
+  }
+  public List<TableModel> finishAlgorithm(){
+    geneticAlgorithm.run();
+    return  makeTableModelList(geneticAlgorithm.getStatistics());
+  }
+  private List<TableModel> makeTableModelList(Statistics<Boolean> stats){
+    int size = stats.getBestIndividuals().size();
+    List<TableModel> tableModelList = new ArrayList<>();
+    for (int i=0; i<size;i++){
+      tableModelList.add(new TableModel(i,stats.getBestIndividuals().get(i),stats.getHistory().get(i)));
     }
-    Genotype<Boolean> currentBest =geneticAlgorithm.getStatistics().getBestIndividuals().get(geneticAlgorithm.getStatistics().getBestIndividuals().size()-1);
-    System.out.println(currentBest.getFitness()+ " " +currentBest.getAge()  +" Iteration: " + geneticAlgorithm.getIterations());
-    return new BestGenotype(currentBest.getFitness(),currentBest.getAge());
+    return tableModelList;
   }
 }

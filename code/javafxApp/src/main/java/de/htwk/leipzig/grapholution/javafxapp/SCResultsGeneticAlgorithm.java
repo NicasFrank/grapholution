@@ -1,9 +1,9 @@
 package de.htwk.leipzig.grapholution.javafxapp;
 
-import de.htwk.leipzig.grapholution.javafxapp.model.BestGenotype;
-import de.htwk.leipzig.grapholution.javafxapp.model.HistoryResults;
+import de.htwk.leipzig.grapholution.evolibrary.statistics.Statistics;
+import de.htwk.leipzig.grapholution.javafxapp.model.TableModel;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -16,45 +16,44 @@ import java.util.ResourceBundle;
 public class SCResultsGeneticAlgorithm extends SceneController implements Initializable {
 
     @FXML
-    TableView<HistoryResults> tableViewResults;
+    TableView<TableModel> tableViewResults;
     @FXML
-    TableColumn<HistoryResults, String> population;
+    TableColumn<TableModel, String> duration;
     @FXML
-    TableColumn<HistoryResults, String> duration;
+    TableColumn<TableModel, String> fitnessPopulation;
     @FXML
-    TableColumn<HistoryResults, String> fitness;
+    TableColumn<TableModel, String> fitnessBestIndividual;
+    @FXML
+    TableColumn<TableModel, String> age;
     @FXML
     private Button buttonNextStep,buttonFastForward;
 
     private ViewModel viewModel;
-    private ObservableList<BestGenotype> bestGenotypeList;
-
-    public void loadButtonTableView(ActionEvent e) {
-    }
-
-    public void loadButtonLineChart(ActionEvent e) {
-    }
+    private final Statistics<Boolean> stats = new Statistics<>();
+    private final ObservableList<TableModel> allResults = FXCollections.observableArrayList();
 
     public void sendButton_backwards(){
       viewModel.navigation_Back();
     }
 
     public void nextStep(){
-      viewModel.geneticAlgorithmNextStep(false);
-
+      allResults.add(viewModel.geneticAlgorithmNextStep());
+      tableViewResults.setItems(allResults);
     }
     public void fastForward(){
-      BestGenotype bestGenotype = viewModel.geneticAlgorithmNextStep(true);
+      allResults.removeAll();
+      allResults.addAll(viewModel.geneticAlgorithmUntilDone());
       buttonFastForward.setDisable(true);
       buttonNextStep.setDisable(true);
+      tableViewResults.setItems(allResults);
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-      duration.setCellValueFactory((cellData -> cellData.getValue().durationProperty()));
-      population.setCellValueFactory((cellData -> cellData.getValue().populationProperty()));
-      fitness.setCellValueFactory((cellData -> cellData.getValue().fitnessProperty()));
+      duration.setCellValueFactory((cellData -> cellData.getValue().iterationProperty()));
       age.setCellValueFactory((cellData -> cellData.getValue().ageProperty()));
+      fitnessBestIndividual.setCellValueFactory((cellData -> cellData.getValue().fitnessIndividualProperty()));
+      //fitnessPopulation.setCellValueFactory((cellData -> cellData.getValue().fitnessPopulationProperty()));
     }
     /**
      * setter für viewmodel und bindet outputfield an output vom viewmodel
@@ -66,6 +65,8 @@ public class SCResultsGeneticAlgorithm extends SceneController implements Initia
       if(viewModel.getIsAlgorithmStepByStep()){
         buttonFastForward.setDisable(false);
         buttonNextStep.setDisable(false);
+      } else {
+        fastForward();
       }
     }
 }
