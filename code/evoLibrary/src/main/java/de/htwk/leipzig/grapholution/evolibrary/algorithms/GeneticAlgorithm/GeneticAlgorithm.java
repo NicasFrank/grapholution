@@ -78,7 +78,7 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
 
 
     private boolean hasNotRunToCompletion() {
-        return (iterations < limit || limit < 0) && !(population.getBestFitness() == genotype.MAX_FITNESS_VALUE);
+        return (iterations < limit || limit < 0) && !(population.getBestFitness() == genotype.getMaxFitnessValue());
     }
 
     /**
@@ -102,7 +102,7 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
 
         for(int i = 0; i < population.size() / 2; i++) {
             if(ThreadLocalRandom.current().nextDouble(1) < recombinationChance) {
-                ArrayList<Genotype<T>> newGenotypes = recombinator.recombine(population.get(2*i), population.get(2*i + 1));
+                var newGenotypes = recombinator.recombine(population.get(2*i), population.get(2*i + 1));
                 population.set(2*i, newGenotypes.get(0));
                 population.set(2*i+1, newGenotypes.get(1));
             }

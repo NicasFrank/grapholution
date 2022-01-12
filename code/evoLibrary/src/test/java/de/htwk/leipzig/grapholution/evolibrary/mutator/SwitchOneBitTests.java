@@ -1,7 +1,9 @@
 package de.htwk.leipzig.grapholution.evolibrary.mutator;
 
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.FitnessFunction;
+import de.htwk.leipzig.grapholution.evolibrary.genotypes.BitSetGenotype;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
+import de.htwk.leipzig.grapholution.evolibrary.genotypes.ListGenotype;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,30 +17,26 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ExtendWith(MockitoExtension.class)
 public class SwitchOneBitTests {
     Mutator<Boolean> switchOneBit;
-    Genotype<Boolean> testGenotype;
+    BitSetGenotype testGenotype;
     @Mock
     FitnessFunction<Boolean> fitnessMock;
 
     @BeforeEach
     void setup() {
-        testGenotype = new Genotype<>(Random::nextBoolean, fitnessMock, 10);
+        testGenotype = new BitSetGenotype(Random::nextBoolean, fitnessMock, 10);
     }
 
     @Test
     public void mutate_WhenCalled_FlipsOneBit() {
-        var copy = testGenotype.createCopy();
+        var copy = (BitSetGenotype) testGenotype.createCopy();
         switchOneBit = new SwitchOneBit();
 
-        testGenotype = switchOneBit.mutate(testGenotype);
+        testGenotype = (BitSetGenotype) switchOneBit.mutate(testGenotype);
 
-        var trueCount = testGenotype.getValues().stream()
-                .filter(aBoolean -> aBoolean)
-                .count();
+        var oneCount = testGenotype.oneCount();
 
-        var copyTrueCount = copy.getValues().stream()
-                .filter(aBoolean -> aBoolean)
-                .count();
+        var copyOneCount = copy.oneCount();
 
-        assertEquals(1, Math.abs(trueCount - copyTrueCount));
+        assertEquals(1, Math.abs(oneCount - copyOneCount));
     }
 }

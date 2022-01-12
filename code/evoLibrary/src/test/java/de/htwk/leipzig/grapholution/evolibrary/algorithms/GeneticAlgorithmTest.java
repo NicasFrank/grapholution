@@ -3,6 +3,7 @@ package de.htwk.leipzig.grapholution.evolibrary.algorithms;
 import de.htwk.leipzig.grapholution.evolibrary.algorithms.GeneticAlgorithm.GeneticAlgorithm;
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.FitnessFunction;
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.OneMaxEvaluator;
+import de.htwk.leipzig.grapholution.evolibrary.genotypes.BitSetGenotype;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Population;
 import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmConfigOptions;
 import de.htwk.leipzig.grapholution.evolibrary.models.DoubleConfig;
@@ -31,7 +32,7 @@ public class GeneticAlgorithmTest {
     @BeforeEach
     void setup() {
         evaluator = new OneMaxEvaluator();
-        testPopulation = new Population<>(r -> false, 10, 10, evaluator);
+        testPopulation = new Population<>(() -> new BitSetGenotype(r -> false, evaluator, 10), 10);
     }
 
     @Test

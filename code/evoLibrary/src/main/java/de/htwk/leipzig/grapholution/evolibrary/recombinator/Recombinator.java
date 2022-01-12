@@ -3,6 +3,7 @@ package de.htwk.leipzig.grapholution.evolibrary.recombinator;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Interface fuer Rekombinationsklassen zur Rekombination von 2 Genotypen miteinander
@@ -16,6 +17,6 @@ public interface Recombinator<T> {
      * @param individualB Zweiter Genotyp
      * @return ArrayList mit neuen rekombinierten Genotypen
      */
-    ArrayList<Genotype<T>> recombine(Genotype<T> individualA, Genotype<T> individualB);
+    List<Genotype<T>> recombine(Genotype<T> individualA, Genotype<T> individualB);
 
 }
