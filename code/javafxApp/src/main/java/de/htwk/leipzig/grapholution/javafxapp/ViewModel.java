@@ -21,12 +21,9 @@ public class ViewModel {
     private Pane[] allScenes = new Pane[3];
     private int currentScene = -1;
 
+    private AlgorithmConfigOptions configOptions = new AlgorithmConfigOptions();
     private ViewModelGeneticAlgorithm viewModelGeneticAlgorithm;
     private ViewModelHillclimber viewModelHillclimber;
-
-    private Hillclimber<Boolean> hilly;
-    private BestGenotype bestGenotype;
-    private Genotype genotype;
 
     public ViewModel(SceneControllerBase sceneControllerBase, Pane firstPane) {
         this.sceneControllerBase = sceneControllerBase;
@@ -83,20 +80,10 @@ public class ViewModel {
      *
      * @param startConfig Startkonfiguration
      */
-    /* Todo Methode entfernen
-    public void climbTheHill(String startConfig) {
-        int genosize = 10;
-        FitnessFunction<Boolean> fitnessfunctionO = new OneMaxEvaluator();
-        Genotype<Boolean> genotypeO = new Genotype<>(Random::nextBoolean, fitnessfunctionO, genosize);
-        Mutator<Boolean> mutatorS = new SwitchOneBit();
-        isInputCorrect();
-        hilly = new Hillclimber<>(genotypeO, mutatorS);
-        hilly.run();
-        EvoLibMapper evoLibMapper = new EvoLibMapper();
-    }
-    */
-    public void startHillclimberAlgorithm(boolean mutationIsBinary, double mutationChance, boolean fitnessIsOneMax) {
-        viewModelHillclimber = new ViewModelHillclimber(mutationIsBinary, mutationChance, fitnessIsOneMax);
+
+    public void startHillclimberAlgorithm(AlgorithmConfigOptions options) {
+        setConfigOptins(options);
+        viewModelHillclimber = new ViewModelHillclimber(options);
     }
 
     public void startGeneticAlgorithm(boolean isStepByStep, boolean mutationIsBinary, double mutationChance,
@@ -162,7 +149,7 @@ public class ViewModel {
         return outputField;
     }
 
-    public Property<String> inputFieldProperty() {
-        return inputField;
-    }
+    public AlgorithmConfigOptions getConfigOptions() {return configOptions;}
+
+    public void setConfigOptions(AlgorithmConfigOptions) {this.configOptions = configOptions;}
 }

@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.stage.FileChooser;
 
 /**
  * SceneController Klasse für die Darstellung des Konfigurierbaren Hillclimbers
@@ -36,14 +37,45 @@ public class SceneControllerHillclimber extends SceneController {
      * Methode um Hillclimber Algorithmus mit entsprechendem ViewModel zu starten
      */
     public void sendButton_startAlgo() {
-        viewModel.navigation_configureScreen("StatisticsHillclimber");
-        viewModel.startHillclimberAlgorithm(
-                radioMutationBinary.isSelected(),
-                sliderMutationChance.getValue(),
-                radioOneMax.isSelected()
-        );
+        viewModel.startHillclimberAlgorithm(createConfigOptions());
+        viewModel.navigation_configureScreen(EChoices.ResultsHillclimberAlgorithm);
+    }
+
+    private AlgorithmConfigOptions createConfigOptions(){
+        return new AlgorithmConfigOptions()
+                .add(BoolConfig.MutationIsBinary, radioMutationBinary.isSelected())
+                .add(IntConfig.MutationChance, radioMutationBinary.isSelected() ?(int) sliderMutationChance.getValue(): 0)
+                .add(BoolConfig.FitnessIsOneMax, radioOneMax.isSelected())
+                .add(BoolConfig.FitnessIsZeroMax, radioZeroMax.isSelected());
 
     }
+
+    private void setOptions(AlgorithmConfigOptions options){
+        radioMutationBinary.selectedProperty().set(options.getOrElse(BoolConfig.MutationIsBinary, radioMutationBinary.isSelected()));
+        sliderMutationChance.selectedProperty().set(options.getOrElse(IntConfig.MutationChance, (int) sliderMutationChance.getValue()));
+
+        if(options.getOrElse(BoolConfig.FitnessIsOneMax, radioOneMax.isSelected())){
+            radioOneMax.selectedProperty().set(true);
+        } else{
+            radioZeroMax.selectedProperty().set(true);
+        }
+    }
+
+    public void sendButton_saveConfig(){
+        var fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters()
+                .add(new FileChooser.ExtensionFilter("Hillclimber Algorithmus (*.gacf)", "*.gacf"));
+        var file = fileChooser.showSaveDialog(null);
+
+        if(file != null){
+            try {
+                createConfigOptions().serialize(file);
+            }catch (Exception e){
+                DialogUtils.ShowAlert("Error","Fehler beim Speichern der Datei!");
+            }
+        }
+    }
+
 
     /**
      * Handlet die Rückwärtsnavigation
