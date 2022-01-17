@@ -57,5 +57,6 @@ import java.util.ResourceBundle;
         public void initialize(URL location, ResourceBundle resources) {
             duration.setCellValueFactory((cellData -> cellData.getValue().iterationProperty()));
             fitness.setCellValueFactory((cellData -> cellData.getValue().fitnessIndividualProperty()));
+            fitness.setCellValueFactory((cellData -> cellData.getValue().fitnessPopulationProperty()));
         }
     }

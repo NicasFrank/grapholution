@@ -53,7 +53,7 @@ public class SCResultsGeneticAlgorithm extends SceneController implements Initia
       duration.setCellValueFactory((cellData -> cellData.getValue().iterationProperty()));
       age.setCellValueFactory((cellData -> cellData.getValue().ageProperty()));
       fitnessBestIndividual.setCellValueFactory((cellData -> cellData.getValue().fitnessIndividualProperty()));
-      //fitnessPopulation.setCellValueFactory((cellData -> cellData.getValue().fitnessPopulationProperty()));
+      fitnessPopulation.setCellValueFactory((cellData -> cellData.getValue().fitnessPopulationProperty()));
     }
     /**
      * setter für viewmodel und bindet outputfield an output vom viewmodel
