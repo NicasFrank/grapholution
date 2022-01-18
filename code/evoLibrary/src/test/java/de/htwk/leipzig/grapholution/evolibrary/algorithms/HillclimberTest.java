@@ -4,7 +4,11 @@ import de.htwk.leipzig.grapholution.evolibrary.algorithms.Hillclimber.Hillclimbe
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.FitnessFunction;
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.OneMaxEvaluator;
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.ZeroMaxEvaluator;
+import de.htwk.leipzig.grapholution.evolibrary.genotypes.BitSetGenotype;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
+import de.htwk.leipzig.grapholution.evolibrary.genotypes.ListGenotype;
+import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmConfigOptions;
+import de.htwk.leipzig.grapholution.evolibrary.models.IntConfig;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.BinaryMutation;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.Mutator;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.SwitchOneBit;
@@ -29,13 +33,13 @@ public class HillclimberTest {
     static void initHillclimber() {
         FitnessFunction<Boolean> fitnessfunctionZ = new ZeroMaxEvaluator();
         FitnessFunction<Boolean> fitnessfunctionO = new OneMaxEvaluator();
-        Genotype<Boolean> genotypeZ = new Genotype<>(Random::nextBoolean, fitnessfunctionZ, genosize);
-        Genotype<Boolean> genotypeO = new Genotype<>(r -> false, fitnessfunctionO, genosize);
+        Genotype<Boolean> genotypeZ = new BitSetGenotype(Random::nextBoolean, fitnessfunctionZ, genosize);
+        Genotype<Boolean> genotypeO = new BitSetGenotype(r -> false, fitnessfunctionO, genosize);
         Mutator<Boolean> mutatorB = new BinaryMutation(10);
         Mutator<Boolean> mutatorS = new SwitchOneBit();
         hillclimberZero = new Hillclimber<>(genotypeZ, mutatorB);
         hillclimberOne = new Hillclimber<>(genotypeO, mutatorS);
-        hillclimberOneLimit = new Hillclimber<>(genotypeO, mutatorS, 8);
+        hillclimberOneLimit = new Hillclimber<>(genotypeO, mutatorS, new AlgorithmConfigOptions().add(IntConfig.Limit, 8));
         resultZ = new ArrayList<>();
         for(int i = 0; i<genosize; i++){
             resultZ.add(Boolean.FALSE);

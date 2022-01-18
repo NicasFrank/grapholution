@@ -1,10 +1,15 @@
 package de.htwk.leipzig.grapholution.javafxapp;
 
+import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmConfigOptions;
+import de.htwk.leipzig.grapholution.evolibrary.models.BoolConfig;
+import de.htwk.leipzig.grapholution.evolibrary.models.IntConfig;
+import de.htwk.leipzig.grapholution.javafxapp.utils.DialogUtils;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.stage.FileChooser;
 
 /**
@@ -38,21 +43,20 @@ public class SceneControllerHillclimber extends SceneController {
      */
     public void sendButton_startAlgo() {
         viewModel.startHillclimberAlgorithm(createConfigOptions());
-        viewModel.navigation_configureScreen(EChoices.ResultsHillclimberAlgorithm);
+        viewModel.navigation_configureScreen(EChoices.ResultsHillclimber);
     }
 
     private AlgorithmConfigOptions createConfigOptions(){
         return new AlgorithmConfigOptions()
                 .add(BoolConfig.MutationIsBinary, radioMutationBinary.isSelected())
                 .add(IntConfig.MutationChance, radioMutationBinary.isSelected() ?(int) sliderMutationChance.getValue(): 0)
-                .add(BoolConfig.FitnessIsOneMax, radioOneMax.isSelected())
-                .add(BoolConfig.FitnessIsZeroMax, radioZeroMax.isSelected());
+                .add(BoolConfig.FitnessIsOneMax, radioOneMax.isSelected());
 
     }
 
     private void setOptions(AlgorithmConfigOptions options){
         radioMutationBinary.selectedProperty().set(options.getOrElse(BoolConfig.MutationIsBinary, radioMutationBinary.isSelected()));
-        sliderMutationChance.selectedProperty().set(options.getOrElse(IntConfig.MutationChance, (int) sliderMutationChance.getValue()));
+        sliderMutationChance.valueProperty().set(options.getOrElse(IntConfig.MutationChance, (int) sliderMutationChance.getValue()));
 
         if(options.getOrElse(BoolConfig.FitnessIsOneMax, radioOneMax.isSelected())){
             radioOneMax.selectedProperty().set(true);

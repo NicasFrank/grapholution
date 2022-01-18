@@ -1,8 +1,18 @@
 package de.htwk.leipzig.grapholution.javafxapp;
 
+
+import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.FitnessFunction;
+import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.OneMaxEvaluator;
+import de.htwk.leipzig.grapholution.evolibrary.genotypes.BitSetGenotype;
+import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmConfigOptions;
+import de.htwk.leipzig.grapholution.evolibrary.models.BoolConfig;
+import de.htwk.leipzig.grapholution.evolibrary.models.IntConfig;
+import de.htwk.leipzig.grapholution.evolibrary.mutator.Mutator;
+import de.htwk.leipzig.grapholution.evolibrary.mutator.SwitchOneBit;
 import de.htwk.leipzig.grapholution.evolibrary.algorithms.Hillclimber.Hillclimber;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
 import de.htwk.leipzig.grapholution.javafxapp.model.BestGenotype;
+import de.htwk.leipzig.grapholution.javafxapp.model.EvoLibMapper;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -10,6 +20,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Random;
 
 
 public class ViewModel {
@@ -18,11 +30,12 @@ public class ViewModel {
     private final StringProperty outputField = new SimpleStringProperty();
 
     private final SceneControllerBase sceneControllerBase;
-    private Pane[] allScenes = new Pane[3];
+    private final Pane[] allScenes = new Pane[3];
     private int currentScene = -1;
+  private boolean isAlgorithmStepByStep = false;
 
-    private AlgorithmConfigOptions configOptions = new AlgorithmConfigOptions();
-    private ViewModelGeneticAlgorithm viewModelGeneticAlgorithm;
+  private AlgorithmConfigOptions configOptions = new AlgorithmConfigOptions();
+  private ViewModelGeneticAlgorithm viewModelGeneticAlgorithm;
     private ViewModelHillclimber viewModelHillclimber;
 
     public ViewModel(SceneControllerBase sceneControllerBase, Pane firstPane) {
@@ -30,41 +43,34 @@ public class ViewModel {
         allScenes[0] = firstPane;
     }
 
-    /**
-     * switch anhand String je nach nächster Pane
-     *
-     * @param nameOfNextScreen String mit Namen des nächsten Screens
-     */
-    public void navigation_configureScreen(Object nameOfNextScreen) {
-        currentScene++;
-        switch (nameOfNextScreen.toString()) {
-            case "Choice":
-                allScenes[0] = loadNewPane("ChoiceAlgorithm.fxml");
-                break;
-
-            case "Hillclimber":
-                allScenes[1] = loadNewPane("ConfigHillclimber.fxml");
-                break;
-
-            case "Genetischer Algorithmus":
-                allScenes[1] = loadNewPane("ConfigGeneticAlgorithm.fxml");
-                break;
-
-            case "AuswertungHillclimber":
-                //Todo neue Methode für Hillclimber aufrufen
-                allScenes[2] = loadNewPane("StatisticsHillclimber.fxml");
-                outputField.set("Ergebnis");
-                break;
-
-            case "AuswertungGeneticAlgorithm":
-                allScenes[2] = loadNewPane("StatisticsGeneticAlgorithm.fxml");
-                break;
-
-            default:
-                //Nichts
-                break;
-        }
+  /**
+   * switch anhand String je nach nächster Pane
+   * @param nameOfNextScreen String mit Namen des nächsten Screens
+   */
+  public void navigation_configureScreen (EChoices nameOfNextScreen){
+    currentScene++;
+    switch (nameOfNextScreen) {
+      case AlgorithmChoice :
+        allScenes[0] = loadNewPane("AlgorithmChoice.fxml");
+        break;
+      case Hillclimber :
+        allScenes[1] = loadNewPane("ConfigHillclimber.fxml");
+        break;
+      case GeneticAlgorithm :
+        allScenes[1] = loadNewPane("ConfigGeneticAlgorithm.fxml");
+        break;
+      case ResultsHillclimber :
+        allScenes[2] = loadNewPane("ResultsHillclimber.fxml");
+        outputField.set("Ergebnis");
+        break;
+      case ResultsGeneticAlgorithm :
+        allScenes[2] = loadNewPane("ResultsGeneticAlgorithm.fxml");
+        break;
+      default :
+        //handle das noch
+        break;
     }
+  }
 
     /**
      * dient zur Rückwärtsnavigation
@@ -82,21 +88,21 @@ public class ViewModel {
      */
 
     public void startHillclimberAlgorithm(AlgorithmConfigOptions options) {
-        setConfigOptins(options);
+        setConfigOptions(options);
         viewModelHillclimber = new ViewModelHillclimber(options);
-    }
-
-    public void startGeneticAlgorithm(boolean isStepByStep, boolean mutationIsBinary, double mutationChance,
-                                      boolean fitnessIsOneMax, double recombinationChance, double populationSize,
-                                      double genotypeSize, double generationAmount, Genotype<Boolean> genotype) {
-        viewModelGeneticAlgorithm = new ViewModelGeneticAlgorithm(isStepByStep, mutationIsBinary, mutationChance,
-                fitnessIsOneMax, recombinationChance, populationSize, genotypeSize, generationAmount,genotype);
     }
 
     public BestGenotype geneticAlgorithmNextStep(boolean untilDone) {
         return viewModelGeneticAlgorithm.runAlgorithm(untilDone);
     }
 
+
+  public void startGeneticAlgorithm(AlgorithmConfigOptions options){
+    setConfigOptions(options);
+    isAlgorithmStepByStep = options.getBool(BoolConfig.IsStepByStep);
+    viewModelGeneticAlgorithm = new ViewModelGeneticAlgorithm(options
+    );
+  }
 
     /**
      * versucht bestimmte Pane zu laden
@@ -148,8 +154,16 @@ public class ViewModel {
     public Property<String> outputFieldProperty() {
         return outputField;
     }
+  public Property<String> inputFieldProperty() {
+    return inputField;
+  }
+  public boolean getIsAlgorithmStepByStep(){return isAlgorithmStepByStep;}
 
-    public AlgorithmConfigOptions getConfigOptions() {return configOptions;}
+  public AlgorithmConfigOptions getConfigOptions() {
+    return configOptions;
+  }
 
-    public void setConfigOptions(AlgorithmConfigOptions) {this.configOptions = configOptions;}
+  public void setConfigOptions(AlgorithmConfigOptions configOptions) {
+    this.configOptions = configOptions;
+  }
 }

@@ -9,4 +9,5 @@ module code.Grapholution.javafxApp.main {
   opens de.htwk.leipzig.grapholution.javafxapp to javafx.fxml;
   opens de.htwk.leipzig.grapholution.javafxapp.model to javafx.base;
     exports de.htwk.leipzig.grapholution.javafxapp;
+    exports de.htwk.leipzig.grapholution.javafxapp.model;
 }

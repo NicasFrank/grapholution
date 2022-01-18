@@ -6,5 +6,7 @@ module code.Grapholution.evoLibrary.main {
   exports de.htwk.leipzig.grapholution.evolibrary.algorithms.GeneticAlgorithm;
   exports de.htwk.leipzig.grapholution.evolibrary.recombinator;
   exports de.htwk.leipzig.grapholution.evolibrary.selectors;
-  exports de.htwk.leipzig.grapholution.evolibrary.statistics;
+    exports de.htwk.leipzig.grapholution.evolibrary.models;
+    exports de.htwk.leipzig.grapholution.evolibrary.algorithms;
+    exports de.htwk.leipzig.grapholution.evolibrary.statistics;
 }

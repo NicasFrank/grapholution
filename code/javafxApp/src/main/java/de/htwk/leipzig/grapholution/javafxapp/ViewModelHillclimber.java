@@ -1,14 +1,14 @@
 package de.htwk.leipzig.grapholution.javafxapp;
 
 import de.htwk.leipzig.grapholution.evolibrary.algorithms.Hillclimber.Hillclimber;
-import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.FitnessFunction;
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.OneMaxEvaluator;
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.ZeroMaxEvaluator;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
+import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmConfigOptions;
+import de.htwk.leipzig.grapholution.evolibrary.models.*;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.BinaryMutation;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.Mutator;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.SwitchOneBit;
-import de.htwk.leipzig.grapholution.evolibrary.selectors.FitnessproportionalSelection;
 import de.htwk.leipzig.grapholution.javafxapp.model.BestGenotype;
 import de.htwk.leipzig.grapholution.javafxapp.model.EvoLibMapper;
 import javafx.beans.property.Property;
@@ -96,9 +96,9 @@ public class ViewModelHillclimber{
      * @param fitnessIsOneMax ob OneMax verwendet wird
      */
     public ViewModelHillclimber(AlgorithmConfigOptions options){
-        var mutatator = options.getBool(BoolConfig.MutationIsBinary) ? new BinaryMutation(options.getInt(IntConfig.MutationChance)) : new SwitchOneBit();
-        var fitnessFunction = options.getBool(BoolCinfig.FitnessIsOneMax) ? new OneMaxEvaluator() : new ZeroMaxEvaluator();
-        hillclimberAlgorithm = new HillclimberAlgorithm<>(mutator,options);
+        var mutator = options.getBool(BoolConfig.MutationIsBinary) ? new BinaryMutation(options.getInt(IntConfig.MutationChance)) : new SwitchOneBit();
+        var fitnessFunction = options.getBool(BoolConfig.FitnessIsOneMax) ? new OneMaxEvaluator() : new ZeroMaxEvaluator();
+        hillclimberAlgorithm = new Hillclimber<Boolean>(genotype, mutator, options);
     }
 
     /**
@@ -107,13 +107,12 @@ public class ViewModelHillclimber{
      * @return aktuell besten genotypen
      */
     public BestGenotype runAlgorithm(){
-        if(BoolfConfig.FitnessIsOneMax){
+        if(BoolConfig.FitnessIsOneMax){
             int fitness = hillclimberOne.run.getFitness();
             int age = hillclimberOne.run.getAge();
             bestGenotype = new BestGenotype(fitness,age);
             System.out.println(bestGenotype + "Iteration: " + hillclimberAlgorithm.getIterations);
-        }
-        if(BoolConfig.FitnessIsZeroMax){
+        } else {
             int fitness = hillclimberZero.run.getFitness();
             int age = hillclimberZero.run.getAge();
             bestGenotype = new BestGenotype(fitness,age);

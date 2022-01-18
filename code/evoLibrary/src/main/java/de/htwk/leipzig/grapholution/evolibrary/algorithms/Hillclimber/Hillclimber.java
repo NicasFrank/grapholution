@@ -1,8 +1,11 @@
 package de.htwk.leipzig.grapholution.evolibrary.algorithms.Hillclimber;
 
-import de.htwk.leipzig.grapholution.evolibrary.algorithms.Algorithm;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
+import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmConfigOptions;
+import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmType;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.Mutator;
+import de.htwk.leipzig.grapholution.evolibrary.algorithms.Algorithm;
+
 
 /**
  * Klasse zur Darstellung eines einfachen Hillclimbers mit einstellbarer Mutation und Genotyp
@@ -21,7 +24,7 @@ public class Hillclimber<T> extends Algorithm<T> {
     public Hillclimber(Genotype<T> genotype, Mutator<T> mutator) {
         super(genotype);
         this.mutator = mutator;
-        currentBest = genotype;
+        currentBest = genotype.createCopy();
         statistics.addBestIndividual(genotype);
     }
 
@@ -29,22 +32,20 @@ public class Hillclimber<T> extends Algorithm<T> {
      * Konstruktor zur Erstellung eines einfachen Hillclimbers mit einstellbarer Mutation und Genotyp, sowie Limit der Durchlaeufe
      * @param genotype Genotyp auf dem der Algorithmus arbeiten soll
      * @param mutator Mutation, die zur Veraenderung des Genotypen benutzt werden soll
-     * @param limit Maximale Anzahl an Durchlaeufen, die der Hillclimber durcharbeiten soll
      */
-    public Hillclimber(Genotype<T> genotype, Mutator<T> mutator, int limit) {
-        super(genotype, limit);
+    public Hillclimber(Genotype<T> genotype, Mutator<T> mutator, AlgorithmConfigOptions configOptions) {
+        super(genotype, configOptions);
         this.mutator = mutator;
-        currentBest = genotype;
+        currentBest = genotype.createCopy();
         statistics.addBestIndividual(genotype);
     }
-
 
     /**
      * Funktion zum Ausfuehren des Hillclimbers
      * @return Bester erreichter Genotyp
      */
     public Genotype<T> run() {
-            while (currentBest.getFitness() < currentBest.MAX_FITNESS_VALUE && //Ueberprufung ob Limit oder bestmoeglicher Genotyp bereits erreicht
+            while (currentBest.getFitness() < currentBest.getMaxFitnessValue() && //Ueberprufung ob Limit oder bestmoeglicher Genotyp bereits erreicht
                 (limit < 0 || iterations < limit)){
             Genotype<T> mutation = mutator.mutate(currentBest); //Kopie des letzten Genotypen zur Mutation wird erstellt
             if (mutation.getFitness() > currentBest.getFitness()) { //Vergleich der Fitnesswerte von mutierter Kopie und urspruenglichem Genotyp
@@ -56,7 +57,19 @@ public class Hillclimber<T> extends Algorithm<T> {
             }
             iterations++; //Durchlauf wird erhoeht
         }
-        return currentBest;
+        return currentBest.createCopy();
     }
 
+    @Override
+    protected AlgorithmType getType() {
+        return AlgorithmType.Hillclimber;
+    }
+
+    @Override
+    protected AlgorithmConfigOptions getCustomConfigOptions() {
+        return new AlgorithmConfigOptions();
+    }
+
+    @Override
+    protected void setCustomConfigOptions(AlgorithmConfigOptions options) { }
 }

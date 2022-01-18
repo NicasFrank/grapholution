@@ -1,5 +1,6 @@
 package de.htwk.leipzig.grapholution.javafxapp;
 
+import de.htwk.leipzig.grapholution.javafxapp.model.BestGenotype;
 import de.htwk.leipzig.grapholution.evolibrary.statistics.Statistics;
 import de.htwk.leipzig.grapholution.javafxapp.model.BestGenotype;
 import de.htwk.leipzig.grapholution.javafxapp.model.HillModel;
@@ -25,15 +26,6 @@ public class SceneControllerResultsGeneticAlgorithm extends SceneController impl
 
     private ViewModel viewModel;
 
-    /**
-     * setter für viewmodel und bindet outputfield an output vom viewmodel
-     *
-     * @param viewModel gleiche ViewModel für alle
-     */
-    public void setViewModel(ViewModel viewModel) {
-      this.viewModel = viewModel;
-    }
-
     public void loadButtonTableView(ActionEvent e) {
     }
 
@@ -51,6 +43,19 @@ public class SceneControllerResultsGeneticAlgorithm extends SceneController impl
       BestGenotype bestGenotype = viewModel.geneticAlgorithmNextStep(true);
       buttonFastForward.setDisable(true);
       buttonNextStep.setDisable(true);
+    }
+
+    /**
+     * setter für viewmodel und bindet outputfield an output vom viewmodel
+     *
+     * @param viewModel gleiche ViewModel für alle
+     */
+    public void setViewModel(ViewModel viewModel) {
+        this.viewModel = viewModel;
+        if (viewModel.getIsAlgorithmStepByStep()) {
+            buttonFastForward.setDisable(false);
+            buttonNextStep.setDisable(false);
+        }
     }
 
     @FXML

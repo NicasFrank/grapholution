@@ -3,7 +3,11 @@ package de.htwk.leipzig.grapholution.evolibrary.algorithms;
 import de.htwk.leipzig.grapholution.evolibrary.algorithms.GeneticAlgorithm.GeneticAlgorithm;
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.FitnessFunction;
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.OneMaxEvaluator;
+import de.htwk.leipzig.grapholution.evolibrary.genotypes.BitSetGenotype;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Population;
+import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmConfigOptions;
+import de.htwk.leipzig.grapholution.evolibrary.models.DoubleConfig;
+import de.htwk.leipzig.grapholution.evolibrary.models.IntConfig;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.SwitchOneBit;
 import de.htwk.leipzig.grapholution.evolibrary.recombinator.OnePointCrossover;
 import de.htwk.leipzig.grapholution.evolibrary.selectors.FitnessproportionalSelection;
@@ -28,7 +32,7 @@ public class GeneticAlgorithmTest {
     @BeforeEach
     void setup() {
         evaluator = new OneMaxEvaluator();
-        testPopulation = new Population<>(r -> false, 10, 10, evaluator);
+        testPopulation = new Population<>(() -> new BitSetGenotype(r -> false, evaluator, 10), 10);
     }
 
     @Test
@@ -39,8 +43,9 @@ public class GeneticAlgorithmTest {
                 new SwitchOneBit(),
                 selectorMock,
                 new OnePointCrossover<>(),
-                0.5,
-                testPopulation
+                testPopulation,
+                new AlgorithmConfigOptions()
+                        .add(DoubleConfig.RecombinationChance, 0.5)
         );
 
         var result = geneticAlgorithm.run();
@@ -57,9 +62,10 @@ public class GeneticAlgorithmTest {
                 new SwitchOneBit(),
                 selectorMock,
                 new OnePointCrossover<>(),
-                0.5,
                 testPopulation,
-                limit
+                new AlgorithmConfigOptions()
+                        .add(DoubleConfig.RecombinationChance, 0.5)
+                        .add(IntConfig.Limit, limit)
         );
 
         geneticAlgorithm.run();
@@ -75,8 +81,9 @@ public class GeneticAlgorithmTest {
                 new SwitchOneBit(),
                 selectorMock,
                 new OnePointCrossover<>(),
-                0.5,
-                testPopulation
+                testPopulation,
+                new AlgorithmConfigOptions()
+                        .add(DoubleConfig.RecombinationChance, 0.5)
         );
 
         geneticAlgorithm.oneStep();
@@ -92,9 +99,10 @@ public class GeneticAlgorithmTest {
                 new SwitchOneBit(),
                 selectorMock,
                 new OnePointCrossover<>(),
-                0.5,
                 testPopulation,
-                limit
+                new AlgorithmConfigOptions()
+                        .add(DoubleConfig.RecombinationChance, 0.5)
+                        .add(IntConfig.Limit, limit)
         );
 
         geneticAlgorithm.oneStep();

@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.Slider?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ToggleGroup?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.htwk.leipzig.grapholution.javafxapp.SceneControllerHillclimber">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.htwk.leipzig.grapholution.javafxapp.SceneControllerHillclimber">
    <children>
       <Label layoutX="275.0" layoutY="56.0" prefHeight="53.0" prefWidth="413.0" styleClass="heading" text="Algorithmuskonfiguration">
          <font>
@@ -24,7 +19,7 @@
        <RadioButton fx:id="radioZeroMax" layoutX="270.0" layoutY="400.0" mnemonicParsing="false" selected="true" text="ZeroMax">
 
        </RadioButton>
-      <Slider fx:id="sliderMutationChance" blockIncrement="1.0" layoutX="357.0" layoutY="510.0" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" minorTickCount="2" prefHeight="35.0" prefWidth="247.0" showTickLabels="true" showTickMarks="true" value="50.0"/>
+      <Slider fx:id="sliderMutationChance" blockIncrement="1.0" layoutX="357.0" layoutY="510.0" max="5.0" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" minorTickCount="2" prefHeight="35.0" prefWidth="247.0" showTickLabels="true" showTickMarks="true" value="50.0"/>
       <Label layoutX="380.0" layoutY="474.0" prefHeight="17.0" prefWidth="300.0" styleClass="heading" text="Mutationswahrscheinlichkeit">
          <font>
             <Font size="18.0" />
@@ -35,17 +30,17 @@
             <Font name="Arial" size="30.0" />
          </font>
       </TextField>
-      <Button id="sendButton_backwards" fx:id="sendButton_backwards" onAction="#sendButton_backwards" alignment="CENTER" layoutX="100.0" layoutY="600.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="60.0" prefWidth="150.0" styleClass="defaultButton" text="Zurück" textFill="#28240b">
+      <Button id="sendButton_backwards" fx:id="sendButton_backwards" alignment="CENTER" layoutX="100.0" layoutY="600.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#sendButton_backwards" prefHeight="60.0" prefWidth="150.0" styleClass="defaultButton" text="Zurück" textFill="#28240b">
          <font>
             <Font name="Arial" size="24.0" />
          </font>
       </Button>
-      <Button id="sendButton_startAlgo" fx:id="sendButton_startAlgo" onAction="#sendButton_startAlgo" alignment="CENTER" layoutX="710.0" layoutY="600.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="60.0" prefWidth="150.0" styleClass="defaultButton" text="Starten" textFill="#28240b">
+      <Button id="sendButton_startAlgo" fx:id="sendButton_startAlgo" alignment="CENTER" layoutX="710.0" layoutY="600.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#sendButton_startAlgo" prefHeight="60.0" prefWidth="150.0" styleClass="defaultButton" text="Starten" textFill="#28240b">
          <font>
             <Font name="Arial" size="24.0" />
          </font>
       </Button>
-      <Button id="saveButton_saveAlgo" fx:id="saveButton_saveAlgo" alignment="CENTER" layoutX="407.0" layoutY="600.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="60.0" prefWidth="150.0" styleClass="defaultButton" text="Speichern" textFill="#28240b">
+      <Button id="saveButton_saveAlgo" fx:id="saveButton_saveAlgo" alignment="CENTER" layoutX="407.0" layoutY="600.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#sendButton_saveConfig" prefHeight="60.0" prefWidth="150.0" styleClass="defaultButton" text="Speichern" textFill="#28240b">
          <font>
             <Font name="Arial" size="24.0" />
          </font>

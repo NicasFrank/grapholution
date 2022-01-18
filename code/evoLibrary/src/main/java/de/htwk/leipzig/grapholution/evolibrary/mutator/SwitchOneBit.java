@@ -1,5 +1,6 @@
 package de.htwk.leipzig.grapholution.evolibrary.mutator;
 
+import de.htwk.leipzig.grapholution.evolibrary.genotypes.BitSetGenotype;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
 
 import java.util.concurrent.ThreadLocalRandom;
@@ -16,9 +17,10 @@ public class SwitchOneBit implements Mutator<Boolean> {
      */
     @Override
     public Genotype<Boolean> mutate(Genotype<Boolean> genotype) {
-        Genotype<Boolean> genotypeCopy = genotype.createCopy();
-        int index = ThreadLocalRandom.current().nextInt(genotype.size());
-        genotypeCopy.set(index, !genotype.get(index));
+        var genotypeCopy = (BitSetGenotype) genotype.createCopy();
+        var index = ThreadLocalRandom.current().nextInt(genotypeCopy.size());
+
+        genotypeCopy.flip(index);
         genotypeCopy.updateFitness();
         return genotypeCopy;
     }

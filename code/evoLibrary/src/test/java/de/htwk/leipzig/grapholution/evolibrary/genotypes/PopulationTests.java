@@ -26,8 +26,8 @@ public class PopulationTests {
 
     @BeforeEach
     public void setup() {
-        testGenotype1 = new Genotype<>(rand -> rand.nextInt(15), fitnessMock, 1);
-        testGenotype2 = new Genotype<>(rand -> rand.nextInt(15), fitnessMock, 1);
+        testGenotype1 = new ListGenotype<>(rand -> rand.nextInt(15), fitnessMock, 1);
+        testGenotype2 = new ListGenotype<>(rand -> rand.nextInt(15), fitnessMock, 1);
         genotypes = new ArrayList<>();
         genotypes.add(testGenotype1);
         genotypes.add(testGenotype2);
@@ -49,7 +49,7 @@ public class PopulationTests {
 
     @Test
     public void createCopy_WhenCalled_ReturnsPopulationWithMatchingGenotypes() {
-        population = new Population<>(rand -> rand.nextInt(15), 10, 10, fitnessMock);
+        population = new Population<>(() -> new ListGenotype<>(rand -> rand.nextInt(15), fitnessMock, 10), 10);
 
         var copy = population.createCopy();
 

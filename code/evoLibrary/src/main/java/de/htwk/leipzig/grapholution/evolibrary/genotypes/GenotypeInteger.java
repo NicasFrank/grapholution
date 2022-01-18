@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Noch zu entwickeln
  */
-public class GenotypeInteger extends Genotype<Integer> {
+public class GenotypeInteger extends ListGenotype<Integer> {
 
     public GenotypeInteger(FitnessFunction<Integer> fitnessfunction, List<Integer> values) {
         super(fitnessfunction, values);

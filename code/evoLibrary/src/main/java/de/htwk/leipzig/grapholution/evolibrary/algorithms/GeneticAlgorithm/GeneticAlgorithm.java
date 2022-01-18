@@ -3,6 +3,9 @@ package de.htwk.leipzig.grapholution.evolibrary.algorithms.GeneticAlgorithm;
 import de.htwk.leipzig.grapholution.evolibrary.algorithms.Algorithm;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Population;
+import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmConfigOptions;
+import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmType;
+import de.htwk.leipzig.grapholution.evolibrary.models.DoubleConfig;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.Mutator;
 import de.htwk.leipzig.grapholution.evolibrary.recombinator.Recombinator;
 import de.htwk.leipzig.grapholution.evolibrary.selectors.Selector;
@@ -19,39 +22,24 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
 
     private final Mutator<T> mutator;
     private final Recombinator<T> recombinator;
-    private final double recombinationChance;
+    private double recombinationChance;
     private Population<T> population;
-    private int limit = -1;
     private final Selector<T> selector;
 
     /**
      * Konstruktor ohne Limit
      * @param mutator enthält Mutation des Genotypen
      * @param recombinator enthält Rekombination zweier Genotypen
-     * @param recombinationChance Chance, dass Rekombination durchgeführt wird
      * @param population Population des Genotypen
      */
-    public GeneticAlgorithm(Mutator<T> mutator, Selector<T> selector, Recombinator<T> recombinator, double recombinationChance, Population<T> population) {
-        super(population.get(0));
+    public GeneticAlgorithm(Mutator<T> mutator, Selector<T> selector, Recombinator<T> recombinator,
+            Population<T> population, AlgorithmConfigOptions configOptions) {
+        super(population.get(0), configOptions);
         this.mutator = mutator;
         this.recombinator = recombinator;
-        this.recombinationChance = recombinationChance;
-        this.population = population;
+        this.recombinationChance = configOptions.getOrElse(DoubleConfig.RecombinationChance, 1.0);
+        this.population = population.createCopy();
         this.selector = selector;
-        statistics.addToHistory(population);
-    }
-
-    /**
-     * Konstruktor mit Limit
-     * @param mutator enthält Mutation des Genotypen
-     * @param recombinator enthält Rekombination zweier Genotypen
-     * @param recombinationChance Chance, dass Rekombination durchgeführt wird
-     * @param population Population des Genotypen
-     * @param limit Maximale Anzahl der Iterationen
-     */
-    public GeneticAlgorithm(Mutator<T> mutator, Selector<T> selector, Recombinator<T> recombinator, double recombinationChance, Population<T> population, int limit) {
-        this(mutator, selector, recombinator, recombinationChance, population);
-        this.limit = limit;
         statistics.addToHistory(population);
     }
 
@@ -71,8 +59,26 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
         return bestIndividuum();
     }
 
+    @Override
+    protected AlgorithmType getType() {
+        return AlgorithmType.GeneticAlgorithm;
+    }
+
+    @Override
+    protected AlgorithmConfigOptions getCustomConfigOptions() {
+        var options = new AlgorithmConfigOptions();
+        options.add(DoubleConfig.RecombinationChance, recombinationChance);
+        return options;
+    }
+
+    @Override
+    protected void setCustomConfigOptions(AlgorithmConfigOptions options) {
+        recombinationChance = options.getOrElse(DoubleConfig.RecombinationChance, 1.0);
+    }
+
+
     private boolean hasNotRunToCompletion() {
-        return (iterations < limit || limit < 0) && !(population.getBestFitness() == genotype.MAX_FITNESS_VALUE);
+        return (iterations < limit || limit < 0) && !(population.getBestFitness() == genotype.getMaxFitnessValue());
     }
 
     /**
@@ -96,7 +102,7 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
 
         for(int i = 0; i < population.size() / 2; i++) {
             if(ThreadLocalRandom.current().nextDouble(1) < recombinationChance) {
-                ArrayList<Genotype<T>> newGenotypes = recombinator.recombine(population.get(2*i), population.get(2*i + 1));
+                var newGenotypes = recombinator.recombine(population.get(2*i), population.get(2*i + 1));
                 population.set(2*i, newGenotypes.get(0));
                 population.set(2*i+1, newGenotypes.get(1));
             }
