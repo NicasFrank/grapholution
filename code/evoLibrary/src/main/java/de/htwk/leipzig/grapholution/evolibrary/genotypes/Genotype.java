@@ -3,7 +3,10 @@ package de.htwk.leipzig.grapholution.evolibrary.genotypes;
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.FitnessFunction;
 
 import java.util.List;
-
+/**
+ * Klasse zur Darstellung eines einzelnen Genotypen
+ * @param <T> Datentyp der Werte des Genotypen
+ */
 public abstract class Genotype<T> {
     protected final FitnessFunction<T> fitnessFunction;
     protected int age = 0;

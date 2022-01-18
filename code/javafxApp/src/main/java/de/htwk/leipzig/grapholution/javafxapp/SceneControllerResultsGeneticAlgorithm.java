@@ -1,5 +1,6 @@
 package de.htwk.leipzig.grapholution.javafxapp;
 
+import de.htwk.leipzig.grapholution.javafxapp.model.BestGenotype;
 import de.htwk.leipzig.grapholution.evolibrary.statistics.Statistics;
 import de.htwk.leipzig.grapholution.javafxapp.model.BestGenotype;
 import de.htwk.leipzig.grapholution.javafxapp.model.HillModel;
@@ -44,20 +45,21 @@ public class SceneControllerResultsGeneticAlgorithm extends SceneController impl
       buttonNextStep.setDisable(true);
     }
 
-    @FXML
-    public void initialize(URL location, ResourceBundle resources) {
-        fitness.setCellValueFactory(new PropertyValueFactory<HillModel, String>("fitness"));
-    }
     /**
      * setter für viewmodel und bindet outputfield an output vom viewmodel
      *
      * @param viewModel gleiche ViewModel für alle
      */
     public void setViewModel(ViewModel viewModel) {
-      this.viewModel = viewModel;
-      if(viewModel.getIsAlgorithmStepByStep()){
-        buttonFastForward.setDisable(false);
-        buttonNextStep.setDisable(false);
-      }
+        this.viewModel = viewModel;
+        if (viewModel.getIsAlgorithmStepByStep()) {
+            buttonFastForward.setDisable(false);
+            buttonNextStep.setDisable(false);
+        }
+    }
+
+    @FXML
+    public void initialize(URL location, ResourceBundle resources) {
+        fitness.setCellValueFactory(new PropertyValueFactory<HillModel, String>("fitness"));
     }
 }

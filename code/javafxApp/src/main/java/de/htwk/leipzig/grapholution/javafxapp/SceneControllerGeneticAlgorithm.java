@@ -4,7 +4,6 @@ import de.htwk.leipzig.grapholution.evolibrary.models.*;
 import de.htwk.leipzig.grapholution.javafxapp.utils.DialogUtils;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.stage.FileChooser;
 
 public class SceneControllerGeneticAlgorithm extends SceneController{
 
@@ -30,7 +29,6 @@ public class SceneControllerGeneticAlgorithm extends SceneController{
    * loest Laden der naechsten Pane aus
    * gibt Konfiguration des genetischen Algorithmus weiter
    */
-  /*
   public void sendButton_startAlgo(){
     viewModel.startGeneticAlgorithm(createConfigOptions());
     viewModel.navigation_configureScreen(EChoices.ResultsGeneticAlgorithm);
@@ -79,7 +77,7 @@ public class SceneControllerGeneticAlgorithm extends SceneController{
       }
     }
   }
-*/
+
   public void sendButton_backwards(){
     viewModel.navigation_Back();
   }
