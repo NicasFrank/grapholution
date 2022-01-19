@@ -42,6 +42,7 @@ public class SCResultsGeneticAlgorithm extends SceneController implements Initia
     }
     public void fastForward(){
       allResults.removeAll();
+      tableViewResults.getItems().clear();
       allResults.addAll(viewModel.geneticAlgorithmUntilDone());
       buttonFastForward.setDisable(true);
       buttonNextStep.setDisable(true);
