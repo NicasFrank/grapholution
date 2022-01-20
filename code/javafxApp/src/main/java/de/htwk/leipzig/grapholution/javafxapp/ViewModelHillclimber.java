@@ -37,63 +37,6 @@ public class ViewModelHillclimber{
 
     /**
      * Konstruktor
-     * @param mutatorIsBinary ob die mutation binary ist wenn nicht switch one bit
-     * @param mutationChance die wahrscheinlichkeit der binary mutation
-     * @param fitnessIsOneMax ob OneMax verwendet wird
-     */
-
-/*
-    public ViewModelHillclimber(boolean mutatorIsBinary, double mutationChance, boolean fitnessIsOneMax){
-        FitnessFunction<Boolean> fitnessfunctionZ = new ZeroMaxEvaluator();
-        FitnessFunction<Boolean> fitnessfunction0 = new OneMaxEvaluator();
-        Genotype<Boolean> genotypeZ = new Genotype<>(Random::nextBoolean, fitnessfunctionZ, genosize);
-        Genotype<Boolean> genotypeO = new Genotype<>(r -> false, fitnessfunction0, genosize);
-        Mutator<Boolean> mutatorB = new BinaryMutation(10);
-        Mutator<Boolean> mutatorS = new SwitchOneBit();
-        hillclimberZero = new Hillclimber<Boolean>(genotypeZ, mutatorB);
-        hillclimberOne = new Hillclimber<Boolean>(genotypeO, mutatorS);
-        hillclimberOneLimit = new Hillclimber<Boolean>(genotypeO, mutatorS, 8);
-        resultZ = new ArrayList<>();
-        for(int i = 0; i<genosize; i++){
-            resultZ.add(Boolean.FALSE);
-        }
-        runAlgorithm(false);
-        resultO = new ArrayList<>();
-        for(int i = 0; i<genosize; i++){
-            resultO.add(Boolean.TRUE);
-        }
-        runAlgorithm(false);
-    }
-
-    /**
-     * ruft die run methoden des Hillclimber algorithmus
-     * @param untilDone ob der algorithmus bis zur maximalanzahl der generationen oder bestmoeglichen individuums durchlaufen soll
-     * @return aktuell besten genotypen
-     */
-/*
-    public BestGenotype runAlgorithm(boolean untilDone){
-        if(!untilDone) {
-            isInputCorrect();
-            int fitnessZ = hillclimberZero.run().getFitness();
-            int ageZ = hillclimberZero.run().getAge();
-            hillclimberZero.run();
-            bestGenotype = new BestGenotype(fitnessZ,ageZ);
-            System.out.println(bestGenotype +" Iteration: " + hillclimberZero.getIterations());
-        }
-        else{
-            isInputCorrect();
-            int fitness0 = hillclimberOne.run().getFitness();
-            int age0 = hillclimberOne.run().getAge();
-            hillclimberOne.run();
-            bestGenotype = new BestGenotype(fitness0,age0);
-            System.out.println(bestGenotype +" Iteration: " + hillclimberOne.getIterations());
-        }
-
-        return bestGenotype;
-    }
-*/
-    /**
-     * Konstruktor
      * @param options Konfiguration Hillclimber Algorithmus
      */
     public ViewModelHillclimber(AlgorithmConfigOptions options){
@@ -111,9 +54,9 @@ public class ViewModelHillclimber{
     }
 
     /**
-     * ruft die run methoden des Hillclimber algorithmus
+     * ruft die run Methoden des Hillclimber Algorithmus auf
      * @param
-     * @return aktuell besten genotypen
+     * @return aktuell bester genotyp
      */
     public BestGenotype runAlgorithm(){
             isInputCorrect();

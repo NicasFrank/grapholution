@@ -27,7 +27,7 @@ public class EvoLibMapper {
     }
 
     /**
-     * Getter für Besten Genotypen
+     * Mapper für Besten Genotypen
      * @param genotype
      * @return bester Gentoyp
      */
@@ -40,12 +40,12 @@ public class EvoLibMapper {
      * @param statistics
      * @return
      */
-    public List<HillModel> mapStatModel(Statistics statistics) {
-        List<HillModel> listReturn = new ArrayList<>();
+    public List<MapHillModel> mapHillModel(Statistics statistics) {
+        List<MapHillModel> listReturn = new ArrayList<>();
 
         for (Object g : statistics.getBestIndividuals()) {
             Genotype<Boolean> h = (Genotype<Boolean>) g;
-            listReturn.add(new HillModel(h.getFitness()));
+            listReturn.add(new MapHillModel(h.getFitness()));
         }
         return listReturn;
     }
@@ -55,17 +55,17 @@ public class EvoLibMapper {
      * @param statistics
      * @return
      */
-    public List<GenModel> map(Statistics statistics) {
-        List<GenModel> listReturn = new ArrayList<>();
+    public List<MapGenModel> mapGenModel(Statistics statistics) {
+        List<MapGenModel> listReturn = new ArrayList<>();
 
         for (Object populationObject : statistics.getHistory()) {
             Population<Boolean> population = (Population<Boolean>) populationObject;
-            List<HillModel> statListReturn = new ArrayList<>();
+            List<MapHillModel> statListReturn = new ArrayList<>();
             for (Object genotypeObject: population){
                 Genotype<Boolean> genotype = (Genotype<Boolean>) genotypeObject;
-                statListReturn.add(new HillModel(genotype.getFitness()));
+                statListReturn.add(new MapHillModel(genotype.getFitness()));
             }
-            listReturn.add(new GenModel(statListReturn));
+            listReturn.add(new MapGenModel(statListReturn));
         }
         return listReturn;
     }

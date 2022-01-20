@@ -1,5 +1,5 @@
 package de.htwk.leipzig.grapholution.javafxapp;
-import de.htwk.leipzig.grapholution.javafxapp.model.HillModel;
+import de.htwk.leipzig.grapholution.javafxapp.model.MapHillModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -22,11 +22,11 @@ public class SceneControllerResultsHillclimber extends SceneController implement
     @FXML
     private TextField outputField;
     @FXML
-    private TableView<HillModel> tableViewResults;
+    private TableView<MapHillModel> tableViewResults;
     @FXML
-    private LineChart<HillModel, String> lineChartResults;
+    private LineChart<MapHillModel, String> lineChartResults;
     @FXML
-    private TableColumn<HillModel, String> fitness;
+    private TableColumn<MapHillModel, String> fitness;
     /**
      * Objekte der ViewModels
      */
@@ -48,12 +48,12 @@ public class SceneControllerResultsHillclimber extends SceneController implement
      */
 
     public void setTableViewResults() {
-        final ObservableList<HillModel> data = FXCollections.observableArrayList(
+        final ObservableList<MapHillModel> data = FXCollections.observableArrayList(
                 //Dummy Data
-                new HillModel(1),
-                new HillModel(4),
-                new HillModel(3),
-                new HillModel(2));
+                new MapHillModel(1),
+                new MapHillModel(4),
+                new MapHillModel(3),
+                new MapHillModel(2));
         fitness.setCellValueFactory(new PropertyValueFactory<>("fitness"));
         tableViewResults.setItems(data);
         tableViewResults.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);

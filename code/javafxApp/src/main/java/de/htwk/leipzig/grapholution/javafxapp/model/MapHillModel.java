@@ -1,13 +1,12 @@
 package de.htwk.leipzig.grapholution.javafxapp.model;
 
-import de.htwk.leipzig.grapholution.evolibrary.statistics.Statistics;
 import javafx.beans.property.SimpleStringProperty;
 
 /**
  *  Klasse um HillclimberModel
  */
 
-public class HillModel extends Statistics {
+public class MapHillModel{
     /**
      * SimpleStringProperty Variable fitness
      */
@@ -17,7 +16,7 @@ public class HillModel extends Statistics {
      * Konstruktor
      * @param fitness
      */
-    public HillModel(int fitness) {
+    public MapHillModel(int fitness) {
         super();
         this.fitness = new SimpleStringProperty(String.valueOf(fitness));
     }
