@@ -17,30 +17,18 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 import java.util.ArrayList;
-import java.util.BitSet;
 
 public class ViewModelHillclimber{
 
     private BestGenotype bestGenotype;
     private Genotype<Boolean> genotype;
     private EvoLibMapper evoLibMapper;
-    private static Hillclimber<Boolean> hillclimberOne;
-    private static Hillclimber<Boolean> hillclimberZero;
-    private static Hillclimber<Boolean> hillclimberOneLimit;
     static ArrayList<Boolean> resultZ;
     static ArrayList<Boolean> resultO;
     static int genosize = 10;
     private final StringProperty inputField = new SimpleStringProperty();
     private final StringProperty outputField = new SimpleStringProperty();
     private final Hillclimber<Boolean> hillclimberAlgorithm;
-    private boolean isOneMax;
-
-    /**
-     * Konstruktor
-     * @param mutatorIsBinary ob die mutation binary ist wenn nicht switch one bit
-     * @param mutationChance die wahrscheinlichkeit der binary mutation
-     * @param fitnessIsOneMax ob OneMax verwendet wird
-     */
 
 /*
     public ViewModelHillclimber(boolean mutatorIsBinary, double mutationChance, boolean fitnessIsOneMax){
@@ -99,28 +87,21 @@ public class ViewModelHillclimber{
     public ViewModelHillclimber(AlgorithmConfigOptions options){
         var mutator = options.getBool(BoolConfig.MutationIsBinary) ? new BinaryMutation(options.getInt(IntConfig.MutationChance)) : new SwitchOneBit();
         var fitnessFunction = options.getBool(BoolConfig.FitnessIsOneMax) ? new OneMaxEvaluator() : new ZeroMaxEvaluator();
-        isOneMax = options.getBool(BoolConfig.FitnessIsOneMax);
-        var bitset = new BitSet(inputField.get().length());
-        for (int i = 0; i < inputField.get().length(); i++) {
-            if (inputField.get().charAt(i) == '1') {
-                bitset.set(i);
-            }
-        }
-        genotype = new BitSetGenotype(fitnessFunction,bitset,inputField.get().length());
-        hillclimberAlgorithm = new Hillclimber<Boolean>(genotype, mutator, options);
+
+        genotype = BitSetGenotype.fromString(fitnessFunction, inputField.get());
+        hillclimberAlgorithm = new Hillclimber<>(genotype, mutator, options);
     }
 
     /**
      * ruft die run methoden des Hillclimber algorithmus
-     * @param
      * @return aktuell besten genotypen
      */
     public BestGenotype runAlgorithm(){
-            isInputCorrect();
-            int fitness = hillclimberAlgorithm.run().getFitness();
-            int age = hillclimberAlgorithm.run().getAge();
-            bestGenotype = new BestGenotype(fitness,age);
-            System.out.println(bestGenotype + "Iteration: " + hillclimberAlgorithm.getIterations());
+        isInputCorrect();
+        int fitness = hillclimberAlgorithm.run().getFitness();
+        int age = hillclimberAlgorithm.run().getAge();
+        bestGenotype = new BestGenotype(fitness,age);
+        System.out.println(bestGenotype + "Iteration: " + hillclimberAlgorithm.getIterations());
 
         return bestGenotype;
     }
@@ -128,17 +109,10 @@ public class ViewModelHillclimber{
 
     /**
      * Methode zum überprüfen ob Eingabe 0 oder 1
-     * @return true falls korrekt
-     * @return false falls inkorrekt
+     * @return ob die Eingabe 0 oder 1 ist
      */
     private boolean isInputCorrect() {
-        char[] input = inputField.get().toCharArray();
-        for (char c : input) {
-            if (c != '0' && c != '1') {
-                return false;
-            }
-        }
-        return true;
+        return inputField.get().matches("[01]*");
     }
 
     public Property<String> outputFieldProperty() {
