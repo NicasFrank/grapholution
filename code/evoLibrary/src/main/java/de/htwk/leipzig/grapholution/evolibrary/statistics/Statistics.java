@@ -13,7 +13,7 @@ public class Statistics {
 
     private List<Population<?>> history = new ArrayList<>();
     private List<Genotype<?>> bestIndividuals = new ArrayList<>();
-
+    private List<List<float>> colorHistory = new ArrayList<>();
     /**
      * Funktion zum Hinzufuegen einer Population des Algorithmus zur Historie, sowie deren bestes Individuum zur
      * Besten-Individuums-Historie
@@ -22,6 +22,7 @@ public class Statistics {
     public void addToHistory(Population<?> population) {
         history.add(population);
         bestIndividuals.add(population.getBestIndividual());
+        addColorBitString(population);
     }
 
     /**
@@ -32,9 +33,9 @@ public class Statistics {
 
     /**
      * Funktion zum erhalt des Proznetanteils der Bits der Stellen des Genotypes die dem Fitnessziel entsprechen einer Population
-     * @return Array mit jeweiligen prozentvorkommen des Fitnessziels an der entsprechenden Stelle
+     * fügt Array mit jeweiligen prozentvorkommen des Fitnessziels an colorHistory an
      */
-    public float[] getColorBitString(Population<?> population){
+    public void addColorBitString(Population<?> population){
         float[] array = new float[population.get(0).size()];
         for(int j = 0; j <= array.length; j++){
             array[j] = 0f;
@@ -49,6 +50,14 @@ public class Statistics {
         for(int j = 0; j <= array.length; j++){
             array[j] = array[j]/population.size();
         }
-        return array;
+        colorHistory.add(array);
+    }
+
+    /**
+     * getter für Historie des Prozentanteils der Bits einer Population die dem Fitnessziel entsprechen
+     * @return colorHistory
+     */
+    public List<List<float>> getColorHistory(){
+        return colorHistory;
     }
 }
