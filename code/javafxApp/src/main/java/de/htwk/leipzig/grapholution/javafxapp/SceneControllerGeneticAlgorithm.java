@@ -4,6 +4,7 @@ import de.htwk.leipzig.grapholution.evolibrary.models.*;
 import de.htwk.leipzig.grapholution.javafxapp.utils.DialogUtils;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.stage.FileChooser;
 
 public class SceneControllerGeneticAlgorithm extends SceneController{
 
