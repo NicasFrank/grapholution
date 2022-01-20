@@ -1,8 +1,6 @@
 package de.htwk.leipzig.grapholution.javafxapp;
 
-import de.htwk.leipzig.grapholution.evolibrary.algorithms.hillclimber.Hillclimber;
 import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmConfigOptions;
-import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmType;
 import de.htwk.leipzig.grapholution.javafxapp.utils.DialogUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

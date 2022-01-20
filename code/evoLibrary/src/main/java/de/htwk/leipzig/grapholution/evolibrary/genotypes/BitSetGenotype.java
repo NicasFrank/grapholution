@@ -31,6 +31,16 @@ public class BitSetGenotype extends Genotype<Boolean> {
         maxFitnessValue = fitnessFunction.getMaxFitnessValue(this);
     }
 
+    public static BitSetGenotype fromString(FitnessFunction<Boolean> fitnessFunction, String values) {
+        var bitset = new BitSet(values.length());
+        for (int i = 0; i < values.length(); i++) {
+            if (values.charAt(i) == '1') {
+                bitset.set(i);
+            }
+        }
+        return new BitSetGenotype(fitnessFunction, bitset, values.length());
+    }
+
     @Override
     public List<Boolean> valuesToList() {
         return IntStream.range(0, size)

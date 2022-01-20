@@ -1,7 +1,6 @@
 package de.htwk.leipzig.grapholution.javafxapp;
 
 
-import de.htwk.leipzig.grapholution.evolibrary.algorithms.hillclimber.Hillclimber;
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.FitnessFunction;
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.OneMaxEvaluator;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.BitSetGenotype;
@@ -10,6 +9,8 @@ import de.htwk.leipzig.grapholution.evolibrary.models.BoolConfig;
 import de.htwk.leipzig.grapholution.evolibrary.models.IntConfig;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.Mutator;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.SwitchOneBit;
+import de.htwk.leipzig.grapholution.evolibrary.algorithms.Hillclimber.Hillclimber;
+import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
 import de.htwk.leipzig.grapholution.javafxapp.model.BestGenotype;
 import de.htwk.leipzig.grapholution.javafxapp.model.EvoLibMapper;
 import javafx.beans.property.Property;
@@ -25,22 +26,22 @@ import java.util.Random;
 
 public class ViewModel {
 
-  private final StringProperty inputField = new SimpleStringProperty();
-  private final StringProperty outputField= new SimpleStringProperty();
+    private final StringProperty inputField = new SimpleStringProperty();
+    private final StringProperty outputField = new SimpleStringProperty();
 
-  private final SceneControllerBase sceneControllerBase;
-  private final Pane[] allScenes = new Pane[3];
-  private int currentScene = -1;
+    private final SceneControllerBase sceneControllerBase;
+    private final Pane[] allScenes = new Pane[3];
+    private int currentScene = -1;
   private boolean isAlgorithmStepByStep = false;
 
   private AlgorithmConfigOptions configOptions = new AlgorithmConfigOptions();
-  private Hillclimber<Boolean> hilly;
   private ViewModelGeneticAlgorithm viewModelGeneticAlgorithm;
+    private ViewModelHillclimber viewModelHillclimber;
 
-  ViewModel(SceneControllerBase sceneControllerBase, Pane firstPane){
-    this.sceneControllerBase = sceneControllerBase;
-    allScenes[0]=firstPane;
-  }
+    public ViewModel(SceneControllerBase sceneControllerBase, Pane firstPane) {
+        this.sceneControllerBase = sceneControllerBase;
+        allScenes[0] = firstPane;
+    }
 
   /**
    * switch anhand String je nach nächster Pane
@@ -59,7 +60,6 @@ public class ViewModel {
         allScenes[1] = loadNewPane("ConfigGeneticAlgorithm.fxml");
         break;
       case ResultsHillclimber :
-        climbTheHill(inputField.get());
         allScenes[2] = loadNewPane("ResultsHillclimber.fxml");
         outputField.set("Ergebnis");
         break;
@@ -72,34 +72,30 @@ public class ViewModel {
     }
   }
 
-  /**
-   * dient zur Rückwärtsnavigation
-   * anhand der aktuellen szene wird aus array die vorherige genommen
-   */
-  public void navigation_Back(){
-    currentScene--;
-    setNextScreen(allScenes[currentScene]);
-  }
+    /**
+     * dient zur Rückwärtsnavigation
+     * anhand der aktuellen szene wird aus array die vorherige genommen
+     */
+    public void navigation_Back() {
+        currentScene--;
+        setNextScreen(allScenes[currentScene]);
+    }
 
-  /**
-   * Hillclimber instanziert und ausgeführt
-   * @param startConfig Startkonfiguration
-   */
-  public void climbTheHill(String startConfig){
-      int genosize = configOptions.getOrElse(IntConfig.GenotypeSize, 10);
-      FitnessFunction<Boolean> fitnessfunctionO = new OneMaxEvaluator();
-      var genotypeO = new BitSetGenotype(Random::nextBoolean, fitnessfunctionO, genosize);
-      Mutator<Boolean> mutatorS = new SwitchOneBit();
+    /**
+     * Hillclimber instanziert und ausgeführt
+     *
+     * @param startConfig Startkonfiguration
+     */
 
-      hilly = new Hillclimber<>(genotypeO, mutatorS, configOptions);
+    public void startHillclimberAlgorithm(AlgorithmConfigOptions options) {
+        setConfigOptions(options);
+        viewModelHillclimber = new ViewModelHillclimber(options);
+    }
 
-      hilly.run();
-      EvoLibMapper evoLibMapper = new EvoLibMapper();
+    public BestGenotype geneticAlgorithmNextStep(boolean untilDone) {
+        return viewModelGeneticAlgorithm.runAlgorithm(untilDone);
+    }
 
-    List<BestGenotype> bg = evoLibMapper.map(hilly.getStatistics().getBestIndividuals());
-
-      //outputField.set();
-  }
 
   public void startGeneticAlgorithm(AlgorithmConfigOptions options){
     setConfigOptions(options);
@@ -108,42 +104,41 @@ public class ViewModel {
     );
   }
 
-  public BestGenotype geneticAlgorithmNextStep(boolean untilDone){
-    return viewModelGeneticAlgorithm.runAlgorithm(untilDone);
-  }
-
     /**
-   * versucht bestimmte Pane zu laden
-   * @param paneName Name der zu ladenden Pane aus private String[] slides
-   * @return wahr wenn erfolgreich false wenn nicht
-   */
-    private Pane loadNewPane (String paneName){
-      FXMLLoader loader = new FXMLLoader(getClass().getResource(paneName));
-      try {
-        Pane nextPane = loader.load();
-        SceneController newController = loader.getController();
-        newController.setViewModel(this);
-        setNextScreen(nextPane);
-        return nextPane;
-      } catch (IOException e) {
-        return null;
-      }
+     * versucht bestimmte Pane zu laden
+     *
+     * @param paneName Name der zu ladenden Pane aus private String[] slides
+     * @return wahr wenn erfolgreich false wenn nicht
+     */
+    private Pane loadNewPane(String paneName) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(paneName));
+        try {
+            Pane nextPane = loader.load();
+            SceneController newController = loader.getController();
+            newController.setViewModel(this);
+            setNextScreen(nextPane);
+            return nextPane;
+        } catch (IOException e) {
+            return null;
+        }
     }
 
-  /**
-   * gibt nächste Scene an ersten Controller weiter
-   * @param nextScreen nächste Scene als Pane
-   */
-    private void setNextScreen (Pane nextScreen){
+    /**
+     * gibt nächste Scene an ersten Controller weiter
+     *
+     * @param nextScreen nächste Scene als Pane
+     */
+    private void setNextScreen(Pane nextScreen) {
         sceneControllerBase.setNewScreen(nextScreen);
     }
 
-  /**
-   * Handhabung des Eingabefeldes:
-   * iteriert durch das Eingabefeld und speichert in einem char Array
-   * @return true falls Eingabe 0 oder 1 (Buchstabe)
-   */
-  private boolean isInputCorrect(){
+    /**
+     * Handhabung des Eingabefeldes:
+     * iteriert durch das Eingabefeld und speichert in einem char Array
+     *
+     * @return true falls Eingabe 0 oder 1 (Buchstabe)
+     */
+    private boolean isInputCorrect() {
         char[] input = inputField.get().toCharArray();
         for (char c : input) {
             if (c != '0' && c != '1') {

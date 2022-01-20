@@ -7,7 +7,6 @@ import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmType;
 import de.htwk.leipzig.grapholution.evolibrary.models.IntConfig;
 
 import java.io.*;
-import java.util.List;
 
 /**
  * Abstrakte Klasse zur Allgemeinen-Dartstellung eines evolutionaeren Algorithmus
@@ -52,6 +51,10 @@ public abstract class Algorithm<T> {
      */
     public abstract Genotype<T> run();
 
+    /**
+     * Funktion zum erhalten der Statistiken
+     * @return statitics
+     */
     public Statistics<T> getStatistics() {
         return statistics.createCopy();
     }

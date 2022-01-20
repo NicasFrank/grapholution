@@ -1,10 +1,10 @@
-package de.htwk.leipzig.grapholution.evolibrary.algorithms.hillclimber;
+package de.htwk.leipzig.grapholution.evolibrary.algorithms.Hillclimber;
 
-import de.htwk.leipzig.grapholution.evolibrary.algorithms.Algorithm;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
 import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmConfigOptions;
 import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmType;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.Mutator;
+import de.htwk.leipzig.grapholution.evolibrary.algorithms.Algorithm;
 
 
 /**

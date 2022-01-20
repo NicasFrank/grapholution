@@ -1,13 +1,15 @@
 package de.htwk.leipzig.grapholution.javafxapp;
 
 import de.htwk.leipzig.grapholution.javafxapp.model.BestGenotype;
-import de.htwk.leipzig.grapholution.javafxapp.model.HistoryResults;
+import de.htwk.leipzig.grapholution.evolibrary.statistics.Statistics;
+import de.htwk.leipzig.grapholution.javafxapp.model.HillModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -15,13 +17,9 @@ import java.util.ResourceBundle;
 public class SceneControllerResultsGeneticAlgorithm extends SceneController implements Initializable {
 
     @FXML
-    TableView<HistoryResults> tableViewResults;
+    TableView<Statistics> tableViewResults;
     @FXML
-    TableColumn<HistoryResults, String> population;
-    @FXML
-    TableColumn<HistoryResults, String> duration;
-    @FXML
-    TableColumn<HistoryResults, String> fitness;
+    TableColumn<HillModel, String> fitness;
     @FXML
     private Button buttonNextStep,buttonFastForward;
 
@@ -46,22 +44,21 @@ public class SceneControllerResultsGeneticAlgorithm extends SceneController impl
       buttonNextStep.setDisable(true);
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-      duration.setCellValueFactory((cellData -> cellData.getValue().durationProperty()));
-      population.setCellValueFactory((cellData -> cellData.getValue().populationProperty()));
-      fitness.setCellValueFactory((cellData -> cellData.getValue().fitnessProperty()));
-    }
     /**
      * setter für viewmodel und bindet outputfield an output vom viewmodel
      *
      * @param viewModel gleiche ViewModel für alle
      */
     public void setViewModel(ViewModel viewModel) {
-      this.viewModel = viewModel;
-      if(viewModel.getIsAlgorithmStepByStep()){
-        buttonFastForward.setDisable(false);
-        buttonNextStep.setDisable(false);
-      }
+        this.viewModel = viewModel;
+        if (viewModel.getIsAlgorithmStepByStep()) {
+            buttonFastForward.setDisable(false);
+            buttonNextStep.setDisable(false);
+        }
+    }
+
+    @FXML
+    public void initialize(URL location, ResourceBundle resources) {
+        fitness.setCellValueFactory(new PropertyValueFactory<HillModel, String>("fitness"));
     }
 }
