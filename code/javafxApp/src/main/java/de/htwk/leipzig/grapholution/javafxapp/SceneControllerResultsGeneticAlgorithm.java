@@ -2,7 +2,7 @@ package de.htwk.leipzig.grapholution.javafxapp;
 
 import de.htwk.leipzig.grapholution.javafxapp.model.BestGenotype;
 import de.htwk.leipzig.grapholution.evolibrary.statistics.Statistics;
-import de.htwk.leipzig.grapholution.javafxapp.model.MapHillModel;
+import de.htwk.leipzig.grapholution.javafxapp.model.HillModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -19,7 +19,7 @@ public class SceneControllerResultsGeneticAlgorithm extends SceneController impl
     @FXML
     TableView<Statistics> tableViewResults;
     @FXML
-    TableColumn<MapHillModel, String> fitness;
+    TableColumn<HillModel, String> fitness;
     @FXML
     private Button buttonNextStep,buttonFastForward;
 
@@ -59,6 +59,6 @@ public class SceneControllerResultsGeneticAlgorithm extends SceneController impl
 
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
-        fitness.setCellValueFactory(new PropertyValueFactory<MapHillModel, String>("fitness"));
+        fitness.setCellValueFactory(new PropertyValueFactory<HillModel, String>("fitness"));
     }
 }

@@ -17,6 +17,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 import java.util.ArrayList;
+import java.util.BitSet;
 
 public class ViewModelHillclimber{
 
@@ -29,62 +30,9 @@ public class ViewModelHillclimber{
     private final StringProperty inputField = new SimpleStringProperty();
     private final StringProperty outputField = new SimpleStringProperty();
     private final Hillclimber<Boolean> hillclimberAlgorithm;
-<<<<<<< HEAD
     private boolean isOneMax;
 
-=======
 
-/*
-    public ViewModelHillclimber(boolean mutatorIsBinary, double mutationChance, boolean fitnessIsOneMax){
-        FitnessFunction<Boolean> fitnessfunctionZ = new ZeroMaxEvaluator();
-        FitnessFunction<Boolean> fitnessfunction0 = new OneMaxEvaluator();
-        Genotype<Boolean> genotypeZ = new Genotype<>(Random::nextBoolean, fitnessfunctionZ, genosize);
-        Genotype<Boolean> genotypeO = new Genotype<>(r -> false, fitnessfunction0, genosize);
-        Mutator<Boolean> mutatorB = new BinaryMutation(10);
-        Mutator<Boolean> mutatorS = new SwitchOneBit();
-        hillclimberZero = new Hillclimber<Boolean>(genotypeZ, mutatorB);
-        hillclimberOne = new Hillclimber<Boolean>(genotypeO, mutatorS);
-        hillclimberOneLimit = new Hillclimber<Boolean>(genotypeO, mutatorS, 8);
-        resultZ = new ArrayList<>();
-        for(int i = 0; i<genosize; i++){
-            resultZ.add(Boolean.FALSE);
-        }
-        runAlgorithm(false);
-        resultO = new ArrayList<>();
-        for(int i = 0; i<genosize; i++){
-            resultO.add(Boolean.TRUE);
-        }
-        runAlgorithm(false);
-    }
-
-    /**
-     * ruft die run methoden des Hillclimber algorithmus
-     * @param untilDone ob der algorithmus bis zur maximalanzahl der generationen oder bestmoeglichen individuums durchlaufen soll
-     * @return aktuell besten genotypen
-     */
-/*
-    public BestGenotype runAlgorithm(boolean untilDone){
-        if(!untilDone) {
-            isInputCorrect();
-            int fitnessZ = hillclimberZero.run().getFitness();
-            int ageZ = hillclimberZero.run().getAge();
-            hillclimberZero.run();
-            bestGenotype = new BestGenotype(fitnessZ,ageZ);
-            System.out.println(bestGenotype +" Iteration: " + hillclimberZero.getIterations());
-        }
-        else{
-            isInputCorrect();
-            int fitness0 = hillclimberOne.run().getFitness();
-            int age0 = hillclimberOne.run().getAge();
-            hillclimberOne.run();
-            bestGenotype = new BestGenotype(fitness0,age0);
-            System.out.println(bestGenotype +" Iteration: " + hillclimberOne.getIterations());
-        }
-
-        return bestGenotype;
-    }
-*/
->>>>>>> a258c3ee017c9c74327221968b0d564ded3adc9a
     /**
      * Konstruktor
      * @param options Konfiguration Hillclimber Algorithmus
@@ -92,20 +40,24 @@ public class ViewModelHillclimber{
     public ViewModelHillclimber(AlgorithmConfigOptions options){
         var mutator = options.getBool(BoolConfig.MutationIsBinary) ? new BinaryMutation(options.getInt(IntConfig.MutationChance)) : new SwitchOneBit();
         var fitnessFunction = options.getBool(BoolConfig.FitnessIsOneMax) ? new OneMaxEvaluator() : new ZeroMaxEvaluator();
+        isOneMax = options.getBool(BoolConfig.FitnessIsOneMax);
+        var bitset = new BitSet(inputField.get().length());
+        for (int i = 0; i < inputField.get().length(); i++) {
+            if (inputField.get().charAt(i) == '1') {
+                bitset.set(i);
+            }
+        }
+        genotype = new BitSetGenotype(fitnessFunction,bitset,inputField.get().length());
+        hillclimberAlgorithm = new Hillclimber<Boolean>(genotype, mutator, options);
 
-        genotype = BitSetGenotype.fromString(fitnessFunction, inputField.get());
-        hillclimberAlgorithm = new Hillclimber<>(genotype, mutator, options);
     }
 
     /**
-<<<<<<< HEAD
+
      * ruft die run Methoden des Hillclimber Algorithmus auf
      * @param
      * @return aktuell bester genotyp
-=======
-     * ruft die run methoden des Hillclimber algorithmus
-     * @return aktuell besten genotypen
->>>>>>> a258c3ee017c9c74327221968b0d564ded3adc9a
+
      */
     public BestGenotype runAlgorithm(){
         isInputCorrect();

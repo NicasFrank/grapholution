@@ -6,7 +6,7 @@ import javafx.beans.property.SimpleStringProperty;
  *  Klasse um HillclimberModel
  */
 
-public class MapHillModel{
+public class HillModel {
     /**
      * SimpleStringProperty Variable fitness
      */
@@ -16,7 +16,7 @@ public class MapHillModel{
      * Konstruktor
      * @param fitness
      */
-    public MapHillModel(int fitness) {
+    public HillModel(int fitness) {
         super();
         this.fitness = new SimpleStringProperty(String.valueOf(fitness));
     }
