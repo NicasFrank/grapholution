@@ -11,22 +11,16 @@ import de.htwk.leipzig.grapholution.evolibrary.models.IntConfig;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.BinaryMutation;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.SwitchOneBit;
 import de.htwk.leipzig.grapholution.javafxapp.model.BestGenotype;
-import de.htwk.leipzig.grapholution.javafxapp.model.EvoLibMapper;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-import java.util.ArrayList;
 import java.util.BitSet;
 
 public class ViewModelHillclimber{
 
     private BestGenotype bestGenotype;
     private Genotype<Boolean> genotype;
-    private EvoLibMapper evoLibMapper;
-    static ArrayList<Boolean> resultZ;
-    static ArrayList<Boolean> resultO;
-    static int genosize = 10;
     private final StringProperty inputField = new SimpleStringProperty();
     private final StringProperty outputField = new SimpleStringProperty();
     private final Hillclimber<Boolean> hillclimberAlgorithm;
