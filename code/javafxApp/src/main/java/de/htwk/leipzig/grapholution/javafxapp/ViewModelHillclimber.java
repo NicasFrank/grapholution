@@ -3,11 +3,12 @@ package de.htwk.leipzig.grapholution.javafxapp;
 import de.htwk.leipzig.grapholution.evolibrary.algorithms.Hillclimber.Hillclimber;
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.OneMaxEvaluator;
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.ZeroMaxEvaluator;
+import de.htwk.leipzig.grapholution.evolibrary.genotypes.BitSetGenotype;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
 import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmConfigOptions;
-import de.htwk.leipzig.grapholution.evolibrary.models.*;
+import de.htwk.leipzig.grapholution.evolibrary.models.BoolConfig;
+import de.htwk.leipzig.grapholution.evolibrary.models.IntConfig;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.BinaryMutation;
-import de.htwk.leipzig.grapholution.evolibrary.mutator.Mutator;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.SwitchOneBit;
 import de.htwk.leipzig.grapholution.javafxapp.model.BestGenotype;
 import de.htwk.leipzig.grapholution.javafxapp.model.EvoLibMapper;
@@ -16,7 +17,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 import java.util.ArrayList;
-import java.util.Random;
+import java.util.BitSet;
 
 public class ViewModelHillclimber{
 
@@ -31,6 +32,8 @@ public class ViewModelHillclimber{
     static int genosize = 10;
     private final StringProperty inputField = new SimpleStringProperty();
     private final StringProperty outputField = new SimpleStringProperty();
+    private final Hillclimber<Boolean> hillclimberAlgorithm;
+    private boolean isOneMax;
 
     /**
      * Konstruktor
@@ -91,33 +94,33 @@ public class ViewModelHillclimber{
 */
     /**
      * Konstruktor
-     * @param mutatorIsBinary ob die mutation binary ist wenn nicht switch one bit
-     * @param mutationChance die wahrscheinlichkeit der binary mutation
-     * @param fitnessIsOneMax ob OneMax verwendet wird
+     * @param options Konfiguration Hillclimber Algorithmus
      */
     public ViewModelHillclimber(AlgorithmConfigOptions options){
         var mutator = options.getBool(BoolConfig.MutationIsBinary) ? new BinaryMutation(options.getInt(IntConfig.MutationChance)) : new SwitchOneBit();
         var fitnessFunction = options.getBool(BoolConfig.FitnessIsOneMax) ? new OneMaxEvaluator() : new ZeroMaxEvaluator();
+        isOneMax = options.getBool(BoolConfig.FitnessIsOneMax);
+        var bitset = new BitSet(inputField.get().length());
+        for (int i = 0; i < inputField.get().length(); i++) {
+            if (inputField.get().charAt(i) == '1') {
+                bitset.set(i);
+            }
+        }
+        genotype = new BitSetGenotype(fitnessFunction,bitset,inputField.get().length());
         hillclimberAlgorithm = new Hillclimber<Boolean>(genotype, mutator, options);
     }
 
     /**
      * ruft die run methoden des Hillclimber algorithmus
-     * @param untilDone ob der algorithmus bis zur maximalanzahl der generationen oder bestmoeglichen individuums durchlaufen soll
+     * @param
      * @return aktuell besten genotypen
      */
     public BestGenotype runAlgorithm(){
-        if(BoolConfig.FitnessIsOneMax){
-            int fitness = hillclimberOne.run.getFitness();
-            int age = hillclimberOne.run.getAge();
+            isInputCorrect();
+            int fitness = hillclimberAlgorithm.run().getFitness();
+            int age = hillclimberAlgorithm.run().getAge();
             bestGenotype = new BestGenotype(fitness,age);
-            System.out.println(bestGenotype + "Iteration: " + hillclimberAlgorithm.getIterations);
-        } else {
-            int fitness = hillclimberZero.run.getFitness();
-            int age = hillclimberZero.run.getAge();
-            bestGenotype = new BestGenotype(fitness,age);
-            System.out.println(bestGenotype + "Iteration: " + hillclimberAlgorithm.getIterations);
-        }
+            System.out.println(bestGenotype + "Iteration: " + hillclimberAlgorithm.getIterations());
 
         return bestGenotype;
     }
