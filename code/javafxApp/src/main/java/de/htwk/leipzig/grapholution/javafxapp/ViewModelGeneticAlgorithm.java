@@ -49,11 +49,11 @@ public class ViewModelGeneticAlgorithm{
    * @return aktuell besten genotypen
    */
   public TableModel runAlgorithm(){
-    geneticAlgorithm.oneStep();
+    Genotype<Boolean> bestGenotype = geneticAlgorithm.oneStep();
     Statistics<Boolean> stats = geneticAlgorithm.getStatistics();
-    int statsSize = stats.getBestIndividuals().size()-1;
-    return new TableModel(geneticAlgorithm.getIterations(), stats.getBestIndividuals().get(statsSize),stats.getHistory().get(statsSize));
+    return new TableModel(geneticAlgorithm.getIterations(), bestGenotype,stats.getHistory().get(stats.getBestIndividuals().size()-1));
   }
+
   public List<TableModel> finishAlgorithm(){
     geneticAlgorithm.run();
     return  makeTableModelList(geneticAlgorithm.getStatistics());

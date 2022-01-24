@@ -29,7 +29,6 @@ public class SCResultsGeneticAlgorithm extends SceneController implements Initia
     private Button buttonNextStep,buttonFastForward;
 
     private ViewModel viewModel;
-    private final Statistics<Boolean> stats = new Statistics<>();
     private final ObservableList<TableModel> allResults = FXCollections.observableArrayList();
 
     public void sendButton_backwards(){
