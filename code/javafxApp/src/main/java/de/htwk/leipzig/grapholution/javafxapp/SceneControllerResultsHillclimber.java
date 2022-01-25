@@ -31,7 +31,6 @@ public class SceneControllerResultsHillclimber extends SceneController implement
      * Objekte der ViewModels
      */
     private ViewModel viewModel;
-    private ViewModelHillclimber viewModelHillclimber;
 
     /**
      * setter für viewmodel und bindet outputfield an output vom viewmodel
