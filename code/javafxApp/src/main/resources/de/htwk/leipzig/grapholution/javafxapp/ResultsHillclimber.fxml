@@ -31,6 +31,7 @@
                snapToPixel="false">
         <columns>
             <TableColumn fx:id="iteration" minWidth="100" text="iteration"/>
+            <TableColumn fx:id="age" minWidth="100" text="age"/>
             <TableColumn fx:id="fitness" minWidth="100" text="fitness"/>
         </columns>
     </TableView>

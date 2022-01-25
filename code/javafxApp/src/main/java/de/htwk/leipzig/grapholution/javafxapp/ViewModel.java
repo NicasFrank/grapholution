@@ -3,6 +3,7 @@ package de.htwk.leipzig.grapholution.javafxapp;
 
 import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmConfigOptions;
 import de.htwk.leipzig.grapholution.evolibrary.models.BoolConfig;
+import de.htwk.leipzig.grapholution.evolibrary.statistics.Statistics;
 import de.htwk.leipzig.grapholution.javafxapp.model.BestGenotype;
 import javafx.beans.property.Property;
 import javafx.beans.property.StringProperty;
@@ -75,8 +76,8 @@ public class ViewModel {
         viewModelHillclimber = new ViewModelHillclimber(options,SCh);
     }
 
-    public BestGenotype runHillclimberAlgorithm(){
-      return viewModelHillclimber.runAlgorithm();
+    public void runHillclimberAlgorithm(){
+      viewModelHillclimber.runAlgorithm();
     }
 
     public BestGenotype geneticAlgorithmNextStep(boolean untilDone) {
@@ -131,6 +132,10 @@ public class ViewModel {
 
   public AlgorithmConfigOptions getConfigOptions() {
     return configOptions;
+  }
+
+  public Statistics getHillclimberStatistics(){
+      return viewModelHillclimber.getHillclimberStatistic();
   }
 
   public void setConfigOptions(AlgorithmConfigOptions configOptions) {

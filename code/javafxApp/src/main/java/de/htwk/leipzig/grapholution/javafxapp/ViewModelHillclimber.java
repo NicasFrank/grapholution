@@ -12,7 +12,6 @@ import de.htwk.leipzig.grapholution.evolibrary.mutator.BinaryMutation;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.SwitchOneBit;
 import de.htwk.leipzig.grapholution.evolibrary.statistics.Statistics;
 import de.htwk.leipzig.grapholution.javafxapp.model.BestGenotype;
-import javafx.beans.property.Property;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -49,12 +48,10 @@ public class ViewModelHillclimber{
     /**
 
      * ruft die run Methoden des Hillclimber Algorithmus auf
-     * @param
-     * @return aktuell bester genotyp
      * @TODO wirkliche bitset werte in output packen
      */
 
-    public BestGenotype runAlgorithm(){
+    public void runAlgorithm(){
         bestGenotype = new BestGenotype(hillclimberAlgorithm.run());
         //System.out.println(bestGenotype + "Iteration: " + hillclimberAlgorithm.getIterations());
 
@@ -66,7 +63,6 @@ public class ViewModelHillclimber{
         outputField.set(outputVal);
 
 
-        return bestGenotype;
     }
 
     /**
