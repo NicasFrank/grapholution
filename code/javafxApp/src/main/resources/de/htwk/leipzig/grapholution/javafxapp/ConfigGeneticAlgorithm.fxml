@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.htwk.leipzig.grapholution.javafxapp.SceneControllerGeneticAlgorithm">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.htwk.leipzig.grapholution.javafxapp.SceneControllerGeneticAlgorithm">
    <children>
       <Label layoutX="275.0" layoutY="43.0" prefHeight="121.0" prefWidth="413.0" styleClass="heading" text="Algorithmuskonfiguration Genetic Algorithn" textAlignment="CENTER" wrapText="true">
          <font>

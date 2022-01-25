@@ -11,20 +11,20 @@ import de.htwk.leipzig.grapholution.evolibrary.models.IntConfig;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.BinaryMutation;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.SwitchOneBit;
 import de.htwk.leipzig.grapholution.evolibrary.statistics.Statistics;
-import de.htwk.leipzig.grapholution.javafxapp.model.BestGenotype;
+import de.htwk.leipzig.grapholution.javafxapp.model.HillModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+import java.util.ArrayList;
 import java.util.BitSet;
+import java.util.List;
 
 public class ViewModelHillclimber{
 
-    private BestGenotype bestGenotype;
     private Genotype<Boolean> genotype;
     private final StringProperty inputField = new SimpleStringProperty();
     private final StringProperty outputField = new SimpleStringProperty();
     private final Hillclimber<Boolean> hillclimberAlgorithm;
-    private boolean isOneMax;
 
     /**
      * Konstruktor
@@ -34,7 +34,7 @@ public class ViewModelHillclimber{
         inputField.bindBidirectional(SCh.getInputField().textProperty());
         var mutator = options.getBool(BoolConfig.MutationIsBinary) ? new BinaryMutation(options.getInt(IntConfig.MutationChance)) : new SwitchOneBit();
         var fitnessFunction = options.getBool(BoolConfig.FitnessIsOneMax) ? new OneMaxEvaluator() : new ZeroMaxEvaluator();
-        isOneMax = options.getBool(BoolConfig.FitnessIsOneMax);
+        boolean isOneMax = options.getBool(BoolConfig.FitnessIsOneMax);
         var bitset = new BitSet(inputField.get().length());
         for (int i = 0; i < inputField.get().length(); i++) {
             if (inputField.get().charAt(i) == '1') {
@@ -46,25 +46,27 @@ public class ViewModelHillclimber{
     }
 
     /**
-
      * ruft die run Methoden des Hillclimber Algorithmus auf
-     * @TODO wirkliche bitset werte in output packen
      */
 
-    public void runAlgorithm(){
-        bestGenotype = new BestGenotype(hillclimberAlgorithm.run());
-        //System.out.println(bestGenotype + "Iteration: " + hillclimberAlgorithm.getIterations());
-
-        //vorerst lösung damit man was sieht :^)
-        String outputVal = "";
-        for(char c : inputField.get().toCharArray()){
-            outputVal += "1";
-        }
-        outputField.set(outputVal);
-
-
+    public List<HillModel> runAlgorithm(){
+        Genotype<Boolean> bitGeno = hillclimberAlgorithm.run();
+        outputField.set(bitGeno.toString());
+        return makeListHillModel();
     }
 
+    /**
+     * @TODO wie ist das mit den iterations, wird ja nicht immer in die stats geschrieben, woher die richtige iteration?
+     * @return
+     */
+    private List<HillModel> makeListHillModel(){
+        List<HillModel> listHM = new ArrayList<>();
+        List<Genotype<Boolean>> stats = hillclimberAlgorithm.getStatistics().getBestIndividuals();
+        for ( int i = 0; i<stats.size();i++){
+            listHM.add(new HillModel(i,stats.get(i)));
+        }
+        return listHM;
+    }
     /**
      * @TODO isInputCorrect an richtiger Stelle einfügen
      * Methode zum überprüfen ob Eingabe 0 oder 1
@@ -82,7 +84,7 @@ public class ViewModelHillclimber{
         return inputField;
     }
 
-    public Statistics getHillclimberStatistic(){
+    public Statistics<Boolean> getHillclimberStatistic(){
         return hillclimberAlgorithm.getStatistics();
     }
 }

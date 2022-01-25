@@ -42,7 +42,6 @@ public class SceneControllerHillclimber extends SceneController {
      */
     public void sendButton_startAlgo() {
         viewModel.startHillclimberAlgorithm(createConfigOptions(),this);
-        viewModel.runHillclimberAlgorithm();
         viewModel.navigation_configureScreen(EChoices.ResultsHillclimber);
     }
 

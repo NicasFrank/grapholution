@@ -27,13 +27,12 @@ public class HillModel {
     }
 
     /**
-     * @TODO iteration
      * @param genotype
      */
-    public HillModel(Genotype genotype){
+    public HillModel(int iteration, Genotype<Boolean> genotype){
         this.fitness = new SimpleStringProperty(String.valueOf(genotype.getFitness()));
         this.age = new SimpleStringProperty(String.valueOf(genotype.getAge()));
-        this.iteration = new SimpleStringProperty(String.valueOf(genotype.getAge()));
+        this.iteration = new SimpleStringProperty(String.valueOf(iteration));
     }
 
     /**

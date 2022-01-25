@@ -44,6 +44,7 @@ public class SceneControllerResultsHillclimber extends SceneController implement
      */
     public void setViewModel(ViewModel viewModel) {
         this.viewModel = viewModel;
+        allResults.addAll(viewModel.runHillclimberAlgorithm());
         outputField.textProperty().bindBidirectional(viewModel.VMoutputFieldProperty());
         setTableViewResults();
     }
@@ -59,7 +60,6 @@ public class SceneControllerResultsHillclimber extends SceneController implement
      */
 
     public void setTableViewResults() {
-        allResults.addAll(new EvoLibMapper().mapHillModel(viewModel.getHillclimberStatistics()));
         tableViewResults.setItems(allResults);
     }
 
