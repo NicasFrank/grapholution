@@ -69,7 +69,17 @@ public class BitSetGenotype extends Genotype<Boolean> {
     }
 
     @Override
-    public void print() {}
+    public String toString() {
+        return IntStream
+                .range(0, size)
+                .mapToObj(i -> values.get(i) ? '1' : '0')
+                .collect(
+                        () -> new StringBuilder(size),
+                        StringBuilder::append,
+                        StringBuilder::append
+                )
+                .toString();
+    }
 
     public int oneCount() {
         return values.cardinality();

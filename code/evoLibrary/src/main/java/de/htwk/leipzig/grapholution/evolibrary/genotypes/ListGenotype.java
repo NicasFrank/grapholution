@@ -80,13 +80,15 @@ public class ListGenotype<T> extends Genotype<T> {
         return new ListGenotype<>(fitnessFunction, new ArrayList<>(values));
     }
 
-    /**
-     * Funktion zur Ausgabe der Werte des Genotypen auf der Konsole
-     */
     @Override
-    public void print(){
-        values.forEach(value -> System.out.print(value + " "));
-        System.out.println("\n");
+    public String toString() {
+        return values.stream()
+                .collect(
+                        () -> new StringBuilder(values.size()),
+                        StringBuilder::append,
+                        StringBuilder::append
+                )
+                .toString();
     }
 
     @Override

@@ -66,5 +66,5 @@ public abstract class Genotype<T> {
 
     public abstract Genotype<T> createCopy();
 
-    public abstract void print();
+    public abstract String toString();
 }
