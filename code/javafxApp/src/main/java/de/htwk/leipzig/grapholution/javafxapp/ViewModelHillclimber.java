@@ -10,6 +10,7 @@ import de.htwk.leipzig.grapholution.evolibrary.models.BoolConfig;
 import de.htwk.leipzig.grapholution.evolibrary.models.IntConfig;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.BinaryMutation;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.SwitchOneBit;
+import de.htwk.leipzig.grapholution.evolibrary.statistics.Statistics;
 import de.htwk.leipzig.grapholution.javafxapp.model.BestGenotype;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleStringProperty;
@@ -43,7 +44,6 @@ public class ViewModelHillclimber{
         }
         genotype = new BitSetGenotype(fitnessFunction,bitset,inputField.get().length());
         hillclimberAlgorithm = new Hillclimber<Boolean>(genotype, mutator, options);
-
     }
 
     /**
@@ -51,20 +51,26 @@ public class ViewModelHillclimber{
      * ruft die run Methoden des Hillclimber Algorithmus auf
      * @param
      * @return aktuell bester genotyp
-
+     * @TODO wirkliche bitset werte in output packen
      */
+
     public BestGenotype runAlgorithm(){
-        isInputCorrect();
-        int fitness = hillclimberAlgorithm.run().getFitness();
-        int age = hillclimberAlgorithm.run().getAge();
-        bestGenotype = new BestGenotype(fitness,age);
-        System.out.println(bestGenotype + "Iteration: " + hillclimberAlgorithm.getIterations());
+        bestGenotype = new BestGenotype(hillclimberAlgorithm.run());
+        //System.out.println(bestGenotype + "Iteration: " + hillclimberAlgorithm.getIterations());
+
+        //vorerst lösung damit man was sieht :^)
+        String outputVal = "";
+        for(char c : inputField.get().toCharArray()){
+            outputVal += "1";
+        }
+        outputField.set(outputVal);
+
 
         return bestGenotype;
     }
 
-
     /**
+     * @TODO isInputCorrect an richtiger Stelle einfügen
      * Methode zum überprüfen ob Eingabe 0 oder 1
      * @return ob die Eingabe 0 oder 1 ist
      */
@@ -72,11 +78,15 @@ public class ViewModelHillclimber{
         return inputField.get().matches("[01]*");
     }
 
-    public Property<String> outputFieldProperty() {
+    public StringProperty outputFieldProperty() {
         return outputField;
     }
 
-    public Property<String> inputFieldProperty() {
+    public StringProperty inputFieldProperty() {
         return inputField;
+    }
+
+    public Statistics getHillclimberStatistic(){
+        return hillclimberAlgorithm.getStatistics();
     }
 }

@@ -27,10 +27,9 @@ public class SceneControllerResultsHillclimber extends SceneController implement
     private LineChart<HillModel, String> lineChartResults;
     @FXML
     private TableColumn<HillModel, String> fitness;
-    /**
-     * Objekte der ViewModels
-     */
+
     private ViewModel viewModel;
+    private final ObservableList<HillModel> allResults = FXCollections.observableArrayList() ;
 
     /**
      * setter für viewmodel und bindet outputfield an output vom viewmodel
@@ -39,7 +38,7 @@ public class SceneControllerResultsHillclimber extends SceneController implement
      */
     public void setViewModel(ViewModel viewModel) {
         this.viewModel = viewModel;
-        outputField.textProperty().bind(viewModel.VMoutputFieldProperty());
+        outputField.textProperty().bindBidirectional(viewModel.VMoutputFieldProperty());
     }
 
     /**
@@ -47,12 +46,7 @@ public class SceneControllerResultsHillclimber extends SceneController implement
      */
 
     public void setTableViewResults() {
-        final ObservableList<HillModel> data = FXCollections.observableArrayList(
-                //Dummy Data
-                new HillModel(1),
-                new HillModel(4),
-                new HillModel(3),
-                new HillModel(2));
+        final ObservableList<HillModel> data = FXCollections.observableArrayList();
         fitness.setCellValueFactory(new PropertyValueFactory<>("fitness"));
         tableViewResults.setItems(data);
         tableViewResults.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);

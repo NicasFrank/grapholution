@@ -5,6 +5,7 @@ import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmConfigOptions;
 import de.htwk.leipzig.grapholution.evolibrary.models.BoolConfig;
 import de.htwk.leipzig.grapholution.javafxapp.model.BestGenotype;
 import javafx.beans.property.Property;
+import javafx.beans.property.StringProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
 
@@ -74,16 +75,18 @@ public class ViewModel {
         viewModelHillclimber = new ViewModelHillclimber(options,SCh);
     }
 
+    public BestGenotype runHillclimberAlgorithm(){
+      return viewModelHillclimber.runAlgorithm();
+    }
+
     public BestGenotype geneticAlgorithmNextStep(boolean untilDone) {
         return viewModelGeneticAlgorithm.runAlgorithm(untilDone);
     }
 
-
   public void startGeneticAlgorithm(AlgorithmConfigOptions options){
     setConfigOptions(options);
     isAlgorithmStepByStep = options.getBool(BoolConfig.IsStepByStep);
-    viewModelGeneticAlgorithm = new ViewModelGeneticAlgorithm(options
-    );
+    viewModelGeneticAlgorithm = new ViewModelGeneticAlgorithm(options);
   }
 
     /**
@@ -118,10 +121,10 @@ public class ViewModel {
     /**
      * Methoden geben Eingabe und Ausgabefeld zurück
      **/
-    public Property<String> VMoutputFieldProperty() {
+    public StringProperty VMoutputFieldProperty() {
         return viewModelHillclimber.outputFieldProperty();
     }
-  public Property<String> VMinputFieldProperty() {
+  public StringProperty VMinputFieldProperty() {
     return viewModelHillclimber.inputFieldProperty();
   }
   public boolean getIsAlgorithmStepByStep(){return isAlgorithmStepByStep;}
