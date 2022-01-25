@@ -5,6 +5,7 @@ import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmConfigOptions;
 import de.htwk.leipzig.grapholution.evolibrary.models.BoolConfig;
 import de.htwk.leipzig.grapholution.evolibrary.statistics.Statistics;
 import de.htwk.leipzig.grapholution.javafxapp.model.BestGenotype;
+import de.htwk.leipzig.grapholution.javafxapp.model.GenModel;
 import de.htwk.leipzig.grapholution.javafxapp.model.HillModel;
 import javafx.beans.property.Property;
 import javafx.beans.property.StringProperty;
@@ -82,9 +83,13 @@ public class ViewModel {
       return viewModelHillclimber.runAlgorithm();
     }
 
-    public BestGenotype geneticAlgorithmNextStep(boolean untilDone) {
-        return viewModelGeneticAlgorithm.runAlgorithm(untilDone);
+    public GenModel geneticAlgorithmNextStep() {
+        return viewModelGeneticAlgorithm.runAlgorithm();
     }
+
+  public List<GenModel> geneticAlgorithmUntilDone(){
+    return viewModelGeneticAlgorithm.finishAlgorithm();
+  }
 
   public void startGeneticAlgorithm(AlgorithmConfigOptions options){
     setConfigOptions(options);

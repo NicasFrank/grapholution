@@ -65,7 +65,7 @@ public class EvoLibMapper {
                 Genotype<Boolean> genotype = (Genotype<Boolean>) genotypeObject;
                 statListReturn.add(new HillModel(genotype.getFitness()));
             }
-            listReturn.add(new GenModel(statListReturn));
+            //listReturn.add(new GenModel(0,genotype,population));
         }
         return listReturn;
     }
