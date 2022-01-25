@@ -34,7 +34,6 @@ public class SceneControllerHillclimber extends SceneController {
     private Slider sliderMutationChance;
 
     private ViewModel viewModel;
-    private ViewModelHillclimber viewModelHillclimber;
 
     /**
      * speichert aktuellen Text des Inputfields, triggert dann laden der Ergebnis-Szene und gibt Input an ViewModel, damit
@@ -42,7 +41,10 @@ public class SceneControllerHillclimber extends SceneController {
      * Methode um Hillclimber Algorithmus mit entsprechendem ViewModel zu starten
      */
     public void sendButton_startAlgo() {
-        viewModel.startHillclimberAlgorithm(createConfigOptions());
+        viewModel.startHillclimberAlgorithm(createConfigOptions(),this);
+
+        //inputField.textProperty().bind(viewModel.VMinputFieldProperty());
+
         viewModel.navigation_configureScreen(EChoices.ResultsHillclimber);
     }
 
@@ -51,7 +53,6 @@ public class SceneControllerHillclimber extends SceneController {
                 .add(BoolConfig.MutationIsBinary, radioMutationBinary.isSelected())
                 .add(IntConfig.MutationChance, radioMutationBinary.isSelected() ?(int) sliderMutationChance.getValue(): 0)
                 .add(BoolConfig.FitnessIsOneMax, radioOneMax.isSelected());
-
     }
 
     private void setOptions(AlgorithmConfigOptions options){
@@ -80,6 +81,9 @@ public class SceneControllerHillclimber extends SceneController {
         }
     }
 
+    public TextField getInputField(){
+        return inputField;
+    }
 
     /**
      * Handlet die Rückwärtsnavigation

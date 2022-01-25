@@ -26,12 +26,12 @@ public class ViewModelHillclimber{
     private final Hillclimber<Boolean> hillclimberAlgorithm;
     private boolean isOneMax;
 
-
     /**
      * Konstruktor
      * @param options Konfiguration Hillclimber Algorithmus
      */
-    public ViewModelHillclimber(AlgorithmConfigOptions options){
+    public ViewModelHillclimber(AlgorithmConfigOptions options,SceneControllerHillclimber SCh){
+        inputField.bindBidirectional(SCh.getInputField().textProperty());
         var mutator = options.getBool(BoolConfig.MutationIsBinary) ? new BinaryMutation(options.getInt(IntConfig.MutationChance)) : new SwitchOneBit();
         var fitnessFunction = options.getBool(BoolConfig.FitnessIsOneMax) ? new OneMaxEvaluator() : new ZeroMaxEvaluator();
         isOneMax = options.getBool(BoolConfig.FitnessIsOneMax);

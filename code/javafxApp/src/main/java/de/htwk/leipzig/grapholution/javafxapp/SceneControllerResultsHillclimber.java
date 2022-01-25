@@ -40,7 +40,7 @@ public class SceneControllerResultsHillclimber extends SceneController implement
      */
     public void setViewModel(ViewModel viewModel) {
         this.viewModel = viewModel;
-        outputField.textProperty().bind(viewModel.outputFieldProperty());
+        outputField.textProperty().bind(viewModel.VMoutputFieldProperty());
     }
 
     /**
