@@ -64,6 +64,7 @@ public class ListGenotype<T> extends Genotype<T> {
     @Override
     public void set(int i, T element){
         values.set(i, element);
+        updateFitness();
     }
 
     @Override
