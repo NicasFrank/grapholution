@@ -15,10 +15,6 @@ public class AlgorithmConfigOptions implements Serializable {
         return this;
     }
 
-    public AlgorithmConfigOptions add(StringConfig config, String value) {
-        return addAny(config, value);
-    }
-
     public AlgorithmConfigOptions add(IntConfig config, int value){
         return addAny(config, Integer.toString(value));
     }
@@ -31,10 +27,6 @@ public class AlgorithmConfigOptions implements Serializable {
         return addAny(config, Boolean.toString(value));
     }
 
-    public String get(StringConfig config) {
-        return options.get(config);
-    }
-
     public int getInt(IntConfig config) {
         return Integer.parseInt(options.get(config));
     }
@@ -42,12 +34,9 @@ public class AlgorithmConfigOptions implements Serializable {
     public double getDouble(DoubleConfig config) {
         return Double.parseDouble(options.get(config));
     }
-    public boolean getBool(BoolConfig config) {
-        return Boolean.parseBoolean(options.get(config));
-    }
 
-    public String getOrElse(StringConfig config, String fallback) {
-        return options.getOrDefault(config, fallback);
+    public boolean getBool(BoolConfig config) {
+        return options.get(config).equals("true");
     }
 
     public int getOrElse(IntConfig config, int fallback) {
