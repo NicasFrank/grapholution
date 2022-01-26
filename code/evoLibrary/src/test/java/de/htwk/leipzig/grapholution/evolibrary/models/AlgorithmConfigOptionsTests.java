@@ -31,7 +31,9 @@ public class AlgorithmConfigOptionsTests {
         } catch (Exception e) {
             assert false;
         } finally {
-            file.delete();
+            if (!file.delete()) {
+                System.out.println("Temporary test file could not be deleted!");
+            }
         }
     }
 
