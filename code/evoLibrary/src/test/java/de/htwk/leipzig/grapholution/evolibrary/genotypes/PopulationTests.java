@@ -48,6 +48,20 @@ public class PopulationTests {
     }
 
     @Test
+    public void getBestIndividual_WhenCalled_ReturnsGenotypeWithHighestFitnessValue() {
+        when(fitnessMock.evaluate(any())).thenReturn(10);
+        testGenotype1.updateFitness();
+        when(fitnessMock.evaluate(any())).thenReturn(0);
+        testGenotype2.updateFitness();
+
+        population = new Population<>(genotypes);
+
+        var result = population.getBestIndividual();
+
+        assertEquals(testGenotype1, result);
+    }
+
+    @Test
     public void createCopy_WhenCalled_ReturnsPopulationWithMatchingGenotypes() {
         population = new Population<>(() -> new ListGenotype<>(rand -> rand.nextInt(15), fitnessMock, 10), 10);
 

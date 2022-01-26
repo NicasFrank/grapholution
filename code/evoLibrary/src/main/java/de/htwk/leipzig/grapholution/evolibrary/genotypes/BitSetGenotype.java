@@ -68,9 +68,6 @@ public class BitSetGenotype extends Genotype<Boolean> {
         return new BitSetGenotype(fitnessFunction, values, size);
     }
 
-    @Override
-    public void print() {}
-
     public int oneCount() {
         return values.cardinality();
     }

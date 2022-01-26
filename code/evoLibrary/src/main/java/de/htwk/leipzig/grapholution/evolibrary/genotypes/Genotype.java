@@ -30,10 +30,6 @@ public abstract class Genotype<T> {
         return fitness;
     }
 
-    public FitnessFunction<T> getFitnessFunction(){
-        return fitnessFunction;
-    }
-
     /**
      * Funktion zur erneuten Evaluierung des Fitnesswerts des Genotypen
      */
@@ -66,5 +62,4 @@ public abstract class Genotype<T> {
 
     public abstract Genotype<T> createCopy();
 
-    public abstract void print();
 }
