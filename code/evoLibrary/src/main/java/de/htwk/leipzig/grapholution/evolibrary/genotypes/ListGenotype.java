@@ -79,23 +79,4 @@ public class ListGenotype<T> extends Genotype<T> {
     public Genotype<T> createCopy(){
         return new ListGenotype<>(fitnessFunction, new ArrayList<>(values));
     }
-
-    /**
-     * Funktion zur Ausgabe der Werte des Genotypen auf der Konsole
-     */
-    @Override
-    public void print(){
-        values.forEach(value -> System.out.print(value + " "));
-        System.out.println("\n");
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        return super.equals(o);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), fitnessFunction, age, fitness, maxFitnessValue);
-    }
 }

@@ -2,7 +2,6 @@ package de.htwk.leipzig.grapholution.evolibrary.algorithms.Hillclimber;
 
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
 import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmConfigOptions;
-import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmType;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.Mutator;
 import de.htwk.leipzig.grapholution.evolibrary.algorithms.Algorithm;
 
@@ -60,16 +59,4 @@ public class Hillclimber<T> extends Algorithm<T> {
         return currentBest.createCopy();
     }
 
-    @Override
-    protected AlgorithmType getType() {
-        return AlgorithmType.Hillclimber;
-    }
-
-    @Override
-    protected AlgorithmConfigOptions getCustomConfigOptions() {
-        return new AlgorithmConfigOptions();
-    }
-
-    @Override
-    protected void setCustomConfigOptions(AlgorithmConfigOptions options) { }
 }

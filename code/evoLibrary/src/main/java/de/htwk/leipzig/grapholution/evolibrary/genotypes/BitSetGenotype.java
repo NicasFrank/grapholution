@@ -19,6 +19,7 @@ public class BitSetGenotype extends Genotype<Boolean> {
         this.values = BitSet.valueOf(values.toByteArray());
         this.size = size;
         maxFitnessValue = fitnessFunction.getMaxFitnessValue(this);
+        updateFitness();
     }
 
     public BitSetGenotype(Function<Random, Boolean> creator, FitnessFunction<Boolean> fitnessFunction, int size) {
@@ -29,6 +30,7 @@ public class BitSetGenotype extends Genotype<Boolean> {
             values.set(i, creator.apply(ThreadLocalRandom.current()));
         }
         maxFitnessValue = fitnessFunction.getMaxFitnessValue(this);
+        updateFitness();
     }
 
     public static BitSetGenotype fromString(FitnessFunction<Boolean> fitnessFunction, String values) {
@@ -56,6 +58,7 @@ public class BitSetGenotype extends Genotype<Boolean> {
     @Override
     public void set(int i, Boolean element) {
         values.set(i, element);
+        updateFitness();
     }
 
     @Override
@@ -67,9 +70,6 @@ public class BitSetGenotype extends Genotype<Boolean> {
     public Genotype<Boolean> createCopy() {
         return new BitSetGenotype(fitnessFunction, values, size);
     }
-
-    @Override
-    public void print() {}
 
     public int oneCount() {
         return values.cardinality();
