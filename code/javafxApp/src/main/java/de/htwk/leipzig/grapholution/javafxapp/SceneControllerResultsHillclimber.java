@@ -1,4 +1,6 @@
 package de.htwk.leipzig.grapholution.javafxapp;
+
+import de.htwk.leipzig.grapholution.javafxapp.model.EvoLibMapper;
 import de.htwk.leipzig.grapholution.javafxapp.model.HillModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -26,12 +28,14 @@ public class SceneControllerResultsHillclimber extends SceneController implement
     @FXML
     private LineChart<HillModel, String> lineChartResults;
     @FXML
+    private TableColumn<HillModel, String> iteration;
+    @FXML
     private TableColumn<HillModel, String> fitness;
-    /**
-     * Objekte der ViewModels
-     */
+    @FXML
+    private TableColumn<HillModel, String> age;
+
     private ViewModel viewModel;
-    private ViewModelHillclimber viewModelHillclimber;
+    private final ObservableList<HillModel> allResults = FXCollections.observableArrayList();
 
     /**
      * setter für viewmodel und bindet outputfield an output vom viewmodel
@@ -40,7 +44,15 @@ public class SceneControllerResultsHillclimber extends SceneController implement
      */
     public void setViewModel(ViewModel viewModel) {
         this.viewModel = viewModel;
-        outputField.textProperty().bind(viewModel.outputFieldProperty());
+        allResults.addAll(viewModel.runHillclimberAlgorithm());
+        outputField.textProperty().bindBidirectional(viewModel.VMoutputFieldProperty());
+        setTableViewResults();
+    }
+
+    public void initialize(URL location, ResourceBundle resources){
+        iteration.setCellValueFactory((cellData -> cellData.getValue().getIteration()));
+        fitness.setCellValueFactory((cellData -> cellData.getValue().getFitness()));
+        age.setCellValueFactory((cellData -> cellData.getValue().getAge()));
     }
 
     /**
@@ -48,15 +60,8 @@ public class SceneControllerResultsHillclimber extends SceneController implement
      */
 
     public void setTableViewResults() {
-        final ObservableList<HillModel> data = FXCollections.observableArrayList(
-                //Dummy Data
-                new HillModel(1),
-                new HillModel(4),
-                new HillModel(3),
-                new HillModel(2));
-        fitness.setCellValueFactory(new PropertyValueFactory<>("fitness"));
-        tableViewResults.setItems(data);
-        tableViewResults.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        tableViewResults.setItems(allResults);
+        setLineChartResults();
     }
 
     /**
@@ -95,16 +100,5 @@ public class SceneControllerResultsHillclimber extends SceneController implement
      */
     public void sendButton_backwards(){
         viewModel.navigation_Back();
-    }
-
-    /**
-     * Initialisierungsmethode für das Setzen der Visual-Daten
-     * @param location
-     * @param resources
-     */
-    @FXML
-    public void initialize(URL location, ResourceBundle resources) {
-        setTableViewResults();
-        setLineChartResults();
     }
 }

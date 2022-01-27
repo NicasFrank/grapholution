@@ -13,25 +13,23 @@ import de.htwk.leipzig.grapholution.evolibrary.mutator.BinaryMutation;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.SwitchOneBit;
 import de.htwk.leipzig.grapholution.evolibrary.recombinator.OnePointCrossover;
 import de.htwk.leipzig.grapholution.evolibrary.selectors.FitnessproportionalSelection;
-import de.htwk.leipzig.grapholution.javafxapp.model.BestGenotype;
-import de.htwk.leipzig.grapholution.javafxapp.model.EvoLibMapper;
+import de.htwk.leipzig.grapholution.evolibrary.statistics.Statistics;
+import de.htwk.leipzig.grapholution.javafxapp.model.GenModel;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class ViewModelGeneticAlgorithm{
 
   private final GeneticAlgorithm<Boolean> geneticAlgorithm;
-  private BestGenotype bestGenotype;
-  private EvoLibMapper evoLibMapper;
-  private boolean isStepByStep;
-
 
   /**
    * erstellt anhand der Konfiguration den gewuenschten genetischen Algorithmus
    * loest erste iteratation des genetischen algorithmus aus
    */
   public ViewModelGeneticAlgorithm(AlgorithmConfigOptions options){
-    this.isStepByStep = options.getBool(BoolConfig.IsStepByStep);
+    var isStepByStep = options.getBool(BoolConfig.IsStepByStep);
     var mutator = options.getBool(BoolConfig.MutationIsBinary) ? new BinaryMutation(options.getInt(IntConfig.MutationChance)) : new SwitchOneBit();
     var selector= new FitnessproportionalSelection<Boolean>();
     var recombinator = new OnePointCrossover<Boolean>();
@@ -44,22 +42,25 @@ public class ViewModelGeneticAlgorithm{
 
   /**
    * ruft die run methoden des genetischen algorithmus abheangig ob schrittweise oder auf einmal gerechnet werden soll
-   * @param untilDone ob der algorithmus bis zur maximalanzahl der generationen oder bestmoeglichen individuums durchlaufen soll
    * @return aktuell besten genotypen
    */
-  public BestGenotype runAlgorithm(boolean untilDone){
-    Genotype<Boolean> currentBestGeno;
-    if(isStepByStep && !untilDone){
-      currentBestGeno = geneticAlgorithm.oneStep();
-    } else {
-      currentBestGeno = geneticAlgorithm.run();
+  public GenModel runAlgorithm(){
+    Genotype<Boolean> bestGenotype = geneticAlgorithm.oneStep();
+    Statistics<Boolean> stats = geneticAlgorithm.getStatistics();
+    return new GenModel(geneticAlgorithm.getIterations(), bestGenotype,stats.getHistory().get(stats.getBestIndividuals().size()-1));
+  }
+
+  public List<GenModel> finishAlgorithm(){
+    geneticAlgorithm.run();
+    return  makeGenModelList(geneticAlgorithm.getStatistics());
+  }
+
+  private List<GenModel> makeGenModelList(Statistics<Boolean> stats){
+    int size = stats.getBestIndividuals().size();
+    List<GenModel> genModelList = new ArrayList<>();
+    for (int i=0; i<size;i++){
+      genModelList.add(new GenModel(i,stats.getBestIndividuals().get(i),stats.getHistory().get(i)));
     }
-    int fitness = currentBestGeno.getFitness();
-    int age = currentBestGeno.getAge();
-    bestGenotype = new BestGenotype(fitness,age);
-
-    System.out.println(bestGenotype +" Iteration: " + geneticAlgorithm.getIterations());
-
-    return bestGenotype;
+    return genModelList;
   }
 }

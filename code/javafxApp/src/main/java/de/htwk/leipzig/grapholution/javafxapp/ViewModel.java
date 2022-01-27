@@ -1,41 +1,30 @@
 package de.htwk.leipzig.grapholution.javafxapp;
 
 
-import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.FitnessFunction;
-import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.OneMaxEvaluator;
-import de.htwk.leipzig.grapholution.evolibrary.genotypes.BitSetGenotype;
 import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmConfigOptions;
 import de.htwk.leipzig.grapholution.evolibrary.models.BoolConfig;
-import de.htwk.leipzig.grapholution.evolibrary.models.IntConfig;
-import de.htwk.leipzig.grapholution.evolibrary.mutator.Mutator;
-import de.htwk.leipzig.grapholution.evolibrary.mutator.SwitchOneBit;
-import de.htwk.leipzig.grapholution.evolibrary.algorithms.Hillclimber.Hillclimber;
-import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
+import de.htwk.leipzig.grapholution.evolibrary.statistics.Statistics;
 import de.htwk.leipzig.grapholution.javafxapp.model.BestGenotype;
-import de.htwk.leipzig.grapholution.javafxapp.model.EvoLibMapper;
+import de.htwk.leipzig.grapholution.javafxapp.model.GenModel;
+import de.htwk.leipzig.grapholution.javafxapp.model.HillModel;
 import javafx.beans.property.Property;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Random;
 
 
 public class ViewModel {
 
-    private final StringProperty inputField = new SimpleStringProperty();
-    private final StringProperty outputField = new SimpleStringProperty();
-
     private final SceneControllerBase sceneControllerBase;
     private final Pane[] allScenes = new Pane[3];
     private int currentScene = -1;
-  private boolean isAlgorithmStepByStep = false;
+    private boolean isAlgorithmStepByStep = false;
 
-  private AlgorithmConfigOptions configOptions = new AlgorithmConfigOptions();
-  private ViewModelGeneticAlgorithm viewModelGeneticAlgorithm;
+    private AlgorithmConfigOptions configOptions = new AlgorithmConfigOptions();
+    private ViewModelGeneticAlgorithm viewModelGeneticAlgorithm;
     private ViewModelHillclimber viewModelHillclimber;
 
     public ViewModel(SceneControllerBase sceneControllerBase, Pane firstPane) {
@@ -61,7 +50,6 @@ public class ViewModel {
         break;
       case ResultsHillclimber :
         allScenes[2] = loadNewPane("ResultsHillclimber.fxml");
-        outputField.set("Ergebnis");
         break;
       case ResultsGeneticAlgorithm :
         allScenes[2] = loadNewPane("ResultsGeneticAlgorithm.fxml");
@@ -84,24 +72,29 @@ public class ViewModel {
     /**
      * Hillclimber instanziert und ausgeführt
      *
-     * @param startConfig Startkonfiguration
      */
 
-    public void startHillclimberAlgorithm(AlgorithmConfigOptions options) {
+    public void startHillclimberAlgorithm(AlgorithmConfigOptions options,SceneControllerHillclimber sceneControllerHillclimber) {
         setConfigOptions(options);
-        viewModelHillclimber = new ViewModelHillclimber(options);
+        viewModelHillclimber = new ViewModelHillclimber(options,sceneControllerHillclimber);
     }
 
-    public BestGenotype geneticAlgorithmNextStep(boolean untilDone) {
-        return viewModelGeneticAlgorithm.runAlgorithm(untilDone);
+    public List<HillModel> runHillclimberAlgorithm(){
+      return viewModelHillclimber.runAlgorithm();
     }
 
+    public GenModel geneticAlgorithmNextStep() {
+        return viewModelGeneticAlgorithm.runAlgorithm();
+    }
+
+  public List<GenModel> geneticAlgorithmUntilDone(){
+    return viewModelGeneticAlgorithm.finishAlgorithm();
+  }
 
   public void startGeneticAlgorithm(AlgorithmConfigOptions options){
     setConfigOptions(options);
     isAlgorithmStepByStep = options.getBool(BoolConfig.IsStepByStep);
-    viewModelGeneticAlgorithm = new ViewModelGeneticAlgorithm(options
-    );
+    viewModelGeneticAlgorithm = new ViewModelGeneticAlgorithm(options);
   }
 
     /**
@@ -132,35 +125,24 @@ public class ViewModel {
         sceneControllerBase.setNewScreen(nextScreen);
     }
 
-    /**
-     * Handhabung des Eingabefeldes:
-     * iteriert durch das Eingabefeld und speichert in einem char Array
-     *
-     * @return true falls Eingabe 0 oder 1 (Buchstabe)
-     */
-    private boolean isInputCorrect() {
-        char[] input = inputField.get().toCharArray();
-        for (char c : input) {
-            if (c != '0' && c != '1') {
-                return false;
-            }
-        }
-        return true;
-    }
 
     /**
      * Methoden geben Eingabe und Ausgabefeld zurück
      **/
-    public Property<String> outputFieldProperty() {
-        return outputField;
+    public StringProperty VMoutputFieldProperty() {
+        return viewModelHillclimber.outputFieldProperty();
     }
-  public Property<String> inputFieldProperty() {
-    return inputField;
+  public StringProperty VMinputFieldProperty() {
+    return viewModelHillclimber.inputFieldProperty();
   }
   public boolean getIsAlgorithmStepByStep(){return isAlgorithmStepByStep;}
 
   public AlgorithmConfigOptions getConfigOptions() {
     return configOptions;
+  }
+
+  public Statistics<Boolean> getHillclimberStatistics(){
+      return viewModelHillclimber.getHillclimberStatistic();
   }
 
   public void setConfigOptions(AlgorithmConfigOptions configOptions) {

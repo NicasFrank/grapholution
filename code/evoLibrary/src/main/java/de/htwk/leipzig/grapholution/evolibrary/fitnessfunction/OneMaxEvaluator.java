@@ -29,4 +29,13 @@ public class OneMaxEvaluator implements FitnessFunction<Boolean> {
     public int getMaxFitnessValue(Genotype<Boolean> genotype) {
         return genotype.size();
     }
+
+    /**
+     * Funktion zur Ermittlung des Fitnessziels
+     * @return true
+     */
+    @Override
+    public Boolean target(){
+        return true;
+    }
 }

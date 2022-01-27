@@ -41,6 +41,16 @@ public class Population<T> extends ArrayList<Genotype<T>> {
                 .max().orElse(0);
     }
 
+    /**
+     * gibt die Güte der Population zurück
+     * @return die Güte
+     */
+    public double getGoodness() {
+        return stream()
+            .mapToInt(Genotype::getFitness)
+            .average().orElse(0);
+    }
+
     public Genotype<T> getBestIndividual() {
         return stream()
                 .max(Comparator.comparing(Genotype<T>::getFitness))

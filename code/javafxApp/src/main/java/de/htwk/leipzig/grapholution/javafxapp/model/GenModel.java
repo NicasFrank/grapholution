@@ -1,7 +1,9 @@
 package de.htwk.leipzig.grapholution.javafxapp.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
+import de.htwk.leipzig.grapholution.evolibrary.genotypes.Population;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 /**
  * ModelKlasse GenerischeModels
@@ -9,17 +11,22 @@ import java.util.List;
 
 public class GenModel {
 
-    /**
-     * Liste von HillModels
-     */
-    List<HillModel> listHillModel = new ArrayList<>();
+    private final SimpleStringProperty fitnessIndividual;
+    private final SimpleStringProperty age;
+    private final SimpleStringProperty iteration;
+    private final SimpleStringProperty fitnessPopulation;
+    private final SimpleStringProperty bits;
 
-    /**
-     *
-     * @param listHillModel
-     */
-    public GenModel(List<HillModel> listHillModel) {
-        this.listHillModel = listHillModel;
+    public GenModel(int iteration, Genotype<Boolean> genotype, Population<Boolean> population) {
+        this.fitnessIndividual = new SimpleStringProperty(String.valueOf(genotype.getFitness()));
+        this.age = new SimpleStringProperty(String.valueOf(genotype.getAge()));
+        this.iteration = new SimpleStringProperty(String.valueOf(iteration));
+        this.fitnessPopulation = new SimpleStringProperty(String.valueOf(population.getGoodness()));
+        this.bits = new SimpleStringProperty(genotype.toString());
     }
-
+    public SimpleStringProperty fitnessIndividualProperty(){return fitnessIndividual;}
+    public SimpleStringProperty ageProperty(){return age;}
+    public SimpleStringProperty iterationProperty() {return iteration;}
+    public StringProperty fitnessPopulationProperty() {return fitnessPopulation;}
+    public SimpleStringProperty bitsProperty(){return bits;}
 }

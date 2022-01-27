@@ -2,7 +2,10 @@ package de.htwk.leipzig.grapholution.javafxapp;
 
 import de.htwk.leipzig.grapholution.javafxapp.model.BestGenotype;
 import de.htwk.leipzig.grapholution.evolibrary.statistics.Statistics;
+import de.htwk.leipzig.grapholution.javafxapp.model.GenModel;
 import de.htwk.leipzig.grapholution.javafxapp.model.HillModel;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -17,18 +20,30 @@ import java.util.ResourceBundle;
 public class SceneControllerResultsGeneticAlgorithm extends SceneController implements Initializable {
 
     @FXML
-    TableView<Statistics> tableViewResults;
+    TableView<GenModel> tableViewResults;
     @FXML
-    TableColumn<HillModel, String> fitness;
+    TableColumn<GenModel, String> duration;
+    @FXML
+    TableColumn<GenModel, String> fitnessPopulation;
+    @FXML
+    TableColumn<GenModel, String> fitnessBestIndividual;
+    @FXML
+    TableColumn<GenModel, String> bitsBestIndividual;
+    @FXML
+    TableColumn<GenModel, String> age;
     @FXML
     private Button buttonNextStep,buttonFastForward;
 
     private ViewModel viewModel;
+    private final ObservableList<GenModel> allResults = FXCollections.observableArrayList();
 
-    public void loadButtonTableView(ActionEvent e) {
-    }
-
-    public void loadButtonLineChart(ActionEvent e) {
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        bitsBestIndividual.setCellValueFactory((cellData -> cellData.getValue().bitsProperty()));
+        duration.setCellValueFactory((cellData -> cellData.getValue().iterationProperty()));
+        age.setCellValueFactory((cellData -> cellData.getValue().ageProperty()));
+        fitnessBestIndividual.setCellValueFactory((cellData -> cellData.getValue().fitnessIndividualProperty()));
+        fitnessPopulation.setCellValueFactory((cellData -> cellData.getValue().fitnessPopulationProperty()));
     }
 
     public void sendButton_backwards(){
@@ -36,12 +51,20 @@ public class SceneControllerResultsGeneticAlgorithm extends SceneController impl
     }
 
     public void nextStep(){
-      BestGenotype bestGenotype = viewModel.geneticAlgorithmNextStep(false);
+        allResults.add(viewModel.geneticAlgorithmNextStep());
+        tableViewResults.setItems(allResults);
     }
+
+    /**
+     *
+     */
     public void fastForward(){
-      BestGenotype bestGenotype = viewModel.geneticAlgorithmNextStep(true);
-      buttonFastForward.setDisable(true);
-      buttonNextStep.setDisable(true);
+        allResults.removeAll();
+        tableViewResults.getItems().clear();
+        allResults.addAll(viewModel.geneticAlgorithmUntilDone());
+        buttonFastForward.setDisable(true);
+        buttonNextStep.setDisable(true);
+        tableViewResults.setItems(allResults);
     }
 
     /**
@@ -51,14 +74,11 @@ public class SceneControllerResultsGeneticAlgorithm extends SceneController impl
      */
     public void setViewModel(ViewModel viewModel) {
         this.viewModel = viewModel;
-        if (viewModel.getIsAlgorithmStepByStep()) {
+        if(viewModel.getIsAlgorithmStepByStep()){
             buttonFastForward.setDisable(false);
             buttonNextStep.setDisable(false);
+        } else {
+            fastForward();
         }
-    }
-
-    @FXML
-    public void initialize(URL location, ResourceBundle resources) {
-        fitness.setCellValueFactory(new PropertyValueFactory<HillModel, String>("fitness"));
     }
 }

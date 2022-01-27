@@ -64,6 +64,7 @@ public class ListGenotype<T> extends Genotype<T> {
     @Override
     public void set(int i, T element){
         values.set(i, element);
+        updateFitness();
     }
 
     @Override
@@ -78,5 +79,16 @@ public class ListGenotype<T> extends Genotype<T> {
     @Override
     public Genotype<T> createCopy(){
         return new ListGenotype<>(fitnessFunction, new ArrayList<>(values));
+    }
+
+    @Override
+    public String toString() {
+        return values.stream()
+                .collect(
+                        () -> new StringBuilder(values.size()),
+                        StringBuilder::append,
+                        StringBuilder::append
+                )
+                .toString();
     }
 }

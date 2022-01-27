@@ -45,6 +45,14 @@ public abstract class Genotype<T> {
     }
 
     /**
+     * Funktion zur Ausgabe des optimierungsziels der fitnessfunction
+     * @return T Werte der Methode type()
+     */
+    public T getFitnessTarget(){
+        return fitnessFunction.target();
+    }
+
+    /**
      * Getter für Alter des Genotypen
      * @return Alter des Genotypen
      */
@@ -61,5 +69,8 @@ public abstract class Genotype<T> {
     public abstract T get(int i);
 
     public abstract Genotype<T> createCopy();
+
+    public abstract String toString();
+
 
 }

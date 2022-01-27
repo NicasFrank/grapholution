@@ -10,31 +10,31 @@ import de.htwk.leipzig.grapholution.evolibrary.models.BoolConfig;
 import de.htwk.leipzig.grapholution.evolibrary.models.IntConfig;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.BinaryMutation;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.SwitchOneBit;
-import de.htwk.leipzig.grapholution.javafxapp.model.BestGenotype;
-import javafx.beans.property.Property;
+import de.htwk.leipzig.grapholution.evolibrary.statistics.Statistics;
+import de.htwk.leipzig.grapholution.javafxapp.model.HillModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+import java.util.ArrayList;
 import java.util.BitSet;
+import java.util.List;
 
 public class ViewModelHillclimber{
 
-    private BestGenotype bestGenotype;
     private Genotype<Boolean> genotype;
     private final StringProperty inputField = new SimpleStringProperty();
     private final StringProperty outputField = new SimpleStringProperty();
     private final Hillclimber<Boolean> hillclimberAlgorithm;
-    private boolean isOneMax;
-
 
     /**
      * Konstruktor
      * @param options Konfiguration Hillclimber Algorithmus
      */
-    public ViewModelHillclimber(AlgorithmConfigOptions options){
+    public ViewModelHillclimber(AlgorithmConfigOptions options,SceneControllerHillclimber sceneControllerHillclimber){
+        inputField.bindBidirectional(sceneControllerHillclimber.getInputField().textProperty());
         var mutator = options.getBool(BoolConfig.MutationIsBinary) ? new BinaryMutation(options.getInt(IntConfig.MutationChance)) : new SwitchOneBit();
         var fitnessFunction = options.getBool(BoolConfig.FitnessIsOneMax) ? new OneMaxEvaluator() : new ZeroMaxEvaluator();
-        isOneMax = options.getBool(BoolConfig.FitnessIsOneMax);
+        boolean isOneMax = options.getBool(BoolConfig.FitnessIsOneMax);
         var bitset = new BitSet(inputField.get().length());
         for (int i = 0; i < inputField.get().length(); i++) {
             if (inputField.get().charAt(i) == '1') {
@@ -43,28 +43,32 @@ public class ViewModelHillclimber{
         }
         genotype = new BitSetGenotype(fitnessFunction,bitset,inputField.get().length());
         hillclimberAlgorithm = new Hillclimber<Boolean>(genotype, mutator, options);
-
     }
 
     /**
-
      * ruft die run Methoden des Hillclimber Algorithmus auf
-     * @param
-     * @return aktuell bester genotyp
-
      */
-    public BestGenotype runAlgorithm(){
-        isInputCorrect();
-        int fitness = hillclimberAlgorithm.run().getFitness();
-        int age = hillclimberAlgorithm.run().getAge();
-        bestGenotype = new BestGenotype(fitness,age);
-        System.out.println(bestGenotype + "Iteration: " + hillclimberAlgorithm.getIterations());
 
-        return bestGenotype;
+    public List<HillModel> runAlgorithm(){
+        Genotype<Boolean> bitGeno = hillclimberAlgorithm.run();
+        outputField.set(bitGeno.toString());
+        return makeListHillModel();
     }
 
-
     /**
+     * @TODO wie ist das mit den iterations, wird ja nicht immer in die stats geschrieben, woher die richtige iteration?
+     * @return
+     */
+    private List<HillModel> makeListHillModel(){
+        List<HillModel> listHM = new ArrayList<>();
+        List<Genotype<Boolean>> stats = hillclimberAlgorithm.getStatistics().getBestIndividuals();
+        for ( int i = 0; i<stats.size();i++){
+            listHM.add(new HillModel(i,stats.get(i)));
+        }
+        return listHM;
+    }
+    /**
+     * @TODO isInputCorrect an richtiger Stelle einfügen
      * Methode zum überprüfen ob Eingabe 0 oder 1
      * @return ob die Eingabe 0 oder 1 ist
      */
@@ -72,11 +76,15 @@ public class ViewModelHillclimber{
         return inputField.get().matches("[01]*");
     }
 
-    public Property<String> outputFieldProperty() {
+    public StringProperty outputFieldProperty() {
         return outputField;
     }
 
-    public Property<String> inputFieldProperty() {
+    public StringProperty inputFieldProperty() {
         return inputField;
+    }
+
+    public Statistics<Boolean> getHillclimberStatistic(){
+        return hillclimberAlgorithm.getStatistics();
     }
 }
