@@ -1,12 +1,9 @@
 package de.htwk.leipzig.grapholution.evolibrary.algorithms;
 
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
-import de.htwk.leipzig.grapholution.evolibrary.statistics.Statistics;
 import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmConfigOptions;
-import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmType;
 import de.htwk.leipzig.grapholution.evolibrary.models.IntConfig;
-
-import java.io.*;
+import de.htwk.leipzig.grapholution.evolibrary.statistics.Statistics;
 
 /**
  * Abstrakte Klasse zur Allgemeinen-Dartstellung eines evolutionaeren Algorithmus
@@ -58,44 +55,4 @@ public abstract class Algorithm<T> {
     public Statistics<T> getStatistics() {
         return statistics.createCopy();
     }
-
-    public void serialize(File file) throws Exception {
-        var config = new AlgorithmConfigOptions();
-        config.add(IntConfig.Limit, limit);
-        config.merge(getCustomConfigOptions());
-
-        var fos = new FileOutputStream(file);
-        var oos = new ObjectOutputStream(fos);
-
-        oos.writeObject(getType());
-        oos.writeObject(config);
-
-        oos.close();
-        fos.close();
-    }
-
-    public void deserialize(File file) throws Exception {
-        var fis = new FileInputStream(file);
-        var ois = new ObjectInputStream(fis);
-
-        var type = (AlgorithmType) ois.readObject();
-        if (type != getType()) {
-            throw new IllegalArgumentException("");
-        }
-        var options = (AlgorithmConfigOptions) ois.readObject();
-
-        ois.close();
-        fis.close();
-
-        limit = options.getInt(IntConfig.Limit);
-
-        setCustomConfigOptions(options);
-    }
-
-    protected abstract AlgorithmType getType();
-
-    protected abstract AlgorithmConfigOptions getCustomConfigOptions();
-
-    protected abstract void setCustomConfigOptions(AlgorithmConfigOptions options);
-
 }

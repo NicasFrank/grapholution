@@ -91,14 +91,4 @@ public class ListGenotype<T> extends Genotype<T> {
                 )
                 .toString();
     }
-
-    @Override
-    public boolean equals(Object o) {
-        return super.equals(o);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), fitnessFunction, age, fitness, maxFitnessValue);
-    }
 }
