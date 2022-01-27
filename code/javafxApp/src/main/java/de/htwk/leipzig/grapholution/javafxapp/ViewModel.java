@@ -74,9 +74,9 @@ public class ViewModel {
      *
      */
 
-    public void startHillclimberAlgorithm(AlgorithmConfigOptions options,SceneControllerHillclimber SCh) {
+    public void startHillclimberAlgorithm(AlgorithmConfigOptions options,SceneControllerHillclimber sceneControllerHillclimber) {
         setConfigOptions(options);
-        viewModelHillclimber = new ViewModelHillclimber(options,SCh);
+        viewModelHillclimber = new ViewModelHillclimber(options,sceneControllerHillclimber);
     }
 
     public List<HillModel> runHillclimberAlgorithm(){

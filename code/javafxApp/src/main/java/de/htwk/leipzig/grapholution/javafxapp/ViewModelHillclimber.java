@@ -30,8 +30,8 @@ public class ViewModelHillclimber{
      * Konstruktor
      * @param options Konfiguration Hillclimber Algorithmus
      */
-    public ViewModelHillclimber(AlgorithmConfigOptions options,SceneControllerHillclimber SCh){
-        inputField.bindBidirectional(SCh.getInputField().textProperty());
+    public ViewModelHillclimber(AlgorithmConfigOptions options,SceneControllerHillclimber sceneControllerHillclimber){
+        inputField.bindBidirectional(sceneControllerHillclimber.getInputField().textProperty());
         var mutator = options.getBool(BoolConfig.MutationIsBinary) ? new BinaryMutation(options.getInt(IntConfig.MutationChance)) : new SwitchOneBit();
         var fitnessFunction = options.getBool(BoolConfig.FitnessIsOneMax) ? new OneMaxEvaluator() : new ZeroMaxEvaluator();
         boolean isOneMax = options.getBool(BoolConfig.FitnessIsOneMax);
