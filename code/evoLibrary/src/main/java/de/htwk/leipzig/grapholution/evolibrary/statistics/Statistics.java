@@ -5,6 +5,8 @@ import de.htwk.leipzig.grapholution.evolibrary.genotypes.Population;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * Klasse zur Verwaltung der Populations-Historie und Besten-Individuums-Historie eines Algorithmus, sowie Auswertung dieser
@@ -43,20 +45,13 @@ public class Statistics<T> {
      * fügt Array mit jeweiligen prozentvorkommen des Fitnessziels an colorHistory an
      */
     public void addColorBitString(Population<T> population){
-        var list = new ArrayList<Float>();
-        for(int j = 0; j <= population.size(); j++){
-            list.add(0f);
-        }
-        for (Genotype<T> g: population) {
-            for(int i = 0; i < g.size(); i++){
-                if(g.get(i) == g.getFitnessTarget()){
-                    list.set(i,list.get(i)+1f);
-                }
-            }
-        }
-        for(int j = 0; j <= population.size(); j++){
-            list.set(j,list.get(j)/population.size());
-        }
+        var list = population.stream()
+                .map(g -> IntStream.range(0, g.size())
+                        .filter(i -> g.get(i) == g.getFitnessTarget())
+                        .count())
+                .map(l -> 1f* l / population.size())
+                .collect(Collectors.toList());
+
         colorHistory.add(list);
     }
 
@@ -65,7 +60,7 @@ public class Statistics<T> {
      * @return colorHistory
      */
     public List<List<Float>> getColorHistory(){
-        return colorHistory;
+        return new ArrayList<>(colorHistory);
     }
     public List<Population<T>> getHistory() {
         return new ArrayList<>(history);

@@ -28,6 +28,11 @@ public class FitnessproportionalSelectionTests {
             public int getMaxFitnessValue(Genotype<Integer> genotype) {
                 return Integer.MAX_VALUE;
             }
+
+            @Override
+            public Integer target() {
+                return Integer.MAX_VALUE;
+            }
         };
     }
 
