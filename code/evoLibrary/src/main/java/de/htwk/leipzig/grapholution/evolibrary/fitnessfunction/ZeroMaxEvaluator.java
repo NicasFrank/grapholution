@@ -30,4 +30,12 @@ public class ZeroMaxEvaluator implements FitnessFunction<Boolean> {
         return genotype.size();
     }
 
+    /**
+     * Funktion zur Ermittlung des Fitnessziels
+     * @return false
+     */
+    @Override
+    public bool target(){
+        return false;
+    }
 }

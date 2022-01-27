@@ -22,4 +22,9 @@ public interface FitnessFunction<T> {
      */
     int getMaxFitnessValue(Genotype<T> genotype);
 
+    /**
+     * Funktion die die Art des Evaluators zurückgibt
+     * @return T Typ des Rückgabe wertes, Wert entspricht dem gewünschten Fitnessziel
+     */
+    T target();
 }
