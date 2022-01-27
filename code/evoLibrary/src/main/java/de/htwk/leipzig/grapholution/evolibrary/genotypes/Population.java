@@ -1,10 +1,8 @@
 package de.htwk.leipzig.grapholution.evolibrary.genotypes;
 
-import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.FitnessFunction;
-import java.util.*;
-import java.util.concurrent.ThreadLocalRandom;
-import java.util.function.Function;
-import java.util.function.Predicate;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Comparator;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -57,16 +55,6 @@ public class Population<T> extends ArrayList<Genotype<T>> {
         return stream()
                 .max(Comparator.comparing(Genotype<T>::getFitness))
                 .orElse(null);
-    }
-
-    /**
-     * gibt das Individuum mit dem besten Fitnesswert zurück
-     * @return bester Fitnesswert
-     */
-    public Genotype<T> getBestIndividuum() {
-        return stream()
-                .filter(genotype -> genotype.fitness == getBestFitness())
-                .findFirst().orElse(null);
     }
 
     /**

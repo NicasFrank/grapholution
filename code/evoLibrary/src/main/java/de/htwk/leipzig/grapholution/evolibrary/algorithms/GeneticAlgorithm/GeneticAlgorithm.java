@@ -4,13 +4,11 @@ import de.htwk.leipzig.grapholution.evolibrary.algorithms.Algorithm;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Population;
 import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmConfigOptions;
-import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmType;
 import de.htwk.leipzig.grapholution.evolibrary.models.DoubleConfig;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.Mutator;
 import de.htwk.leipzig.grapholution.evolibrary.recombinator.Recombinator;
 import de.htwk.leipzig.grapholution.evolibrary.selectors.Selector;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -57,23 +55,6 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
         }
 
         return bestIndividuum();
-    }
-
-    @Override
-    protected AlgorithmType getType() {
-        return AlgorithmType.GeneticAlgorithm;
-    }
-
-    @Override
-    protected AlgorithmConfigOptions getCustomConfigOptions() {
-        var options = new AlgorithmConfigOptions();
-        options.add(DoubleConfig.RecombinationChance, recombinationChance);
-        return options;
-    }
-
-    @Override
-    protected void setCustomConfigOptions(AlgorithmConfigOptions options) {
-        recombinationChance = options.getOrElse(DoubleConfig.RecombinationChance, 1.0);
     }
 
 
