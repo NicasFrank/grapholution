@@ -30,7 +30,8 @@
             <TableColumn fx:id="duration" minWidth="100" text="Iteration" />
             <TableColumn fx:id="fitnessPopulation" minWidth="100" text="Güte" />
             <TableColumn fx:id="age" minWidth="100" text="Alter" />
-            <TableColumn fx:id="fitnessBestIndividual" minWidth="100" text="Fitness" />
+            <TableColumn fx:id="fitnessBestIndividual" minWidth="100" text="Bester Fitnesswert" />
+            <TableColumn fx:id="bitsBestIndividual" minWidth="100" text="Bestes BitSet" />
          </columns>
       </TableView>
       <Button id="backButton" fx:id="backButton" alignment="CENTER" layoutX="110.0" layoutY="600.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#sendButton_backwards" prefHeight="60.0" prefWidth="150.0" styleClass="defaultButton" text="Zurück" textFill="#28240b">

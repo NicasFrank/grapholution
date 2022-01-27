@@ -61,6 +61,7 @@ public class SceneControllerResultsHillclimber extends SceneController implement
 
     public void setTableViewResults() {
         tableViewResults.setItems(allResults);
+        setLineChartResults();
     }
 
     /**

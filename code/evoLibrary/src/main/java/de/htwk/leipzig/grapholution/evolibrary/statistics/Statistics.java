@@ -13,7 +13,7 @@ public class Statistics<T> {
 
     private final List<Population<T>> history = new ArrayList<>();
     private final List<Genotype<T>> bestIndividuals = new ArrayList<>();
-    private List<List<float>> colorHistory = new ArrayList<>();
+    private List<List<Float>> colorHistory = new ArrayList<>();
     /**
      * Funktion zum Hinzufuegen einer Population des Algorithmus zur Historie, sowie deren bestes Individuum zur
      * Besten-Individuums-Historie
@@ -42,29 +42,29 @@ public class Statistics<T> {
      * Funktion zum erhalt des Proznetanteils der Bits der Stellen des Genotypes die dem Fitnessziel entsprechen einer Population
      * fügt Array mit jeweiligen prozentvorkommen des Fitnessziels an colorHistory an
      */
-    public void addColorBitString(Population<?> population){
-        float[] array = new float[population.get(0).size()];
-        for(int j = 0; j <= array.length; j++){
-            array[j] = 0f;
+    public void addColorBitString(Population<T> population){
+        var list = new ArrayList<Float>();
+        for(int j = 0; j <= population.size(); j++){
+            list.add(0f);
         }
-        for (Genotype<?> g: population) {
+        for (Genotype<T> g: population) {
             for(int i = 0; i < g.size(); i++){
-                if(g.getValues().get(i) == g.getFitnessTarget()){
-                    array[i] += 1f;
+                if(g.get(i) == g.getFitnessTarget()){
+                    list.set(i,list.get(i)+1f);
                 }
             }
         }
-        for(int j = 0; j <= array.length; j++){
-            array[j] = array[j]/population.size();
+        for(int j = 0; j <= population.size(); j++){
+            list.set(j,list.get(j)/population.size());
         }
-        colorHistory.add(array);
+        colorHistory.add(list);
     }
 
     /**
      * getter für Historie des Prozentanteils der Bits einer Population die dem Fitnessziel entsprechen
      * @return colorHistory
      */
-    public List<List<float>> getColorHistory(){
+    public List<List<Float>> getColorHistory(){
         return colorHistory;
     }
     public List<Population<T>> getHistory() {

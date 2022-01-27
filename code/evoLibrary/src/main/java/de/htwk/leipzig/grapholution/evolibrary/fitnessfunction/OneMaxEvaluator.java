@@ -35,7 +35,7 @@ public class OneMaxEvaluator implements FitnessFunction<Boolean> {
      * @return true
      */
     @Override
-    public bool target(){
+    public Boolean target(){
         return true;
     }
 }

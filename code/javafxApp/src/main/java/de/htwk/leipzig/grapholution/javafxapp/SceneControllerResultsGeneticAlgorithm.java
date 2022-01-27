@@ -28,6 +28,8 @@ public class SceneControllerResultsGeneticAlgorithm extends SceneController impl
     @FXML
     TableColumn<GenModel, String> fitnessBestIndividual;
     @FXML
+    TableColumn<GenModel, String> bitsBestIndividual;
+    @FXML
     TableColumn<GenModel, String> age;
     @FXML
     private Button buttonNextStep,buttonFastForward;
@@ -37,6 +39,7 @@ public class SceneControllerResultsGeneticAlgorithm extends SceneController impl
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        bitsBestIndividual.setCellValueFactory((cellData -> cellData.getValue().bitsProperty()));
         duration.setCellValueFactory((cellData -> cellData.getValue().iterationProperty()));
         age.setCellValueFactory((cellData -> cellData.getValue().ageProperty()));
         fitnessBestIndividual.setCellValueFactory((cellData -> cellData.getValue().fitnessIndividualProperty()));
@@ -53,7 +56,7 @@ public class SceneControllerResultsGeneticAlgorithm extends SceneController impl
     }
 
     /**
-     * @TODO irgendwie funktioniert hierbei fitness des individuum nicht
+     *
      */
     public void fastForward(){
         allResults.removeAll();

@@ -35,7 +35,7 @@ public class ZeroMaxEvaluator implements FitnessFunction<Boolean> {
      * @return false
      */
     @Override
-    public bool target(){
+    public Boolean target(){
         return false;
     }
 }
