@@ -16,7 +16,7 @@ public class Statistics<T> {
 
     private final List<Population<T>> history = new ArrayList<>();
     private final List<Genotype<T>> bestIndividuals = new ArrayList<>();
-    private List<List<Float>> colorHistory = new ArrayList<>();
+
     /**
      * Funktion zum Hinzufuegen einer Population des Algorithmus zur Historie, sowie deren bestes Individuum zur
      * Besten-Individuums-Historie
@@ -40,16 +40,6 @@ public class Statistics<T> {
         return c;
     }
 
-    /**
-     * getter für Historie des Prozentanteils der Bits einer Population die dem Fitnessziel entsprechen
-     * @return colorHistory
-     */
-    public List<ColorBitString> getColorBitStrings(){
-        //noinspection unchecked
-        return history.stream()
-                .map(p -> new ColorBitString((Population<Boolean>) p))
-                .collect(Collectors.toList());
-    }
     public List<Population<T>> getHistory() {
         return new ArrayList<>(history);
     }

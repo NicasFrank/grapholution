@@ -136,7 +136,10 @@ public class SceneControllerResultsGeneticAlgorithm extends SceneController impl
 
     private void paintBitStrings() {
         final var pageSize = 50;
-        var bitStrings = viewModel.getGeneticAlgorithmStatistics().getColorBitStrings();
+        var bitStrings = viewModel.getGeneticAlgorithmStatistics().getHistory().stream()
+                .map(ColorBitString::new)
+                .collect(Collectors.toList());
+
         bitStringPagination.setPageCount((int) Math.ceil(1.0 * bitStrings.size() / pageSize));
         bitStringPagination.setPageFactory(i -> {
             var scrollPane = new ScrollPane();

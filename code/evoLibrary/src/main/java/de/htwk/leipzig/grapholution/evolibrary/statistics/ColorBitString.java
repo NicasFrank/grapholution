@@ -10,7 +10,7 @@ import java.util.stream.IntStream;
 public class ColorBitString {
     private final List<BitDoublePair> data;
 
-    ColorBitString(Population<Boolean> population) {
+    public ColorBitString(Population<Boolean> population) {
         data = IntStream.range(0, population.get(0).size())
                 .mapToObj(i -> new BitDoublePair(
                         population.getBestIndividual().get(i),
