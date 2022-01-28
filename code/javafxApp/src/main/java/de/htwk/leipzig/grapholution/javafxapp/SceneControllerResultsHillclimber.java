@@ -2,7 +2,6 @@ package de.htwk.leipzig.grapholution.javafxapp;
 
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
 import de.htwk.leipzig.grapholution.javafxapp.model.HillModel;
-import de.htwk.leipzig.grapholution.javafxapp.utils.LineChartUtils;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,9 +10,9 @@ import javafx.scene.chart.*;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.paint.Color;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
@@ -28,7 +27,7 @@ public class SceneControllerResultsHillclimber extends SceneController implement
     @FXML
     private TableView<HillModel> tableViewResults;
     @FXML
-    private LineChart<Integer, Integer> lineChartResults;
+    private LineChart<Integer, Number> lineChartResults;
     @FXML
     private TableColumn<HillModel, String> iteration;
     @FXML
@@ -38,6 +37,7 @@ public class SceneControllerResultsHillclimber extends SceneController implement
 
     private ViewModel viewModel;
     private final ObservableList<HillModel> allResults = FXCollections.observableArrayList();
+    private LineChartHandler lineChartHandler;
 
     /**
      * setter für viewmodel und bindet outputfield an output vom viewmodel
@@ -46,9 +46,14 @@ public class SceneControllerResultsHillclimber extends SceneController implement
      */
     public void setViewModel(ViewModel viewModel) {
         this.viewModel = viewModel;
+        lineChartHandler = new LineChartHandler(
+                lineChartResults,
+                List.of("Fitness", "Alter"),
+                List.of(ViewModel.FITNESS_CHART_COLOR, ViewModel.AGE_CHART_COLOR)
+        );
         allResults.addAll(viewModel.runHillclimberAlgorithm());
         outputField.textProperty().bindBidirectional(viewModel.VMoutputFieldProperty());
-        setTableViewResults();
+        setResults();
     }
 
     public void initialize(URL location, ResourceBundle resources){
@@ -61,7 +66,7 @@ public class SceneControllerResultsHillclimber extends SceneController implement
      * Methode um besten Fitnesswert des Hillclimber Algorithmus, in TableView zu setzen
      */
 
-    public void setTableViewResults() {
+    public void setResults() {
         tableViewResults.setItems(allResults);
         setLineChartResults();
     }
@@ -72,21 +77,12 @@ public class SceneControllerResultsHillclimber extends SceneController implement
     public void setLineChartResults() {
         var statistics = viewModel.getHillclimberStatistics();
 
-        LineChartUtils.addDataSeries(
-                lineChartResults,
-                statistics.getBestIndividuals().stream()
-                        .map(Genotype::getFitness)
-                        .collect(Collectors.toList()),
-                "Fitness",
-                Color.DARKBLUE);
-        LineChartUtils.addDataSeries(
-                lineChartResults,
-                statistics.getBestIndividuals().stream()
-                        .map(Genotype::getAge)
-                        .collect(Collectors.toList()),
-                "Alter",
-                Color.LIMEGREEN);
-        LineChartUtils.setLegendColors(lineChartResults, List.of(Color.DARKBLUE, Color.LIMEGREEN));
+        statistics.getBestIndividuals().stream()
+                .map(Genotype::getFitness)
+                .forEach(i -> lineChartHandler.addData(i, "Fitness"));
+        statistics.getBestIndividuals().stream()
+                .map(Genotype::getAge)
+                .forEach(i -> lineChartHandler.addData(i, "Alter"));
     }
 
     /**

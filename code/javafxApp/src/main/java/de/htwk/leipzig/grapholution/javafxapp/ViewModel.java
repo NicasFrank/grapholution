@@ -11,12 +11,16 @@ import javafx.beans.property.Property;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 
 import java.io.IOException;
 import java.util.List;
 
 
 public class ViewModel {
+    public static Color FITNESS_CHART_COLOR = Color.DARKBLUE;
+    public static Color AGE_CHART_COLOR = Color.LIMEGREEN;
+    public static Color GOODNESS_CHART_COLOR = Color.CYAN;
 
     private final SceneControllerBase sceneControllerBase;
     private final Pane[] allScenes = new Pane[3];
@@ -143,6 +147,10 @@ public class ViewModel {
 
   public Statistics<Boolean> getHillclimberStatistics(){
       return viewModelHillclimber.getHillclimberStatistic();
+  }
+
+  public Statistics<Boolean> getGeneticAlgorithmStatistics(){
+      return viewModelGeneticAlgorithm.getGeneticAlgorithmStatistic();
   }
 
   public void setConfigOptions(AlgorithmConfigOptions configOptions) {
