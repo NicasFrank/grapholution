@@ -2,25 +2,28 @@ package de.htwk.leipzig.grapholution.javafxapp;
 
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Population;
+import de.htwk.leipzig.grapholution.evolibrary.statistics.ColorBitString;
 import de.htwk.leipzig.grapholution.evolibrary.statistics.Statistics;
 import de.htwk.leipzig.grapholution.javafxapp.model.GenModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.chart.LineChart;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
+import javafx.util.Callback;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
 public class SceneControllerResultsGeneticAlgorithm extends SceneController implements Initializable {
 
+    @FXML
+    Pagination bitStringPagination;
     @FXML
     TableView<GenModel> tableViewResults;
     @FXML
@@ -60,6 +63,7 @@ public class SceneControllerResultsGeneticAlgorithm extends SceneController impl
         tableViewResults.setItems(allResults);
 
         addLineChartValues(viewModel.getGeneticAlgorithmStatistics());
+        paintBitStrings();
     }
 
     private void addLineChartValues(Statistics<Boolean> statistics) {
@@ -98,6 +102,8 @@ public class SceneControllerResultsGeneticAlgorithm extends SceneController impl
                 .skip(currentIteration)
                 .map(Population::getGoodness)
                 .forEach(i -> lineChartHandler.addData(i, "Guete"));
+
+        paintBitStrings();
     }
 
     /**
@@ -118,6 +124,7 @@ public class SceneControllerResultsGeneticAlgorithm extends SceneController impl
                 bestIndividuals.get(bestIndividuals.size() - 1),
                 statistics.getHistory().get(bestIndividuals.size()-1)));
         addLineChartValues(statistics);
+        paintBitStrings();
 
         if(viewModel.getIsAlgorithmStepByStep()){
             buttonFastForward.setDisable(false);
@@ -125,5 +132,22 @@ public class SceneControllerResultsGeneticAlgorithm extends SceneController impl
         } else {
             fastForward();
         }
+    }
+
+    private void paintBitStrings() {
+        final var pageSize = 50;
+        var bitStrings = viewModel.getGeneticAlgorithmStatistics().getColorBitStrings();
+        bitStringPagination.setPageCount((int) Math.ceil(1.0 * bitStrings.size() / pageSize));
+        bitStringPagination.setPageFactory(i -> {
+            var scrollPane = new ScrollPane();
+
+            var canvas = new Canvas();
+            canvas.setWidth(bitStringPagination.getPrefWidth() * 0.95);
+            scrollPane.setContent(canvas);
+            final var pageStart = i * pageSize;
+            CanvasPainter.paintBitStrings(canvas, bitStrings.subList(pageStart, Math.min(pageStart + pageSize, bitStrings.size())));
+
+            return scrollPane;
+        });
     }
 }
