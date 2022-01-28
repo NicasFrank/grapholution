@@ -63,4 +63,8 @@ public class ViewModelGeneticAlgorithm{
     }
     return genModelList;
   }
+
+  public Statistics<Boolean> getGeneticAlgorithmStatistic(){
+    return geneticAlgorithm.getStatistics();
+  }
 }

@@ -1,21 +1,23 @@
 package de.htwk.leipzig.grapholution.javafxapp;
 
-import de.htwk.leipzig.grapholution.javafxapp.model.BestGenotype;
+import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
+import de.htwk.leipzig.grapholution.evolibrary.genotypes.Population;
 import de.htwk.leipzig.grapholution.evolibrary.statistics.Statistics;
 import de.htwk.leipzig.grapholution.javafxapp.model.GenModel;
-import de.htwk.leipzig.grapholution.javafxapp.model.HillModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.LineChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class SceneControllerResultsGeneticAlgorithm extends SceneController implements Initializable {
 
@@ -32,10 +34,13 @@ public class SceneControllerResultsGeneticAlgorithm extends SceneController impl
     @FXML
     TableColumn<GenModel, String> age;
     @FXML
+    private LineChart<Integer, Number> lineChartResults;
+    @FXML
     private Button buttonNextStep,buttonFastForward;
 
     private ViewModel viewModel;
     private final ObservableList<GenModel> allResults = FXCollections.observableArrayList();
+    private LineChartHandler lineChartHandler;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -53,18 +58,46 @@ public class SceneControllerResultsGeneticAlgorithm extends SceneController impl
     public void nextStep(){
         allResults.add(viewModel.geneticAlgorithmNextStep());
         tableViewResults.setItems(allResults);
+
+        addLineChartValues(viewModel.getGeneticAlgorithmStatistics());
+    }
+
+    private void addLineChartValues(Statistics<Boolean> statistics) {
+        var history = statistics.getHistory();
+        var lastPopulation = history.get(history.size() - 1);
+
+        lineChartHandler.addData(lastPopulation.getBestIndividual().getFitness(), "Fitness");
+        lineChartHandler.addData(lastPopulation.getBestIndividual().getAge(), "Alter");
+        lineChartHandler.addData(lastPopulation.getGoodness(), "Guete");
     }
 
     /**
      *
      */
     public void fastForward(){
-        allResults.removeAll();
-        tableViewResults.getItems().clear();
-        allResults.addAll(viewModel.geneticAlgorithmUntilDone());
+        var currentIteration = allResults.size();
+        allResults.addAll(viewModel.geneticAlgorithmUntilDone()
+                .stream()
+                .skip(currentIteration)
+                .collect(Collectors.toList()));
         buttonFastForward.setDisable(true);
         buttonNextStep.setDisable(true);
         tableViewResults.setItems(allResults);
+
+        var statistics = viewModel.getGeneticAlgorithmStatistics();
+
+        statistics.getBestIndividuals().stream()
+                .skip(currentIteration)
+                .map(Genotype::getFitness)
+                .forEach(i -> lineChartHandler.addData(i, "Fitness"));
+        statistics.getBestIndividuals().stream()
+                .skip(currentIteration)
+                .map(Genotype::getAge)
+                .forEach(i -> lineChartHandler.addData(i, "Alter"));
+        statistics.getHistory().stream()
+                .skip(currentIteration)
+                .map(Population::getGoodness)
+                .forEach(i -> lineChartHandler.addData(i, "Guete"));
     }
 
     /**
@@ -74,6 +107,18 @@ public class SceneControllerResultsGeneticAlgorithm extends SceneController impl
      */
     public void setViewModel(ViewModel viewModel) {
         this.viewModel = viewModel;
+
+        lineChartHandler = new LineChartHandler(
+                lineChartResults, List.of("Fitness", "Alter", "Guete"),
+                List.of(ViewModel.FITNESS_CHART_COLOR, ViewModel.AGE_CHART_COLOR, ViewModel.GOODNESS_CHART_COLOR));
+
+        var statistics = viewModel.getGeneticAlgorithmStatistics();
+        var bestIndividuals = statistics.getBestIndividuals();
+        allResults.add(new GenModel(0,
+                bestIndividuals.get(bestIndividuals.size() - 1),
+                statistics.getHistory().get(bestIndividuals.size()-1)));
+        addLineChartValues(statistics);
+
         if(viewModel.getIsAlgorithmStepByStep()){
             buttonFastForward.setDisable(false);
             buttonNextStep.setDisable(false);
