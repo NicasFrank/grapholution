@@ -20,7 +20,7 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
 
     private final Mutator<T> mutator;
     private final Recombinator<T> recombinator;
-    private double recombinationChance;
+    private final double recombinationChance;
     private Population<T> population;
     private final Selector<T> selector;
 

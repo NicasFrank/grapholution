@@ -4,46 +4,78 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.htwk.leipzig.grapholution.javafxapp.SceneControllerHillclimber">
-   <children>
-      <Label layoutX="275.0" layoutY="56.0" prefHeight="53.0" prefWidth="413.0" styleClass="heading" text="Algorithmuskonfiguration">
-         <font>
-            <Font size="36.0" />
-         </font>
-      </Label>
-      <RadioButton fx:id="radioMutationBinary" layoutX="242.0" layoutY="326.0" mnemonicParsing="false" selected="true" text="Mutation Binary">
-      </RadioButton>
-       <RadioButton fx:id="radioOneMax" layoutX="270.0" layoutY="370.0" mnemonicParsing="false" selected="true" text="OneMax">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0"
+            prefWidth="960.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="de.htwk.leipzig.grapholution.javafxapp.SceneControllerHillclimber">
+   <Label layoutX="275.0" layoutY="56.0" prefHeight="53.0" prefWidth="413.0" styleClass="heading"
+          text="Algorithmuskonfiguration">
+      <font>
+         <Font size="36.0"/>
+      </font>
+   </Label>
+   <Label layoutX="282.0" layoutY="306.0" prefHeight="27.0" prefWidth="124.0" styleClass="heading"
+          text="Fitnessfunktion">
+      <font>
+         <Font size="18.0"/>
+      </font>
+   </Label>
+   <RadioButton fx:id="radioOneMax" layoutX="281.0" layoutY="351.0" mnemonicParsing="false" selected="true"
+                text="One Max">
+      <toggleGroup>
+         <ToggleGroup fx:id="Fitnessfunction"/>
+      </toggleGroup>
+   </RadioButton>
+   <RadioButton fx:id="radioZeroMax" layoutX="281.0" layoutY="395.0" mnemonicParsing="false" text="Zero Max"
+                toggleGroup="$Fitnessfunction"/>
 
-       </RadioButton>
-       <RadioButton fx:id="radioZeroMax" layoutX="270.0" layoutY="400.0" mnemonicParsing="false" selected="true" text="ZeroMax">
+   <Label layoutX="572.0" layoutY="309.0" prefHeight="27.0" prefWidth="110.0" styleClass="heading" text="Mutationsart">
+      <font>
+         <Font size="18.0"/>
+      </font>
+   </Label>
+   <RadioButton fx:id="radioMutationBinary" contentDisplay="CENTER" layoutX="572.0" layoutY="355.0"
+                mnemonicParsing="false" prefHeight="18.0" prefWidth="110.0" selected="true" text="Binary">
+      <toggleGroup>
+         <ToggleGroup fx:id="Mutation"/>
+      </toggleGroup>
+   </RadioButton>
+   <RadioButton layoutX="572.0" layoutY="395.0" mnemonicParsing="false" text="Switch One Bit"
+                toggleGroup="$Mutation"/>
 
-       </RadioButton>
-      <Slider fx:id="sliderMutationChance" blockIncrement="1.0" layoutX="357.0" layoutY="510.0" max="5.0" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" minorTickCount="2" prefHeight="35.0" prefWidth="247.0" showTickLabels="true" showTickMarks="true" value="50.0"/>
-      <Label layoutX="380.0" layoutY="474.0" prefHeight="17.0" prefWidth="300.0" styleClass="heading" text="Mutationswahrscheinlichkeit">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <TextField id="inputField" fx:id="inputField" alignment="CENTER" layoutX="294.0" layoutY="183.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="56.0" promptText="Eingabefeld">
-         <font>
-            <Font name="Arial" size="30.0" />
-         </font>
-      </TextField>
-      <Button id="sendButton_backwards" fx:id="sendButton_backwards" alignment="CENTER" layoutX="100.0" layoutY="600.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#sendButton_backwards" prefHeight="60.0" prefWidth="150.0" styleClass="defaultButton" text="Zurück" textFill="#28240b">
-         <font>
-            <Font name="Arial" size="24.0" />
-         </font>
-      </Button>
-      <Button id="sendButton_startAlgo" fx:id="sendButton_startAlgo" alignment="CENTER" layoutX="710.0" layoutY="600.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#sendButton_startAlgo" prefHeight="60.0" prefWidth="150.0" styleClass="defaultButton" text="Starten" textFill="#28240b">
-         <font>
-            <Font name="Arial" size="24.0" />
-         </font>
-      </Button>
-      <Button id="saveButton_saveAlgo" fx:id="saveButton_saveAlgo" alignment="CENTER" layoutX="407.0" layoutY="600.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#sendButton_saveConfig" prefHeight="60.0" prefWidth="150.0" styleClass="defaultButton" text="Speichern" textFill="#28240b">
-         <font>
-            <Font name="Arial" size="24.0" />
-         </font>
-      </Button>
-   </children>
+   <Slider fx:id="sliderMutationChance" blockIncrement="1.0" layoutX="357.0" layoutY="510.0" max="5.0"
+           maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" minorTickCount="2" prefHeight="35.0"
+           prefWidth="247.0" showTickLabels="true" showTickMarks="true" value="50.0"/>
+   <Label layoutX="380.0" layoutY="474.0" prefHeight="17.0" prefWidth="300.0" styleClass="heading"
+          text="Mutationswahrscheinlichkeit">
+      <font>
+         <Font size="18.0"/>
+      </font>
+   </Label>
+   <TextField id="inputField" fx:id="inputField" alignment="CENTER" layoutX="294.0" layoutY="183.0"
+              maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="56.0" promptText="Eingabefeld">
+      <font>
+         <Font name="Arial" size="30.0"/>
+      </font>
+   </TextField>
+   <Button id="sendButton_backwards" fx:id="sendButton_backwards" alignment="CENTER" layoutX="100.0" layoutY="600.0"
+           maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#sendButton_backwards"
+           prefHeight="60.0" prefWidth="150.0" styleClass="defaultButton" text="Zurück" textFill="#28240b">
+      <font>
+         <Font name="Arial" size="24.0"/>
+      </font>
+   </Button>
+   <Button id="sendButton_startAlgo" fx:id="sendButton_startAlgo" alignment="CENTER" layoutX="710.0" layoutY="600.0"
+           maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#sendButton_startAlgo"
+           prefHeight="60.0" prefWidth="150.0" styleClass="defaultButton" text="Starten" textFill="#28240b">
+      <font>
+         <Font name="Arial" size="24.0"/>
+      </font>
+   </Button>
+   <Button id="saveButton_saveAlgo" alignment="CENTER" layoutX="407.0" layoutY="600.0"
+           maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#sendButton_saveConfig"
+           prefHeight="60.0" prefWidth="150.0" styleClass="defaultButton" text="Speichern" textFill="#28240b">
+      <font>
+         <Font name="Arial" size="24.0"/>
+      </font>
+   </Button>
 </AnchorPane>

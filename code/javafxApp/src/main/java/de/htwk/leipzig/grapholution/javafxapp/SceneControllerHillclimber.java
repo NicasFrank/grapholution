@@ -5,17 +5,14 @@ import de.htwk.leipzig.grapholution.evolibrary.models.BoolConfig;
 import de.htwk.leipzig.grapholution.evolibrary.models.IntConfig;
 import de.htwk.leipzig.grapholution.javafxapp.utils.DialogUtils;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.Slider;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.stage.FileChooser;
 
 /**
  * SceneController Klasse für die Darstellung des Konfigurierbaren Hillclimbers
  */
 public class SceneControllerHillclimber extends SceneController {
+    public RadioButton radioMutationBinary;
     @FXML
     private TextField inputField;
     @FXML
@@ -24,8 +21,6 @@ public class SceneControllerHillclimber extends SceneController {
     private Button sendButton_startAlgo;
     @FXML
     private Button sendButton_saveAlgo;
-    @FXML
-    private RadioButton radioMutationBinary;
     @FXML
     private RadioButton radioZeroMax;
     @FXML

@@ -27,6 +27,14 @@ public class BitSetGenotypeTests {
     }
 
     @Test
+    public void totring_WhenCalled_ReturnsStringWithGenotypeValues() {
+        var string = "01011010";
+        var genotype = BitSetGenotype.fromString(fitnessMock, string);
+
+        assertEquals(string, genotype.toString());
+    }
+
+    @Test
     public void survive_WhenCalled_IncreasesAgeByOne() {
         var genotype = BitSetGenotype.fromString(fitnessMock, "1");
 
