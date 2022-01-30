@@ -10,11 +10,15 @@ import de.htwk.leipzig.grapholution.javafxapp.model.HillModel;
 import javafx.beans.property.Property;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
+import java.util.Stack;
 
 
 public class ViewModel {
@@ -22,18 +26,17 @@ public class ViewModel {
     public static Color AGE_CHART_COLOR = Color.LIMEGREEN;
     public static Color GOODNESS_CHART_COLOR = Color.CYAN;
 
-    private final SceneControllerBase sceneControllerBase;
-    private final Pane[] allScenes = new Pane[3];
-    private int currentScene = -1;
+    private final Stack<Scene> scenes = new Stack<>();
+    private final Stage stage;
     private boolean isAlgorithmStepByStep = false;
 
     private AlgorithmConfigOptions configOptions = new AlgorithmConfigOptions();
     private ViewModelGeneticAlgorithm viewModelGeneticAlgorithm;
     private ViewModelHillclimber viewModelHillclimber;
 
-    public ViewModel(SceneControllerBase sceneControllerBase, Pane firstPane) {
-        this.sceneControllerBase = sceneControllerBase;
-        allScenes[0] = firstPane;
+    public ViewModel(Stage stage, Scene firstScene) {
+        this.stage = stage;
+        scenes.add(firstScene);
     }
 
   /**
@@ -41,22 +44,21 @@ public class ViewModel {
    * @param nameOfNextScreen String mit Namen des nächsten Screens
    */
   public void navigation_configureScreen (EChoices nameOfNextScreen){
-    currentScene++;
     switch (nameOfNextScreen) {
       case AlgorithmChoice :
-        allScenes[0] = loadNewPane("AlgorithmChoice.fxml");
+        scenes.add(loadNewPane("AlgorithmChoice.fxml"));
         break;
       case Hillclimber :
-        allScenes[1] = loadNewPane("ConfigHillclimber.fxml");
+          scenes.add(loadNewPane("ConfigHillclimber.fxml"));
         break;
       case GeneticAlgorithm :
-        allScenes[1] = loadNewPane("ConfigGeneticAlgorithm.fxml");
+          scenes.add(loadNewPane("ConfigGeneticAlgorithm.fxml"));
         break;
       case ResultsHillclimber :
-        allScenes[2] = loadNewPane("ResultsHillclimber.fxml");
+          scenes.add(loadNewPane("ResultsHillclimber.fxml"));
         break;
       case ResultsGeneticAlgorithm :
-        allScenes[2] = loadNewPane("ResultsGeneticAlgorithm.fxml");
+          scenes.add(loadNewPane("ResultsGeneticAlgorithm.fxml"));
         break;
       default :
         //handle das noch
@@ -69,8 +71,8 @@ public class ViewModel {
      * anhand der aktuellen szene wird aus array die vorherige genommen
      */
     public void navigation_Back() {
-        currentScene--;
-        setNextScreen(allScenes[currentScene]);
+        scenes.pop();
+        setNextScreen(scenes.peek());
     }
 
     /**
@@ -107,26 +109,28 @@ public class ViewModel {
      * @param paneName Name der zu ladenden Pane aus private String[] slides
      * @return wahr wenn erfolgreich false wenn nicht
      */
-    private Pane loadNewPane(String paneName) {
+    private Scene loadNewPane(String paneName) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(paneName));
         try {
             Pane nextPane = loader.load();
             SceneController newController = loader.getController();
             newController.setViewModel(this);
-            setNextScreen(nextPane);
-            return nextPane;
+            var nextScene = new Scene(nextPane);
+            nextScene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("styles_new.css")).toExternalForm());
+            setNextScreen(nextScene);
+            return nextScene;
         } catch (IOException e) {
             return null;
         }
     }
 
     /**
-     * gibt nächste Scene an ersten Controller weiter
+     * gibt nächste Scene an die Stage weiter
      *
-     * @param nextScreen nächste Scene als Pane
+     * @param nextScene nächste Scene
      */
-    private void setNextScreen(Pane nextScreen) {
-        sceneControllerBase.setNewScreen(nextScreen);
+    private void setNextScreen(Scene nextScene) {
+        stage.setScene(nextScene);
     }
 
 
