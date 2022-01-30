@@ -16,7 +16,24 @@ buildscript {
     plugins {
         id 'de.htwk.leipzig.grapholution.java-application-conventions'
         id 'org.openjfx.javafxplugin' version '0.0.10'
+        id 'java'
+        id 'application'
+        id 'idea'
     }
+
+mainClassName = "$moduleName/de.htwk.leipzig.grapholution.javafxapp.MainClass"
+jar {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+    manifest {
+        attributes(
+                'Main-Class': "de.htwk.leipzig.grapholution.javafxapp.MainClass"
+        )
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
 
     test {
         useJUnitPlatform()
@@ -50,8 +67,7 @@ buildscript {
         }
     }
 
-    mainClassName = "$moduleName/de.htwk.leipzig.grapholution.javafxapp.MainApp"
     application {
         // Define the main class for the application.
-        mainClass = 'de.htwk.leipzig.grapholution.javafxapp.MainApp'
+        mainClass = 'de.htwk.leipzig.grapholution.javafxapp.MainClass'
     }
