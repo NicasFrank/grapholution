@@ -10,7 +10,7 @@ import javafx.scene.text.TextAlignment;
 import java.util.List;
 
 public class CanvasPainter {
-    private static final int maxSize = 50;
+    private static final int maxSize = 35;
     private static final Color highColor = Color.BLUE;
     private static final Color lowColor = Color.GREEN;
 

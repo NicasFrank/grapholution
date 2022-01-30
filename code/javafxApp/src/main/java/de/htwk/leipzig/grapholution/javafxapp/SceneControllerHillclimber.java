@@ -16,16 +16,6 @@ public class SceneControllerHillclimber extends SceneController {
     @FXML
     private TextField inputField;
     @FXML
-    private Button sendButton_backwards;
-    @FXML
-    private Button sendButton_startAlgo;
-    @FXML
-    private Button sendButton_saveAlgo;
-    @FXML
-    private RadioButton radioZeroMax;
-    @FXML
-    private RadioButton radioOneMax;
-    @FXML
     private Slider sliderMutationChance;
 
     private ViewModel viewModel;
@@ -44,18 +34,12 @@ public class SceneControllerHillclimber extends SceneController {
         return new AlgorithmConfigOptions()
                 .add(BoolConfig.MutationIsBinary, radioMutationBinary.isSelected())
                 .add(IntConfig.MutationChance, radioMutationBinary.isSelected() ?(int) sliderMutationChance.getValue(): 0)
-                .add(BoolConfig.FitnessIsOneMax, radioOneMax.isSelected());
+                .add(BoolConfig.FitnessIsOneMax, viewModel.getProblemIsOneMax());
     }
 
     private void setOptions(AlgorithmConfigOptions options){
         radioMutationBinary.selectedProperty().set(options.getOrElse(BoolConfig.MutationIsBinary, radioMutationBinary.isSelected()));
         sliderMutationChance.valueProperty().set(options.getOrElse(IntConfig.MutationChance, (int) sliderMutationChance.getValue()));
-
-        if(options.getOrElse(BoolConfig.FitnessIsOneMax, radioOneMax.isSelected())){
-            radioOneMax.selectedProperty().set(true);
-        } else{
-            radioZeroMax.selectedProperty().set(true);
-        }
     }
 
     public void sendButton_saveConfig(){
@@ -87,9 +71,10 @@ public class SceneControllerHillclimber extends SceneController {
     /**
      * setter für allgemeines ViewModel zur Navigation
      *
-     * @param viewModel
+     * @param viewModel das ViewModel
      */
     public void setViewModel(ViewModel viewModel) {
         this.viewModel = viewModel;
+        setOptions(viewModel.getConfigOptions());
     }
 }

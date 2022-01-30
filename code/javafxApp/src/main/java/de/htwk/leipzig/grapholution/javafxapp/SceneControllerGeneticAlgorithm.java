@@ -8,9 +8,8 @@ import javafx.stage.FileChooser;
 
 public class SceneControllerGeneticAlgorithm extends SceneController{
 
-  public RadioButton radioFitnessZeroMax;
   @FXML
-  private RadioButton radioMutationBinary,radioFitnessOneMax;
+  private RadioButton radioMutationBinary;
   @FXML
   private Slider sliderGenerations;
   @FXML
@@ -40,7 +39,7 @@ public class SceneControllerGeneticAlgorithm extends SceneController{
             .add(BoolConfig.IsStepByStep, checkBoxStepByStep.isSelected())
             .add(BoolConfig.MutationIsBinary, radioMutationBinary.isSelected())
             .add(IntConfig.MutationChance, radioMutationBinary.isSelected() ? (int) sliderMutationChance.getValue() : 0)
-            .add(BoolConfig.FitnessIsOneMax, radioFitnessOneMax.isSelected())
+            .add(BoolConfig.FitnessIsOneMax, viewModel.getProblemIsOneMax())
             .add(DoubleConfig.RecombinationChance, sliderRecombinationChance.getValue())
             .add(IntConfig.PopulationSize, (int) sliderPopulationSize.getValue())
             .add(IntConfig.GenotypeSize, (int) sliderGenotypeSize.getValue())
@@ -55,12 +54,6 @@ public class SceneControllerGeneticAlgorithm extends SceneController{
     sliderPopulationSize.valueProperty().set(options.getOrElse(IntConfig.PopulationSize, (int) sliderPopulationSize.getValue()));
     sliderGenotypeSize.valueProperty().set(options.getOrElse(IntConfig.GenotypeSize, (int) sliderGenotypeSize.getValue()));
     sliderGenerations.valueProperty().set(options.getOrElse(IntConfig.Limit, (int) sliderGenerations.getValue()));
-
-    if (options.getOrElse(BoolConfig.FitnessIsOneMax, radioFitnessOneMax.isSelected())) {
-      radioFitnessOneMax.selectedProperty().set(true);
-    } else {
-      radioFitnessZeroMax.selectedProperty().set(true);
-    }
   }
 
   public void sendButton_saveConfig() {

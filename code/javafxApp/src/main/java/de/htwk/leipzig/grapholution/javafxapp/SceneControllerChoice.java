@@ -1,25 +1,22 @@
 package de.htwk.leipzig.grapholution.javafxapp;
 
 import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmConfigOptions;
+import de.htwk.leipzig.grapholution.evolibrary.models.BoolConfig;
 import de.htwk.leipzig.grapholution.javafxapp.utils.DialogUtils;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.stage.FileChooser;
 
-import java.util.Arrays;
 import java.util.stream.Collectors;
 
 public class SceneControllerChoice extends SceneController{
-  @FXML
-  private Button nextButton,loadButton;
+  public static final String ZERO_MAX = "Zero Max";
+  public static final String ONE_MAX = "One Max";
+
   @FXML
   private ComboBox<String> comboBoxAlgo;
   @FXML
   private ComboBox<String> comboBoxProblem;
-
-
 
   private ViewModel viewModel;
 
@@ -33,15 +30,18 @@ public class SceneControllerChoice extends SceneController{
               .map(eChoice -> eChoice.name)
               .collect(Collectors.toList())
     );
+    comboBoxAlgo.getSelectionModel().select(0);
+    comboBoxProblem.getItems().setAll(ONE_MAX, ZERO_MAX);
+    comboBoxProblem.getSelectionModel().select(0);
   }
 
   /**
    * gibt Auswahl des Algorithmus an viewmodel weiter
    */
   public void sendButtonClick_configureScreen() {
+    viewModel.setProblemIsOneMax(comboBoxProblem.getValue().equals(ONE_MAX));
     viewModel.navigation_configureScreen(
         EChoices.getByName(comboBoxAlgo.getValue())
-        //,comboBoxProblem.getValue()
     );
   }
 
@@ -49,7 +49,7 @@ public class SceneControllerChoice extends SceneController{
     this.viewModel = viewModel;
   }
 
-  public void sendButton_loadConfig(ActionEvent actionEvent) {
+  public void sendButton_loadConfig() {
     var fileChooser = new FileChooser();
     fileChooser.getExtensionFilters()
             .add(new FileChooser.ExtensionFilter("Evolutionaere Algorithmen (*.gacf, *.hccf)", "*.gacf", "*.hccf"));
@@ -62,6 +62,7 @@ public class SceneControllerChoice extends SceneController{
 
         var splitName = file.getName().split("\\.");
         var ending = splitName[splitName.length - 1];
+        comboBoxProblem.getSelectionModel().select(options.getOrElse(BoolConfig.FitnessIsOneMax, true) ? ONE_MAX : ZERO_MAX);
         viewModel.setConfigOptions(options);
         switch (ending) {
           case "gacf":

@@ -5,6 +5,7 @@ import de.htwk.leipzig.grapholution.evolibrary.genotypes.Population;
 import de.htwk.leipzig.grapholution.evolibrary.statistics.ColorBitString;
 import de.htwk.leipzig.grapholution.evolibrary.statistics.Statistics;
 import de.htwk.leipzig.grapholution.javafxapp.model.GenModel;
+import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -132,6 +133,11 @@ public class SceneControllerResultsGeneticAlgorithm extends SceneController impl
         } else {
             fastForward();
         }
+
+        ChangeListener<Number> stageSizeListener = (observable, oldValue, newValue) -> paintBitStrings();
+
+        viewModel.getStage().widthProperty().addListener(stageSizeListener);
+        viewModel.getStage().heightProperty().addListener(stageSizeListener);
     }
 
     private void paintBitStrings() {
@@ -145,7 +151,8 @@ public class SceneControllerResultsGeneticAlgorithm extends SceneController impl
             var scrollPane = new ScrollPane();
 
             var canvas = new Canvas();
-            canvas.setWidth(bitStringPagination.getPrefWidth() * 0.95);
+            var width = bitStringPagination.getWidth() == 0 ? bitStringPagination.getPrefWidth() : bitStringPagination.getWidth();
+            canvas.setWidth(width * 0.95);
             scrollPane.setContent(canvas);
             final var pageStart = i * pageSize;
             CanvasPainter.paintBitStrings(canvas, bitStrings.subList(pageStart, Math.min(pageStart + pageSize, bitStrings.size())));

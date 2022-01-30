@@ -4,10 +4,8 @@ package de.htwk.leipzig.grapholution.javafxapp;
 import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmConfigOptions;
 import de.htwk.leipzig.grapholution.evolibrary.models.BoolConfig;
 import de.htwk.leipzig.grapholution.evolibrary.statistics.Statistics;
-import de.htwk.leipzig.grapholution.javafxapp.model.BestGenotype;
 import de.htwk.leipzig.grapholution.javafxapp.model.GenModel;
 import de.htwk.leipzig.grapholution.javafxapp.model.HillModel;
-import javafx.beans.property.Property;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -29,6 +27,7 @@ public class ViewModel {
     private final Stack<Scene> scenes = new Stack<>();
     private final Stage stage;
     private boolean isAlgorithmStepByStep = false;
+    private boolean problemIsOneMax = false;
 
     private AlgorithmConfigOptions configOptions = new AlgorithmConfigOptions();
     private ViewModelGeneticAlgorithm viewModelGeneticAlgorithm;
@@ -43,7 +42,7 @@ public class ViewModel {
    * switch anhand String je nach nächster Pane
    * @param nameOfNextScreen String mit Namen des nächsten Screens
    */
-  public void navigation_configureScreen (EChoices nameOfNextScreen){
+  public void navigation_configureScreen(EChoices nameOfNextScreen){
     switch (nameOfNextScreen) {
       case AlgorithmChoice :
         scenes.add(loadNewPane("AlgorithmChoice.fxml"));
@@ -131,6 +130,7 @@ public class ViewModel {
      */
     private void setNextScreen(Scene nextScene) {
         stage.setScene(nextScene);
+        stage.centerOnScreen();
     }
 
 
@@ -140,24 +140,35 @@ public class ViewModel {
     public StringProperty VMoutputFieldProperty() {
         return viewModelHillclimber.outputFieldProperty();
     }
-  public StringProperty VMinputFieldProperty() {
-    return viewModelHillclimber.inputFieldProperty();
-  }
-  public boolean getIsAlgorithmStepByStep(){return isAlgorithmStepByStep;}
 
-  public AlgorithmConfigOptions getConfigOptions() {
+    public boolean getIsAlgorithmStepByStep(){return isAlgorithmStepByStep;}
+
+    public AlgorithmConfigOptions getConfigOptions() {
     return configOptions;
   }
 
-  public Statistics<Boolean> getHillclimberStatistics(){
+    public Statistics<Boolean> getHillclimberStatistics(){
       return viewModelHillclimber.getHillclimberStatistic();
   }
 
-  public Statistics<Boolean> getGeneticAlgorithmStatistics(){
-      return viewModelGeneticAlgorithm.getGeneticAlgorithmStatistic();
-  }
+    public Statistics<Boolean> getGeneticAlgorithmStatistics(){
+        return viewModelGeneticAlgorithm.getGeneticAlgorithmStatistic();
+    }
 
-  public void setConfigOptions(AlgorithmConfigOptions configOptions) {
-    this.configOptions = configOptions;
-  }
+    public void setConfigOptions(AlgorithmConfigOptions configOptions) {
+        problemIsOneMax = configOptions.getOrElse(BoolConfig.FitnessIsOneMax, true);
+        this.configOptions = configOptions;
+    }
+
+    public boolean getProblemIsOneMax() {
+        return problemIsOneMax;
+    }
+
+    public void setProblemIsOneMax(boolean problemIsOneMax) {
+        this.problemIsOneMax = problemIsOneMax;
+    }
+
+    public Stage getStage() {
+        return stage;
+    }
 }
