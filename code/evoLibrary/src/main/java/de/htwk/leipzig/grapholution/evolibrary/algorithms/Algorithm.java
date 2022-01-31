@@ -25,9 +25,9 @@ public abstract class Algorithm<T> {
     }
 
     /**
-     * Konstruktor fuer einen Algorithmus mit Begrenzter Anzahl an Durchlaeufen
+     * Konstruktor fuer einen Algorithmus mit Konfigurationsoptionen
      * @param genotype Genotyp, auf dem der Algorithmus arbeiten soll
-     * @param configOptions Maximale Anzahl an Durchlaeufen, die der Algorithmus durchlaufen soll
+     * @param configOptions Einstellungen fuer Parameter des Algorithmus
      */
     public Algorithm(Genotype<T> genotype, AlgorithmConfigOptions configOptions) {
         this(genotype);
@@ -50,7 +50,7 @@ public abstract class Algorithm<T> {
 
     /**
      * Funktion zum erhalten der Statistiken
-     * @return statitics
+     * @return Statistiken des Algorithmus
      */
     public Statistics<T> getStatistics() {
         return statistics.createCopy();

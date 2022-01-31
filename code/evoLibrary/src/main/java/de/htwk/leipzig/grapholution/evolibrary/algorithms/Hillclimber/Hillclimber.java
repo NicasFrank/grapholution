@@ -27,10 +27,12 @@ public class Hillclimber<T> extends Algorithm<T> {
         statistics.addBestIndividual(genotype);
     }
 
+
     /**
-     * Konstruktor zur Erstellung eines einfachen Hillclimbers mit einstellbarer Mutation und Genotyp, sowie Limit der Durchlaeufe
+     * Konstruktor zur Erstellung eines konfigurierbaren Hillclimbers
      * @param genotype Genotyp auf dem der Algorithmus arbeiten soll
-     * @param mutator Mutation, die zur Veraenderung des Genotypen benutzt werden soll
+     * @param mutator Mutator den der Algorithmus zur Mutation verwenden soll
+     * @param configOptions Einstellungen fuer Parameter des Algorithmus
      */
     public Hillclimber(Genotype<T> genotype, Mutator<T> mutator, AlgorithmConfigOptions configOptions) {
         super(genotype, configOptions);
