@@ -15,9 +15,7 @@ public class OneMaxEvaluator implements FitnessFunction<Boolean> {
      */
     @Override
     public int evaluate(Genotype<Boolean> genotype) {
-        var bitSetGenotype = (BitSetGenotype) genotype;
-
-        return bitSetGenotype.oneCount();
+        return ((BitSetGenotype) genotype).oneCount();
     }
 
     /**

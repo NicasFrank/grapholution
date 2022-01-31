@@ -1,34 +1,24 @@
-package de.htwk.leipzig.grapholution.javafxapp;
+package de.htwk.leipzig.grapholution.javafxapp.sceneController;
 
 import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmConfigOptions;
 import de.htwk.leipzig.grapholution.evolibrary.models.BoolConfig;
 import de.htwk.leipzig.grapholution.evolibrary.models.IntConfig;
+import de.htwk.leipzig.grapholution.javafxapp.enums.EChoices;
 import de.htwk.leipzig.grapholution.javafxapp.utils.DialogUtils;
+import de.htwk.leipzig.grapholution.javafxapp.viewModel.ViewModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.FileChooser;
 
 /**
- * SceneController Klasse für die Darstellung des Konfigurierbaren Hillclimbers
+ * SceneController für das Fenster zur Konfiguration des Hillclimbers
  */
 public class SceneControllerHillclimber extends SceneController {
     public RadioButton radioMutationBinary;
     @FXML
     private TextField inputField;
     @FXML
-    private Button sendButton_backwards;
-    @FXML
-    private Button sendButton_startAlgo;
-    @FXML
-    private Button sendButton_saveAlgo;
-    @FXML
-    private RadioButton radioZeroMax;
-    @FXML
-    private RadioButton radioOneMax;
-    @FXML
     private Slider sliderMutationChance;
-
-    private ViewModel viewModel;
 
     /**
      * speichert aktuellen Text des Inputfields, triggert dann laden der Ergebnis-Szene und gibt Input an ViewModel, damit
@@ -36,7 +26,7 @@ public class SceneControllerHillclimber extends SceneController {
      * Methode um Hillclimber Algorithmus mit entsprechendem ViewModel zu starten
      */
     public void sendButton_startAlgo() {
-        viewModel.startHillclimberAlgorithm(createConfigOptions(),this);
+        viewModel.startHillclimberAlgorithm(createConfigOptions(), inputField.textProperty().get());
         viewModel.navigation_configureScreen(EChoices.ResultsHillclimber);
     }
 
@@ -44,20 +34,17 @@ public class SceneControllerHillclimber extends SceneController {
         return new AlgorithmConfigOptions()
                 .add(BoolConfig.MutationIsBinary, radioMutationBinary.isSelected())
                 .add(IntConfig.MutationChance, radioMutationBinary.isSelected() ?(int) sliderMutationChance.getValue(): 0)
-                .add(BoolConfig.FitnessIsOneMax, radioOneMax.isSelected());
+                .add(BoolConfig.FitnessIsOneMax, viewModel.getProblemIsOneMax());
     }
 
     private void setOptions(AlgorithmConfigOptions options){
         radioMutationBinary.selectedProperty().set(options.getOrElse(BoolConfig.MutationIsBinary, radioMutationBinary.isSelected()));
         sliderMutationChance.valueProperty().set(options.getOrElse(IntConfig.MutationChance, (int) sliderMutationChance.getValue()));
-
-        if(options.getOrElse(BoolConfig.FitnessIsOneMax, radioOneMax.isSelected())){
-            radioOneMax.selectedProperty().set(true);
-        } else{
-            radioZeroMax.selectedProperty().set(true);
-        }
     }
 
+    /**
+     * Öffnet einen Dialog zum Speichern der Algorithmus-Konfiguration
+     */
     public void sendButton_saveConfig(){
         var fileChooser = new FileChooser();
         fileChooser.getExtensionFilters()
@@ -73,10 +60,6 @@ public class SceneControllerHillclimber extends SceneController {
         }
     }
 
-    public TextField getInputField(){
-        return inputField;
-    }
-
     /**
      * Handlet die Rückwärtsnavigation
      */
@@ -84,12 +67,9 @@ public class SceneControllerHillclimber extends SceneController {
         viewModel.navigation_Back();
     }
 
-    /**
-     * setter für allgemeines ViewModel zur Navigation
-     *
-     * @param viewModel
-     */
+    @Override
     public void setViewModel(ViewModel viewModel) {
-        this.viewModel = viewModel;
+        super.setViewModel(viewModel);
+        setOptions(viewModel.getConfigOptions());
     }
 }

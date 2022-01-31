@@ -1,16 +1,20 @@
-package de.htwk.leipzig.grapholution.javafxapp;
+package de.htwk.leipzig.grapholution.javafxapp.sceneController;
 
 import de.htwk.leipzig.grapholution.evolibrary.models.*;
+import de.htwk.leipzig.grapholution.javafxapp.enums.EChoices;
 import de.htwk.leipzig.grapholution.javafxapp.utils.DialogUtils;
+import de.htwk.leipzig.grapholution.javafxapp.viewModel.ViewModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.FileChooser;
 
+/**
+ * SceneController für das Fenster zur Konfiguration des genetischen Algorithmus
+ */
 public class SceneControllerGeneticAlgorithm extends SceneController{
 
-  public RadioButton radioFitnessZeroMax;
   @FXML
-  private RadioButton radioMutationBinary,radioFitnessOneMax;
+  private RadioButton radioMutationBinary;
   @FXML
   private Slider sliderGenerations;
   @FXML
@@ -23,8 +27,6 @@ public class SceneControllerGeneticAlgorithm extends SceneController{
   private Slider sliderGenotypeSize;
   @FXML
   private CheckBox checkBoxStepByStep;
-
-  private ViewModel viewModel;
 
   /**
    * loest Laden der naechsten Pane aus
@@ -40,7 +42,7 @@ public class SceneControllerGeneticAlgorithm extends SceneController{
             .add(BoolConfig.IsStepByStep, checkBoxStepByStep.isSelected())
             .add(BoolConfig.MutationIsBinary, radioMutationBinary.isSelected())
             .add(IntConfig.MutationChance, radioMutationBinary.isSelected() ? (int) sliderMutationChance.getValue() : 0)
-            .add(BoolConfig.FitnessIsOneMax, radioFitnessOneMax.isSelected())
+            .add(BoolConfig.FitnessIsOneMax, viewModel.getProblemIsOneMax())
             .add(DoubleConfig.RecombinationChance, sliderRecombinationChance.getValue())
             .add(IntConfig.PopulationSize, (int) sliderPopulationSize.getValue())
             .add(IntConfig.GenotypeSize, (int) sliderGenotypeSize.getValue())
@@ -55,14 +57,11 @@ public class SceneControllerGeneticAlgorithm extends SceneController{
     sliderPopulationSize.valueProperty().set(options.getOrElse(IntConfig.PopulationSize, (int) sliderPopulationSize.getValue()));
     sliderGenotypeSize.valueProperty().set(options.getOrElse(IntConfig.GenotypeSize, (int) sliderGenotypeSize.getValue()));
     sliderGenerations.valueProperty().set(options.getOrElse(IntConfig.Limit, (int) sliderGenerations.getValue()));
-
-    if (options.getOrElse(BoolConfig.FitnessIsOneMax, radioFitnessOneMax.isSelected())) {
-      radioFitnessOneMax.selectedProperty().set(true);
-    } else {
-      radioFitnessZeroMax.selectedProperty().set(true);
-    }
   }
 
+  /**
+   * Öffnet einen Dialog zum Speichern der Algorithmus-Konfiguration
+   */
   public void sendButton_saveConfig() {
     var fileChooser = new FileChooser();
     fileChooser.getExtensionFilters()
@@ -79,12 +78,16 @@ public class SceneControllerGeneticAlgorithm extends SceneController{
     }
   }
 
+  /**
+   * Handlet die Rückwärtsnavigation
+   */
   public void sendButton_backwards(){
     viewModel.navigation_Back();
   }
 
+  @Override
   public void setViewModel(ViewModel viewModel){
-    this.viewModel=viewModel;
+    super.setViewModel(viewModel);
     setOptions(viewModel.getConfigOptions());
   }
 }

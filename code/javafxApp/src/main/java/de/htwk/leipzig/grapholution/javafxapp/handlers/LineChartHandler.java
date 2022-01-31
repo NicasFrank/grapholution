@@ -1,4 +1,4 @@
-package de.htwk.leipzig.grapholution.javafxapp;
+package de.htwk.leipzig.grapholution.javafxapp.handlers;
 
 import javafx.application.Platform;
 import javafx.scene.chart.LineChart;
@@ -8,11 +8,20 @@ import javafx.scene.paint.Color;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Klasse zur Zeichnung und Verwaltung mehrerer Datenreihen auf einem LineChart
+ */
 public class LineChartHandler {
     private final LineChart<Integer, Number> chart;
-    private List<Color> colors;
+    private final List<Color> colors;
     private boolean legendColorSet = false;
 
+    /**
+     * Konstruktor für ein LineChart
+     * @param chart Das LineChart-Objekt, auf dem gezeichnet werden soll
+     * @param names Die Namen der Datenreihen
+     * @param colors Die Farben, in denen die Datenreihen gezeichnet werden sollen
+     */
     public LineChartHandler(LineChart<Integer, Number> chart, List<String> names, List<Color> colors) {
         this.chart = chart;
         chart.setCreateSymbols(false);
@@ -33,6 +42,11 @@ public class LineChartHandler {
         setLegendColor(chart, colors);
     }
 
+    /**
+     * Fügt den übergebenen Wert der Datenreihen mit dem übergebenen Namen hinzu
+     * @param value Der hinzuzufügende Datenwert
+     * @param name Der Name der Datenreihe, der der Wert hinzugefügt werden soll
+     */
     public void addData(Number value, String name) {
         var series = chart.getData().stream()
                 .filter(s -> s.getName().equals(name))

@@ -4,6 +4,7 @@ import de.htwk.leipzig.grapholution.evolibrary.genotypes.BitSetGenotype;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
 
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.IntStream;
 
 /**
  * Klasse zur Mutation von Boolean-Genotypen nach dem Binary-Mutation Prinzip
@@ -29,11 +30,9 @@ public class BinaryMutation implements Mutator<Boolean> {
     public Genotype<Boolean> mutate(Genotype<Boolean> genotype) {
         var genotypeCopy = (BitSetGenotype) genotype.createCopy();
 
-        for(int i = 0; i < genotypeCopy.size(); i++){
-            if(ThreadLocalRandom.current().nextInt(100)<probability){
-                genotypeCopy.flip(i); //Bit wird geflippt, sollte Wahrscheinlichkeit eintreten
-            }
-        }
+        IntStream.range(0, genotypeCopy.size())
+                .filter(i -> ThreadLocalRandom.current().nextInt(100) < probability)
+                .forEach(genotypeCopy::flip);
 
         genotypeCopy.updateFitness();
         return genotypeCopy;

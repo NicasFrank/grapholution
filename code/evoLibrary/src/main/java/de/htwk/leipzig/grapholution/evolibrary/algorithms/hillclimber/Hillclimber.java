@@ -1,4 +1,4 @@
-package de.htwk.leipzig.grapholution.evolibrary.algorithms.Hillclimber;
+package de.htwk.leipzig.grapholution.evolibrary.algorithms.hillclimber;
 
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
 import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmConfigOptions;
@@ -46,9 +46,9 @@ public class Hillclimber<T> extends Algorithm<T> {
      * @return Bester erreichter Genotyp
      */
     public Genotype<T> run() {
-            while (currentBest.getFitness() < currentBest.getMaxFitnessValue() && //Ueberprufung ob Limit oder bestmoeglicher Genotyp bereits erreicht
+        while (currentBest.getFitness() < currentBest.getMaxFitnessValue() && //Ueberprufung ob Limit oder bestmoeglicher Genotyp bereits erreicht
                 (limit < 0 || iterations < limit)){
-            Genotype<T> mutation = mutator.mutate(currentBest); //Kopie des letzten Genotypen zur Mutation wird erstellt
+            var mutation = mutator.mutate(currentBest); //Kopie des letzten Genotypen zur Mutation wird erstellt
             if (mutation.getFitness() > currentBest.getFitness()) { //Vergleich der Fitnesswerte von mutierter Kopie und urspruenglichem Genotyp
                 currentBest = mutation; //Wenn Kopie besser, wird sie der history hinzugefügt und als neuer bester Genotyp fuer weitere Mutationen verwendet
                 statistics.addBestIndividual(currentBest);
@@ -58,6 +58,7 @@ public class Hillclimber<T> extends Algorithm<T> {
             }
             iterations++; //Durchlauf wird erhoeht
         }
+
         return currentBest.createCopy();
     }
 

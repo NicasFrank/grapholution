@@ -1,4 +1,4 @@
-package de.htwk.leipzig.grapholution.javafxapp;
+package de.htwk.leipzig.grapholution.javafxapp.handlers;
 
 import de.htwk.leipzig.grapholution.evolibrary.statistics.ColorBitString;
 import javafx.geometry.VPos;
@@ -9,11 +9,19 @@ import javafx.scene.text.TextAlignment;
 
 import java.util.List;
 
-public class CanvasPainter {
-    private static final int maxSize = 50;
+/**
+ * Klasse zum Zeichnen der farblichen Darstellung der Populationen des genetischen Algorithmus
+ */
+public class CanvasPaintHandler {
+    private static final int maxSize = 35;
     private static final Color highColor = Color.BLUE;
     private static final Color lowColor = Color.GREEN;
 
+    /**
+     * Zeichnet die farbliche Darstellung der übergebenen Daten auf den übergebenen Canvas
+     * @param canvas Das Canvas-Objekt, auf dem gezeichnet werden soll
+     * @param bitStrings Die Daten der farblichen Darstellung, die gezeichnet werden soll
+     */
     public static void paintBitStrings(Canvas canvas, List<ColorBitString> bitStrings) {
         if (bitStrings.size() == 0) {
             return;

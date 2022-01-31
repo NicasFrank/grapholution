@@ -1,4 +1,4 @@
-package de.htwk.leipzig.grapholution.evolibrary.algorithms.GeneticAlgorithm;
+package de.htwk.leipzig.grapholution.evolibrary.algorithms.geneticAlgorithm;
 
 import de.htwk.leipzig.grapholution.evolibrary.algorithms.Algorithm;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
@@ -51,7 +51,6 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
      * @return Bestes vom Algorithmus erstelltes Individuum
      */
     public Genotype<T> run(){
-        //getNewGeneration().evaluate; //evaluiert die Diversität der Generation für Anschaulichkeit?
         while(hasNotRunToCompletion()) {
             iterate();
         }
@@ -106,6 +105,6 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
     private Genotype<T> bestIndividuum() {
         return population.stream()
                 .max(Comparator.comparingInt(Genotype::getFitness))
-                .orElse(null);
+                .orElseThrow(() -> new IllegalStateException("The population is empty!"));
     }
 }
