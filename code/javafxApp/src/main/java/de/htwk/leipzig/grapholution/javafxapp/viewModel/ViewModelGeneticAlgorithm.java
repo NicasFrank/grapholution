@@ -20,16 +20,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * ViewModel-Klasse für den genetischen Algorithmus
+ */
 public class ViewModelGeneticAlgorithm{
 
   private final GeneticAlgorithm<Boolean> geneticAlgorithm;
 
   /**
-   * erstellt anhand der Konfiguration den gewuenschten genetischen Algorithmus
-   * loest erste iteratation des genetischen algorithmus aus
+   * Erstellt anhand der Einstellungswerte den gewünschten genetischen Algorithmus
+   * @param options Die Einstellungswerte, mit denen der genetische Algorithmus erstellt werden soll
    */
   public ViewModelGeneticAlgorithm(AlgorithmConfigOptions options){
-    var isStepByStep = options.getBool(BoolConfig.IsStepByStep);
     var mutator = options.getBool(BoolConfig.MutationIsBinary) ? new BinaryMutation(options.getInt(IntConfig.MutationChance)) : new SwitchOneBit();
     var selector= new FitnessproportionalSelection<Boolean>();
     var recombinator = new OnePointCrossover<Boolean>();
@@ -41,8 +43,8 @@ public class ViewModelGeneticAlgorithm{
   }
 
   /**
-   * ruft die run methoden des genetischen algorithmus abheangig ob schrittweise oder auf einmal gerechnet werden soll
-   * @return aktuell besten genotypen
+   * Führt einen Schritt des genetischen Algorithmus aus und gibt das Ergebnis davon als GenModel zurück
+   * @return aktuell besten Genotypen als GenModel
    */
   public GenModel runAlgorithm(){
     Genotype<Boolean> bestGenotype = geneticAlgorithm.oneStep();
@@ -50,6 +52,10 @@ public class ViewModelGeneticAlgorithm{
     return new GenModel(geneticAlgorithm.getIterations(), bestGenotype,stats.getHistory().get(stats.getBestIndividuals().size()-1));
   }
 
+  /**
+   * Führt den genetischen Algorithmus vollständig aus und gibt das Ergebnis davon als GenModel-Liste zurück
+   * @return Das Ergebnis des genetischen Algorithmus als GenModel-Liste
+   */
   public List<GenModel> finishAlgorithm(){
     geneticAlgorithm.run();
     return  makeGenModelList(geneticAlgorithm.getStatistics());
@@ -64,6 +70,10 @@ public class ViewModelGeneticAlgorithm{
     return genModelList;
   }
 
+  /**
+   * Gibt die Statistiken des genetischen Algorithmus zurück
+   * @return Die Statistiken des genetischen Algorithmus
+   */
   public Statistics<Boolean> getGeneticAlgorithmStatistic(){
     return geneticAlgorithm.getStatistics();
   }

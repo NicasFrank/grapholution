@@ -11,7 +11,7 @@ import javafx.scene.control.*;
 import javafx.stage.FileChooser;
 
 /**
- * SceneController Klasse für die Darstellung des Konfigurierbaren Hillclimbers
+ * SceneController für das Fenster zur Konfiguration des Hillclimbers
  */
 public class SceneControllerHillclimber extends SceneController {
     public RadioButton radioMutationBinary;
@@ -26,7 +26,7 @@ public class SceneControllerHillclimber extends SceneController {
      * Methode um Hillclimber Algorithmus mit entsprechendem ViewModel zu starten
      */
     public void sendButton_startAlgo() {
-        viewModel.startHillclimberAlgorithm(createConfigOptions(),this);
+        viewModel.startHillclimberAlgorithm(createConfigOptions(), inputField.textProperty().get());
         viewModel.navigation_configureScreen(EChoices.ResultsHillclimber);
     }
 
@@ -42,6 +42,9 @@ public class SceneControllerHillclimber extends SceneController {
         sliderMutationChance.valueProperty().set(options.getOrElse(IntConfig.MutationChance, (int) sliderMutationChance.getValue()));
     }
 
+    /**
+     * Öffnet einen Dialog zum Speichern der Algorithmus-Konfiguration
+     */
     public void sendButton_saveConfig(){
         var fileChooser = new FileChooser();
         fileChooser.getExtensionFilters()
@@ -57,10 +60,6 @@ public class SceneControllerHillclimber extends SceneController {
         }
     }
 
-    public TextField getInputField(){
-        return inputField;
-    }
-
     /**
      * Handlet die Rückwärtsnavigation
      */
@@ -68,11 +67,6 @@ public class SceneControllerHillclimber extends SceneController {
         viewModel.navigation_Back();
     }
 
-    /**
-     * setter für allgemeines ViewModel zur Navigation
-     *
-     * @param viewModel das ViewModel
-     */
     @Override
     public void setViewModel(ViewModel viewModel) {
         super.setViewModel(viewModel);

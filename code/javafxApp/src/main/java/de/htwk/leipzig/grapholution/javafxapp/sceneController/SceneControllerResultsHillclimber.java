@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 /**
- * Scene Kontroller Klasse für Hillclimber Statistik und Visualisierung
+ * SceneController für das Fenster zur Auswertung des Hillclimbers
  */
 public class SceneControllerResultsHillclimber extends SceneController implements Initializable{
 
@@ -38,11 +38,6 @@ public class SceneControllerResultsHillclimber extends SceneController implement
     private final ObservableList<HillModel> allResults = FXCollections.observableArrayList();
     private LineChartHandler lineChartHandler;
 
-    /**
-     * setter für viewmodel und bindet outputfield an output vom viewmodel
-     *
-     * @param viewModel gleiche ViewModel für alle
-     */
     @Override
     public void setViewModel(ViewModel viewModel) {
         super.setViewModel(viewModel);
@@ -56,6 +51,7 @@ public class SceneControllerResultsHillclimber extends SceneController implement
         setResults();
     }
 
+    @Override
     public void initialize(URL location, ResourceBundle resources){
         iteration.setCellValueFactory((cellData -> cellData.getValue().getIteration()));
         fitness.setCellValueFactory((cellData -> cellData.getValue().getFitness()));
@@ -63,9 +59,8 @@ public class SceneControllerResultsHillclimber extends SceneController implement
     }
 
     /**
-     * Methode um besten Fitnesswert des Hillclimber Algorithmus, in TableView zu setzen
+     * Methode um besten Fitnesswert des Hillclimber Algorithmus, in TableView zu setzen und um das Diagramm zu zeichnen
      */
-
     public void setResults() {
         tableViewResults.setItems(allResults);
         setLineChartResults();

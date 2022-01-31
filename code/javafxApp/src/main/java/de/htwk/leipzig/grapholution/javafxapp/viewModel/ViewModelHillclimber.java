@@ -11,7 +11,6 @@ import de.htwk.leipzig.grapholution.evolibrary.models.IntConfig;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.BinaryMutation;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.SwitchOneBit;
 import de.htwk.leipzig.grapholution.evolibrary.statistics.Statistics;
-import de.htwk.leipzig.grapholution.javafxapp.sceneController.SceneControllerHillclimber;
 import de.htwk.leipzig.grapholution.javafxapp.models.HillModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -20,6 +19,9 @@ import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * ViewModel-Klasse für den Hillclimber
+ */
 public class ViewModelHillclimber{
 
     private final StringProperty outputField = new SimpleStringProperty();
@@ -28,9 +30,9 @@ public class ViewModelHillclimber{
     /**
      * Konstruktor
      * @param options Konfiguration Hillclimber Algorithmus
+     * @param input Die Werte des Genotypen, mit dem der Hillclimber starten soll
      */
-    public ViewModelHillclimber(AlgorithmConfigOptions options, SceneControllerHillclimber sceneControllerHillclimber){
-        var input = sceneControllerHillclimber.getInputField().textProperty().get();
+    public ViewModelHillclimber(AlgorithmConfigOptions options, String input){
         if (!isInputCorrect(input)) {
             throw new InvalidParameterException("The input must only contain 1 and 0!");
         }
@@ -43,9 +45,8 @@ public class ViewModelHillclimber{
     }
 
     /**
-     * ruft die run Methoden des Hillclimber Algorithmus auf
+     * ruft die run Methode des Hillclimbers auf
      */
-
     public List<HillModel> runAlgorithm(){
         Genotype<Boolean> bitGeno = hillclimberAlgorithm.run();
         outputField.set(bitGeno.toString());
@@ -53,7 +54,7 @@ public class ViewModelHillclimber{
     }
 
     /**
-     * @TODO wie ist das mit den iterations, wird ja nicht immer in die stats geschrieben, woher die richtige iteration?
+     * Gibt eine HillModel-Liste aus den Statistiken des Hillclimbers zurück
      * @return Die HillModel-Liste
      */
     private List<HillModel> makeListHillModel(){
@@ -74,10 +75,18 @@ public class ViewModelHillclimber{
         return input.matches("[01]*");
     }
 
+    /**
+     * Gibt die StringProperty des Ausgabefeldes zurück
+     * @return Die StringProperty des Ausgabefeldes
+     */
     public StringProperty outputFieldProperty() {
         return outputField;
     }
 
+    /**
+     * Gibt die Statistiken des Hillclimbers zurück
+     * @return Die Statistiken des Hillclimbers
+     */
     public Statistics<Boolean> getHillclimberStatistic(){
         return hillclimberAlgorithm.getStatistics();
     }

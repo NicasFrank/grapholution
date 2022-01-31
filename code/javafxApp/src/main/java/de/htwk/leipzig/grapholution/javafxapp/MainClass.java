@@ -1,6 +1,6 @@
 package de.htwk.leipzig.grapholution.javafxapp;
 
-/*
+/**
     Workaround für gradle -jar Bug
  */
 public class MainClass {

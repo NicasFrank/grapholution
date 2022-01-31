@@ -5,21 +5,17 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 /**
- *  Klasse um HillclimberModel
+ * Klasse zur tabellarischen Darstellung des Verlaufs des Hillclimbers
  */
-
 public class HillModel {
-    /**
-     * SimpleStringProperty Variable fitness
-     */
     private final SimpleStringProperty fitness;
     private final SimpleStringProperty iteration;
     private final SimpleStringProperty age;
 
     /**
      * Erstellt ein neues HillModel aus einem Genotyp.
-     * @param iteration die Iteration des Algorithmus, an der der Genotyp entstanden ist
-     * @param genotype der Genotyp, aus dem das HillModel erstellt wird
+     * @param iteration Die Iteration des Algorithmus, an der der Genotyp entstanden ist
+     * @param genotype Der Genotyp, aus dem das HillModel erstellt wird
      */
     public HillModel(int iteration, Genotype<Boolean> genotype){
         this.fitness = new SimpleStringProperty(String.valueOf(genotype.getFitness()));

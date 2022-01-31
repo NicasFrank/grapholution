@@ -10,6 +10,9 @@ import javafx.stage.FileChooser;
 
 import java.util.stream.Collectors;
 
+/**
+ * SceneController für das Fenster zur Algorithmus-Auswahl
+ */
 public class SceneControllerChoice extends SceneController {
   public static final String ZERO_MAX = "Zero Max";
   public static final String ONE_MAX = "One Max";
@@ -21,7 +24,7 @@ public class SceneControllerChoice extends SceneController {
 
   /**
    * wird aufgerufen, sobald instanze erstellt
-   * setzt Inhalt der ComboBox(en), erstellt ViewModel und gibt diesem sich selbst als parameter
+   * setzt Inhalt der ComboBoxen
    */
   public void initialize(){
     comboBoxAlgo.getItems().setAll(
@@ -44,6 +47,9 @@ public class SceneControllerChoice extends SceneController {
     );
   }
 
+  /**
+   * Öffnet einen Dialog zum Laden einer Algorithmus-Konfiguration
+   */
   public void sendButton_loadConfig() {
     var fileChooser = new FileChooser();
     fileChooser.getExtensionFilters()

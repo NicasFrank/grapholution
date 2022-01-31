@@ -8,6 +8,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.FileChooser;
 
+/**
+ * SceneController für das Fenster zur Konfiguration des genetischen Algorithmus
+ */
 public class SceneControllerGeneticAlgorithm extends SceneController{
 
   @FXML
@@ -56,6 +59,9 @@ public class SceneControllerGeneticAlgorithm extends SceneController{
     sliderGenerations.valueProperty().set(options.getOrElse(IntConfig.Limit, (int) sliderGenerations.getValue()));
   }
 
+  /**
+   * Öffnet einen Dialog zum Speichern der Algorithmus-Konfiguration
+   */
   public void sendButton_saveConfig() {
     var fileChooser = new FileChooser();
     fileChooser.getExtensionFilters()
@@ -72,6 +78,9 @@ public class SceneControllerGeneticAlgorithm extends SceneController{
     }
   }
 
+  /**
+   * Handlet die Rückwärtsnavigation
+   */
   public void sendButton_backwards(){
     viewModel.navigation_Back();
   }

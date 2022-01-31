@@ -55,10 +55,15 @@ public class SceneControllerResultsGeneticAlgorithm extends SceneController impl
         fitnessPopulation.setCellValueFactory((cellData -> cellData.getValue().fitnessPopulationProperty()));
     }
 
+    /**
+     * Handled die Rückwärtsnavigation
+     */
     public void sendButton_backwards(){
       viewModel.navigation_Back();
     }
-
+    /**
+     * Führt einen Schritt des genetischen Algorithmus aus und zeigt das Ergebnis an
+     */
     public void nextStep(){
         allResults.add(viewModel.geneticAlgorithmNextStep());
         tableViewResults.setItems(allResults);
@@ -77,7 +82,7 @@ public class SceneControllerResultsGeneticAlgorithm extends SceneController impl
     }
 
     /**
-     *
+     * Führt den genetischen Algorithmus bis zum Ende aus und zeigt die Ergebnisse an
      */
     public void fastForward(){
         var currentIteration = allResults.size();
@@ -107,11 +112,6 @@ public class SceneControllerResultsGeneticAlgorithm extends SceneController impl
         paintBitStrings();
     }
 
-    /**
-     * setter für viewmodel und bindet outputfield an output vom viewmodel
-     *
-     * @param viewModel gleiche ViewModel für alle
-     */
     @Override
     public void setViewModel(ViewModel viewModel) {
         super.setViewModel(viewModel);

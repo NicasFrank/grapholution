@@ -7,7 +7,6 @@ import de.htwk.leipzig.grapholution.evolibrary.statistics.Statistics;
 import de.htwk.leipzig.grapholution.javafxapp.MainApp;
 import de.htwk.leipzig.grapholution.javafxapp.enums.EChoices;
 import de.htwk.leipzig.grapholution.javafxapp.sceneController.SceneController;
-import de.htwk.leipzig.grapholution.javafxapp.sceneController.SceneControllerHillclimber;
 import de.htwk.leipzig.grapholution.javafxapp.models.GenModel;
 import de.htwk.leipzig.grapholution.javafxapp.models.HillModel;
 import javafx.beans.property.StringProperty;
@@ -23,6 +22,9 @@ import java.util.Objects;
 import java.util.Stack;
 
 
+/**
+ * ViewModel-Klasse
+ */
 public class ViewModel {
     public static Color FITNESS_CHART_COLOR = Color.DARKBLUE;
     public static Color AGE_CHART_COLOR = Color.LIMEGREEN;
@@ -37,14 +39,19 @@ public class ViewModel {
     private ViewModelGeneticAlgorithm viewModelGeneticAlgorithm;
     private ViewModelHillclimber viewModelHillclimber;
 
+    /**
+     * Konstruktor
+     * @param stage Stage des Fensters
+     * @param firstScene Scene des ersten Fensters
+     */
     public ViewModel(Stage stage, Scene firstScene) {
         this.stage = stage;
         scenes.add(firstScene);
     }
 
   /**
-   * switch anhand String je nach nächster Pane
-   * @param nameOfNextScreen String mit Namen des nächsten Screens
+   * Wechsel zum nächsten Fenster, passend zum übergebenen Enum-Wert
+   * @param nameOfNextScreen Enum-Wert mit Namen des nächsten Fensters
    */
   public void navigation_configureScreen(EChoices nameOfNextScreen){
     switch (nameOfNextScreen) {
@@ -70,8 +77,7 @@ public class ViewModel {
   }
 
     /**
-     * dient zur Rückwärtsnavigation
-     * anhand der aktuellen szene wird aus array die vorherige genommen
+     * Wechselt zum vorherigen Fenster
      */
     public void navigation_Back() {
         scenes.pop();
@@ -79,27 +85,43 @@ public class ViewModel {
     }
 
     /**
-     * Hillclimber instanziert und ausgeführt
-     *
+     * Hillclimber instanziert
+     * @param options Die Einstellungswerte, mit den der Hillclimber ausgeführt werden soll
+     * @param input Die Werte des Genotypen, mit dem der Hillclimber starten soll
      */
-
-    public void startHillclimberAlgorithm(AlgorithmConfigOptions options, SceneControllerHillclimber sceneControllerHillclimber) {
+    public void startHillclimberAlgorithm(AlgorithmConfigOptions options, String input) {
         setConfigOptions(options);
-        viewModelHillclimber = new ViewModelHillclimber(options,sceneControllerHillclimber);
+        viewModelHillclimber = new ViewModelHillclimber(options, input);
     }
 
+    /**
+     * Startet den Hillclimber und gibt dessen Ergebnis zurück
+     * @return Das Ergebnis der Ausführung des Hillclimbers
+     */
     public List<HillModel> runHillclimberAlgorithm(){
       return viewModelHillclimber.runAlgorithm();
     }
 
+    /**
+     * Führt einen Schritt des genetischen Algorithmus aus und gibt das Ergebnis zurück
+     * @return Das Ergebnis der Ausführung des Schrittes
+     */
     public GenModel geneticAlgorithmNextStep() {
         return viewModelGeneticAlgorithm.runAlgorithm();
     }
 
+    /**
+     * Führt den genetischen Algorithmus bis zum Ende aus und gibt das Ergebnis zurück
+     * @return Das Ergebnis der Ausführung des genetischen Algorithmus
+     */
   public List<GenModel> geneticAlgorithmUntilDone(){
     return viewModelGeneticAlgorithm.finishAlgorithm();
   }
 
+    /**
+     * Initialisiert und startet den genetischen Algorithmus mit den übergebenen Einstellungswerten
+     * @param options Die Einstellungswerte, mit den der genetische Algorithmus initialisiert werden soll
+     */
   public void startGeneticAlgorithm(AlgorithmConfigOptions options){
     setConfigOptions(options);
     isAlgorithmStepByStep = options.getBool(BoolConfig.IsStepByStep);
@@ -107,10 +129,9 @@ public class ViewModel {
   }
 
     /**
-     * versucht bestimmte Pane zu laden
-     *
-     * @param paneName Name der zu ladenden Pane aus private String[] slides
-     * @return wahr wenn erfolgreich false wenn nicht
+     * Lädt das Fenster mit dem übergebenen Namen in eine neue Scene und gibt diese zurück
+     * @param paneName Name des zu ladenden Fensters
+     * @return Die Scene des Fensters
      */
     private Scene loadNewPane(String paneName) {
         FXMLLoader loader = new FXMLLoader(MainApp.class.getResource(paneName));
@@ -145,33 +166,65 @@ public class ViewModel {
         return viewModelHillclimber.outputFieldProperty();
     }
 
+    /**
+     * Gibt zurück, ob der genetische Algorithmus Schritt für Schritt ausgeführt werden kann
+     * @return Ob der genetische Algorithmus Schritt für Schritt ausgeführt werden kann
+     */
     public boolean getIsAlgorithmStepByStep(){return isAlgorithmStepByStep;}
 
+    /**
+     * Gibt die Einstellungswerte zurück
+     * @return Die Einstellungswerte
+     */
     public AlgorithmConfigOptions getConfigOptions() {
     return configOptions;
   }
 
+    /**
+     * Gibt die Statistiken des Hillclimbers zurück
+     * @return Die Statistiken des Hillclimbers
+     */
     public Statistics<Boolean> getHillclimberStatistics(){
       return viewModelHillclimber.getHillclimberStatistic();
   }
 
+    /**
+     * Gibt die Statistiken des genetischen Algorithmus zurück
+     * @return Die Statistiken des genetischen Algorithmus
+     */
     public Statistics<Boolean> getGeneticAlgorithmStatistics(){
         return viewModelGeneticAlgorithm.getGeneticAlgorithmStatistic();
     }
 
+    /**
+     * Setzt die Einstellungswerte
+     * @param configOptions Die zu setzenden Einstellungswerte
+     */
     public void setConfigOptions(AlgorithmConfigOptions configOptions) {
         problemIsOneMax = configOptions.getOrElse(BoolConfig.FitnessIsOneMax, true);
         this.configOptions = configOptions;
     }
 
+    /**
+     * Gibt zurück, ob es sich bei dem zu lösenden Problem um das One-Max-Problem handelt
+     * @return Ob es sich bei dem zu lösenden Problem um das One-Max-Problem handelt
+     */
     public boolean getProblemIsOneMax() {
         return problemIsOneMax;
     }
 
+    /**
+     * Setzt, ob es sich bei dem zu lösenden Problem um das One-Max-Problem handelt
+     * @param problemIsOneMax Ob es sich bei dem zu lösenden Problem um das One-Max-Problem handelt
+     */
     public void setProblemIsOneMax(boolean problemIsOneMax) {
         this.problemIsOneMax = problemIsOneMax;
     }
 
+    /**
+     * Gibt die Stage des Fensters zurück
+     * @return Die Stage des Fensters
+     */
     public Stage getStage() {
         return stage;
     }

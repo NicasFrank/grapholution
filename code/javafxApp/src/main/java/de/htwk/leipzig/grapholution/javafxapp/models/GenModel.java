@@ -6,9 +6,8 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 /**
- * ModelKlasse GenerischeModels
+ * Klasse zur tabellarischen Darstellung des Verlaufs des genetischen Algorithmus
  */
-
 public class GenModel {
 
     private final SimpleStringProperty fitnessIndividual;
@@ -17,6 +16,12 @@ public class GenModel {
     private final SimpleStringProperty fitnessPopulation;
     private final SimpleStringProperty bits;
 
+    /**
+     * Konstruktor aus einem Genotyp und einer Population
+     * @param iteration Die Iteration des Algorithmus, an der der Genotyp entstanden ist
+     * @param genotype Der Genotyp, aus dem das GenModel erstellt wird
+     * @param population Die Population, aus der das GenModel erstellt wird
+     */
     public GenModel(int iteration, Genotype<Boolean> genotype, Population<Boolean> population) {
         this.fitnessIndividual = new SimpleStringProperty(String.valueOf(genotype.getFitness()));
         this.age = new SimpleStringProperty(String.valueOf(genotype.getAge()));
