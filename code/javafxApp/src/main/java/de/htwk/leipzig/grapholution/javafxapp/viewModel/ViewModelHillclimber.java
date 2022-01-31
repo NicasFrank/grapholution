@@ -45,7 +45,8 @@ public class ViewModelHillclimber{
     }
 
     /**
-     * ruft die run Methode des Hillclimbers auf
+     * Ruft die run Methode des Hillclimbers auf und gibt das Ergebnis als HillModel-Liste zurück
+     * @return Das Ergebnis des Hillclimbers als HillModel-Liste
      */
     public List<HillModel> runAlgorithm(){
         Genotype<Boolean> bitGeno = hillclimberAlgorithm.run();

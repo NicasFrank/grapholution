@@ -14,7 +14,7 @@ public class MainApp extends Application {
     /**
      * Methode bindet die fxml datei sowie die css Datei in den Startprozess ein
      * @param stage: Benutzt um Titel und Scene zu setzen
-     * @throws Exception: Wenn Datei nicht gefunden wurde
+     * @throws Exception Falls ein unbehandelter Fehler beim Laden der fxml-Datei auftritt
      */
     @Override
     public void start(Stage stage) throws Exception {

@@ -160,7 +160,8 @@ public class ViewModel {
 
 
     /**
-     * Methoden geben Eingabe und Ausgabefeld zurück
+     * Gibt das Ausgabefeld zurück
+     * @return Das Ausgabefeld
      **/
     public StringProperty VMoutputFieldProperty() {
         return viewModelHillclimber.outputFieldProperty();
