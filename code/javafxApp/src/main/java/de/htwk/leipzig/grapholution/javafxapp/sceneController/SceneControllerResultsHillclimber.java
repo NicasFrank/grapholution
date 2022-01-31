@@ -2,7 +2,7 @@ package de.htwk.leipzig.grapholution.javafxapp.sceneController;
 
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
 import de.htwk.leipzig.grapholution.javafxapp.handlers.LineChartHandler;
-import de.htwk.leipzig.grapholution.javafxapp.model.HillModel;
+import de.htwk.leipzig.grapholution.javafxapp.models.HillModel;
 import de.htwk.leipzig.grapholution.javafxapp.viewModel.ViewModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

@@ -14,7 +14,7 @@ import de.htwk.leipzig.grapholution.evolibrary.mutator.SwitchOneBit;
 import de.htwk.leipzig.grapholution.evolibrary.recombinator.OnePointCrossover;
 import de.htwk.leipzig.grapholution.evolibrary.selectors.FitnessproportionalSelection;
 import de.htwk.leipzig.grapholution.evolibrary.statistics.Statistics;
-import de.htwk.leipzig.grapholution.javafxapp.model.GenModel;
+import de.htwk.leipzig.grapholution.javafxapp.models.GenModel;
 
 import java.util.ArrayList;
 import java.util.List;

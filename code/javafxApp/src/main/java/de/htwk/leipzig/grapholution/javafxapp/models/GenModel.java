@@ -1,4 +1,4 @@
-package de.htwk.leipzig.grapholution.javafxapp.model;
+package de.htwk.leipzig.grapholution.javafxapp.models;
 
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Population;

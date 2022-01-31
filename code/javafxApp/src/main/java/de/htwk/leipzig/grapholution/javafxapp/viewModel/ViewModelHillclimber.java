@@ -12,7 +12,7 @@ import de.htwk.leipzig.grapholution.evolibrary.mutator.BinaryMutation;
 import de.htwk.leipzig.grapholution.evolibrary.mutator.SwitchOneBit;
 import de.htwk.leipzig.grapholution.evolibrary.statistics.Statistics;
 import de.htwk.leipzig.grapholution.javafxapp.sceneController.SceneControllerHillclimber;
-import de.htwk.leipzig.grapholution.javafxapp.model.HillModel;
+import de.htwk.leipzig.grapholution.javafxapp.models.HillModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 

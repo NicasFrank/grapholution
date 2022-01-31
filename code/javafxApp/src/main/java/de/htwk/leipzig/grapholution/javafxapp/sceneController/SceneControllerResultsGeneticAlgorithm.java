@@ -6,7 +6,7 @@ import de.htwk.leipzig.grapholution.evolibrary.statistics.ColorBitString;
 import de.htwk.leipzig.grapholution.evolibrary.statistics.Statistics;
 import de.htwk.leipzig.grapholution.javafxapp.handlers.CanvasPaintHandler;
 import de.htwk.leipzig.grapholution.javafxapp.handlers.LineChartHandler;
-import de.htwk.leipzig.grapholution.javafxapp.model.GenModel;
+import de.htwk.leipzig.grapholution.javafxapp.models.GenModel;
 import de.htwk.leipzig.grapholution.javafxapp.viewModel.ViewModel;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
