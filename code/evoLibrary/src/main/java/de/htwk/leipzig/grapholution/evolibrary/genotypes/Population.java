@@ -13,9 +13,9 @@ import java.util.stream.Stream;
 public class Population<T> extends ArrayList<Genotype<T>> {
 
     /**
-     * Konstruktor zur Erzeugung einer Population mit vorgegebener Größe
-     * @param creator Funktion zum Erstellen zufälliger Werte des Individuums
-     * @param populationSize Größe der Population
+     * Konstruktor zur Erzeugung einer Population mit vorgegebenen größen
+     * @param creator funktion zum erstellen Zufälliger Werte des Individuums
+     * @param populationSize größe der Population
      */
     public Population(Supplier<Genotype<T>> creator, int populationSize) {
         super(Stream.generate(creator)
@@ -32,8 +32,8 @@ public class Population<T> extends ArrayList<Genotype<T>> {
     }
 
     /**
-     * Gibt besten Fitnesswert aus Population zurück
-     * @return Bester Fitnesswert
+     * gibt besten Fitnesswert aus Population zurück
+     * @return bester Fitnesswert
      */
     public int getBestFitness() {
         return stream()
@@ -43,8 +43,8 @@ public class Population<T> extends ArrayList<Genotype<T>> {
     }
 
     /**
-     * Gibt die Güte der Population zurück
-     * @return Die Güte
+     * gibt die Güte der Population zurück
+     * @return die Güte
      */
     public double getGoodness() {
         return stream()
@@ -53,10 +53,6 @@ public class Population<T> extends ArrayList<Genotype<T>> {
             .orElseThrow(() -> new IllegalStateException("The population is empty!"));
     }
 
-    /**
-     * Gibt das Individuum mit dem besten Fitnesswert der Population zurück
-     * @return Das Individuum mit dem besten Fitnesswert der Population
-     */
     public Genotype<T> getBestIndividual() {
         return stream()
                 .max(Comparator.comparing(Genotype<T>::getFitness))
@@ -65,7 +61,7 @@ public class Population<T> extends ArrayList<Genotype<T>> {
 
     /**
      * Erstellt eine Kopie der Population
-     * @return Liste aller Individuen der Population
+     * @return Liste aller individuen der Population
      */
     public Population<T> createCopy(){
         return new Population<>(stream()

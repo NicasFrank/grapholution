@@ -5,7 +5,7 @@ import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
 import java.util.List;
 
 /**
- * Interface für Rekombinationsklassen zur Rekombination von 2 Genotypen miteinander
+ * Interface fuer Rekombinationsklassen zur Rekombination von 2 Genotypen miteinander
  * @param <T> Datentyp der zu rekombinierenden Genotypen
  */
 public interface Recombinator<T> {

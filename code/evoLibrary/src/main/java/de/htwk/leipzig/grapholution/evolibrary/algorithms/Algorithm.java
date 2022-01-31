@@ -25,9 +25,9 @@ public abstract class Algorithm<T> {
     }
 
     /**
-     * Konstruktor fuer einen Algorithmus mit configOptions
+     * Konstruktor fuer einen Algorithmus mit Begrenzter Anzahl an Durchlaeufen
      * @param genotype Genotyp, auf dem der Algorithmus arbeiten soll
-     * @param configOptions Einstellungswerte zur Konfiguration des Algorithmus
+     * @param configOptions Maximale Anzahl an Durchlaeufen, die der Algorithmus durchlaufen soll
      */
     public Algorithm(Genotype<T> genotype, AlgorithmConfigOptions configOptions) {
         this(genotype);

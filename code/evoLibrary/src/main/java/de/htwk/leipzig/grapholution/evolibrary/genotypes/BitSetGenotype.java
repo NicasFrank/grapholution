@@ -10,20 +10,10 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-/**
- * Implementierung eine Boolean-Genotypen mit einem BitSet zur Speicherung der Werte
- */
 public class BitSetGenotype extends Genotype<Boolean> {
     private final BitSet values;
     private final int size;
 
-
-    /**
-     * Konstruktor mit den Werten aus einem BitSet
-     * @param fitnessFunction Die Fitnessfunktion zur Berechnung des Fitnesswertes des Genotypen
-     * @param values Die Werte, die der Genotyp haben soll
-     * @param size Die Größe, die der Genotyp haben soll
-     */
     public BitSetGenotype(FitnessFunction<Boolean> fitnessFunction, BitSet values, int size) {
         super(fitnessFunction);
         this.values = BitSet.valueOf(values.toByteArray());
@@ -32,12 +22,6 @@ public class BitSetGenotype extends Genotype<Boolean> {
         updateFitness();
     }
 
-    /**
-     * Konstruktor mit Werten, die von der übergebenen Funktion generiert werden
-     * @param creator Funktion zur Generierung der Werte des Genotyps
-     * @param fitnessFunction Die Fitnessfunktion zur Berechnung des Fitnesswertes des Genotypen
-     * @param size Die Größe, die der Genotyp haben soll
-     */
     public BitSetGenotype(Function<Random, Boolean> creator, FitnessFunction<Boolean> fitnessFunction, int size) {
         super(fitnessFunction);
         this.size = size;
@@ -49,12 +33,6 @@ public class BitSetGenotype extends Genotype<Boolean> {
         updateFitness();
     }
 
-    /**
-     * Erstellt eine neue Instanz von BitSetGenotype mit den Werten im übergebenen String
-     * @param fitnessFunction Die Fitnessfunktion zur Berechnung des Fitnesswertes des Genotypen
-     * @param values Die Werte, die der Genotyp haben soll
-     * @return Die neue Instanz von BitSetGenotype
-     */
     public static BitSetGenotype fromString(FitnessFunction<Boolean> fitnessFunction, String values) {
         var bitset = new BitSet(values.length());
 
@@ -106,26 +84,14 @@ public class BitSetGenotype extends Genotype<Boolean> {
                 .toString();
     }
 
-    /**
-     * Gibt die Anzahl der gesetzten Bits zurück
-     * @return Die Anzahl der gesetzten Bits
-     */
     public int oneCount() {
         return values.cardinality();
     }
 
-    /**
-     * Gibt die Anzahl der nicht gesetzten Bits zurück
-     * @return Die Anzahl der nicht gesetzten Bits
-     */
     public int zeroCount() {
         return size - values.cardinality();
     }
 
-    /**
-     * Invertiert den Wert des Bits an der Stelle i
-     * @param i Die Stelle des Bits, das invertiert werden soll
-     */
     public void flip(int i) {
         values.flip(i);
     }

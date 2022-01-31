@@ -28,10 +28,9 @@ public class Hillclimber<T> extends Algorithm<T> {
     }
 
     /**
-     * Konstruktor zur Erstellung eines einfachen Hillclimbers mit einstellbarer Mutation, Genotyp und mit configOptions
+     * Konstruktor zur Erstellung eines einfachen Hillclimbers mit einstellbarer Mutation und Genotyp, sowie Limit der Durchlaeufe
      * @param genotype Genotyp auf dem der Algorithmus arbeiten soll
      * @param mutator Mutation, die zur Veraenderung des Genotypen benutzt werden soll
-     * @param configOptions Einstellungswerte zur Konfiguration des Hillclimbers
      */
     public Hillclimber(Genotype<T> genotype, Mutator<T> mutator, AlgorithmConfigOptions configOptions) {
         super(genotype, configOptions);
@@ -41,7 +40,7 @@ public class Hillclimber<T> extends Algorithm<T> {
     }
 
     /**
-     * Funktion zum Ausführen des Hillclimbers
+     * Funktion zum Ausfuehren des Hillclimbers
      * @return Bester erreichter Genotyp
      */
     public Genotype<T> run() {
