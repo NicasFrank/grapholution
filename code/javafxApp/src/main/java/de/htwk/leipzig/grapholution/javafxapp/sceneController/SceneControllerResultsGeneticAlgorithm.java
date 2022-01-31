@@ -22,6 +22,9 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
+/**
+ * SceneController für das Fenster zur Auswertung des genetischen Algorithmus
+ */
 public class SceneControllerResultsGeneticAlgorithm extends SceneController implements Initializable {
 
     @FXML
