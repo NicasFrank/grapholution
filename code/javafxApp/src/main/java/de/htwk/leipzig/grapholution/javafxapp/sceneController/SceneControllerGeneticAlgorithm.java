@@ -1,7 +1,9 @@
-package de.htwk.leipzig.grapholution.javafxapp;
+package de.htwk.leipzig.grapholution.javafxapp.sceneController;
 
 import de.htwk.leipzig.grapholution.evolibrary.models.*;
+import de.htwk.leipzig.grapholution.javafxapp.enums.EChoices;
 import de.htwk.leipzig.grapholution.javafxapp.utils.DialogUtils;
+import de.htwk.leipzig.grapholution.javafxapp.viewModel.ViewModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.FileChooser;
@@ -22,8 +24,6 @@ public class SceneControllerGeneticAlgorithm extends SceneController{
   private Slider sliderGenotypeSize;
   @FXML
   private CheckBox checkBoxStepByStep;
-
-  private ViewModel viewModel;
 
   /**
    * loest Laden der naechsten Pane aus
@@ -76,8 +76,9 @@ public class SceneControllerGeneticAlgorithm extends SceneController{
     viewModel.navigation_Back();
   }
 
+  @Override
   public void setViewModel(ViewModel viewModel){
-    this.viewModel=viewModel;
+    super.setViewModel(viewModel);
     setOptions(viewModel.getConfigOptions());
   }
 }

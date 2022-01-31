@@ -1,20 +1,21 @@
-package de.htwk.leipzig.grapholution.javafxapp;
+package de.htwk.leipzig.grapholution.javafxapp.sceneController;
 
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Population;
 import de.htwk.leipzig.grapholution.evolibrary.statistics.ColorBitString;
 import de.htwk.leipzig.grapholution.evolibrary.statistics.Statistics;
+import de.htwk.leipzig.grapholution.javafxapp.handlers.CanvasPaintHandler;
+import de.htwk.leipzig.grapholution.javafxapp.handlers.LineChartHandler;
 import de.htwk.leipzig.grapholution.javafxapp.model.GenModel;
+import de.htwk.leipzig.grapholution.javafxapp.viewModel.ViewModel;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.chart.LineChart;
 import javafx.scene.control.*;
-import javafx.util.Callback;
 
 import java.net.URL;
 import java.util.List;
@@ -42,7 +43,6 @@ public class SceneControllerResultsGeneticAlgorithm extends SceneController impl
     @FXML
     private Button buttonNextStep,buttonFastForward;
 
-    private ViewModel viewModel;
     private final ObservableList<GenModel> allResults = FXCollections.observableArrayList();
     private LineChartHandler lineChartHandler;
 
@@ -112,18 +112,24 @@ public class SceneControllerResultsGeneticAlgorithm extends SceneController impl
      *
      * @param viewModel gleiche ViewModel für alle
      */
+    @Override
     public void setViewModel(ViewModel viewModel) {
-        this.viewModel = viewModel;
+        super.setViewModel(viewModel);
 
         lineChartHandler = new LineChartHandler(
-                lineChartResults, List.of("Fitness", "Alter", "Guete"),
-                List.of(ViewModel.FITNESS_CHART_COLOR, ViewModel.AGE_CHART_COLOR, ViewModel.GOODNESS_CHART_COLOR));
+                lineChartResults,
+                List.of("Fitness", "Alter", "Guete"),
+                List.of(ViewModel.FITNESS_CHART_COLOR, ViewModel.AGE_CHART_COLOR, ViewModel.GOODNESS_CHART_COLOR)
+        );
 
         var statistics = viewModel.getGeneticAlgorithmStatistics();
         var bestIndividuals = statistics.getBestIndividuals();
-        allResults.add(new GenModel(0,
+        allResults.add(new GenModel(
+                0,
                 bestIndividuals.get(bestIndividuals.size() - 1),
-                statistics.getHistory().get(bestIndividuals.size()-1)));
+                statistics.getHistory().get(bestIndividuals.size()-1)
+                )
+        );
         addLineChartValues(statistics);
         paintBitStrings();
 
@@ -155,7 +161,7 @@ public class SceneControllerResultsGeneticAlgorithm extends SceneController impl
             canvas.setWidth(width * 0.95);
             scrollPane.setContent(canvas);
             final var pageStart = i * pageSize;
-            CanvasPainter.paintBitStrings(canvas, bitStrings.subList(pageStart, Math.min(pageStart + pageSize, bitStrings.size())));
+            CanvasPaintHandler.paintBitStrings(canvas, bitStrings.subList(pageStart, Math.min(pageStart + pageSize, bitStrings.size())));
 
             return scrollPane;
         });

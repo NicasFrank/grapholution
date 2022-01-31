@@ -1,6 +1,6 @@
-package de.htwk.leipzig.grapholution.javafxapp;
+package de.htwk.leipzig.grapholution.javafxapp.viewModel;
 
-import de.htwk.leipzig.grapholution.evolibrary.algorithms.GeneticAlgorithm.GeneticAlgorithm;
+import de.htwk.leipzig.grapholution.evolibrary.algorithms.geneticAlgorithm.GeneticAlgorithm;
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.OneMaxEvaluator;
 import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.ZeroMaxEvaluator;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.BitSetGenotype;

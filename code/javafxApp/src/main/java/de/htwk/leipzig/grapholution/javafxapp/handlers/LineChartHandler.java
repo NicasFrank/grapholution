@@ -1,4 +1,4 @@
-package de.htwk.leipzig.grapholution.javafxapp;
+package de.htwk.leipzig.grapholution.javafxapp.handlers;
 
 import javafx.application.Platform;
 import javafx.scene.chart.LineChart;

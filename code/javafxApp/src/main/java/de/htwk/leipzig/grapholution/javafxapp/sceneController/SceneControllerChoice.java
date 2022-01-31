@@ -1,7 +1,8 @@
-package de.htwk.leipzig.grapholution.javafxapp;
+package de.htwk.leipzig.grapholution.javafxapp.sceneController;
 
 import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmConfigOptions;
 import de.htwk.leipzig.grapholution.evolibrary.models.BoolConfig;
+import de.htwk.leipzig.grapholution.javafxapp.enums.EChoices;
 import de.htwk.leipzig.grapholution.javafxapp.utils.DialogUtils;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
@@ -9,7 +10,7 @@ import javafx.stage.FileChooser;
 
 import java.util.stream.Collectors;
 
-public class SceneControllerChoice extends SceneController{
+public class SceneControllerChoice extends SceneController {
   public static final String ZERO_MAX = "Zero Max";
   public static final String ONE_MAX = "One Max";
 
@@ -17,8 +18,6 @@ public class SceneControllerChoice extends SceneController{
   private ComboBox<String> comboBoxAlgo;
   @FXML
   private ComboBox<String> comboBoxProblem;
-
-  private ViewModel viewModel;
 
   /**
    * wird aufgerufen, sobald instanze erstellt
@@ -43,10 +42,6 @@ public class SceneControllerChoice extends SceneController{
     viewModel.navigation_configureScreen(
         EChoices.getByName(comboBoxAlgo.getValue())
     );
-  }
-
-  public void setViewModel(ViewModel viewModel) {
-    this.viewModel = viewModel;
   }
 
   public void sendButton_loadConfig() {

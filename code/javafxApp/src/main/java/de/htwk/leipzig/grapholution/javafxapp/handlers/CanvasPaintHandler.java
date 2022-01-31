@@ -1,4 +1,4 @@
-package de.htwk.leipzig.grapholution.javafxapp;
+package de.htwk.leipzig.grapholution.javafxapp.handlers;
 
 import de.htwk.leipzig.grapholution.evolibrary.statistics.ColorBitString;
 import javafx.geometry.VPos;
@@ -9,7 +9,7 @@ import javafx.scene.text.TextAlignment;
 
 import java.util.List;
 
-public class CanvasPainter {
+public class CanvasPaintHandler {
     private static final int maxSize = 35;
     private static final Color highColor = Color.BLUE;
     private static final Color lowColor = Color.GREEN;

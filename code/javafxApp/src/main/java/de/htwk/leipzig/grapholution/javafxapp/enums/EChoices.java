@@ -1,6 +1,5 @@
-package de.htwk.leipzig.grapholution.javafxapp;
+package de.htwk.leipzig.grapholution.javafxapp.enums;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public enum EChoices {

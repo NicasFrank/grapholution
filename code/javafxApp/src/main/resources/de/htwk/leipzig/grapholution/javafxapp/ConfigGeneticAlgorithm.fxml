@@ -7,7 +7,7 @@
 
 <GridPane prefHeight="720.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/11.0.2"
           xmlns:fx="http://javafx.com/fxml/1"
-          fx:controller="de.htwk.leipzig.grapholution.javafxapp.SceneControllerGeneticAlgorithm">
+          fx:controller="de.htwk.leipzig.grapholution.javafxapp.sceneController.SceneControllerGeneticAlgorithm">
    <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" percentWidth="20.0"/>
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" percentWidth="20.0"/>

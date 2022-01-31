@@ -38,7 +38,8 @@ public class Population<T> extends ArrayList<Genotype<T>> {
     public int getBestFitness() {
         return stream()
                 .mapToInt(Genotype::getFitness)
-                .max().orElse(0);
+                .max()
+                .orElseThrow(() -> new IllegalStateException("The population is empty!"));
     }
 
     /**
@@ -48,13 +49,14 @@ public class Population<T> extends ArrayList<Genotype<T>> {
     public double getGoodness() {
         return stream()
             .mapToInt(Genotype::getFitness)
-            .average().orElse(0);
+            .average()
+            .orElseThrow(() -> new IllegalStateException("The population is empty!"));
     }
 
     public Genotype<T> getBestIndividual() {
         return stream()
                 .max(Comparator.comparing(Genotype<T>::getFitness))
-                .orElse(null);
+                .orElseThrow(() -> new IllegalStateException("The population is empty!"));
     }
 
     /**

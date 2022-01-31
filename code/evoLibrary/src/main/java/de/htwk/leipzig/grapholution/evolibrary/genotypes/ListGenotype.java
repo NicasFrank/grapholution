@@ -4,7 +4,6 @@ import de.htwk.leipzig.grapholution.evolibrary.fitnessfunction.FitnessFunction;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Function;

@@ -1,9 +1,12 @@
-package de.htwk.leipzig.grapholution.javafxapp;
+package de.htwk.leipzig.grapholution.javafxapp.viewModel;
 
 
 import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmConfigOptions;
 import de.htwk.leipzig.grapholution.evolibrary.models.BoolConfig;
 import de.htwk.leipzig.grapholution.evolibrary.statistics.Statistics;
+import de.htwk.leipzig.grapholution.javafxapp.enums.EChoices;
+import de.htwk.leipzig.grapholution.javafxapp.sceneController.SceneController;
+import de.htwk.leipzig.grapholution.javafxapp.sceneController.SceneControllerHillclimber;
 import de.htwk.leipzig.grapholution.javafxapp.model.GenModel;
 import de.htwk.leipzig.grapholution.javafxapp.model.HillModel;
 import javafx.beans.property.StringProperty;
@@ -79,7 +82,7 @@ public class ViewModel {
      *
      */
 
-    public void startHillclimberAlgorithm(AlgorithmConfigOptions options,SceneControllerHillclimber sceneControllerHillclimber) {
+    public void startHillclimberAlgorithm(AlgorithmConfigOptions options, SceneControllerHillclimber sceneControllerHillclimber) {
         setConfigOptions(options);
         viewModelHillclimber = new ViewModelHillclimber(options,sceneControllerHillclimber);
     }

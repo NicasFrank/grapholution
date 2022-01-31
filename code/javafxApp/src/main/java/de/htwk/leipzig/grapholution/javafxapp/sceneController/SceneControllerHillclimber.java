@@ -1,9 +1,11 @@
-package de.htwk.leipzig.grapholution.javafxapp;
+package de.htwk.leipzig.grapholution.javafxapp.sceneController;
 
 import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmConfigOptions;
 import de.htwk.leipzig.grapholution.evolibrary.models.BoolConfig;
 import de.htwk.leipzig.grapholution.evolibrary.models.IntConfig;
+import de.htwk.leipzig.grapholution.javafxapp.enums.EChoices;
 import de.htwk.leipzig.grapholution.javafxapp.utils.DialogUtils;
+import de.htwk.leipzig.grapholution.javafxapp.viewModel.ViewModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.FileChooser;
@@ -17,8 +19,6 @@ public class SceneControllerHillclimber extends SceneController {
     private TextField inputField;
     @FXML
     private Slider sliderMutationChance;
-
-    private ViewModel viewModel;
 
     /**
      * speichert aktuellen Text des Inputfields, triggert dann laden der Ergebnis-Szene und gibt Input an ViewModel, damit
@@ -73,8 +73,9 @@ public class SceneControllerHillclimber extends SceneController {
      *
      * @param viewModel das ViewModel
      */
+    @Override
     public void setViewModel(ViewModel viewModel) {
-        this.viewModel = viewModel;
+        super.setViewModel(viewModel);
         setOptions(viewModel.getConfigOptions());
     }
 }

@@ -35,11 +35,11 @@ public class BitSetGenotype extends Genotype<Boolean> {
 
     public static BitSetGenotype fromString(FitnessFunction<Boolean> fitnessFunction, String values) {
         var bitset = new BitSet(values.length());
-        for (int i = 0; i < values.length(); i++) {
-            if (values.charAt(i) == '1') {
-                bitset.set(i);
-            }
-        }
+
+        IntStream.range(0, values.length())
+                .filter(i -> values.charAt(i) == '1')
+                .forEach(bitset::set);
+        
         return new BitSetGenotype(fitnessFunction, bitset, values.length());
     }
 
