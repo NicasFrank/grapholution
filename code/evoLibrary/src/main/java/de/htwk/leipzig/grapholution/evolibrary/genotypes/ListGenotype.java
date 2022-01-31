@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * Klasse zur Darstellung eines einzelnen Genotypen
+ * Klasse zur Darstellung eines einzelnen Genotypen unter Verwendung einer Liste fuer die Werte
  * @param <T> Datentyp der Werte des Genotypen
  */
 public class ListGenotype<T> extends Genotype<T> {
@@ -55,17 +55,31 @@ public class ListGenotype<T> extends Genotype<T> {
         return new ArrayList<>(values);
     }
 
+    /**
+     * Gibt Groesse des Genotyps zurueck
+     * @return Groesse des Genotyps
+     */
     @Override
     public int size(){
         return values.size();
     }
 
+    /**
+     * Aendert Wert an bestimmter Stelle im Genotyp
+     * @param i Stelle im Genotyp die abgeaendert werden soll
+     * @param element Gewuenschter Wert
+     */
     @Override
     public void set(int i, T element){
         values.set(i, element);
         updateFitness();
     }
 
+    /**
+     * Gibt Wert an bestimmter Stelle im Genotyp zurueck
+     * @param i Stelle im Genotyp deren Wert ermittelt werden soll
+     * @return Wert an der Stelle
+     */
     @Override
     public T get(int i){
         return values.get(i);
@@ -80,6 +94,11 @@ public class ListGenotype<T> extends Genotype<T> {
         return new ListGenotype<>(fitnessFunction, new ArrayList<>(values));
     }
 
+
+    /**
+     * Wandelt den Genotyp in einen String um
+     * @return Genotyp als String dargestellt
+     */
     @Override
     public String toString() {
         return values.stream()

@@ -43,7 +43,7 @@ public class Population<T> extends ArrayList<Genotype<T>> {
     }
 
     /**
-     * gibt die Güte der Population zurück
+     * Gibt die Güte der Population zurück
      * @return die Güte
      */
     public double getGoodness() {
@@ -53,6 +53,10 @@ public class Population<T> extends ArrayList<Genotype<T>> {
             .orElseThrow(() -> new IllegalStateException("The population is empty!"));
     }
 
+    /**
+     * Gibt bestes Individuum der Population zurueck
+     * @return Bestes Individuum der Population
+     */
     public Genotype<T> getBestIndividual() {
         return stream()
                 .max(Comparator.comparing(Genotype<T>::getFitness))

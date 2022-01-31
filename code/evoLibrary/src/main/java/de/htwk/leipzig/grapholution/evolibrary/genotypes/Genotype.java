@@ -18,6 +18,10 @@ public abstract class Genotype<T> {
         this.fitnessFunction = fitnessFunction;
     }
 
+    /**
+     * Getter fuer maximalen Fitnesswert des Genotyps
+     * @return Maximaler Fitnesswert des Genotyps
+     */
     public int getMaxFitnessValue() {
         return maxFitnessValue;
     }
@@ -60,16 +64,43 @@ public abstract class Genotype<T> {
         return age;
     }
 
+    /**
+     * Gibt Werte des Genotyps als Liste zurueck
+     * @return Werte des Genotyps als Liste dargestellt
+     */
     public abstract List<T> valuesToList();
 
+
+    /**
+     * Gibt Groesse des Genotyps zurueck
+     * @return Groesse des Genotyps
+     */
     public abstract int size();
 
+    /**
+     * Aendert Wert an bestimmter Stelle im Genotyp
+     * @param i Stelle im Genotyp die abgeaendert werden soll
+     * @param element Gewuenschter Wert
+     */
     public abstract void set(int i, T element);
 
+    /**
+     * Gibt Wert an bestimmter Stelle im Genotyp zurueck
+     * @param i Stelle im Genotyp deren Wert ermittelt werden soll
+     * @return Wert an der Stelle
+     */
     public abstract T get(int i);
 
+    /**
+     * Erzeugt eine Kopie des Genotyps
+     * @return Kopie des Genotyps
+     */
     public abstract Genotype<T> createCopy();
 
+    /**
+     * Wandelt den Genotyp in einen String um
+     * @return Genotyp als String dargestellt
+     */
     public abstract String toString();
 
 
