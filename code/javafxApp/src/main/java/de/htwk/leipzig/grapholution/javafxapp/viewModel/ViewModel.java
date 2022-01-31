@@ -4,6 +4,7 @@ package de.htwk.leipzig.grapholution.javafxapp.viewModel;
 import de.htwk.leipzig.grapholution.evolibrary.models.AlgorithmConfigOptions;
 import de.htwk.leipzig.grapholution.evolibrary.models.BoolConfig;
 import de.htwk.leipzig.grapholution.evolibrary.statistics.Statistics;
+import de.htwk.leipzig.grapholution.javafxapp.MainApp;
 import de.htwk.leipzig.grapholution.javafxapp.enums.EChoices;
 import de.htwk.leipzig.grapholution.javafxapp.sceneController.SceneController;
 import de.htwk.leipzig.grapholution.javafxapp.sceneController.SceneControllerHillclimber;
@@ -112,13 +113,13 @@ public class ViewModel {
      * @return wahr wenn erfolgreich false wenn nicht
      */
     private Scene loadNewPane(String paneName) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(paneName));
+        FXMLLoader loader = new FXMLLoader(MainApp.class.getResource(paneName));
         try {
             Pane nextPane = loader.load();
             SceneController newController = loader.getController();
             newController.setViewModel(this);
             var nextScene = new Scene(nextPane);
-            nextScene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("styles_new.css")).toExternalForm());
+            nextScene.getStylesheets().add(Objects.requireNonNull(MainApp.class.getResource("styles_new.css")).toExternalForm());
             setNextScreen(nextScene);
             return nextScene;
         } catch (IOException e) {
