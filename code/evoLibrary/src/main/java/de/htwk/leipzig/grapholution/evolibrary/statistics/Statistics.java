@@ -37,10 +37,19 @@ public class Statistics<T> {
         return c;
     }
 
+    /**
+     * Gibt die Populations-Historie zurück
+     * @return Die Populations-Historie
+     */
     public List<Population<T>> getHistory() {
         return new ArrayList<>(history);
     }
 
+
+    /**
+     * Gibt die Besten-Individuums-Historie zurück
+     * @return Die Besten-Individuums-Historie
+     */
     public List<Genotype<T>> getBestIndividuals() {
         return new ArrayList<>(bestIndividuals);
     }

@@ -13,7 +13,7 @@ import java.util.Comparator;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
- * Noch zu entwickeln
+ * Genetischer Algorithmus
  * @param <T> Datentyp des Genotypen, auf dem der genetische Algorithmus arbeitet
  */
 public class GeneticAlgorithm<T> extends Algorithm<T> {
@@ -25,10 +25,11 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
     private final Selector<T> selector;
 
     /**
-     * Konstruktor ohne Limit
-     * @param mutator enthält Mutation des Genotypen
-     * @param recombinator enthält Rekombination zweier Genotypen
-     * @param population Population des Genotypen
+     * Konstruktor
+     * @param mutator Der Mutator zur Mutation der Genotypen
+     * @param recombinator Der Rekombinator zur Rekombination der Genotypen
+     * @param population Population mit Genotypen, mit denen der genetische Algorithmus arbeiten soll
+     * @param configOptions Einstellungswerte zur Konfiguration des genetischen Algorithmus
      */
     public GeneticAlgorithm(Mutator<T> mutator, Selector<T> selector, Recombinator<T> recombinator,
             Population<T> population, AlgorithmConfigOptions configOptions) {

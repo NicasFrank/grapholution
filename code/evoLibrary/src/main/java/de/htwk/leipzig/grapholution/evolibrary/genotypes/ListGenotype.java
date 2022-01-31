@@ -11,14 +11,14 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * Klasse zur Darstellung eines einzelnen Genotypen
+ * Klasse zur Darstellung eines einzelnen Genotypen mit einer Liste zur Speicherung der Werte
  * @param <T> Datentyp der Werte des Genotypen
  */
 public class ListGenotype<T> extends Genotype<T> {
     protected List<T> values;
 
     /**
-     * Konstruktor zur Erstellung eines Genotypen mit vorgenerierten Werten als List
+     * Konstruktor zur Erstellung eines Genotypen mit Werten aus der übergebenen Liste
      * @param fitnessFunction Fitnessfunktion, die zur Evaluierung des Genotyps benutzt wird
      * @param values Werte, die dem Genotyp zugewiesen werden
      */
@@ -31,10 +31,10 @@ public class ListGenotype<T> extends Genotype<T> {
     }
 
     /**
-     * Konstruktor zur Erstellung eines Genotypen mit zufaellig generierten Werten als ArrayList einer bestimmten Länge
-     * @param creator funktion zum erstellen Zufälliger Werte des Individuums
+     * Konstruktor zur Erstellung eines Genotypen mit zufällig generierten Werten als ArrayList einer bestimmten Länge
+     * @param creator Funktion zum Erstellen zufälliger Werte des Individuums
      * @param fitnessFunction Fitnessfunktion, die zur Evaluierung des Genotyps benutzt wird
-     * @param size Gewuenschte Laenge des Genotypen
+     * @param size Gewünschte Länge des Genotypen
      */
     public ListGenotype(Function<Random, T> creator, FitnessFunction<T> fitnessFunction, int size){
         super(fitnessFunction);
@@ -47,7 +47,7 @@ public class ListGenotype<T> extends Genotype<T> {
     }
 
     /**
-     * Getter fuer Werte des Genotyps
+     * Getter für Werte des Genotyps
      * @return Liste mit Werten des Genotyps
      */
     @Override
@@ -71,10 +71,6 @@ public class ListGenotype<T> extends Genotype<T> {
         return values.get(i);
     }
 
-    /**
-     * Funktion zur Erstellung einer Kopie eines Genotypen
-     * @return Kopie des Genotypen
-     */
     @Override
     public Genotype<T> createCopy(){
         return new ListGenotype<>(fitnessFunction, new ArrayList<>(values));

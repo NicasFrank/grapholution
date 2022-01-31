@@ -3,7 +3,7 @@ package de.htwk.leipzig.grapholution.evolibrary.fitnessfunction;
 import de.htwk.leipzig.grapholution.evolibrary.genotypes.Genotype;
 
 /**
- * Interface fuer EvaluationsKlassen zur Fitnesswertermittlung
+ * Interface fuer Evaluationsklassen zur Fitnesswertermittlung
  * @param <T> Datentyp der mit der Klasse evaluiert werden kann
  */
 public interface FitnessFunction<T> {
