@@ -84,7 +84,6 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
      */
     private void iterate(){
         population = selector.select(population);
-        statistics.addToHistory(population);
 
         for(int i = 0; i < population.size() / 2; i++) {
             if(ThreadLocalRandom.current().nextDouble(1) < recombinationChance) {
@@ -95,6 +94,7 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
             population.set(2*i,mutator.mutate(population.get(2*i)));
             population.set(2*i+1,mutator.mutate(population.get(2*i+1)));
         }
+        statistics.addToHistory(population);
         iterations++;
     }
 
