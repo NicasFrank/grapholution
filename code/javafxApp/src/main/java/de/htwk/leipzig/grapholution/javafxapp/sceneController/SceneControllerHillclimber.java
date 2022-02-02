@@ -23,13 +23,18 @@ public class SceneControllerHillclimber extends SceneController {
     /**
      * speichert aktuellen Text des Inputfields, triggert dann laden der Ergebnis-Szene und gibt Input an ViewModel, damit
      * an Hillclimber weiter
-     * Methode um Hillclimber Algorithmus mit entsprechendem ViewModel zu starten
+     * Methode um Hillclimber Algorithmus mit entsprechendem ViewModel
      */
     public void sendButton_startAlgo() {
         viewModel.startHillclimberAlgorithm(createConfigOptions(), inputField.textProperty().get());
         viewModel.navigation_configureScreen(EChoices.ResultsHillclimber);
     }
 
+    /**
+     *
+     * @return gibt gewünschte Konfigurations-Optionen zurück
+     * hier: Binäre-Mutation, Wahrscheinlichkeit der Mutation, Lösung des OneMaxProblem
+     */
     private AlgorithmConfigOptions createConfigOptions(){
         return new AlgorithmConfigOptions()
                 .add(BoolConfig.MutationIsBinary, radioMutationBinary.isSelected())
@@ -37,6 +42,10 @@ public class SceneControllerHillclimber extends SceneController {
                 .add(BoolConfig.FitnessIsOneMax, viewModel.getProblemIsOneMax());
     }
 
+    /**
+     * Setzt die gewünschten Optionen für den konfiguierbaren Hillclimber-Algorithmus
+     * @param options Hillclimber Konfigurations-Optionen
+     */
     private void setOptions(AlgorithmConfigOptions options){
         radioMutationBinary.selectedProperty().set(options.getOrElse(BoolConfig.MutationIsBinary, radioMutationBinary.isSelected()));
         sliderMutationChance.valueProperty().set(options.getOrElse(IntConfig.MutationChance, (int) sliderMutationChance.getValue()));
@@ -67,6 +76,10 @@ public class SceneControllerHillclimber extends SceneController {
         viewModel.navigation_Back();
     }
 
+    /**
+     * Setzt für jeden SceneController das grundlegende viewModel
+     * @param viewModel das zu setzende viewModel
+     */
     @Override
     public void setViewModel(ViewModel viewModel) {
         super.setViewModel(viewModel);

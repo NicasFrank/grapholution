@@ -38,6 +38,11 @@ public class SceneControllerResultsHillclimber extends SceneController implement
     private final ObservableList<HillModel> allResults = FXCollections.observableArrayList();
     private LineChartHandler lineChartHandler;
 
+    /**
+     * Erzeugt aus dem zu verwendenden ViewModel einen neuen Handler für die LinienChartAuswertung
+     * @param viewModel das zu setzende viewModel
+     * Statistiken werden einer Observable List hinzugefügt
+     */
     @Override
     public void setViewModel(ViewModel viewModel) {
         super.setViewModel(viewModel);
@@ -51,6 +56,11 @@ public class SceneControllerResultsHillclimber extends SceneController implement
         setResults();
     }
 
+    /**
+     * Initialisierungsmethode
+     * @param location Lokation der Werte
+     * @param resources zu verwendende Resourcen
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources){
         iteration.setCellValueFactory((cellData -> cellData.getValue().getIteration()));
@@ -68,6 +78,8 @@ public class SceneControllerResultsHillclimber extends SceneController implement
 
     /**
      * Methode um zeitlichen Verlauf der Fitnesswerte in LinienChart zu setzen
+     * per Getter wird aus Statistikklasse bester Fitness-Wert des Individuums eines Genotypen geholt
+     * dem Handler der LinienChart werden Fitness und Alter hinzugefügt
      */
     public void setLineChartResults() {
         var statistics = viewModel.getHillclimberStatistics();

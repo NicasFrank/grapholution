@@ -59,6 +59,11 @@ public class LineChartHandler {
         }
     }
 
+    /**
+     * setzt die zu verwendende Farbe aus dem Diagramm in der Legende um
+     * @param chart Linien-Chart
+     * @param colors Liste von Farben
+     */
     private void setLegendColor(LineChart<Integer, Number> chart, List<Color> colors) {
         Platform.runLater(() -> {
             var nodes = new ArrayList<>(chart.lookupAll(".chart-legend-item-symbol"));
@@ -72,6 +77,11 @@ public class LineChartHandler {
         });
     }
 
+    /**
+     * Übersetzung von String zu RGB
+     * @param color
+     * @return gibt RBG Code zurück
+     */
     private static String toCssColor(Color color) {
         String rgb = String.format("%d, %d, %d",
                 (int) (color.getRed() * 255),
