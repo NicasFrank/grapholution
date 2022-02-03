@@ -92,7 +92,8 @@ public class GeneticAlgorithmTest {
     }
 
     @Test
-    void oneStep_AlgorithmHasRunToCompletion_DoesNotExecuteIteration() {
+    void oneStep_AlgorithmHasRunToCompletion_DoesStillExecuteIteration() {
+        when(selectorMock.select(any())).thenCallRealMethod();
         var limit = 0;
 
         geneticAlgorithm = new GeneticAlgorithm<>(
@@ -107,6 +108,6 @@ public class GeneticAlgorithmTest {
 
         geneticAlgorithm.oneStep();
 
-        verify(selectorMock, never()).select(any());
+        verify(selectorMock, times(1)).select(any());
     }
 }
