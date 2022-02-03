@@ -72,9 +72,7 @@ public class GeneticAlgorithm<T> extends Algorithm<T> {
      * @return Bestes vom Algorithmus erstelltes Individuum
      */
     public Genotype<T> oneStep() {
-        if(hasNotRunToCompletion()) {
-            iterate();
-        }
+        iterate();
 
         return bestIndividuum();
     }
