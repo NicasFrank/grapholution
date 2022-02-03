@@ -78,9 +78,9 @@ public class LineChartHandler {
     }
 
     /**
-     * Übersetzung von String zu RGB
-     * @param color
-     * @return gibt RBG Code zurück
+     * Wandelt ein Color-Objekt in einen CSS-String um, der dieselbe Farbe repräsentiert
+     * @param color die Farbe, die umgewandelt werden soll
+     * @return die CSS-Repräsentation der Farbe
      */
     private static String toCssColor(Color color) {
         String rgb = String.format("%d, %d, %d",

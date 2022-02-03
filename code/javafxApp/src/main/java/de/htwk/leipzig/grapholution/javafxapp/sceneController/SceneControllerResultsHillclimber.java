@@ -57,7 +57,7 @@ public class SceneControllerResultsHillclimber extends SceneController implement
     }
 
     /**
-     * Initialisierungsmethode
+     * Initialisiert den Controller und die Tabellenspalten
      * @param location Lokation der Werte
      * @param resources zu verwendende Resourcen
      */

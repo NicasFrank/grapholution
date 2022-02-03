@@ -21,9 +21,7 @@ public class SceneControllerHillclimber extends SceneController {
     private Slider sliderMutationChance;
 
     /**
-     * speichert aktuellen Text des Inputfields, triggert dann laden der Ergebnis-Szene und gibt Input an ViewModel, damit
-     * an Hillclimber weiter
-     * Methode um Hillclimber Algorithmus mit entsprechendem ViewModel
+     * Startet den Hillclimber mit der Startkonfiguration aus dem Inputfield und wechselt zum Ergebnisfenster
      */
     public void sendButton_startAlgo() {
         viewModel.startHillclimberAlgorithm(createConfigOptions(), inputField.textProperty().get());
