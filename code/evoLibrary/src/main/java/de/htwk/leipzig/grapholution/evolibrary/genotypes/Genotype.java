@@ -98,6 +98,16 @@ public abstract class Genotype<T> {
     public abstract Genotype<T> createCopy();
 
     /**
+     * Erzeugt eine Kopie des Genotyps wobei zusätzlich das Alter übernommen wird
+     * @return Kopie des Genotyps
+     */
+    public Genotype<T> createCopyWithAge() {
+        var copy = createCopy();
+        copy.age = age;
+        return copy;
+    }
+
+    /**
      * Wandelt den Genotyp in einen String um
      * @return Genotyp als String dargestellt
      */

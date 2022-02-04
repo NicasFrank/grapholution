@@ -51,11 +51,11 @@ public class Hillclimber<T> extends Algorithm<T> {
             var mutation = mutator.mutate(currentBest); //Kopie des letzten Genotypen zur Mutation wird erstellt
             if (mutation.getFitness() > currentBest.getFitness()) { //Vergleich der Fitnesswerte von mutierter Kopie und urspruenglichem Genotyp
                 currentBest = mutation; //Wenn Kopie besser, wird sie der history hinzugefügt und als neuer bester Genotyp fuer weitere Mutationen verwendet
-                statistics.addBestIndividual(currentBest);
             }
             else {
                 currentBest.survive(); //Wenn nicht wird Alter des urspruenglichen Genotypen erhoeht, da er "ueberlebt" hat
             }
+            statistics.addBestIndividual(currentBest.createCopyWithAge());
             iterations++; //Durchlauf wird erhoeht
         }
 

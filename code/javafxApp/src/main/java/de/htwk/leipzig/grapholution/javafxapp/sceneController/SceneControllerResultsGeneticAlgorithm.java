@@ -94,7 +94,6 @@ public class SceneControllerResultsGeneticAlgorithm extends SceneController impl
                 .skip(currentIteration)
                 .collect(Collectors.toList()));
         buttonFastForward.setDisable(true);
-        buttonNextStep.setDisable(true);
         tableViewResults.setItems(allResults);
 
         var statistics = viewModel.getGeneticAlgorithmStatistics();
