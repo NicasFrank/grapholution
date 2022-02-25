@@ -1,0 +1,129 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.github.spotbugs",
+    "module": "spotbugs-annotations",
+    "version": "4.4.1",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.1"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "com.google.code.findbugs",
+          "module": "jsr305",
+          "version": {
+            "requires": "3.0.2"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "spotbugs-annotations-4.4.1.jar",
+          "url": "spotbugs-annotations-4.4.1.jar",
+          "size": 15120,
+          "sha512": "f483e127bdabf752f8bc953c88a22b400992badf9e7b9535cefdaa8598014c3d9c7e8f2a1c87ec54f0019c632b966ac091e480354f31ff3ac8077bb347b5841a",
+          "sha256": "fa5d3b17d585868c74c0e25b3c57c17282f9a3328c73ea5259bfd9ac99c6933a",
+          "sha1": "a409167be27a1b197c0432ebfc421f8f79f9bf41",
+          "md5": "e3b081f2b8ec24ad4877be14b7b56a5d"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "org.junit",
+          "module": "junit-bom",
+          "version": {
+            "requires": "5.7.2"
+          },
+          "attributes": {
+            "org.gradle.category": "platform"
+          },
+          "endorseStrictVersions": true
+        },
+        {
+          "group": "com.google.code.findbugs",
+          "module": "jsr305",
+          "version": {
+            "requires": "3.0.2"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "spotbugs-annotations-4.4.1.jar",
+          "url": "spotbugs-annotations-4.4.1.jar",
+          "size": 15120,
+          "sha512": "f483e127bdabf752f8bc953c88a22b400992badf9e7b9535cefdaa8598014c3d9c7e8f2a1c87ec54f0019c632b966ac091e480354f31ff3ac8077bb347b5841a",
+          "sha256": "fa5d3b17d585868c74c0e25b3c57c17282f9a3328c73ea5259bfd9ac99c6933a",
+          "sha1": "a409167be27a1b197c0432ebfc421f8f79f9bf41",
+          "md5": "e3b081f2b8ec24ad4877be14b7b56a5d"
+        }
+      ]
+    },
+    {
+      "name": "javadocElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "javadoc",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "spotbugs-annotations-4.4.1-javadoc.jar",
+          "url": "spotbugs-annotations-4.4.1-javadoc.jar",
+          "size": 533283,
+          "sha512": "65185cdf6633bedb997fcc99e5020f806441471a37b3713d540d0aab4d0a0660b66023b8a44fd5c382ece6467886a42b089db013cb058440d29e6f16f0c0cfa7",
+          "sha256": "cd290d907c4ab7a0ef0fcdacbe9059d8fa15a9de2b98f6ab9f5e02625f9ef557",
+          "sha1": "33e1508e8bde147c76b2de00766a399beff8b939",
+          "md5": "c557b2c27121a72cc81abb55a9af6ab4"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "spotbugs-annotations-4.4.1-sources.jar",
+          "url": "spotbugs-annotations-4.4.1-sources.jar",
+          "size": 24186,
+          "sha512": "0e550663906a731deb927c648a00256745b99bec928922ebebfafdcb519c51dcb09c2060b9d412c47c6e59fcb0bad284bf5ed7597b969990b9e9e6330fbdeef6",
+          "sha256": "b338136e3e82d585348cde58a8fe3a678e16f51a35c31c1463e05fefef557aad",
+          "sha1": "f0b58a97c071884943ad5c48747a915f474f8fe6",
+          "md5": "6e55c7716df988f9ef3dfd394ca54cfa"
+        }
+      ]
+    }
+  ]
+}
